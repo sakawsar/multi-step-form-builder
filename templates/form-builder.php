@@ -10,7 +10,7 @@
                 </div>
                 <!-- Button -->
                 <div>
-                  <button class="skfb-btn"><i class="fas fa-save"></i> Save</button>
+                  <button class="skfb-btn" id="msfb-save-form"><i class="fas fa-save"></i> Save</button>
                   <a href="#" class="skfb-btn"><i class="fas fa-plus"></i> Add new</a>
                   <a href="#" class="skfb-btn"><i class="fas fa-cog"></i> Settings</a>
                 </div>

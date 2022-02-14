@@ -334,21 +334,86 @@
         $('.' + act_qtn).attr('data-msfb-date-format',date_format)
     })
     // add dropdown options row
-    $(document).on('click','.msfb-dropdown-value-field i', e => {
+    $(document).on('click','.msfb-dropdown-value-field i.fa-plus-circle', e => {
         let this_el = this__(e)
         let row_no = this_el.closest('.msfb-dropdown-value-fields').attr('data-dropdown-row-no')
         row_no++
         let row_html = `
-        <div class="msfb-dropdown-value-field" data-dropdown-row-no="${row_no}">
-            <input type="text" data-msfb-field-type="value" data-dropdown-row-no="${row_no}" class="msfb_dropdown_data_value" placeholder="Value"/>
-            <input type="text" data-msfb-field-type="option" data-dropdown-row-no="${row_no}" class="msfb_dropdown_data_option" placeholder="Option"/>
-            <i class="fa fa-plus-circle"></i>
-        </div>
+            <div class="msfb-dropdown-value-field" data-dropdown-row-no="${row_no}">
+                <input type="text" data-msfb-field-type="value" data-dropdown-row-no="${row_no}" class="msfb_dropdown_data_value" placeholder="Value"/>
+                <input type="text" data-msfb-field-type="option" data-dropdown-row-no="${row_no}" class="msfb_dropdown_data_option" placeholder="Option"/>
+                <i class="fa fa-plus-circle"></i>
+            </div>
         `
         $('.msfb-dropdown-value-fields').append(row_html)
         $('.msfb-dropdown-value-fields').attr('data-dropdown-row-no',row_no)
         let act_qtn = msfb_active_question()
-        $('.' + act_qtn + ' select').append(`<option value="">${row_no}</option>`)
+        let icon_prefix = ".msfb-dropdown-value-field"
+        if( $('.' + act_qtn + ' select').length > 0 ) {
+            $('.' + act_qtn + ' select').append(`<option value="">${row_no}</option>`)
+        } else if ( $('.msfb-form-builder .msfb-form-field-selected').length > 0 ){
+            let field_type = $('.msfb-form-field-selected').attr('data-field-type')
+            let a_multiselect_opt = `
+                <li>
+                    <input type="checkbox" disabled="true" class="sk-custom-checkbox md" id="optC${row_no}">
+                    <label for="optC${row_no}" class="skfb__opt-name">Option ${row_no}</label>
+                </li>
+            `
+            let a_select_opt = `
+                <li>
+                    <input type="radio" disabled="true" class="sk-custom-checkbox md" id="opt${row_no}">
+                    <label for="opt${row_no}" class="skfb__opt-name">Option ${row_no}</label>
+                </li>
+            `
+            let a_dropdown_opt = `<option value="${row_no}">${row_no}</option>`
+            if( field_type == "multiselect_form_field" ) {
+                // div[data-field-type="${field_type}"]
+                icon_prefix = `.msfb-form-builder .msfb-form-field-selected ul.skfb__input-option__lists li`
+                $('.msfb-form-field-selected ul.skfb__input-option__lists').append(a_multiselect_opt)
+            } else if ( field_type == "select_form_field" ) {
+                icon_prefix = `.msfb-form-builder .msfb-form-field-selected ul.skfb__input-option__lists li`
+                $('.msfb-form-field-selected ul.skfb__input-option__lists').append(a_select_opt)
+            } else if ( field_type == "dropdown_form_field" ) {
+                icon_prefix = `.msfb-form-builder .msfb-form-field-selected select`
+                $('.msfb-form-field-selected select').append(a_dropdown_opt)
+            }
+        }
+        let all_rows = this_el.closest('.msfb-dropdown-value-fields').find('.msfb-dropdown-value-field')
+        let total_rows = all_rows.length
+        console.log(total_rows)
+        for( let i = 0; i < total_rows; i++ ) {
+            if( i == total_rows - 1 ){
+                $(all_rows[i]).find('i').attr('class','fa fa-plus-circle')
+            } else {
+                $(all_rows[i]).find('i').attr('class','fa fa-times-circle')
+            }
+        }
+    })
+    // remove dropdown options
+    $(document).on('click','.msfb-dropdown-value-field i.fa-times-circle', e => {
+        let act_el = msfb_active_question()
+        let this_el = this__(e)
+        let row_no = this_el.closest('.msfb-dropdown-value-field').attr('data-dropdown-row-no')
+        row_no--
+        let options = $(`.${act_el} select option`)
+        if ( options.length > 0 ){
+            $(options[row_no]).remove()
+            this_el.closest('.msfb-dropdown-value-field').remove()
+        } else if ( $('.msfb-form-builder .msfb-form-field-selected').length > 0 ) {
+            console.log('working')
+            let field_type = this_el.closest('div[data-drawer-type]').attr('data-drawer-type')
+            if( field_type == "multiselect_form_field" ) {
+                let options = $('.msfb-form-field-selected ul.skfb__input-option__lists li')
+                $(options[row_no]).remove()
+            } else if ( field_type == "select_form_field" ) {
+                let options = $('.msfb-form-field-selected ul.skfb__input-option__lists li')
+                $(options[row_no]).remove()
+            } else if ( field_type == "dropdown_form_field" ) {
+                let options = $('.msfb-form-field-selected select option')
+                $(options[row_no]).remove()
+            }
+            this_el.closest('.msfb-dropdown-value-field').remove()
+        }
     })
     // update dropdown field value 
     $(document).on('keyup','.msfb-dropdown-value-field input', e => {
@@ -358,11 +423,31 @@
         let act_qtn = msfb_active_question()
         let options = $('.' + act_qtn + ' select option')
         row_no--
-        let option_el = $(options[row_no])
-        if( field_type == "value" ){
-            option_el.val(this_el.val())
-        } else if( field_type == "option" ) {
-            option_el.html(this_el.val())
+        if( options.length > 0 ) {
+            let option_el = $(options[row_no])
+            if( field_type == "value" ){
+                option_el.val(this_el.val())
+            } else if( field_type == "option" ) {
+                option_el.html(this_el.val())
+            }
+        } else if ( $('.msfb-form-builder .msfb-form-field-selected').length > 0 ) {
+            let form_field_type = this_el.closest('div[data-drawer-type]').attr('data-drawer-type')
+            let option_el = ""
+            if( form_field_type == "multiselect_form_field" ) {
+                let options = $('.msfb-form-field-selected ul.skfb__input-option__lists li')
+                option_el = field_type == "value" ? $(options[row_no]).find('input') : $(options[row_no]).find('label')
+            } else if ( form_field_type == "select_form_field" ) {
+                let options = $('.msfb-form-field-selected ul.skfb__input-option__lists li')
+                option_el = field_type == "value" ? $(options[row_no]).find('input') : $(options[row_no]).find('label')
+            } else if ( form_field_type == "dropdown_form_field" ) {
+                let options = $('.msfb-form-field-selected select option')
+                option_el = $(options[row_no])
+            }
+            if( field_type == "value" ){
+                option_el.val(this_el.val())
+            } else if( field_type == "option" ) {
+                option_el.html(this_el.val())
+            }
         }
     })
     // update slider fields

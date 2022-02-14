@@ -74,11 +74,27 @@ function msfb_mendatory_fields( $id, $question_data ){
        <div class="skfb__field-box __2">
             <label for="msfb-dropdown-values">Dropdown option data</label>
             <div class="msfb-dropdown-value-fields" data-dropdown-row-no="1">
-                <div class="msfb-dropdown-value-field" data-dropdown-row-no="1">
-                    <input type="text" data-msfb-field-type="value" data-dropdown-row-no="1" class="msfb_dropdown_data_value" placeholder="Value"/>
-                    <input type="text" data-msfb-field-type="option" data-dropdown-row-no="1" class="msfb_dropdown_data_option" placeholder="Option"/>
-                    <i class="fa fa-plus-circle"></i>
+                <?php
+                $i = 1;
+                $total_options = !$has_data ?: count($question_data['question_data']['option_data']);
+                if( $has_data ){
+                foreach($question_data['question_data']['option_data'] as $option_data){
+                ?>
+                <div class="msfb-dropdown-value-field" data-dropdown-row-no="<?php echo $i; ?>">
+                    <input type="text" value="<?php echo $option_data['value']; ?>" data-msfb-field-type="value" data-dropdown-row-no="<?php echo $i; ?>" class="msfb_dropdown_data_value" placeholder="Value"/>
+                    <input type="text" value="<?php echo $option_data['option']; ?>" data-msfb-field-type="option" data-dropdown-row-no="<?php echo $i; ?>" class="msfb_dropdown_data_option" placeholder="Option"/>
+                    <i class="fa fa-<?php echo $i == $total_options ? "plus" : "times"; ?>-circle"></i>
                 </div>
+                <?php $i++; } 
+                } else {
+                    ?>
+                    <div class="msfb-dropdown-value-field" data-dropdown-row-no="1">
+                        <input type="text" value="" data-msfb-field-type="value" data-dropdown-row-no="1" class="msfb_dropdown_data_value" placeholder="Value"/>
+                        <input type="text" value="" data-msfb-field-type="option" data-dropdown-row-no="1" class="msfb_dropdown_data_option" placeholder="Option"/>
+                        <i class="fa fa-plus-circle"></i>
+                    </div>
+                    <?php
+                }?>
             </div>
         </div>
     <?php 

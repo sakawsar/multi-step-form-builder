@@ -7,7 +7,7 @@
             cursor: 'move',
             placeholder: 'ui-state-highlight',
         });
-        $(document).on('click','.skfb__field-box i.fa-times-circle', e => {
+        $(document).on('click','.msfb-form-builder .skfb__field-box i.fa-times-circle', e => {
             let this_el = this__(e)
             this_el.closest('.skfb__field-box').remove()
             msfb_hide_all_drawer()
@@ -15,7 +15,7 @@
         let text_field = `
             <div class="skfb__field-box skfb-form-builder-drawer" data-field-type="text_form_field">
                 <label class="msfb-field-label" for="textField"><i class="fa fa-times-circle"></i> Text field title</label>
-                <input type="text" placeholder="Placeholder" id="textField" />
+                <input disabled="true" type="text" placeholder="Placeholder" id="textField" />
             </div>
         `
         let select_field = `
@@ -23,11 +23,11 @@
                 <label class="msfb-field-label"><i class="fa fa-times-circle"></i> Select field</label>
                 <ul class="skfb__input-option__lists">
                     <li>
-                        <input type="radio" name="singleSelField" class="sk-custom-checkbox md" id="opt1" />
+                        <input disabled="true" type="radio" name="singleSelField" class="sk-custom-checkbox md" id="opt1" />
                         <label for="opt1" class="skfb__opt-name">Option 1</label>
                     </li>
                     <li>
-                        <input type="radio" name="singleSelField" class="sk-custom-checkbox md" id="opt2" />
+                        <input disabled="true" type="radio" name="singleSelField" class="sk-custom-checkbox md" id="opt2" />
                         <label for="opt2" class="skfb__opt-name">Option 2</label>
                     </li>
                 </ul>
@@ -38,19 +38,19 @@
                 <label class="msfb-field-label"><i class="fa fa-times-circle"></i> MultiSelect field</label>
                 <ul class="skfb__input-option__lists">
                     <li>
-                        <input type="checkbox" class="sk-custom-checkbox md" id="optC1" />
+                        <input disabled="true" type="checkbox" class="sk-custom-checkbox md" id="optC1" />
                         <label for="optC1" class="skfb__opt-name">Option 1</label>
                     </li>
                     <li>
-                        <input type="checkbox" class="sk-custom-checkbox md" id="optC2" />
+                        <input disabled="true" type="checkbox" class="sk-custom-checkbox md" id="optC2" />
                         <label for="optC2" class="skfb__opt-name">Option 2</label>
                     </li>
                     <li>
-                        <input type="checkbox" class="sk-custom-checkbox md" id="optC3" />
+                        <input disabled="true" type="checkbox" class="sk-custom-checkbox md" id="optC3" />
                         <label for="optC3" class="skfb__opt-name">Option 3</label>
                     </li>
                     <li>
-                        <input type="checkbox" class="sk-custom-checkbox md" id="optC4" />
+                        <input disabled="true" type="checkbox" class="sk-custom-checkbox md" id="optC4" />
                         <label for="optC4" class="skfb__opt-name">Option 4</label>
                     </li>
                 </ul>
@@ -59,15 +59,15 @@
         let date_field = `
             <div class="skfb__field-box skfb-form-builder-drawer" data-field-type="date_form_field">
                 <label class="msfb-field-label" for="date"><i class="fa fa-times-circle"></i> Date</label>
-                <input type="text" placeholder="YYYY-MM-DD" id="date" data-id="datepicker" />
+                <input disabled="true" type="text" placeholder="YYYY-MM-DD" id="date" data-id="datepicker" />
             </div>
         `
         let dropdown_field = `
             <div class="skfb__field-box skfb-form-builder-drawer" data-field-type="dropdown_form_field">
                 <label class="msfb-field-label" for="date"><i class="fa fa-times-circle"></i> Dropdown</label>
                 <select>
-                    <option value="">Select a value</option>
-                    <option value="1">1</option>
+                    <option value="">1</option>
+                    <option value="2">2</option>
                 </select>
             </div>
         `
@@ -129,7 +129,7 @@
             rightDrawer.css({ "right": "-" + setRight + "px" });
         }
         // question or des selected
-        $('.skfb__form-title, .skfb__form-desc').on('click',e => {
+        $('.msfb-form-builder .skfb__form-title,.msfb-form-builder .skfb__form-desc').on('click',e => {
             msfb_hide_all_drawer()
             msfb_show_drawer("default_options")
             $('#msfb-form-name').val($('.skfb__form-name').html())
@@ -209,16 +209,19 @@
                         // console.log(field_option_data)
                         let drawer_option_holder = $(`div[data-drawer-type="${field_type}"] .msfb-dropdown-value-fields`)
                         drawer_option_holder.html('')
+                        let total_rows = field_option_data.length
                         $.each(field_option_data,(k,v) => {
                             k++
+                            let icon_suffix = k == total_rows ? "plus" : "times"
                             let a_field_option = `
                                 <div class="msfb-dropdown-value-field" data-dropdown-row-no="${k}">
                                     <input type="text" data-msfb-field-type="value" data-dropdown-row-no="${k}" class="msfb_dropdown_data_value" value="${v.value}" placeholder="Value"/>
                                     <input type="text" data-msfb-field-type="option" data-dropdown-row-no="${k}" class="msfb_dropdown_data_option" value="${v.label}" placeholder="Option"/>
-                                    <i class="fa fa-plus-circle"></i>
+                                    <i class="fa fa-${icon_suffix}-circle"></i>
                                 </div>
                             `
                             drawer_option_holder.append(a_field_option)
+                            drawer_option_holder.attr('data-dropdown-row-no',k)
                         })
                     }
                 }
