@@ -128,7 +128,7 @@ jQuery(document).ready($ => {
             fields_data.question_type = "msfb-slider-field"
             fields_data.question_data = JSON.stringify( field_data )
         }
-        this_el.html(`<i class="fa fa-refresh fa-spin"></i> Save`)
+        this_el.html(`<i class="fa fa-spinner fa-spin"></i> Save`)
         let qtn_id = this_el.attr('data-qtn-id')
         if( qtn_id != undefined && qtn_id != "" ) {
             fields_data.question_id = qtn_id
@@ -239,7 +239,7 @@ jQuery(document).ready($ => {
         })
         if (cat_name) {
             console.log(cat_name)
-            this_el.find('i').attr('class','fa fa-plus fa-spin')
+            this_el.find('i').attr('class','fa fa-spinner fa-spin')
             $.ajax({
                 url: msfb.ajax_url,
                 type: "POST",
@@ -302,7 +302,115 @@ jQuery(document).ready($ => {
             })
         }
     })
+    // let field label
+    const msfb_field_label = raw_label => raw_label.replace('<i class="fa fa-times-circle"></i> ','')
     $('#msfb-save-form').on('click', e => {
-        
+        let this_el = this__(e)
+        let form_name = $('.msfb-form-builder').attr('data-form-name')
+        if( !form_name ) {
+            msfb_error_message("Form name is required.")
+            return false
+        }
+        let form_title = $('#msfb-form-title').val()
+        if( !form_title ) {
+            msfb_error_message("Form title is required.")
+        }
+        let form_desc = $('#msfb-form-desc').val()
+        if( !form_desc ) {
+            msfb_error_message("Form description is required.")
+            return false
+        }
+        let form_fields = $('.msfb-form-builder div[data-field-type].skfb__field-box')
+        // console.log(form_fields.map())
+        let form_data = []
+        let field_data = []
+        form_data['form_name'] = form_name
+        $.each(form_fields, (k,field) => {
+            let a_field_data = []
+            let field_type = $(field).attr('data-field-type')
+            if( field_type == "slider_form_field" ) {
+                a_field_data['field_data'] = {
+                    "default_val": $(field).attr('msfb-slider-default-val'),
+                    "max_val": $(field).attr('msfb-slider-max-val'),
+                    "min_val": $(field).attr('msfb-slider-min-val'),
+                    "step_val": $(field).attr('msfb-slider-step-val')
+                }
+            } else if ( field_type == "multiselect_form_field" || field_type == "select_form_field" ) {
+                let multisel_field_data = $(field).find('ul li')
+                let field_data = []
+                $.each(multisel_field_data,(k,a_opt) => {
+                    field_data[k] = {
+                        "label": $(a_opt).find('label').html(),
+                        "value": $(a_opt).find('input').val(),
+                    }
+                })
+                a_field_data['field_data'] = field_data
+            } else if ( field_type == "dropdown_form_field" ) {
+                let dropdown_field_data = $(field).find('select option')
+                let field_data = []
+                $.each(dropdown_field_data,(k,a_opt) => {
+                    field_data[k] = {
+                        "label": $(a_opt).html(),
+                        "value": $(a_opt).val()
+                    }
+                })
+                a_field_data['field_data'] = field_data
+            } else if ( field_type == "text_form_field" || field_type == "date_form_field" || field_type == "textarea_form_field" ) {
+                a_field_data['field_data'] = {
+                    "placeholder": field_type == "textarea_form_field" ? $(field).find('textarea').attr('placeholder') : $(field).find('input').attr('placeholder')
+                }
+            }
+            // is required
+            a_field_data['is_required'] = $(field).attr('msfb-field-required') == "true" ? true : false
+            // is lead column
+            a_field_data['is_lead_column'] = $(field).attr('msfb-field-is-lead-column') == "true" ? true : false
+            // assign field label
+            a_field_data['field_label'] = msfb_field_label($(field).find('label').html())
+            // assign field type
+            a_field_data['field_type'] = field_type
+            a_field_data = { ...a_field_data }
+            field_data[k] = a_field_data
+        })
+        console.log(field_data)
+        form_data['form_data'] = JSON.stringify({ 
+            'form_title': form_title,
+            'form_desc': form_desc,
+            'field_data': field_data
+        })
+        if( this_el.attr('data-form-id') ) {
+            form_data['form_id'] = this_el.attr('data-form-id')
+        }
+        console.log(form_data)
+        this_el.html(`<i class="fa fa-spinner fa-spin"></i> Save`)
+        $.ajax({
+            url: msfb.ajax_url,
+            type: "POST",
+            dataType: "json",
+            data: {
+                action: "msfb_save_forms",
+                dataset: { ...form_data }
+            },
+            success: resp => {
+                console.log(resp)
+                this_el.html(`<i class="fas fa-save"></i> Save`)
+                this_el.attr('data-form-id',resp.form_id)
+                if( resp.status != undefined && resp.status == "created" ) {
+                    Swal.fire({
+                        icon: "success",
+                        text: "Form has been added."
+                    })
+                    window.location.href = resp.redirect
+                } else if(resp.status != undefined && resp.status == "updated" ){
+                    Swal.fire({
+                        icon: "success",
+                        text: "Form has been updated."
+                    })
+                }
+            },
+            error: err => {
+                this_el.html(`<i class="fas fa-save"></i> Save`)
+                console.log(err)
+            }
+        })
     })
 })

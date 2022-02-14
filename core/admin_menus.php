@@ -10,7 +10,7 @@ function msfb_menu_callback(){
 function contact_form_builder_callback(){
    msfb_enqueue_style();
     if(isset($_GET['form_id'])){
-        if(isset($_GET['settings'])){
+        if($_GET['form_id'] != "" && isset($_GET['settings'])){
             include(MSFB_PATH.'templates/form-settings.php');
         }else{
             include(MSFB_PATH.'templates/form-builder.php');

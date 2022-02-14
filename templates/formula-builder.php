@@ -209,7 +209,7 @@
   <div class="skfb-right-options">
     <div class="sk-text-right">
       <button class="skfb-right-sidebar-close">
-        <i class="fas fa-close"></i>
+        <i class="fa fa-times"></i>
       </button>
     </div>
     <h5 class="sk-head __2 sk-text-white">Options</h5>

@@ -20,6 +20,28 @@ function msfb_save_questions_callback(){
     }
     exit;
 }
+add_action('wp_ajax_msfb_save_forms','msfb_save_forms_callback');
+function msfb_save_forms_callback(){
+    if(isset($_POST['dataset'])){
+        global $wpdb;
+        $table_name = $wpdb->prefix.'msfb_forms';
+        $form_data = $_POST['dataset'];
+        if( isset( $form_data['form_id'] ) ){
+            $form_id = $form_data['form_id'];
+            unset($form_data['form_id']);
+            $wpdb->update($table_name,$form_data,array( 'id' => $form_id ));
+            $_POST['dataset']['status'] = 'updated';
+        } else {
+            $wpdb->insert($table_name,$_POST['dataset']);
+            $_POST['dataset']['form_id'] = $wpdb->insert_id;
+            $_POST['dataset']['status'] = 'created';
+            $_POST['dataset']['redirect'] = admin_url( 'admin.php?page=contact_form_builder&form_id='.$wpdb->insert_id );
+        }
+        echo json_encode($_POST['dataset']);
+        exit;
+    }
+    exit;
+}
 add_action("wp_ajax_msfb_add_category","msfb_add_category_callback");
 function msfb_add_category_callback(){
     if($_POST['dataset']){
@@ -112,12 +134,9 @@ function msfb_bulk_action_callback(){
         $el_type    = $_POST['dataset']['el_type'];
         $suffix     = msfb_get_suffix($el_type);
         $response   = false;
+        global $wpdb;
+        $table_name = $wpdb->prefix.$suffix;
         if($action == "delete"){
-            global $wpdb;
-            $table_name = $wpdb->prefix.$suffx;
-            $table_name = 'wp_msfb_questions';
-            // $item_ids = implode( ',', array_map( 'absint', $item_ids ) );
-            // $response = $wpdb->query( "DELETE FROM $table_name WHERE id IN ($item_ids)" );
             foreach($item_ids as $item_id){
                 $response = $wpdb->delete($table_name,array( 'id' => $item_id ));
             }

@@ -72,7 +72,7 @@
             </div>
         `
         let slider_field = `
-            <div class="skfb__field-box skfb-form-builder-drawer" data-field-type="slider_form_field">
+            <div class="skfb__field-box skfb-form-builder-drawer" data-field-type="slider_form_field" msfb-slider-default-val="5" msfb-slider-max-val="10" msfb-slider-min-val="0" msfb-slider-step-val="1">
                 <label class="msfb-field-label"><i class="fa fa-times-circle"></i> Slider</label>
                 <div class="skfb-prev-input __2">
                     <div class="skfb-prev-slider">
@@ -132,7 +132,7 @@
         $('.msfb-form-builder .skfb__form-title,.msfb-form-builder .skfb__form-desc').on('click',e => {
             msfb_hide_all_drawer()
             msfb_show_drawer("default_options")
-            $('#msfb-form-name').val($('.skfb__form-name').html())
+            $('#msfb-form-name').val($('.msfb-form-builder').attr('data-form-name'))
             $('#msfb-form-title').val($('.skfb__form-title').html())
             $('#msfb-form-desc').val($('.skfb__form-desc').html())
         })

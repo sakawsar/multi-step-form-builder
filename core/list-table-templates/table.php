@@ -13,6 +13,9 @@ if( $el_type == "leads" ) {
         'form_name'     => 'Form name'
     ];
     $table_data['struct'] = apply_filters('msfb_form_columns', $struct);
+    $table_name = $prefix.'msfb_forms';
+    $questions = $wpdb->get_results("SELECT * FROM $table_name",ARRAY_A);
+    $table_data['data'] = $wpdb->num_rows > 0 ? $questions : false;
 } elseif ( $el_type == "questions" ) {
     $struct = [
         'question_name' => 'Question name',
@@ -36,7 +39,7 @@ if( $el_type == "leads" ) {
             <?php $i=1; foreach($table_data['struct'] as $t_id => $t_value){ ?>
                 <th><?php echo $t_value; ?></th>
             <?php $i++; } ?>
-            <?php if($this->has_category){ ?>
+            <?php if($this->has_category && $this->get_cates()){ ?>
             <th>Category</th>
             <?php } ?>
             <th>Action</th>
@@ -64,7 +67,7 @@ if( $el_type == "leads" ) {
                         }
                         ?>
                     <?php $i++; } ?>
-                <?php if($this->has_category){ ?>
+                <?php if($this->has_category && $this->get_cates()){ ?>
                     <td>
                         <select data-msfb-item-type="<?php echo $el_type; ?>" data-msfb-item-id="<?php echo $item_data['id']; ?>" data-msfb-cat-id="<?php echo $item_data['cat_id']; ?>">
                             <?php echo $this->get_cates("Select a category",$item_data['cat_id']); ?>

@@ -768,3 +768,6 @@ div[data-question-type]:hover{
 div[data-drawer-type]{
     display:none;
 }
+#msfb-table-item-holder td[colspan]{
+    text-align: center;
+}

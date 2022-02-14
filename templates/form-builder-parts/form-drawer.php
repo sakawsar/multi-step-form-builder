@@ -1,7 +1,7 @@
 <div class="skfb-right-options" style="display:none;" data-drawer-type="default_options">
   <div class="sk-text-right">
     <button class="skfb-right-sidebar-close">
-      <i class="fas fa-close"></i>
+      <i class="fa fa-times"></i>
     </button>
   </div>
   <h5 class="sk-head __2 sk-text-white">Default Options</h5>
@@ -12,11 +12,11 @@
     </div>
     <div class="skfb__field-box __2">
       <label for="formName">Form title</label>
-      <input type="text" placeholder="Form title" id="msfb-form-title" />
+      <input type="text" placeholder="Form title" value="<?php echo $has_data ? $this_form_data['form_data']['form_title'] : ""; ?>" id="msfb-form-title" />
     </div>
     <div class="skfb__field-box __2">
       <label for="formName">Form description</label>
-      <textarea placeholder="Form description" id="msfb-form-desc"></textarea>
+      <textarea placeholder="Form description" id="msfb-form-desc"><?php echo $has_data ? $this_form_data['form_data']['form_desc'] : ""; ?></textarea>
     </div>
     <?php //msfb_form_field_options("slider_form_field"); ?>
   </div> 
@@ -93,7 +93,7 @@ function msfb_form_field_options( $id = "" ){
 <div class="skfb-right-options" style="display:none;" data-drawer-type="multiselect_form_field">
   <div class="sk-text-right">
     <button class="skfb-right-sidebar-close">
-      <i class="fas fa-close"></i>
+      <i class="fa fa-times"></i>
     </button>
   </div>
   <h5 class="sk-head __2 sk-text-white">Multiselect Options</h5>
@@ -105,7 +105,7 @@ function msfb_form_field_options( $id = "" ){
 <div class="skfb-right-options" style="display:none;" data-drawer-type="select_form_field">
   <div class="sk-text-right">
     <button class="skfb-right-sidebar-close">
-      <i class="fas fa-close"></i>
+      <i class="fa fa-times"></i>
     </button>
   </div>
   <h5 class="sk-head __2 sk-text-white">Single select options</h5>
@@ -117,7 +117,7 @@ function msfb_form_field_options( $id = "" ){
 <div class="skfb-right-options" style="display:none;" data-drawer-type="dropdown_form_field">
   <div class="sk-text-right">
     <button class="skfb-right-sidebar-close">
-      <i class="fas fa-close"></i>
+      <i class="fa fa-times"></i>
     </button>
   </div>
   <h5 class="sk-head __2 sk-text-white">Dropdown options</h5>
@@ -129,7 +129,7 @@ function msfb_form_field_options( $id = "" ){
 <div class="skfb-right-options" style="display:none;" data-drawer-type="text_form_field">
   <div class="sk-text-right">
     <button class="skfb-right-sidebar-close">
-      <i class="fas fa-close"></i>
+      <i class="fa fa-times"></i>
     </button>
   </div>
   <h5 class="sk-head __2 sk-text-white">Text field options</h5>
@@ -141,7 +141,7 @@ function msfb_form_field_options( $id = "" ){
 <div class="skfb-right-options" style="display:none;" data-drawer-type="textarea_form_field">
   <div class="sk-text-right">
     <button class="skfb-right-sidebar-close">
-      <i class="fas fa-close"></i>
+      <i class="fa fa-times"></i>
     </button>
   </div>
   <h5 class="sk-head __2 sk-text-white">Textarea options</h5>
@@ -153,7 +153,7 @@ function msfb_form_field_options( $id = "" ){
 <div class="skfb-right-options" style="display:none;" data-drawer-type="date_form_field">
   <div class="sk-text-right">
     <button class="skfb-right-sidebar-close">
-      <i class="fas fa-close"></i>
+      <i class="fa fa-times"></i>
     </button>
   </div>
   <h5 class="sk-head __2 sk-text-white">Date field options</h5>
@@ -165,7 +165,7 @@ function msfb_form_field_options( $id = "" ){
 <div class="skfb-right-options" style="display:none;" data-drawer-type="slider_form_field">
   <div class="sk-text-right">
     <button class="skfb-right-sidebar-close">
-      <i class="fas fa-close"></i>
+      <i class="fa fa-times"></i>
     </button>
   </div>
   <h5 class="sk-head __2 sk-text-white">Slider Options</h5>

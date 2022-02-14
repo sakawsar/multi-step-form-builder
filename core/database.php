@@ -4,6 +4,7 @@ function msfb_create_the_database() {
 	require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
 	$qtn_table            = $wpdb->prefix . 'msfb_questions';
 	$category_table       = $wpdb->prefix . 'msfb_category';
+	$form_table           = $wpdb->prefix . 'msfb_forms';
 	$charset_collate = $wpdb->get_charset_collate();
 	if ( $wpdb->get_var( "SHOW TABLES LIKE " . $qtn_table ) != $qtn_table ) {
 		$sql = "CREATE TABLE $qtn_table (
@@ -25,6 +26,15 @@ function msfb_create_the_database() {
             id INT(11) NOT NULL AUTO_INCREMENT,
             cat_name TEXT NOT NULL,
             cat_type TEXT NOT NULL,
+            PRIMARY KEY (id)
+        ) $charset_collate;";
+		dbDelta( $sql );
+	};
+    if ( $wpdb->get_var( "SHOW TABLES LIKE " . $form_table ) != $form_table ) {
+		$sql = "CREATE TABLE $form_table (
+            id INT(11) NOT NULL AUTO_INCREMENT,
+            form_name TEXT NOT NULL,
+            form_data TEXT NOT NULL,
             PRIMARY KEY (id)
         ) $charset_collate;";
 		dbDelta( $sql );

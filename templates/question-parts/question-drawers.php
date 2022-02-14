@@ -126,7 +126,7 @@ function msfb_mendatory_fields( $id, $question_data ){
 <div class="skfb-right-options msfb-multiselect" data-drawer-type="msfb-multiselect">
     <div class="sk-text-right">
         <button class="skfb-right-sidebar-close">
-        <i class="fas fa-close"></i>
+        <i class="fa fa-times"></i>
         </button>
     </div>
     <h5 class="sk-head __2 sk-text-white">Multiselect options</h5>
@@ -138,7 +138,7 @@ function msfb_mendatory_fields( $id, $question_data ){
 <div class="skfb-right-options msfb-single-select-field" data-drawer-type="msfb-single-select-field">
     <div class="sk-text-right">
         <button class="skfb-right-sidebar-close">
-        <i class="fas fa-close"></i>
+        <i class="fa fa-times"></i>
         </button>
     </div>
     <h5 class="sk-head __2 sk-text-white">Single Select options</h5>
@@ -150,7 +150,7 @@ function msfb_mendatory_fields( $id, $question_data ){
 <div class="skfb-right-options msfb-map-field" data-drawer-type="msfb-map-field">
     <div class="sk-text-right">
         <button class="skfb-right-sidebar-close">
-        <i class="fas fa-close"></i>
+        <i class="fa fa-times"></i>
         </button>
     </div>
     <h5 class="sk-head __2 sk-text-white">Map options</h5>
@@ -162,7 +162,7 @@ function msfb_mendatory_fields( $id, $question_data ){
 <div class="skfb-right-options msfb-dropdown-field" data-drawer-type="msfb-dropdown-field">
     <div class="sk-text-right">
         <button class="skfb-right-sidebar-close">
-            <i class="fas fa-close"></i>
+            <i class="fa fa-times"></i>
         </button>
     </div>
     <h5 class="sk-head __2 sk-text-white">Dropdown options</h5>
@@ -174,7 +174,7 @@ function msfb_mendatory_fields( $id, $question_data ){
 <div class="skfb-right-options msfb-single-select-field" data-drawer-type="msfb-single-select-field">
     <div class="sk-text-right">
         <button class="skfb-right-sidebar-close">
-        <i class="fas fa-close"></i>
+        <i class="fa fa-times"></i>
         </button>
     </div>
     <h5 class="sk-head __2 sk-text-white">Single select options</h5>
@@ -186,7 +186,7 @@ function msfb_mendatory_fields( $id, $question_data ){
 <div class="skfb-right-options msfb-slider-field" data-drawer-type="msfb-slider-field">
     <div class="sk-text-right">
         <button class="skfb-right-sidebar-close">
-        <i class="fas fa-close"></i>
+        <i class="fa fa-times"></i>
         </button>
     </div>
     <h5 class="sk-head __2 sk-text-white">Slider options</h5>
@@ -198,7 +198,7 @@ function msfb_mendatory_fields( $id, $question_data ){
 <div class="skfb-right-options msfb-text-field" data-drawer-type="msfb-text-field">
     <div class="sk-text-right">
         <button class="skfb-right-sidebar-close">
-        <i class="fas fa-close"></i>
+        <i class="fa fa-times"></i>
         </button>
     </div>
     <h5 class="sk-head __2 sk-text-white">Text options</h5>
@@ -210,7 +210,7 @@ function msfb_mendatory_fields( $id, $question_data ){
 <div class="skfb-right-options msfb-textarea-field" data-drawer-type="msfb-textarea-field">
     <div class="sk-text-right">
         <button class="skfb-right-sidebar-close">
-        <i class="fas fa-close"></i>
+        <i class="fa fa-times"></i>
         </button>
     </div>
     <h5 class="sk-head __2 sk-text-white">Textarea options</h5>
@@ -222,7 +222,7 @@ function msfb_mendatory_fields( $id, $question_data ){
 <div class="skfb-right-options msfb-upload-field" data-drawer-type="msfb-upload-field">
     <div class="sk-text-right">
         <button class="skfb-right-sidebar-close">
-        <i class="fas fa-close"></i>
+        <i class="fa fa-times"></i>
         </button>
     </div>
     <h5 class="sk-head __2 sk-text-white">File upload options</h5>
@@ -234,7 +234,7 @@ function msfb_mendatory_fields( $id, $question_data ){
 <div class="skfb-right-options msfb-date-field" data-drawer-type="msfb-date-field">
     <div class="sk-text-right">
         <button class="skfb-right-sidebar-close">
-        <i class="fas fa-close"></i>
+        <i class="fa fa-times"></i>
         </button>
     </div>
     <h5 class="sk-head __2 sk-text-white">Date options</h5>
@@ -246,7 +246,7 @@ function msfb_mendatory_fields( $id, $question_data ){
 <div class="skfb-right-options msfb-multiselect-ans" data-drawer-type="msfb-multiselect-ans">
     <div class="sk-text-right">
         <button class="skfb-right-sidebar-close">
-        <i class="fas fa-close"></i>
+        <i class="fa fa-times"></i>
         </button>
     </div>
     <h5 class="sk-head __2 sk-text-white">Answer options</h5>

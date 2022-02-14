@@ -197,7 +197,7 @@ $msfb_icons = [
     "fas fa-clipboard-list",
     "fas fa-clock",
     "fas fa-clone",
-    "fas fa-closed-captioning",
+    "fa fa-timesd-captioning",
     "fas fa-cloud",
     "fas fa-cloud-download-alt",
     "fas fa-cloud-meatball",

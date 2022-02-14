@@ -10,29 +10,21 @@ $form_list = new MSFB_List_Table('forms');
         <div class="sk-row skfb--gY-20 sk-align-items-center">
           <div class="sk-col-md-8">
             <div class="sk-d-flex sk-align-items-center sk-flex-wrap sk-column-gap">
-              <div>
-                <select name="" id="" class="sk-form-control sk-custom-select">
-                  <option value="">Bulk Action</option>
-                  <option value="">1</option>
-                  <option value="">2</option>
-                </select>
-              </div>
-              <div>
-                <button class="skfb-btn"><i class="fas fa-check"></i> <span>Apply</span></button>
-              </div>
+              <?php $form_list->get_actions(); ?>
             </div>
           </div>
           <div class="sk-col-md-4">
             <div class="skfb-search-box">
               <form action="">
-                <input type="search" class="sk-form-control" placeholder="Search Form">
+                <input type="search" id="msfb-search-name" class="sk-form-control" placeholder="<?php echo $form_list->search_placeholder; ?>">
                 <button class="skfb-search-btn"><i class="fas fa-search"></i></button>
               </form>
             </div>
           </div>
         </div>
         <div class="skfb-table-wrap">
-          <table class="sk-table skfb-table-question">
+          <?php $form_list->get_table(); ?>
+          <!-- <table class="sk-table skfb-table-question">
             <thead>
               <tr>
                 <th><input type="checkbox" class="sk-custom-checkbox" /></th>
@@ -79,7 +71,7 @@ $form_list = new MSFB_List_Table('forms');
                 <td>2021-05-01 2:55 PM</td>
               </tr>
             </tbody>
-          </table>
+          </table> -->
         </div>
         <?php $form_list->get_pagination(); ?>
       </div>
