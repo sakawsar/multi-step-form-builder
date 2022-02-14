@@ -169,11 +169,14 @@
             $('.msfb-form-field-selected input, .msfb-form-field-selected textarea').attr(`placeholder`,this_val)
         })
         // update required field
-        $('.msfb-form-field-required').on('keyup', e => {
+        $('.msfb-form-field-required').on('click', e => {
             let this_el = this__(e)
             let this_val = this_el.val()
-            console.log(e)
-            $('.msfb-form-field-selected').attr(`msfb-field-required`,true)
+            console.log(`this val`,e)
+            let field_type = $('.msfb-form-field-selected div[data-field-type]').attr('data-field-type')
+            let is_checked = $(`.msfb-form-field-selected data[data-drawer-type="${field_type}"] .msfb-form-field-required:checked`).val()
+            console.log(is_checked)
+            // $('.msfb-form-field-selected').attr(`msfb-field-required`,true)
         })
         // update required field
         $('.msfb-lead-column-field').on('keyup', e => {
