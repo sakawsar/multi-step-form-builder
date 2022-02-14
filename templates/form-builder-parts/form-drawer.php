@@ -11,6 +11,10 @@
       <input type="text" placeholder="Form name" id="msfb-form-name" />
     </div>
     <div class="skfb__field-box __2">
+      <label for="formName">Form title</label>
+      <input type="text" placeholder="Form title" id="msfb-form-title" />
+    </div>
+    <div class="skfb__field-box __2">
       <label for="formName">Form description</label>
       <textarea placeholder="Form description" id="msfb-form-desc"></textarea>
     </div>
@@ -67,19 +71,19 @@ function msfb_form_field_options( $id = "" ){
     ?>
     <div class="skfb__field-box __2">
         <label for="msfb-slider-default-value">Default value</label>
-        <input type="number" value="" placeholder="Default value" class="msfb-slider-default-value" />
+        <input type="number" value="" placeholder="Default value" id="msfb-slider-default-value" />
     </div>
     <div class="skfb__field-box __2">
         <label for="msfb-slider-max-value">Maximum value</label>
-        <input type="number" value="" placeholder="Maximum value" class="msfb-slider-max-value" />
+        <input type="number" value="" placeholder="Maximum value" id="msfb-slider-max-value" />
     </div>
     <div class="skfb__field-box __2">
         <label for="msfb-slider-min-value">Minimum value</label>
-        <input type="number" value="" placeholder="Minimum value" class="msfb-slider-min-value" />
+        <input type="number" value="" placeholder="Minimum value" id="msfb-slider-min-value" />
     </div>
     <div class="skfb__field-box __2">
         <label for="msfb-slider-step">Step</label>
-        <input type="number" value="" placeholder="Step" step="0.01" class="msfb-slider-step" />
+        <input type="number" value="" placeholder="Step" step="0.01" id="msfb-slider-step" />
     </div>
     <?php
   }
@@ -92,9 +96,9 @@ function msfb_form_field_options( $id = "" ){
       <i class="fas fa-close"></i>
     </button>
   </div>
-  <h5 class="sk-head __2 sk-text-white">Options</h5>
+  <h5 class="sk-head __2 sk-text-white">Multiselect Options</h5>
   <div class="skfb__field-opt__boxes skfb__overflow_scroll">
-    <?php msfb_form_field_options(); ?>
+    <?php msfb_form_field_options("multiselect_form_field"); ?>
   </div> 
 </div>
 <!-- select form -->
