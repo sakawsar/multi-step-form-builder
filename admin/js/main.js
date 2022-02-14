@@ -89,7 +89,7 @@
                 }
                 i++
             })
-            console.log(pages);
+            // console.log(pages);
             if( pages.length > 1 ) {
                 $('.skfb-table-pagination-wrap').show()
                     for (let p_i = 0; p_i < pages.length; p_i++) {

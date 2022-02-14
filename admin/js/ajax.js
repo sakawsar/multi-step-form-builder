@@ -268,7 +268,8 @@ jQuery(document).ready($ => {
     $('#msfb-apply-bulk-action').on('click', e => {
         let this_el = this__(e)
         let el_type = this_el.attr('data-el-type')
-        let checked_items = $(`#msfb-table-item-holder tr[data-msfb-pagination] td input.msfb-sel-field:checked`)
+        let checked_items = $(`#msfb-table-item-holder tr td input.msfb-sel-field:checked`)
+        // let checked_items = $(`#msfb-table-item-holder tr[data-msfb-pagination] td input.msfb-sel-field:checked`)
         let checked_item_ids = []
         $.each(checked_items,(k,v) => {
             checked_item_ids.push($(v).attr('data-msfb-item-id'))
@@ -321,6 +322,10 @@ jQuery(document).ready($ => {
             return false
         }
         let form_fields = $('.msfb-form-builder div[data-field-type].skfb__field-box')
+        if( form_fields.length == 0 ) {
+            msfb_error_message("Add at least one field.")
+            return false
+        }
         // console.log(form_fields.map())
         let form_data = []
         let field_data = []
