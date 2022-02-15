@@ -47,3 +47,28 @@ function msfb_support_callback(){
     wp_redirect( 'https://youtube.com', 301 );
     exit();
 }
+function msfb_settings_callback(){
+    printf('<h1>%s</h1>',__('Multistep form builder settings','msfb'));
+    if(isset($_POST['save_settings'])){
+        $row_count = sanitize_text_field( $_POST['msfb_row_count'] );
+        update_option('msfb_row_count',$row_count);
+        printf("<div class='is-dismissible notice notice-success'><p>%s</p></div>",__('Settings has been saved.','msfb'));
+    }
+    ?>
+    <table class="form-table">
+        <form method="post">
+            <tr>
+                <th><?php _e('Row limit for each page','msfb'); ?></th>
+                <td>
+                    <input type="number" name="msfb_row_count" value="<?php echo get_option('msfb_row_count') ?: ""; ?>" placeholder="Row count"/>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <input type="submit" class="button button-primary" value="<?php _e('Save Settings','msfb'); ?>" name="save_settings"/>
+                </th>
+            </tr>
+        </form>
+    </table>
+    <?php
+}

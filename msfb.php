@@ -39,6 +39,8 @@ if( !class_exists('MSFB_Object') ){
             add_submenu_page( 'multistep_form_builder', __('Questions','msfb'), __('Questions','msfb'), 'manage_options', 'questions_builder', 'questions_builder_callback' );
             // Formula
             add_submenu_page( 'multistep_form_builder', __('Formula','msfb'), __('Formula','msfb'), 'manage_options', 'formula_builder', 'formula_builder_callback' );
+            // Settings
+            add_submenu_page( 'multistep_form_builder', __('Settings','msfb'), __('Settings','msfb'), 'manage_options', 'msfb_settings', 'msfb_settings_callback' );
             // Help center
             add_submenu_page( 'multistep_form_builder', __('Help center','msfb'), __('Help center','msfb'), 'manage_options', 'msfb_help_center', 'msfb_help_center_callback' );
             // Support

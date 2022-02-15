@@ -34,7 +34,7 @@ function msfb_admin_enqueue_scripts(){
 	}, $all_forms);
 	$localize_data = array(
 		'ajax_url' => admin_url( 'admin-ajax.php' ),
-		'max_rows' => 2,
+		'max_rows' => get_option('msfb_row_count') ?: 5,
 		'all_questions' => $all_questions,
 		'all_forms' => $all_forms
 	);

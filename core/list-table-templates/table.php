@@ -28,7 +28,7 @@ if( $el_type == "leads" ) {
 } elseif ( $el_type == "formulations" ) {
     $struct = [
         'formulation_name'  => 'Formulation name',
-        'shortcode_'  => 'Formulation name',
+        'shortcode'  => 'Shortcode',
     ];
     $table_data['struct'] = apply_filters('msfb_formulation_columns', $struct);
     $table_name = $prefix.'msfb_formulations';
@@ -58,13 +58,15 @@ if( $el_type == "leads" ) {
                     <?php $i=1; foreach($table_data['struct'] as $t_id => $t_value){ ?>
                         <?php
                         $qtn_types = $this->get_question_type();
-                        if( in_array($item_data[$t_id], $qtn_types) ){
+                        if( isset($item_data[$t_id]) && in_array($item_data[$t_id], $qtn_types) ){
                             $field_type = $this->get_question_type($item_data[$t_id]);
                             printf("<td>%s</td>",$field_type);
                         } else {
                             if( strpos($t_id,'name') !== false ){
                                 $name_attr = "data-msfb-row-name='{$item_data[$t_id]}'";
                                 printf("<td %s>%s</td>",$name_attr,$item_data[$t_id]);
+                            } elseif( strpos($t_id,'shortcode') !== false ) {
+                                printf("<td><code>[msfb_multistep_form id='%s']</code></td>",$item_data['id']);
                             } else {
                                 printf("<td>%s</td>",$item_data[$t_id]);
                             }
