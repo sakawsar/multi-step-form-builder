@@ -28,8 +28,12 @@ if( $el_type == "leads" ) {
 } elseif ( $el_type == "formulations" ) {
     $struct = [
         'formulation_name'  => 'Formulation name',
+        'shortcode_'  => 'Formulation name',
     ];
     $table_data['struct'] = apply_filters('msfb_formulation_columns', $struct);
+    $table_name = $prefix.'msfb_formulations';
+    $formulations = $wpdb->get_results("SELECT * FROM $table_name",ARRAY_A);
+    $table_data['data'] = $wpdb->num_rows > 0 ? $formulations : false;
 }
 ?>
 <table class="sk-table skfb-table-question">

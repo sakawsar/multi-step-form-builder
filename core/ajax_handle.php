@@ -61,6 +61,28 @@ function msfb_add_category_callback(){
     }
     exit;
 }
+add_action('wp_ajax_msfb_add_formulation','msfb_add_formulation_callback');
+function msfb_add_formulation_callback(){
+    if(isset($_POST['dataset'])){
+        global $wpdb;
+        $table_name = $wpdb->prefix.'msfb_formulations';
+        $formula_data = $_POST['dataset'];
+        if( isset( $formula_data['formula_id'] ) ){
+            $formula_id = $formula_data['formula_id'];
+            unset($formula_data['formula_id']);
+            $wpdb->update($table_name,$formula_data,array( 'id' => $formula_id ));
+            $_POST['dataset']['status'] = 'updated';
+        } else {
+            $wpdb->insert($table_name,$_POST['dataset']);
+            $_POST['dataset']['formula_id'] = $wpdb->insert_id;
+            $_POST['dataset']['status'] = 'created';
+            $_POST['dataset']['redirect'] = admin_url( 'admin.php?page=formula_builder&formulation_id='.$wpdb->insert_id );
+        }
+        echo json_encode($_POST['dataset']);
+        exit;
+    }
+    exit;
+}
 add_action('wp_ajax_msfb_save_category','msfb_save_category_callback');
 function msfb_save_category_callback(){
     if($_POST['dataset']){

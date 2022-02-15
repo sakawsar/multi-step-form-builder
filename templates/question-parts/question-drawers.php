@@ -76,7 +76,9 @@ function msfb_mendatory_fields( $id, $question_data ){
             <div class="msfb-dropdown-value-fields" data-dropdown-row-no="1">
                 <?php
                 $i = 1;
-                $total_options = !$has_data ?: count($question_data['question_data']['option_data']);
+                $total_options = $has_data && $id == "msfb-dropdown-field" && isset($question_data['question_data']['option_data']) ? count($question_data['question_data']['option_data']) : false;
+                // $total_options = 2;
+                // $total_options = !$has_data && !isset($question_data['question_data']['option_data']) ?: count($question_data['question_data']['option_data']);
                 if( $has_data ){
                 foreach($question_data['question_data']['option_data'] as $option_data){
                 ?>

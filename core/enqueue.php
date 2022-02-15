@@ -32,14 +32,31 @@ function msfb_admin_enqueue_scripts(){
 		$a_frm['form_data'] = json_decode( stripcslashes($a_frm['form_data']), true );
 		return $a_frm;
 	}, $all_forms);
-	wp_localize_script( 'msfb_admin_localize', 'msfb', array(
+	$localize_data = array(
 		'ajax_url' => admin_url( 'admin-ajax.php' ),
 		'max_rows' => 2,
 		'all_questions' => $all_questions,
 		'all_forms' => $all_forms
-	));
+	);
+	if( isset($_GET['formulation_id']) && sanitize_text_field( $_GET['formulation_id'] ) != "" ) {
+		global $wpdb;
+		$table_name = $wpdb->prefix.'msfb_formulations';
+		$formula_id = sanitize_text_field( $_GET['formulation_id'] );
+		$this_formula_data = $wpdb->get_results("SELECT * FROM $table_name WHERE id='$formula_id'",ARRAY_A);
+		if( $wpdb->num_rows > 0){
+			$has_data = true;
+			$this_formula_data = $this_formula_data[0];
+			$this_formula_data['formulation_data'] = json_decode( stripslashes( $this_formula_data['formulation_data'] ),true);
+			$localize_data['raw_data'] = json_decode( stripslashes( $this_formula_data['raw_data'] ),true);
+			// echo '<pre>';
+			// print_r($this_form_data);
+			// echo '</pre>';
+		}
+	}
+	wp_localize_script( 'msfb_admin_localize', 'msfb', $localize_data);
 	wp_enqueue_script( 'msfb_admin_main', MSFB_URL.'admin/js/main.js', array(), false, true );
 	wp_enqueue_script( 'msfb_admin_form_builder', MSFB_URL.'admin/js/form-builder.js', array(), false, true );
+	wp_enqueue_script( 'msfb_admin_formulation_builder', MSFB_URL.'admin/js/formulation-builder.js', array(), false, true );
 	wp_enqueue_script( 'msfb_admin_ajax', MSFB_URL.'admin/js/ajax.js', array(), false, true );
 	wp_enqueue_script( 'msfb_fontawesome_icons', MSFB_URL.'admin/js/fontawesome.js', array(), false, false );
 	wp_enqueue_script( 'msfb_admin_select2', MSFB_URL.'admin/js/select2.min.js' );

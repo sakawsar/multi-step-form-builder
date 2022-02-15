@@ -5,6 +5,7 @@ function msfb_create_the_database() {
 	$qtn_table            = $wpdb->prefix . 'msfb_questions';
 	$category_table       = $wpdb->prefix . 'msfb_category';
 	$form_table           = $wpdb->prefix . 'msfb_forms';
+	$formula_table        = $wpdb->prefix . 'msfb_formulations';
 	$charset_collate = $wpdb->get_charset_collate();
 	if ( $wpdb->get_var( "SHOW TABLES LIKE " . $qtn_table ) != $qtn_table ) {
 		$sql = "CREATE TABLE $qtn_table (
@@ -33,8 +34,21 @@ function msfb_create_the_database() {
     if ( $wpdb->get_var( "SHOW TABLES LIKE " . $form_table ) != $form_table ) {
 		$sql = "CREATE TABLE $form_table (
             id INT(11) NOT NULL AUTO_INCREMENT,
+            cat_id TEXT NOT NULL,
             form_name TEXT NOT NULL,
             form_data TEXT NOT NULL,
+            PRIMARY KEY (id)
+        ) $charset_collate;";
+		dbDelta( $sql );
+	};
+    if ( $wpdb->get_var( "SHOW TABLES LIKE " . $formula_table ) != $formula_table ) {
+		$sql = "CREATE TABLE $formula_table (
+            id INT(11) NOT NULL AUTO_INCREMENT,
+            cat_id TEXT NOT NULL,
+            formulation_name TEXT NOT NULL,
+            formulation_data TEXT NOT NULL,
+            raw_data TEXT NOT NULL,
+            settings TEXT NOT NULL,
             PRIMARY KEY (id)
         ) $charset_collate;";
 		dbDelta( $sql );

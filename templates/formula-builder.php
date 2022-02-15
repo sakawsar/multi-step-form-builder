@@ -2,6 +2,27 @@
   <div class="skfb-container-with-sidebar">
     <div class="skfb-header">
       <div class="sk-container">
+        <?php
+         $has_data = false;
+         $this_formula_data = false;
+         $formula_id = false;
+         $formula_name = false;
+         if( isset($_GET['formulation_id']) ) {
+           global $wpdb;
+           $table_name = $wpdb->prefix.'msfb_formulations';
+           $formula_id = sanitize_text_field( $_GET['formulation_id'] );
+           $this_formula_data = $wpdb->get_results("SELECT * FROM $table_name WHERE id='$formula_id'",ARRAY_A);
+           if( $wpdb->num_rows > 0){
+             $has_data = true;
+             $this_formula_data = $this_formula_data[0];
+             $this_formula_data['formulation_data'] = json_decode( stripslashes( $this_formula_data['formulation_data'] ),true);
+             $formula_name =  $this_formula_data['formulation_name'];
+             // echo '<pre>';
+             // print_r($this_form_data);
+             // echo '</pre>';
+           }
+         }
+        ?>
         <div class="sk-row sk-align-items-center">
           <div class="sk-col-12">
             <div class="sk-d-flex sk-align-items-center sk-flex-wrap sk-column-gap">
@@ -9,9 +30,11 @@
                 <h3>Formula builder</h3>
               </div>
               <div>
-                <button class="skfb-btn"><i class="fas fa-save"></i> Save</button>
-                <a href="#" class="skfb-btn"><i class="fas fa-plus"></i> Add new</a>
-                <a href="#" class="skfb-btn"><i class="fas fa-cog"></i> Settings</a>
+                <button class="skfb-btn" <?php echo $has_data ? "data-formula-id='{$formula_id}'" : ""; ?> <?php echo $has_data ? "data-formula-name='{$formula_name}'" : ""; ?> id="msfb-formulation-builder"><i class="fas fa-save"></i> Save</button>
+                <a href="<?php echo admin_url( 'admin.php?page=formula_builder&formulation_id' ); ?>" class="skfb-btn"><i class="fas fa-plus"></i> Add new</a>
+                <?php if(isset($_GET['formulation_id']) && sanitize_text_field( $_GET['formulation_id'] ) != "" ) { ?>
+                  <a href="<?php echo admin_url( 'admin.php?page=formula_builder&formulation_id='.sanitize_text_field( $_GET['formulation_id'] ).'&settings' ); ?>" class="skfb-btn"><i class="fas fa-cog"></i> Settings</a>
+                <?php } ?>
               </div>
             </div>
           </div>
@@ -24,7 +47,7 @@
           <div class="sk-col-md-3 sk-col-lg-2 skfb__overflow_scroll">
             <div class="skfb-feilds-panel">
               <h6 class="sk-head skfb-bb-primary sk-text-primary">Click to select field</h6>
-              <div class="skfb__field-box __3">
+              <!-- <div class="skfb__field-box __3">
                 <select class="sk-form-control sk-custom-select skfb__custom-select">
                   <option value="">Element type</option>
                   <option value="question">Question</option>
@@ -44,10 +67,10 @@
                   <option value="msfb-dropdown-field">Dropdown</option>
                   <option value="msfb-upload-field">File upload</option>
                 </select>
-              </div>
+              </div> -->
               <div class="skfb-search-box __2">
                 <form action="#">
-                  <input type="search" class="sk-form-control" placeholder="Search Elements by Name">
+                  <input type="search" class="sk-form-control" id="msfb-search-formula-element" placeholder="Search Elements by Name">
                   <button class="skfb-search-btn"><i class="fas fa-search"></i></button>
                 </form>
               </div>
@@ -67,7 +90,7 @@
               }, $all_forms);
               ?>
               <?php foreach($all_questions as $a_question) { ?>
-              <div data-element-type="question" data-question-type="<?php echo $a_question['question_type']; ?> data-element-name="<?php echo $a_question['question_name']; ?> class="skfb-card skfb-feild-draggable" draggable="true" ondragstart="<?php echo 'drag'; ?>(event)" data-node="question-<?php echo $a_question['id']; ?>">
+              <div data-element-type="question" data-question-type="<?php echo $a_question['question_type']; ?>" data-element-name="<?php echo $a_question['question_name']; ?>" class="skfb-card skfb-feild-draggable" draggable="true" ondragstart="<?php echo 'drag'; ?>(event)" data-node="question-<?php echo $a_question['id']; ?>">
                 <div class="sk-row sk-align-items-center">
                   <div class="sk-col-12">
                     <div class="skfb-prev-input">
