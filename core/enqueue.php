@@ -19,9 +19,24 @@ function msfb_admin_enqueue_scripts(){
 	wp_enqueue_script( 'msfb_admin_jquery_step', MSFB_URL.'admin/js/jquery.steps.min.js' );
 	wp_enqueue_script( 'msfb_admin_jquery_ui_touch_punch', MSFB_URL.'admin/js/jquery.ui.touch-punch.min.js' );
 	wp_enqueue_script( 'msfb_admin_localize', MSFB_URL.'admin/js/localize.js' );
+	global $wpdb;
+	$form_table = $wpdb->prefix.'msfb_forms';
+	$question_table = $wpdb->prefix.'msfb_questions';
+	$all_questions = $wpdb->get_results("SELECT * FROM $question_table",ARRAY_A);
+	$all_questions = array_map(function($a_qtn){
+		$a_qtn['question_data'] = json_decode( stripcslashes($a_qtn['question_data']), true );
+		return $a_qtn;
+	}, $all_questions);
+	$all_forms = $wpdb->get_results("SELECT * FROM $form_table",ARRAY_A);
+	$all_forms = array_map(function($a_frm){
+		$a_frm['form_data'] = json_decode( stripcslashes($a_frm['form_data']), true );
+		return $a_frm;
+	}, $all_forms);
 	wp_localize_script( 'msfb_admin_localize', 'msfb', array(
 		'ajax_url' => admin_url( 'admin-ajax.php' ),
-		'max_rows' => 2
+		'max_rows' => 2,
+		'all_questions' => $all_questions,
+		'all_forms' => $all_forms
 	));
 	wp_enqueue_script( 'msfb_admin_main', MSFB_URL.'admin/js/main.js', array(), false, true );
 	wp_enqueue_script( 'msfb_admin_form_builder', MSFB_URL.'admin/js/form-builder.js', array(), false, true );
@@ -30,7 +45,7 @@ function msfb_admin_enqueue_scripts(){
 	wp_enqueue_script( 'msfb_admin_select2', MSFB_URL.'admin/js/select2.min.js' );
 	wp_enqueue_script( 'msfb_admin_swal2', 'https://cdn.jsdelivr.net/npm/sweetalert2@9' );
 	// wp_enqueue_script( 'msfb_admin_drawflow_js', 'https://cdn.jsdelivr.net/gh/jerosoler/Drawflow/dist/drawflow.min.js' );
-	wp_enqueue_script( 'msfb_admin_drawflow_js', MSFB_URL.'admin/src/drawflow_lib.js' );
+	wp_enqueue_script( 'msfb_admin_drawflow_js', MSFB_URL.'admin/src/drawflow_lib.js', array(), false, true );
 	wp_enqueue_script( 'msfb_admin_micromodal', 'https://unpkg.com/micromodal/dist/micromodal.min.js' );
 	wp_enqueue_script( 'msfb_admin_drawflow_script_js', MSFB_URL.'admin/js/drawflow.js', array(), false, true );
 	//css

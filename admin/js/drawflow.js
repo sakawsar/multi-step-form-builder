@@ -110,7 +110,97 @@ if(id != null){
       }
       pos_x = pos_x * ( editor.precanvas.clientWidth / (editor.precanvas.clientWidth * editor.zoom)) - (editor.precanvas.getBoundingClientRect().x * ( editor.precanvas.clientWidth / (editor.precanvas.clientWidth * editor.zoom)));
       pos_y = pos_y * ( editor.precanvas.clientHeight / (editor.precanvas.clientHeight * editor.zoom)) - (editor.precanvas.getBoundingClientRect().y * ( editor.precanvas.clientHeight / (editor.precanvas.clientHeight * editor.zoom)));
-
+      if( name.indexOf('form') > -1 ) {
+        let form_data = name.split('-')
+        let form_id = form_data[1]
+        let form_found = msfb.all_forms.filter( a_form => {
+          return a_form.id == form_id
+        })
+        if( form_found.length > 0 ){
+          let form_name = form_found[0].form_name
+          var form_html = `
+            <div>
+              <div class="box">
+                  <ul>
+                    <li>${form_name}</li>
+                  </ul>
+              </div>
+            </div>
+          `
+        }
+        editor.addNode(name, 1, 1, pos_x, pos_y, name, {"channel":"","channel2":""}, form_html );
+        // var telegrambot = `
+        //     <div>
+        //       <div class="box">
+        //           <p>Question name:</p>
+        //           <ul>
+        //               <li>Option 1</li>
+        //               <li>Option 2</li>
+        //               <li>Option 3</li>
+        //               <li>Option 4</li>
+        //               <li>Option 5</li>
+        //               <li>Option 5</li>
+        //               <li>Option 5</li>
+        //               <li>Option 5</li>
+        //               <li>Option 5</li>
+        //               <li>Option 5</li>
+        //               <li>Option 5</li>
+        //               <li>Option 5</li>
+        //           </ul>
+        //       </div>
+        //     </div>
+        //     `;
+        //   editor.addNode('telegram', 12, 12, pos_x, pos_y, 'telegram', {"channel":"","channel2":""}, telegrambot );
+          return false
+      } else {
+        let qtn_data = name.split('-')
+        let qtn_id = qtn_data[1]
+        let qtn_found = msfb.all_questions.filter( a_qtn => {
+          return a_qtn.id == qtn_id
+        })
+        if( qtn_found.length > 0 ) {
+          let qtn_type = qtn_found[0].question_type
+          let qtn_name = qtn_found[0].question_name
+          if( qtn_type == "msfb-multiselect" || qtn_type == "msfb-text-field" || qtn_type == "msfb-textarea-field" || qtn_type == "msfb-date-field" || qtn_type == "msfb-map-field" || qtn_type == "msfb-upload-field" || qtn_type == "msfb-slider-field" ) {
+            let qtn_html = `
+              <div>
+                <div class="box">
+                    <ul>
+                      <li>${qtn_name}</li>
+                    </ul>
+                </div>
+              </div>
+            `
+            editor.addNode(name, 1, 1, pos_x, pos_y, name, {"channel":"","channel2":""}, qtn_html );
+          } else if ( qtn_type == "msfb-single-select-field" || qtn_type == "msfb-dropdown-field" ) {
+            let qtn_options = ``
+            let qtn_data = qtn_found[0].question_data
+            let input_count = 0
+            if( qtn_type == "msfb-single-select-field" ) {
+              for (let i = 0; i < qtn_data.length; i++) {
+                qtn_options += `<li><i class="${qtn_data[i].icon_class}"></i> ${qtn_data[i].answer}</li>` 
+                input_count++
+              }
+            } else {
+              for (let i = 0; i < qtn_data.option_data.length; i++) {
+                qtn_options += `<li>${qtn_data.option_data[i].option}</li>` 
+                input_count++
+              }
+            }
+            let qtn_html = `
+              <div>
+                <div class="box">
+                    <p>${qtn_name}</p>
+                    <ul>
+                      ${qtn_options}
+                    </ul>
+                </div>
+              </div>
+            `
+            editor.addNode(name, input_count, input_count, pos_x, pos_y, name, {"channel":"","channel2":""}, qtn_html );
+          }
+        }
+      }
 
       switch (name) {
         case 'facebook':
@@ -146,44 +236,27 @@ if(id != null){
             //   <p>select channel</p>
             // <div class="title-box"><i class="fab fa-telegram-plane"></i> Telegram bot</div>
           var telegrambot = `
-          <div>
-            <div class="box">
-                <p>Question name:</p>
-                <ul>
-                    <li>Option 1</li>
-                    <li>Option 2</li>
-                    <li>Option 3</li>
-                    <li>Option 4</li>
-                    <li>Option 5</li>
-                    <li>Option 5</li>
-                    <li>Option 5</li>
-                    <li>Option 5</li>
-                    <li>Option 5</li>
-                    <li>Option 5</li>
-                </ul>
-            </div>
+            <div>
+              <div class="box">
+                  <p>Question name:</p>
+                  <ul>
+                      <li>Option 1</li>
+                      <li>Option 2</li>
+                      <li>Option 3</li>
+                      <li>Option 4</li>
+                      <li>Option 5</li>
+                      <li>Option 5</li>
+                      <li>Option 5</li>
+                      <li>Option 5</li>
+                      <li>Option 5</li>
+                      <li>Option 5</li>
+                      <li>Option 5</li>
+                      <li>Option 5</li>
+                  </ul>
+              </div>
             </div>
             `;
-            // <select df-channel>
-            //   <option value="channel_1">Channel 1</option>
-            //   <option value="channel_2">Channel 2</option>
-            //   <option value="channel_3">Channel 3</option>
-            //   <option value="channel_4">Channel 4</option>
-            // </select>
-            // <select df-channel2>
-            //   <option value="channel_1">Channel 1</option>
-            //   <option value="channel_2">Channel 2</option>
-            //   <option value="channel_3">Channel 3</option>
-            //   <option value="channel_4">Channel 4</option>
-            // </select>
-            // <select df-channel3>
-            //   <option value="channel_1">Channel 1</option>
-            //   <option value="channel_2">Channel 2</option>
-            //   <option value="channel_3">Channel 3</option>
-            //   <option value="channel_4">Channel 4</option>
-            // </select>
-        //   { "channel": ['channel_3','channel_4']}
-          editor.addNode('telegram', 10, 10, pos_x, pos_y, 'telegram', {"channel":"","channel2":""}, telegrambot );
+          editor.addNode('telegram', 10, 12, pos_x, pos_y, 'telegram', {"channel":"","channel2":""}, telegrambot );
           break;
         case 'aws':
           var aws = `
