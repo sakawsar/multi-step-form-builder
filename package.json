@@ -1,0 +1,26 @@
+{
+  "name": "multi-step-form-builder",
+  "version": "1.0.0",
+  "description": "",
+  "main": "tailwind.config.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tailwindcss -i ./admin/css/tailwind-input.css -o ./admin/css/tailwind.css -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sakawsar/multi-step-form-builder.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sakawsar/multi-step-form-builder/issues"
+  },
+  "homepage": "https://github.com/sakawsar/multi-step-form-builder#readme",
+  "dependencies": {
+    "tailwindcss": "^3.0.23"
+  }
+}
