@@ -484,6 +484,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   display: flex;
 }
 
+.hidden {
+  display: none;
+}
+
 .w-4\/5 {
   width: 80%;
 }
@@ -492,8 +496,20 @@ Ensure the default browser behavior of the `hidden` attribute.
   width: 100%;
 }
 
+.flex-row {
+  flex-direction: row;
+}
+
 .flex-col {
   flex-direction: column;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
 }
 
 .gap-4 {
@@ -512,6 +528,16 @@ Ensure the default browser behavior of the `hidden` attribute.
 .text-xl {
   font-size: 1.25rem;
   line-height: 1.75rem;
+}
+
+.text-8xl {
+  font-size: 6rem;
+  line-height: 1;
+}
+
+.text-gray-400 {
+  --tw-text-opacity: 1;
+  color: rgb(156 163 175 / var(--tw-text-opacity));
 }
 
 .tw-msfb-container {
@@ -632,8 +658,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 /** dropdown */
 
-.tw-msfb-dropdown-qtn {
+.tw-msfb-dropdown-qtn, .tw-msfb-text-qtn, .tw-msfb-date-qtn, .tw-msfb-upload-qtn, .tw-msfb-textarea-qtn {
   margin: auto;
+  margin-top: 2rem;
   display: flex;
   width: 100%;
   flex-direction: column;
@@ -641,13 +668,13 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 
 @media (min-width: 640px) {
-  .tw-msfb-dropdown-qtn {
+  .tw-msfb-dropdown-qtn, .tw-msfb-text-qtn, .tw-msfb-date-qtn, .tw-msfb-upload-qtn, .tw-msfb-textarea-qtn {
     width: 100%;
   }
 }
 
 @media (min-width: 768px) {
-  .tw-msfb-dropdown-qtn {
+  .tw-msfb-dropdown-qtn, .tw-msfb-text-qtn, .tw-msfb-date-qtn, .tw-msfb-upload-qtn, .tw-msfb-textarea-qtn {
     width: 60%;
   }
 }
@@ -705,7 +732,7 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 /** dropdown end */
 
-.tw-msfb-dropdown-field, .tw-msfb-date-field, .tw-msfb-text-field, .tw-msfb-upload-field {
+.tw-msfb-dropdown-field, .tw-msfb-date-field, .tw-msfb-text-field, .tw-msfb-upload-field, .tw-msfb-textarea-field {
   position: relative;
   border-radius: 0.5rem;
   border-width: 2px;
@@ -718,34 +745,18 @@ Ensure the default browser behavior of the `hidden` attribute.
   color: rgb(0 0 0 / var(--tw-text-opacity));
 }
 
+.tw-msfb-textarea-field,
+.tw-msfb-upload-field{
+  height: 224px;
+  margin: auto;
+  width: 50%;
+  border-style: dashed;
+}
+
 .tw-msfb-text-field:focus {
   --tw-border-opacity: 1;
   border-color: rgb(96 165 250 / var(--tw-border-opacity));
 }
-
-/* text field */
-
-.tw-msfb-text-qtn {
-  margin: auto;
-  display: flex;
-  width: 100%;
-  flex-direction: column;
-  justify-content: center;
-}
-
-@media (min-width: 640px) {
-  .tw-msfb-text-qtn {
-    width: 100%;
-  }
-}
-
-@media (min-width: 768px) {
-  .tw-msfb-text-qtn {
-    width: 60%;
-  }
-}
-
-/* text field end */
 
 .tw-msfb-dropdown-field i {
   position: absolute;
