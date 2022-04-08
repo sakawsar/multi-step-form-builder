@@ -67,6 +67,7 @@ function msfb_admin_enqueue_scripts(){
 	wp_enqueue_script( 'msfb_admin_drawflow_script_js', MSFB_URL.'admin/js/drawflow.js', array(), false, true );
 	//css
 	wp_register_style( 'msfb_admin_global', MSFB_URL.'admin/css/global.css' );
+	wp_register_style( 'msfb_admin_tailwind', MSFB_URL.'admin/css/tailwind.css' );
 	wp_register_style( 'msfb_admin_fontawesome', 'https://pro.fontawesome.com/releases/v5.10.0/css/all.css' );
 	wp_register_style( 'msfb_admin_jquery_ui_css', MSFB_URL.'admin/css/jquery-ui.css' );
 	wp_register_style( 'msfb_admin_jquery_steps', MSFB_URL.'admin/css/jquery.steps.css' );

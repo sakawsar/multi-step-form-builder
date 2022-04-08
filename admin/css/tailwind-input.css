@@ -1,3 +1,77 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+.tw-msfb-container{
+    @apply container m-auto  h-auto p-16 flex flex-col;
+    min-height: 640px;
+}
+.tw-msfb-progress-bar{
+    @apply w-4/5 mx-auto mb-8 h-2 bg-gray-100 relative rounded shadow-lg;
+}
+.tw-msfb-progress-bar__status{
+    @apply w-4/5 h-2 bg-blue-400 absolute left-0 rounded;
+}
+.tw-msfb-qtn-field{
+    min-height: 224px;
+    height: auto;
+}
+/** multiselect **/
+.tw-msfb-multiselect-qtn{
+    @apply flex flex-row gap-4 w-4/5 m-auto mt-4;
+}
+.tw-msfb-multiselect-qtn__item{
+    @apply w-2/4 p-4 bg-white border border-gray-100 rounded-lg shadow-lg flex flex-col justify-center gap-8 items-center;
+    height: 240px;
+}
+.tw-msfb-multiselect-qtn__item i{
+    @apply text-8xl text-blue-400
+}
+.tw-msfb-multiselect-qtn__item p{
+    @apply text-2xl;
+}
+/** dropdown */
+.tw-msfb-dropdown-qtn{
+    @apply flex flex-col justify-center 
+    m-auto
+    w-full
+    md:w-3/5
+    sm:w-full;
+}
+.tw-msfb-dropdown-qtn .item-holder{
+    @apply absolute top-16 left-0 w-full outline-2 shadow-lg rounded-lg hidden;
+}
+.tw-msfb-dropdown-qtn__item{
+    @apply bg-white p-4 hover:bg-blue-400 hover:text-white font-medium text-gray-600 outline-2 outline-red-500;
+}
+.tw-msfb-dropdown-qtn__item:last-of-type{
+    @apply bg-white p-4 hover:bg-blue-400 hover:text-white font-medium text-gray-600;
+    border: 0px!important;
+}
+/** dropdown end */
+.tw-msfb-dropdown-field,
+.tw-msfb-date-field,
+.tw-msfb-text-field,
+.tw-msfb-upload-field{
+    @apply p-4 text-black relative bg-white border-2 border-blue-400 rounded-lg;
+}
+.tw-msfb-text-field:focus{
+    @apply border-blue-400;
+}
+/* text field */
+.tw-msfb-text-qtn{
+    @apply flex flex-col justify-center 
+    m-auto
+    w-full
+    md:w-3/5
+    sm:w-full;
+}
+/* text field end */
+.tw-msfb-dropdown-field i{
+    @apply absolute right-3 top-3 text-2xl text-gray-400 items-center;
+}
+.tw-msfb-btn-container{
+    @apply flex flex-row gap-4 justify-center my-16;
+}
+.tw-msfb-btn-container button{
+    @apply px-8 py-2 rounded-lg text-white bg-blue-400 text-lg;
+}
