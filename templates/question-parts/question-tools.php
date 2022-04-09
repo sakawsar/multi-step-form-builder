@@ -114,7 +114,7 @@
     </div>
   </div>
 </div>
-<div class="skfb-card skfb-feild-draggable" data-question-type="msfb-map-field">
+<!-- <div class="skfb-card skfb-feild-draggable" data-question-type="msfb-map-field">
   <div class="sk-row sk-align-items-center">
     <div class="sk-col-9">
       <div class="skfb-prev-input">
@@ -129,7 +129,7 @@
       <button class="skfb-field-plus-btn"><i class="fas fa-plus"></i></button>
     </div>
   </div>
-</div>
+</div> -->
 <div class="skfb-card skfb-feild-draggable" data-question-type="msfb-slider-field">
   <div class="sk-row sk-align-items-center">
     <div class="sk-col-9">
