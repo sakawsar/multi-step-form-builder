@@ -7,6 +7,7 @@ function msfb_enqueue_scripts(){
 	wp_enqueue_script( 'msfb_jquery_ui_touch_punch', MSFB_URL.'assets/js/jquery.ui.touch-punch.min.js' );
 	wp_enqueue_script( 'msfb_main', MSFB_URL.'assets/js/main.js' );
 	//css
+	wp_register_style( 'msfb_admin_tailwind', MSFB_URL.'admin/css/tailwind.css' );
 	wp_enqueue_style( 'msfb_jquery_steps_css', MSFB_URL.'assets/css/jquery.steps.css' );
 	wp_enqueue_style( 'msfb_style', MSFB_URL.'assets/css/style.css' );
 }

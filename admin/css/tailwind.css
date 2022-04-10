@@ -469,97 +469,101 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 
 .relative {
-  position: relative;
+  position: relative !important;
 }
 
 .m-auto {
-  margin: auto;
-}
-
-.my-4 {
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+  margin: auto !important;
 }
 
 .mt-4 {
-  margin-top: 1rem;
-}
-
-.mb-4 {
-  margin-bottom: 1rem;
+  margin-top: 1rem !important;
 }
 
 .mb-8 {
-  margin-bottom: 2rem;
+  margin-bottom: 2rem !important;
+}
+
+.mb-2 {
+  margin-bottom: 0.5rem !important;
+}
+
+.mr-8 {
+  margin-right: 2rem !important;
 }
 
 .flex {
-  display: flex;
+  display: flex !important;
 }
 
 .hidden {
-  display: none;
+  display: none !important;
 }
 
 .w-4\/5 {
-  width: 80%;
+  width: 80% !important;
 }
 
 .w-full {
-  width: 100%;
+  width: 100% !important;
 }
 
 .flex-row {
-  flex-direction: row;
+  flex-direction: row !important;
 }
 
 .flex-col {
-  flex-direction: column;
+  flex-direction: column !important;
 }
 
 .items-center {
-  align-items: center;
+  align-items: center !important;
 }
 
 .justify-center {
-  justify-content: center;
+  justify-content: center !important;
 }
 
 .justify-between {
-  justify-content: space-between;
+  justify-content: space-between !important;
 }
 
 .gap-4 {
-  gap: 1rem;
+  gap: 1rem !important;
 }
 
 .text-center {
-  text-align: center;
+  text-align: center !important;
 }
 
 .text-4xl {
-  font-size: 2.25rem;
-  line-height: 2.5rem;
+  font-size: 2.25rem !important;
+  line-height: 2.5rem !important;
 }
 
 .text-xl {
-  font-size: 1.25rem;
-  line-height: 1.75rem;
+  font-size: 1.25rem !important;
+  line-height: 1.75rem !important;
 }
 
 .text-8xl {
-  font-size: 6rem;
-  line-height: 1;
+  font-size: 6rem !important;
+  line-height: 1 !important;
 }
 
-.text-2xl {
-  font-size: 1.5rem;
-  line-height: 2rem;
+.text-lg {
+  font-size: 1.125rem !important;
+  line-height: 1.75rem !important;
 }
 
 .text-gray-400 {
-  --tw-text-opacity: 1;
-  color: rgb(156 163 175 / var(--tw-text-opacity));
+  --tw-text-opacity: 1 !important;
+  color: rgb(156 163 175 / var(--tw-text-opacity)) !important;
+}
+
+.text-blue-400 {
+  --tw-text-opacity: 1 !important;
+  color: rgb(96 165 250 / var(--tw-text-opacity)) !important;
 }
 
 .tw-msfb-container {
@@ -701,6 +705,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   }
 }
 
+.tw-msfb-form-qtn {
+  margin-top: 2rem;
+}
+
 .tw-msfb-dropdown-qtn .item-holder {
   position: absolute;
   top: 4rem;
@@ -801,12 +809,20 @@ Ensure the default browser behavior of the `hidden` attribute.
   cursor: pointer;
 }
 
-.tw-msfb-textarea-field,
 .tw-msfb-upload-field{
   height: 224px;
   margin: auto;
   width: 50%;
   border-style: dashed;
+}
+
+.msfb-form-field {
+  margin: auto;
+  margin-bottom: 1rem;
+  display: flex;
+  width: 50%;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
 
 .tw-msfb-text-field:focus {
@@ -847,3 +863,18 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
+
+/** checkbox custom design */
+
+/* .msfb-form-checkbox input{
+    appearance: none;
+    height: 20px;
+    width: 20px;
+    background: blue;
+    display: flex;
+    flex-direction: column;
+}
+.msfb-form-checkbox input::-ms-check,
+.msfb-form-checkbox input:checked{
+    background-color: red;
+} */
