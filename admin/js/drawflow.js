@@ -387,6 +387,7 @@ if(id != null){
       return label_data[1]
     }
     jQuery('#msfb-formulation-builder').on('click',async (e) => {
+
         let this_el = jQuery(e.currentTarget)
         console.log(editor.export());
         let data = editor.export()
@@ -449,7 +450,7 @@ if(id != null){
           })
           formulation_name = formula_name
         } else {
-          formulation_name = this_el.attr('data-formula-id')
+          formulation_name = this_el.attr('data-formula-name')
         }
         if ( formulation_name ) {
           this_el.find('i').attr('class','fa fa-spinner fa-spin')
@@ -467,11 +468,12 @@ if(id != null){
             dataType: "json",
             data: {
               action: "msfb_add_formulation",
-              dataset: {
-                "formulation_name": formulation_name,
-                "formulation_data": JSON.stringify( { ...formulation_data }),
-                "raw_data": JSON.stringify( data )
-              }
+              dataset: request_data
+              // dataset: {
+              //   "formulation_name": formulation_name,
+              //   "formulation_data": JSON.stringify( { ...formulation_data }),
+              //   "raw_data": JSON.stringify( data )
+              // }
             },
             success: resp => {
               this_el.find('i').attr('class','fas fa-save')
