@@ -14,30 +14,35 @@ function msfb_form_step( $data ){
         <?php if(!empty($form_data['field_data'])){
             foreach($form_data['field_data'] as $field){
         ?>
+
             <!-- multiselect field -->
             <?php if($field['field_type'] == "multiselect_form_field"){ ?>
-            <div class="msfb-form-field msfb-form-checkbox">
-                <label class="w-full text-lg mb-2 text-blue-400"><?php echo $field['field_label']; ?></label>
+            <div class="msfb-form-field msfb-form-checkbox" data-field-label="<?php echo trim(strip_tags( $field['field_label'] )); ?>">
+                <label class="w-full text-lg mb-2 text-blue-400"><?php echo trim(strip_tags( $field['field_label'] )); ?></label>
                 <?php foreach($field['field_data'] as $field_option){ ?>
                 <label class="mr-8">
-                    <input type="checkbox" value="<?php echo $field_option['value']; ?>" name=""/> <?php echo $field_option['label']; ?>
+                    <input type="checkbox" value="<?php echo $field_option['value']; ?>" name="<?php echo trim(strip_tags( $field['field_label'] )); ?>"/> <?php echo $field_option['label']; ?>
                 </label>
                 <?php } ?>
             </div>
+
+
             <!-- select field -->
             <?php } elseif($field['field_type'] == "select_form_field"){ ?>
-            <div class="msfb-form-field msfb-form-radio">
-                <label class="w-full text-lg mb-2 text-blue-400"><?php echo $field['field_label']; ?></label>
+            <div class="msfb-form-field msfb-form-radio" data-field-label="<?php echo trim(strip_tags( $field['field_label'] )); ?>">
+                <label class="w-full text-lg mb-2 text-blue-400"><?php echo trim(strip_tags( $field['field_label'] )); ?></label>
                 <?php foreach($field['field_data'] as $field_option){ ?>
                 <label class="mr-8">
-                    <input type="radio" value="<?php echo $field_option['value']; ?>" name=""/> <?php echo $field_option['label']; ?>
+                    <input type="radio" value="<?php echo $field_option['value']; ?>" name="<?php echo trim(strip_tags( $field['field_label'] )); ?>"/> <?php echo $field_option['label']; ?>
                 </label>
                 <?php } ?>
             </div>
+
+
             <!-- dropdown field -->
             <?php } elseif($field['field_type'] == "dropdown_form_field"){ ?>
-            <div class="msfb-form-field msfb-form-field msfb-form-text">
-                <label class="w-full text-lg mb-2 text-blue-400"><?php echo $field['field_label']; ?></label>
+            <div class="msfb-form-field msfb-form-field msfb-form-text" data-field-label="<?php echo trim(strip_tags( $field['field_label'] )); ?>">
+                <label class="w-full text-lg mb-2 text-blue-400"><?php echo trim(strip_tags( $field['field_label'] )); ?></label>
                 <label class="w-full shadow-md tw-msfb-dropdown-field">
                     <p>Select from dropdown</p>
                     <div class="item-holder bg-white z-50">
@@ -50,40 +55,50 @@ function msfb_form_step( $data ){
                     </div>
                 </label>
             </div>
+
+
             <!-- text field -->
             <?php } elseif($field['field_type'] == "text_form_field"){ ?>
-                <?php
-            echo '<pre>';
-            print_r($field);
-            echo '</pre>';
+            <?php
+            // echo '<pre>';
+            // print_r($field);
+            // echo '</pre>';
             ?>
-            <div class="msfb-form-field msfb-form-field msfb-form-text">
-                <label class="w-full text-lg mb-2 text-blue-400"><?php echo $field['field_label']; ?></label>
+            <div class="msfb-form-field msfb-form-field msfb-form-text" data-field-label="<?php echo trim(strip_tags( $field['field_label'] )); ?>">
+                <label class="w-full text-lg mb-2 text-blue-400"><?php echo trim(strip_tags( $field['field_label'] )); ?></label>
                 <label class="w-full">
-                    <input type="text" placeholder="<?php echo $field['field_data']['placeholder']; ?>" class="tw-msfb-text-field w-full" name="test"/>
+                    <input type="text" placeholder="<?php echo $field['field_data']['placeholder']; ?>" class="tw-msfb-text-field w-full" value="test" name="test"/>
                 </label>
             </div>
+
+
             <!-- textarea field -->
             <?php } elseif($field['field_type'] == "textarea_form_field"){ ?>
-            <div class="msfb-form-field msfb-form-textarea">
-                <label class="w-full text-lg mb-2 text-blue-400"><?php echo $field['field_label']; ?></label>
+            <div class="msfb-form-field msfb-form-textarea" data-field-label="<?php echo trim(strip_tags( $field['field_label'] )); ?>">
+                <label class="w-full text-lg mb-2 text-blue-400"><?php echo trim(strip_tags( $field['field_label'] )); ?></label>
                 <textarea class="tw-msfb-textarea-field msfb-form-textarea w-full" placeholder="Test textarea"></textarea>
             </div>
+
+
             <!-- date field -->
             <?php } elseif($field['field_type'] == "date_form_field"){ ?>
-            <div class="msfb-form-field msfb-form-date">
-                <label class="w-full text-lg mb-2 text-blue-400"><?php echo $field['field_label']; ?></label>
+            <div class="msfb-form-field msfb-form-date" data-field-label="<?php echo trim(strip_tags( $field['field_label'] )); ?>">
+                <label class="w-full text-lg mb-2 text-blue-400"><?php echo trim(strip_tags( $field['field_label'] )); ?></label>
                 <label class="w-full">
                     <input type="date" class="tw-msfb-text-field w-full" value="test" name="test"/>
                 </label>
             </div>
+
+
             <!-- slider field -->
             <?php } elseif($field['field_type'] == "slider_form_field"){ ?>
-            <div class="msfb-form-field msfb-form-date">
-                <label class="w-full text-lg mb-2 text-blue-400"><?php echo $field['field_label']; ?></label>
+            <div class="msfb-form-field msfb-form-date" data-field-label="<?php echo trim(strip_tags( $field['field_label'] )); ?>">
+                <label class="w-full text-lg mb-2 text-blue-400"><?php echo trim(strip_tags( $field['field_label'] )); ?></label>
                 <input type="range" class="tw-msfb-slider-field"/>
             </div>
             <?php } ?>
+
+
         <?php } } ?>
     </div>
     <!-- form step end -->

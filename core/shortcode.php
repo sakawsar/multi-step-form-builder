@@ -117,10 +117,9 @@ function msfb_step_navigation( $data ) {
 		$required = $data['question_required'] == 1 ? "data-msfb-required='true'" : "";
 	}
 	?>
-		<div <?php echo $required; ?>" class="tw-msfb-btn-container" <?php echo $root_node; ?>>
+		<div <?php echo $required; ?>" class="tw-msfb-btn-container" <?php echo $root_node; ?> data-step-type="<?php echo $step_data['type']; ?>">
 			<?php if( $data['step'] != 1 ) { ?>
 				<button data-msfb-prev="">Back</button>
-				<!-- <button data-msfb-prev="<?php echo $step_data['inputs']['input_1']['connections'][0]['node']; ?>">Back</button> -->
 			<?php } ?>
 			<?php if( !empty($step_data['outputs']['output_1']['connections']) ) { ?>
 				<?php $next_node = count($step_data['outputs']) == 1 ? $step_data['outputs']['output_1']['connections'][0]['node'] : ""; ?>
