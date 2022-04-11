@@ -2,10 +2,18 @@
 add_action('wp_enqueue_scripts','msfb_enqueue_scripts');
 function msfb_enqueue_scripts(){
 	//js
+	wp_enqueue_script( 'msfb_localize', MSFB_URL.'admin/js/localize.js' );
+	$localize_data = array(
+		'ajax_url' => admin_url( 'admin-ajax.php' )
+	);
+	wp_localize_script( 'msfb_localize', 'msfb', $localize_data);
 	wp_enqueue_script( 'jquery' );
-	wp_enqueue_script( 'msfb_jquery_step', MSFB_URL.'assets/js/jquery.steps.min.js' );
-	wp_enqueue_script( 'msfb_jquery_ui_touch_punch', MSFB_URL.'assets/js/jquery.ui.touch-punch.min.js' );
-	wp_enqueue_script( 'msfb_main', MSFB_URL.'assets/js/main.js' );
+	wp_enqueue_script( 'msfb_jquery_step', MSFB_URL.'admin/js/jquery.steps.min.js' );
+	wp_enqueue_script( 'msfb_admin_swal2', 'https://cdn.jsdelivr.net/npm/sweetalert2@9' );
+	wp_enqueue_script( 'msfb-jquery-ui', MSFB_URL.'admin/js/jquery-ui.js' );
+	wp_enqueue_script( 'msfb_jquery_ui_touch_punch', MSFB_URL.'admin/js/jquery.ui.touch-punch.min.js' );
+	wp_enqueue_script( 'msfb_main', MSFB_URL.'admin/js/main.js' );
+	wp_enqueue_script( 'msfb_multiselect-nav', MSFB_URL.'admin/js/multistep-nav.js' );
 	//css
 	wp_register_style( 'msfb_admin_tailwind', MSFB_URL.'admin/css/tailwind.css' );
 	wp_enqueue_style( 'msfb_jquery_steps_css', MSFB_URL.'assets/css/jquery.steps.css' );

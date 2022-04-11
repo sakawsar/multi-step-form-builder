@@ -1,139 +1,21 @@
-<div class="tw-msfb-container">
-    <div class="tw-msfb-progress-bar">
-        <div class="tw-msfb-progress-bar__status"></div>
+<?php
+function msfb_text_step( $data ){
+    $step_data = $data['step_data'];
+    $question_data = json_decode( stripslashes( $data['question_data'] ), true);
+    // echo '<pre>';
+    // print_r($question_data);
+    // echo '</pre>';
+?>
+<div class="msfb-text w-4/5 m-auto flex flex-col mt-4 gap-4 <?php echo $data['step'] != 1 ? 'hidden':''; ?>" data-question-type="<?php echo $data['question_type']; ?>" data-msfb-node="<?php echo $data['id']; ?>">
+    <?php if($data['question_title']){ ?>
+        <h1 class="text-center text-4xl"><?php echo $data['question_title']; ?></h1>
+    <?php } ?>
+    <?php if($data['question_desc']){ ?>
+        <p class="text-center text-xl"><?php echo $data['question_desc']; ?></p>
+    <?php } ?>
+    <!-- text field -->
+    <div class="msfb-text-qtn tw-msfb-qtn-field tw-msfb-text-qtn relative">
+        <input type="text" placeholder="<?php echo $question_data['placeholder']; ?>" class="tw-msfb-text-field w-full"/>
     </div>
-    <div class="w-4/5 m-auto flex flex-col mt-4 gap-4">
-        <h1 class="text-center text-4xl">This is the title</h1>
-        <p class="text-center text-xl">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Inventore, vel! Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero, consequatur. Sed quae hic amet minus aliquid nihil quod quo recusandae sequi dolores?</p>
-        <!-- multiselect & select -->
-        <!-- <div class="msfb-multiselect-qtn tw-msfb-qtn-field tw-msfb-multiselect-qtn">
-            <div class="tw-msfb-multiselect-qtn__item">
-                <i class="fa fa-arrow-left"></i>
-                <p>Answer 1</p>
-            </div>
-            <div class="tw-msfb-multiselect-qtn__item">
-                <i class="fa fa-user"></i>
-                <p>Answer 2</p>
-            </div>
-            <div class="tw-msfb-multiselect-qtn__item">
-                <i class="fa fa-arrow-left"></i>
-                <p>Answer 1</p>
-            </div>
-            <div class="tw-msfb-multiselect-qtn__item">
-                <i class="fa fa-arrow-left"></i>
-                <p>Answer 1</p>
-            </div>
-        </div> -->
-        <!-- dropdown -->
-        <!-- <div class="msfb-multiselect-qtn tw-msfb-qtn-field tw-msfb-dropdown-qtn relative">
-            <div class="tw-msfb-dropdown-field">
-                <p>Select from dropdown</p>
-                <i class="fa fa-angle-down"></i>
-                <div class="item-holder">
-                    <div class="tw-msfb-dropdown-qtn__item">Select from dropdown</div>
-                    <div class="tw-msfb-dropdown-qtn__item">Select from dropdown</div>
-                    <div class="tw-msfb-dropdown-qtn__item">Select from dropdown</div>
-                    <div class="tw-msfb-dropdown-qtn__item">Select from dropdown</div>
-                    <div class="tw-msfb-dropdown-qtn__item">Select from dropdown</div>
-                    <div class="tw-msfb-dropdown-qtn__item">Select from dropdown</div>
-                </div>
-            </div>
-        </div> -->
-        <!-- dropdown end -->
-
-        <!-- text field -->
-        <div class="msfb-text-qtn tw-msfb-qtn-field tw-msfb-text-qtn relative">
-            <input type="text" placeholder="This is text field 2" class="tw-msfb-text-field w-full"/>
-        </div>
-        <!-- text field -->
-
-        <!-- date field -->
-        <!-- <div class="msfb-date-qtn tw-msfb-qtn-field tw-msfb-date-qtn relative">
-            <input type="date" placeholder="This is text field 2" class="tw-msfb-date-field w-full"/>
-        </div> -->
-        <!-- date field -->
-
-        <!-- textarea field -->
-        <!-- <div class="msfb-textarea-qtn tw-msfb-qtn-field tw-msfb-textarea-qtn relative">
-            <textarea placeholder="Textarea field" class="tw-msfb-textarea-field"></textarea>
-        </div> -->
-        <!-- textarea field -->
-        <!-- upload field -->
-        <!-- <div class="msfb-upload-qtn tw-msfb-qtn-field tw-msfb-upload-qtn relative">
-            <input type="file" class="hidden"/>
-            <div class="tw-msfb-upload-field flex flex-col items-center justify-center gap-4">
-                <i class="fa fa-upload text-8xl text-gray-400"></i>
-                <p class="text-gray-400">Drag & Drop</p>
-            </div>
-        </div> -->
-        <!-- upload field end -->
-        <!-- slider -->
-        <!-- <div class="msfb-upload-qtn tw-msfb-qtn-field tw-msfb-upload-qtn relative items-center text-xl">
-            <p class="mb-8 msfb-slider-field-value">Value: <span>50</span></p>
-            <input type="range" class="tw-msfb-slider-field"/>
-            <div class="flex flex-row justify-between w-full mt-4">
-                <p>Value: 50</p>
-                <p>Value: 50</p>
-            </div>
-        </div> -->
-        <!-- slider end -->
-        <!-- form step -->
-        <!-- <div class="msfb-form-qtn tw-msfb-qtn-field tw-msfb-form-qtn relative items-center text-xl">
-            <div class="msfb-form-field msfb-form-checkbox">
-                <label class="w-full text-lg mb-2 text-blue-400">Checkbox title</label>
-                <label class="mr-8">
-                    <input type="checkbox" value="test" name=""/> Lorem
-                </label>
-                <label class="mr-8">
-                    <input type="checkbox" value="test" name=""/> Lorem, ipsum.
-                </label>
-                <label class="mr-8">
-                    <input type="checkbox" value="test" name=""/> Lorem ipsum
-                </label>
-                <label class="mr-8">
-                    <input type="checkbox" value="test" name=""/> Test
-                </label>
-            </div>
-            <div class="msfb-form-field msfb-form-radio">
-                <label class="w-full text-lg mb-2 text-blue-400">Radio title</label>
-                <label class="mr-8">
-                    <input type="radio" value="test" name=""/> Test
-                </label>
-                <label class="mr-8">
-                    <input type="radio" value="test" name=""/> Test
-                </label>
-                <label class="mr-8">
-                    <input type="radio" value="test" name=""/> Test
-                </label>
-                <label class="mr-8">
-                    <input type="radio" value="test" name=""/> Test
-                </label>
-            </div>
-            <div class="msfb-form-field msfb-form-field msfb-form-text">
-                <label class="w-full text-lg mb-2 text-blue-400">Text field title</label>
-                <label class="w-full">
-                    <input type="text" placeholder="Test field" class="tw-msfb-text-field w-full" value="test" name="test"/>
-                </label>
-            </div>
-            <div class="msfb-form-field msfb-form-textarea">
-                <label class="w-full text-lg mb-2 text-blue-400">Textarea title</label>
-                <textarea class="tw-msfb-textarea-field msfb-form-textarea w-full" placeholder="Test textarea"></textarea>
-            </div>
-            <div class="msfb-form-field msfb-form-date">
-                <label class="w-full text-lg mb-2 text-blue-400">Text field title</label>
-                <label class="w-full">
-                    <input type="date" class="tw-msfb-text-field w-full" value="test" name="test"/>
-                </label>
-            </div>
-            <div class="msfb-form-field msfb-form-date">
-                <label class="w-full text-lg mb-2 text-blue-400">Text field title</label>
-                <input type="range" class="tw-msfb-slider-field"/>
-            </div>
-        </div> -->
-        <!-- form step end -->
-        <div class="tw-msfb-btn-container">
-            <button>Back</button>
-            <button>Next</button>
-        </div>
-    </div
-</div>
+    <!-- text field -->
+<?php }

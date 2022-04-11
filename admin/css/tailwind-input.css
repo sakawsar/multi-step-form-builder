@@ -23,6 +23,10 @@
     @apply w-2/4 p-4 bg-white border border-gray-100 rounded-lg shadow-lg flex flex-col justify-center gap-8 items-center;
     height: 240px;
 }
+.tw-msfb-multiselect-qtn__item.selected{
+    @apply w-2/4 p-4 bg-white border-2 border-blue-400 rounded-lg shadow-lg flex flex-col justify-center gap-8 items-center;
+    height: 240px;
+}
 .tw-msfb-multiselect-qtn__item i{
     @apply text-8xl text-blue-400
 }
@@ -46,6 +50,7 @@
 .tw-msfb-form-qtn{
     @apply mt-8;
 }
+.msfb-form-text .item-holder,
 .tw-msfb-dropdown-qtn .item-holder{
     @apply absolute top-16 left-0 w-full outline-2 shadow-lg rounded-lg hidden;
 }
@@ -64,6 +69,9 @@
 .tw-msfb-slider-field,
 .tw-msfb-textarea-field{
     @apply p-4 text-black relative bg-white border-2 border-blue-400 rounded-lg;
+}
+.tw-msfb-textarea-field{
+    min-height: 224px;
 }
 .tw-msfb-slider-field {
     -webkit-appearance: none;
@@ -102,11 +110,18 @@
     height: 224px;
     @apply border-dashed w-1/2 m-auto;
 }
+.tw-msfb-upload-field.selected{
+    height: 224px;
+    @apply border-solid border-2 w-1/2 m-auto;
+}
 .msfb-form-field{
     @apply w-1/2 m-auto flex flex-wrap flex-row mb-4;
 }
 .tw-msfb-text-field:focus{
     @apply border-blue-400;
+}
+.tw-msfb-dropdown-field{
+    cursor: pointer;
 }
 .tw-msfb-dropdown-field i{
     @apply absolute right-3 top-3 text-2xl text-gray-400 items-center;
