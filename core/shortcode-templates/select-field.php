@@ -23,7 +23,7 @@ function msfb_select_step( $data ){
                 $node = $step_data['outputs']['output_'.$i]['connections'][0]['node'];
             }
         ?>
-        <div class="tw-msfb-multiselect-qtn__item" data-next-node="<?php echo $node; ?>">
+        <div class="tw-msfb-multiselect-qtn__item" data-price="<?php echo isset($option['price']) ? $option['price'] : ""; ?>" data-next-node="<?php echo $node; ?>">
             <i class="<?php echo $option['icon_class']; ?>"></i>
             <p><?php echo $option['answer']; ?></p>
         </div>

@@ -21,7 +21,7 @@
                                     </div>
                                 </div>
                                 <div class="skfb__builder-bottom">
-                                    <p class="skfb__answer"><?php echo $answer['answer']; ?></p>
+                                    <p class="skfb__answer" data-price="<?php echo isset($answer['price']) ? $answer['price'] : ""; ?>"><?php echo $answer['answer']; ?></p>
                                 </div>
                             </div>
                         </div>
@@ -147,7 +147,7 @@
                                     </div>
                                 </div>
                                 <div class="skfb__builder-bottom">
-                                    <p class="skfb__answer"><?php echo $answer['answer']; ?></p>
+                                    <p class="skfb__answer" data-price="<?php echo isset($answer['price']) ? $answer['price'] : ""; ?>"><?php echo $answer['answer']; ?></p>
                                 </div>
                             </div>
                         </div>

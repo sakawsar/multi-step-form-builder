@@ -8,19 +8,19 @@ include(MSFB_PATH.'core/shortcode-templates/upload-field.php');
 include(MSFB_PATH.'core/shortcode-templates/dropdown-field.php');
 include(MSFB_PATH.'core/shortcode-templates/slider-field.php');
 include(MSFB_PATH.'core/shortcode-templates/form.php');
-add_shortcode('msfb_ui','msfb_ui_callback');
 add_shortcode('msfb_multistep_form','msfb_ui_callback');
 function msfb_ui_callback( $atts ){
 	$atts = shortcode_atts( array(
 		'id' => ''
 	), $atts );
-	if( !$atts['id'] && false ){
+	if( !$atts['id'] ){
 		return __('Formulation id is required','msfb');
 	}
 	ob_start();
 	global $wpdb;
+	$formulation_id = $atts['id'];
 	$table_name = $wpdb->prefix.'msfb_formulations';
-	$results = $wpdb->get_results("SELECT * FROM $table_name");
+	$results = $wpdb->get_results("SELECT * FROM $table_name WHERE id='$formulation_id'");
 	$json_data = $results[0]->raw_data;
 	$json_data = json_decode(stripslashes( $json_data ),true);
 	$json_data = $json_data['drawflow']['Home']['data'];

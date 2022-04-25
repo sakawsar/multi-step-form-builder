@@ -27,7 +27,7 @@ function msfb_dropdown_step( $data ){
                         $node = $step_data['outputs']['output_'.$i]['connections'][0]['node'];
                     }
                 ?>
-                <div class="tw-msfb-dropdown-qtn__item" data-next-node="<?php echo $node; ?>" data-dropdown-value="<?php echo $a_qtn_data['value']; ?>"><?php echo $a_qtn_data['option']; ?></div>
+                <div class="tw-msfb-dropdown-qtn__item" data-price="<?php echo isset($a_qtn_data['price']) ? $a_qtn_data['price'] : ""; ?>" data-next-node="<?php echo $node; ?>" data-dropdown-value="<?php echo $a_qtn_data['value']; ?>"><?php echo $a_qtn_data['option']; ?></div>
                 <?php $i++; } ?>
             </div>
         </div>

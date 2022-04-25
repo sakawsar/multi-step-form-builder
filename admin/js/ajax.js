@@ -58,7 +58,8 @@ jQuery(document).ready($ => {
             $.each(select_opts,(k,v) => {
                 let opt_data = {
                     "icon_class": $(v).find('.icon i').attr('class'),
-                    "answer": $(v).find('.skfb__answer').html()
+                    "answer": $(v).find('.skfb__answer').html(),
+                    "price": $(v).find('.skfb__answer').attr('data-price')
                 }
                 multiselect_opts.push(opt_data)
             })
@@ -74,7 +75,8 @@ jQuery(document).ready($ => {
             $.each(select_opts,(k,v) => {
                 let opt_data = {
                     "icon_class": $(v).find('.icon i').attr('class'),
-                    "answer": $(v).find('.skfb__answer').html()
+                    "answer": $(v).find('.skfb__answer').html(),
+                    "price": $(v).find('.skfb__answer').attr('data-price')
                 }
                 single_select_opts.push(opt_data)
             })
@@ -107,7 +109,8 @@ jQuery(document).ready($ => {
             $.each(sel_options,(k,v) => {
                 let a_opt_data = {
                     "value": $(v).val(),
-                    "option": $(v).html()
+                    "option": $(v).html(),
+                    "price": $(v).attr('data-price')
                 }
                 sel_data.push(a_opt_data)
             }) 

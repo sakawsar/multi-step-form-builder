@@ -264,11 +264,17 @@
         msfb_show_drawer('msfb-multiselect-ans')
         let act_el = msfb_active_question()
         let sel_ans = $('.' + act_el ).attr('data-selected-ans')
+        let this_ans_el = $(`.${act_el} div[data-multiselect-no="${sel_ans}"] .skfb__answer`)
         let this_ans = $(`.${act_el} div[data-multiselect-no="${sel_ans}"] .skfb__answer`).html()
         if( this_ans == "Answer" ){
             $('.msfb_answer').val(null)
         } else {
             $('.msfb_answer').val(this_ans)
+        }
+        if( this_ans_el.attr('data-price') ) {
+            $('.msfb_answer_price').val(this_ans_el.attr('data-price'))
+        } else {
+            $('.msfb_answer_price').val('')
         }
     })
     // multiselect/ single select answer update
@@ -277,6 +283,13 @@
         let act_qtn = msfb_active_question()
         let sel_ans = $('.' + act_qtn).attr('data-selected-ans')
         $(`div[data-multiselect-no="${sel_ans}"] .skfb__answer`).html(this_el.val())
+    })
+    // multiselect/ single select answer update
+    $('.msfb_answer_price').on('keyup',e => {
+        let this_el = this__(e)
+        let act_qtn = msfb_active_question()
+        let sel_ans = $('.' + act_qtn).attr('data-selected-ans')
+        $(`div[data-multiselect-no="${sel_ans}"] .skfb__answer`).attr('data-price',this_el.val())
     })
     // multiselect/ single select icon update
     $('.skfb__icon_select_field i').on('click',e => {
@@ -342,6 +355,7 @@
             <div class="msfb-dropdown-value-field" data-dropdown-row-no="${row_no}">
                 <input type="text" data-msfb-field-type="value" data-dropdown-row-no="${row_no}" class="msfb_dropdown_data_value" placeholder="Value"/>
                 <input type="text" data-msfb-field-type="option" data-dropdown-row-no="${row_no}" class="msfb_dropdown_data_option" placeholder="Option"/>
+                <input type="text" data-msfb-field-type="price" data-dropdown-row-no="${row_no}" class="msfb_dropdown_data_price" placeholder="Price"/>
                 <i class="fa fa-plus-circle"></i>
             </div>
         `
@@ -429,6 +443,8 @@
                 option_el.val(this_el.val())
             } else if( field_type == "option" ) {
                 option_el.html(this_el.val())
+            } else if( field_type == "price" ) {
+                option_el.attr('data-price',this_el.val())
             }
         } else if ( $('.msfb-form-builder .msfb-form-field-selected').length > 0 ) {
             let form_field_type = this_el.closest('div[data-drawer-type]').attr('data-drawer-type')
