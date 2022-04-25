@@ -9,6 +9,7 @@ include(MSFB_PATH.'core/shortcode-templates/dropdown-field.php');
 include(MSFB_PATH.'core/shortcode-templates/slider-field.php');
 include(MSFB_PATH.'core/shortcode-templates/form.php');
 add_shortcode('msfb_ui','msfb_ui_callback');
+add_shortcode('msfb_multistep_form','msfb_ui_callback');
 function msfb_ui_callback( $atts ){
 	$atts = shortcode_atts( array(
 		'id' => ''
@@ -117,7 +118,7 @@ function msfb_step_navigation( $data ) {
 		$required = $data['question_required'] == 1 ? "data-msfb-required='true'" : "";
 	}
 	?>
-		<div <?php echo $required; ?>" class="tw-msfb-btn-container" <?php echo $root_node; ?> data-step-type="<?php echo $step_data['type']; ?>">
+		<div <?php echo $required; ?> class="tw-msfb-btn-container" <?php echo $root_node; ?> data-step-type="<?php echo $step_data['type']; ?>">
 			<?php if( $data['step'] != 1 ) { ?>
 				<button data-msfb-prev="">Back</button>
 			<?php } ?>

@@ -62,12 +62,12 @@ function msfb_form_step( $data ){
             <?php
             // echo '<pre>';
             // print_r($field);
-            // echo '</pre>';
+            // echo '</pre>'; 
             ?>
             <div class="msfb-form-field msfb-form-field msfb-form-text" data-field-label="<?php echo trim(strip_tags( $field['field_label'] )); ?>">
                 <label class="w-full text-lg mb-2 text-blue-400"><?php echo trim(strip_tags( $field['field_label'] )); ?></label>
                 <label class="w-full">
-                    <input type="text" placeholder="<?php echo $field['field_data']['placeholder']; ?>" class="tw-msfb-text-field w-full" value="test" name="test"/>
+                    <input type="text" placeholder="<?php echo $field['field_data']['placeholder']; ?>" class="tw-msfb-text-field w-full" value="" name="test"/>
                 </label>
             </div>
 
