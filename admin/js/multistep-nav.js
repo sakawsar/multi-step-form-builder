@@ -1,5 +1,4 @@
 (function ($) {
-    console.log('working')
     $(document).ready(() => {
         const msfb_visited_path = () => {
             let nodes = [$('.tw-msfb-btn-container[data-msfb-root]').attr('data-msfb-root')]
@@ -42,6 +41,13 @@
             let is_skipped
             if( this_el.attr('data-msfb-next') ) {
                 node_id = this_el.attr('data-msfb-next')
+                if( this_el.closest('div').attr('data-msfb-required') == "true" ) {
+                    let msfb_validation = msfb_required_validator(this_el_node)
+                    if( !msfb_validation ) {
+                        msfb_swal2_warning("This step is required")
+                        return false
+                    }
+                }
                 if( this_el.hasClass('msfb-skip-step') ) {
                     this_el.attr('data-msfb-skipped',true)
                     is_skipped = true
@@ -115,5 +121,54 @@
             }
             // console.log(this_el[0].files[0])
         })
+        // $('button[data-msfb-next]').on('click', e => {
+        //     let this_el = $(e.currentTarget)
+        //     let btn_holder = this_el.closest('div')
+        //     if( btn_holder.attr('data-msfb-required') ) {
+        //         Swal.fire({
+        //             icon: "warning",
+        //             text: "This step is required"
+        //         })
+        //     }
+        // })
+        const msfb_swal2_warning = msg => {
+            Swal.fire({
+                icon: "warning",
+                text: msg
+            })
+        }
+        const msfb_required_validator = node_id => {
+            let validator = true
+            let this_el = $(`div[data-msfb-node="${node_id}"]`)
+            if( this_el.attr('data-question-type') ) {
+                let field_type = this_el.attr('data-question-type')
+                if( field_type == "msfb-date-field" || field_type == "msfb-text-field") {
+                    if( !this_el.find('input').val() ) {
+                        validator = false
+                    }
+                } else if ( field_type == "msfb-textarea-field") {
+                    if( !this_el.find('textarea').val() ) {
+                        validator = false
+                    }
+                } else if ( field_type == "msfb-multiselect") {
+                    let selected = []
+                    $.each($(`div[data-msfb-node="${node_id}"] .tw-msfb-multiselect-qtn__item`),(k,v) => {
+                        if( $(v).hasClass('selected')) {
+                            selected.push('selected')
+                        }
+                    })
+                    if( selected.length == 0 ) {
+                        validator = false
+                    }
+                } else if ( field_type == "msfb-upload-field") {
+                    if( !this_el.find('input').val() ) {
+                        validator = false
+                    }
+                }
+            } else {
+                console.log('This is form step')
+            }
+            return validator
+        }
     })
 })(jQuery);
