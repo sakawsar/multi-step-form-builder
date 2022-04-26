@@ -17,7 +17,7 @@ function msfb_form_step( $data ){
 
             <!-- multiselect field -->
             <?php if($field['field_type'] == "multiselect_form_field"){ ?>
-            <div class="msfb-form-field msfb-form-checkbox" data-field-label="<?php echo trim(strip_tags( $field['field_label'] )); ?>">
+            <div data-msfb-required="<?php echo $field['is_required']; ?>" class="msfb-form-field msfb-form-checkbox" data-field-label="<?php echo trim(strip_tags( $field['field_label'] )); ?>">
                 <label class="w-full text-lg mb-2 text-blue-400"><?php echo trim(strip_tags( $field['field_label'] )); ?></label>
                 <?php foreach($field['field_data'] as $field_option){ ?>
                 <label class="mr-8">
@@ -29,19 +29,19 @@ function msfb_form_step( $data ){
 
             <!-- select field -->
             <?php } elseif($field['field_type'] == "select_form_field"){ ?>
-            <div class="msfb-form-field msfb-form-radio" data-field-label="<?php echo trim(strip_tags( $field['field_label'] )); ?>">
+            <div data-msfb-required="<?php echo $field['is_required']; ?>" class="msfb-form-field msfb-form-radio" data-field-label="<?php echo trim(strip_tags( $field['field_label'] )); ?>">
                 <label class="w-full text-lg mb-2 text-blue-400"><?php echo trim(strip_tags( $field['field_label'] )); ?></label>
-                <?php foreach($field['field_data'] as $field_option){ ?>
+                <?php $i=0; foreach($field['field_data'] as $field_option){ ?>
                 <label class="mr-8">
-                    <input type="radio" value="<?php echo $field_option['value']; ?>" name="<?php echo trim(strip_tags( $field['field_label'] )); ?>"/> <?php echo $field_option['label']; ?>
+                    <input <?php echo $i == 0 ? "checked" : ""; ?> type="radio" value="<?php echo $field_option['value']; ?>" name="<?php echo trim(strip_tags( $field['field_label'] )); ?>"/> <?php echo $field_option['label']; ?>
                 </label>
-                <?php } ?>
+                <?php $i++; } ?>
             </div>
 
 
             <!-- dropdown field -->
             <?php } elseif($field['field_type'] == "dropdown_form_field"){ ?>
-            <div class="msfb-form-field msfb-form-field msfb-form-text" data-field-label="<?php echo trim(strip_tags( $field['field_label'] )); ?>">
+            <div data-msfb-required="<?php echo $field['is_required']; ?>" class="msfb-form-field msfb-form-field msfb-form-text msfb-form-dropdown" data-field-label="<?php echo trim(strip_tags( $field['field_label'] )); ?>">
                 <label class="w-full text-lg mb-2 text-blue-400"><?php echo trim(strip_tags( $field['field_label'] )); ?></label>
                 <label class="w-full shadow-md tw-msfb-dropdown-field">
                     <p>Select from dropdown</p>
@@ -64,7 +64,7 @@ function msfb_form_step( $data ){
             // print_r($field);
             // echo '</pre>'; 
             ?>
-            <div class="msfb-form-field msfb-form-field msfb-form-text" data-field-label="<?php echo trim(strip_tags( $field['field_label'] )); ?>">
+            <div data-msfb-required="<?php echo $field['is_required']; ?>" class="msfb-form-field msfb-form-field msfb-form-text" data-field-label="<?php echo trim(strip_tags( $field['field_label'] )); ?>">
                 <label class="w-full text-lg mb-2 text-blue-400"><?php echo trim(strip_tags( $field['field_label'] )); ?></label>
                 <label class="w-full">
                     <input type="text" placeholder="<?php echo $field['field_data']['placeholder']; ?>" class="tw-msfb-text-field w-full" value="" name="test"/>
@@ -74,7 +74,7 @@ function msfb_form_step( $data ){
 
             <!-- textarea field -->
             <?php } elseif($field['field_type'] == "textarea_form_field"){ ?>
-            <div class="msfb-form-field msfb-form-textarea" data-field-label="<?php echo trim(strip_tags( $field['field_label'] )); ?>">
+            <div data-msfb-required="<?php echo $field['is_required']; ?>" class="msfb-form-field msfb-form-textarea" data-field-label="<?php echo trim(strip_tags( $field['field_label'] )); ?>">
                 <label class="w-full text-lg mb-2 text-blue-400"><?php echo trim(strip_tags( $field['field_label'] )); ?></label>
                 <textarea class="tw-msfb-textarea-field msfb-form-textarea w-full" placeholder="Test textarea"></textarea>
             </div>
@@ -82,7 +82,7 @@ function msfb_form_step( $data ){
 
             <!-- date field -->
             <?php } elseif($field['field_type'] == "date_form_field"){ ?>
-            <div class="msfb-form-field msfb-form-date" data-field-label="<?php echo trim(strip_tags( $field['field_label'] )); ?>">
+            <div data-msfb-required="<?php echo $field['is_required']; ?>" class="msfb-form-field msfb-form-date" data-field-label="<?php echo trim(strip_tags( $field['field_label'] )); ?>">
                 <label class="w-full text-lg mb-2 text-blue-400"><?php echo trim(strip_tags( $field['field_label'] )); ?></label>
                 <label class="w-full">
                     <input type="date" class="tw-msfb-text-field w-full" value="test" name="test"/>
@@ -92,7 +92,7 @@ function msfb_form_step( $data ){
 
             <!-- slider field -->
             <?php } elseif($field['field_type'] == "slider_form_field"){ ?>
-            <div class="msfb-form-field msfb-form-date" data-field-label="<?php echo trim(strip_tags( $field['field_label'] )); ?>">
+            <div data-msfb-required="<?php echo $field['is_required']; ?>" class="msfb-form-field msfb-form-slider" data-field-label="<?php echo trim(strip_tags( $field['field_label'] )); ?>">
                 <label class="w-full text-lg mb-2 text-blue-400"><?php echo trim(strip_tags( $field['field_label'] )); ?></label>
                 <input type="range" class="tw-msfb-slider-field"/>
             </div>

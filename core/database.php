@@ -2,6 +2,7 @@
 function msfb_create_the_database() {
 	global $wpdb;
 	require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+	$qtn_table            = $wpdb->prefix . 'msfb_leads';
 	$qtn_table            = $wpdb->prefix . 'msfb_questions';
 	$category_table       = $wpdb->prefix . 'msfb_category';
 	$form_table           = $wpdb->prefix . 'msfb_forms';

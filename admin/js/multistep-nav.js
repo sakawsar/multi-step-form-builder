@@ -9,7 +9,8 @@
                     nodes.push(node_id)
                 }
             })
-            console.log(nodes)
+            msfb_get_formulation_data(nodes)
+            // console.log(nodes)
         }
         $('.msfb-select .tw-msfb-qtn-field div').on('click', e => {
             // console.log(e)
@@ -41,15 +42,18 @@
             let is_skipped
             if( this_el.attr('data-msfb-next') ) {
                 node_id = this_el.attr('data-msfb-next')
-                if( this_el.closest('div').attr('data-msfb-required') == "true" ) {
+                if( this_el.closest('div').attr('data-msfb-required') == "true" || this_el.closest('div[data-msfb-node]').hasClass('msfb-form') ) {
                     let msfb_validation = msfb_required_validator(this_el_node)
-                    if( !msfb_validation ) {
+                    if( msfb_validation == false ) {
                         msfb_swal2_warning("This step is required")
+                        return false
+                    } else if ( msfb_validation !== true && msfb_validation !== false && typeof(msfb_validation) == "string" ) {
+                        msfb_swal2_warning(msfb_validation)
                         return false
                     }
                 }
                 if( this_el.hasClass('msfb-skip-step') ) {
-                    this_el.attr('data-msfb-skipped',true)
+                    this_el.closest('div[data-msfb-node]').attr('data-msfb-skipped',true)
                     is_skipped = true
                 }
             } else if ( this_el.attr('data-msfb-prev') ) {
@@ -97,9 +101,23 @@
             let option_label = this_el.html()
             let option_value = this_el.attr('data-dropdown-value')
             this_el.closest('.tw-msfb-dropdown-field').find('p').html(option_label)
+            if( is_form_field ) {
+                this_el.closest('.msfb-form-dropdown').attr('data-dropdown-value',this_el.attr('data-dropdown-value'))
+            } else {
+                this_el.closest('.msfb-dropdown').attr('data-dropdown-value',this_el.attr('data-dropdown-value'))
+            }
         })
         $('button[data-msfb-redirect]').on('click', e => {
             let this_el = $(e.currentTarget)
+            let node_id = this_el.closest('div[data-msfb-node]').attr('data-msfb-node')
+            let msfb_validation = msfb_required_validator(node_id)
+            if( msfb_validation == false ) {
+                msfb_swal2_warning("This step is required")
+                return false
+            } else if ( msfb_validation !== true && msfb_validation !== false && typeof(msfb_validation) == "string" ) {
+                msfb_swal2_warning(msfb_validation)
+                return false
+            }
             msfb_visited_path()
         })
         // slider change
@@ -166,9 +184,115 @@
                     }
                 }
             } else {
-                console.log('This is form step')
+                $.each($(`div[data-msfb-node="${node_id}"] .msfb-form-field`),(k,v) => {
+                    if( $(v).attr('data-msfb-required') == "1" ) {
+                        if( $(v).hasClass('msfb-form-checkbox') ) {
+                            if( $(v).find(`input:checked`).length === 0 ) {
+                                validator = `${$(v).find('label.text-lg').html()} is required.`
+                                return false
+                            }
+                        } else if ( ( $(v).hasClass('msfb-form-text') && !$(v).hasClass('msfb-form-dropdown')) || $(v).hasClass('msfb-form-date') ) {
+                            if( $(v).find('input').val() == "" ) {
+                                validator = `${$(v).find('label.text-lg').html()} is required.`
+                                return false
+                            }
+                        } else if ( $(v).hasClass('msfb-form-textarea') ) {
+                            if( $(v).find('textarea').val() == "" ) {
+                                validator = `${$(v).find('label.text-lg').html()} is required.`
+                                return false
+                            }
+                        } else if ( $(v).hasClass('msfb-form-dropdown') ) {
+                            if( $(v).attr('data-dropdown-value') == undefined || $(v).attr('data-dropdown-value') == null ) {
+                                validator = `${$(v).find('label.text-lg').html()} is required.`
+                                return false
+                            }
+                        }
+                    }
+                })
+                // console.log('This is form step')
             }
             return validator
+        }
+        // get the formulation data
+        const msfb_get_formulation_data = node_ids => {
+            let data = []
+            for (let i = 0; i < node_ids.length; i++) {
+                let dataset
+                let title
+                let value
+                let node_id = node_ids[i];
+                let this_el = $(`div[data-msfb-node="${node_id}"]`)
+                if( this_el.attr('data-question-type') ) {
+                    let field_type = this_el.attr('data-question-type')
+                    if( field_type == "msfb-date-field" || field_type == "msfb-text-field" || field_type == "msfb-slider-field") {
+                        if( this_el.find('input').val() ) {
+                            title = this_el.find('h1.text-4xl').html()
+                            value = this_el.find('input').val()
+                        }
+                    } else if ( field_type == "msfb-textarea-field") {
+                        if( this_el.find('textarea').val() ) {
+                            title = this_el.find('h1.text-4xl').html()
+                            value = this_el.find('textarea').val()
+                        }
+                    } else if ( field_type == "msfb-multiselect" || field_type == "msfb-single-select-field") {
+                        let selected = []
+                        $.each($(`div[data-msfb-node="${node_id}"] .tw-msfb-multiselect-qtn__item`),(k,v) => {
+                            if( $(v).hasClass('selected')) {
+                                selected.push($(v).find('p').html())
+                            }
+                        })
+                        title = this_el.find('h1.text-4xl').html()
+                        value = selected
+                    } else if ( field_type == "msfb-dropdown-field") {
+                        if( this_el.attr('data-dropdown-value') ) {
+                            title = this_el.find('h1.text-4xl').html()
+                            value = this_el.attr('data-dropdown-value')
+                        }
+                    } else if ( field_type == "msfb-upload-field") {
+                        if( this_el.find('input').val() ) {
+                            title = this_el.find('h1.text-4xl').html()
+                            value = this_el.attr('data-dropdown-value')
+                        }
+                    }
+                } else {
+                    $.each($(`div[data-msfb-node="${node_id}"] .msfb-form-field`),(k,v) => {
+                        if( $(v).hasClass('msfb-form-checkbox') ) {
+                            value = []
+                            $.each( $(v).find('input:checked'), (kke,vva) => {
+                                value.push($(vva).val())
+                            })
+                        } else if( $(v).hasClass('msfb-form-radio') ) {
+                            let value = []
+                            $.each( $(v).find('input:checked'), (kke,vva) => {
+                                value.push($(vva).val())
+                            })
+                            if( $(v).find(`input:checked`).length > 0 ) {
+                                validator = `${$(v).find('label.text-lg').html()} is required.`
+                                return false
+                            }
+                        } else if ( ( $(v).hasClass('msfb-form-text') && !$(v).hasClass('msfb-form-dropdown')) || $(v).hasClass('msfb-form-date') ) {
+                            if( $(v).find('input').val() == "" ) {
+                                validator = `${$(v).find('label.text-lg').html()} is required.`
+                                return false
+                            }
+                        } else if ( $(v).hasClass('msfb-form-textarea') ) {
+                            if( $(v).find('textarea').val() == "" ) {
+                                validator = `${$(v).find('label.text-lg').html()} is required.`
+                                return false
+                            }
+                        } else if ( $(v).hasClass('msfb-form-dropdown') ) {
+                            if( $(v).attr('data-dropdown-value') == undefined || $(v).attr('data-dropdown-value') == null ) {
+                                validator = `${$(v).find('label.text-lg').html()} is required.`
+                                return false
+                            }
+                        }
+                        title = $(v).attr('data-field-label')
+                    })
+                }
+                dataset = { title, value }
+                data.push(dataset)
+            }
+            console.log(data)
         }
     })
 })(jQuery);
