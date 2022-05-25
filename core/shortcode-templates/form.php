@@ -38,7 +38,6 @@ function msfb_form_step( $data ){
                 <?php $i++; } ?>
             </div>
 
-
             <!-- dropdown field -->
             <?php } elseif($field['field_type'] == "dropdown_form_field"){ ?>
             <div data-msfb-required="<?php echo $field['is_required']; ?>" class="msfb-form-field msfb-form-field msfb-form-text msfb-form-dropdown" data-field-label="<?php echo trim(strip_tags( $field['field_label'] )); ?>">
@@ -64,7 +63,7 @@ function msfb_form_step( $data ){
             // print_r($field);
             // echo '</pre>'; 
             ?>
-            <div data-msfb-required="<?php echo $field['is_required']; ?>" class="msfb-form-field msfb-form-field msfb-form-text" data-field-label="<?php echo trim(strip_tags( $field['field_label'] )); ?>">
+            <div data-msfb-required="<?php echo $field['is_required']; ?>" class="msfb-form-field msfb-form-text" data-field-label="<?php echo trim(strip_tags( $field['field_label'] )); ?>">
                 <label class="w-full text-lg mb-2 text-blue-400"><?php echo trim(strip_tags( $field['field_label'] )); ?></label>
                 <label class="w-full">
                     <input type="text" placeholder="<?php echo $field['field_data']['placeholder']; ?>" class="tw-msfb-text-field w-full" value="" name="test"/>

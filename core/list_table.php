@@ -11,13 +11,13 @@ class MSFB_List_Table{
         switch($el_type){
             case 'leads':
                 $this->title = __('Leads','msfb');
-                $this->has_category = false;
+                // $this->has_category = false;
                 $this->details_url = "";
                 $this->add_new_url = false;
                 $this->add_button = false;
                 $this->has_search = false;
                 $this->search_placeholder = "Search lead";
-                $this->cat_type = "from";
+                $this->cat_type = "lead";
                 break;
             case 'questions':
                 $this->title = __('Questions','msfb');
@@ -69,20 +69,26 @@ class MSFB_List_Table{
     function get_cates( $intial_val = "Filter by category", $selected = null ){
         if($this->has_category && $this->cat_type){
             global $wpdb;
-            $table_name = $wpdb->prefix.'msfb_category';
+            $table_name = $this->cat_type == "lead" ? $wpdb->prefix.'msfb_formulations' : $wpdb->prefix.'msfb_category';
             $cat_type = $this->cat_type;
-            $results = $wpdb->get_results("SELECT * FROM $table_name WHERE cat_type='$cat_type'",ARRAY_A);
+            $query = "";
+            if( $this->cat_type == "lead" ) {
+                $query = "SELECT * FROM $table_name";
+            } else {
+                $query = "SELECT * FROM $table_name WHERE cat_type='$cat_type'";
+            }
+            $results = $wpdb->get_results($query,ARRAY_A);
             if($wpdb->num_rows > 0){
                 ob_start();
                 printf('<option value="">%s</option>',__($intial_val,'msfb'));
                 foreach($results as $cat){
                     $cat_id = $cat['id'];
-                    $cat_name = $cat['cat_name'];
+                    $cat_name = $this->cat_type == "lead" ? $cat['formulation_name'] : $cat['cat_name'];
                     $selected_txt = $cat_id == $selected ? "selected" : $cat_id;
                     printf("<option %s value='%s'>%s</option>",$selected_txt,$cat_id,$cat_name);
                 }
                 return ob_get_clean();
-            }else{
+            } else {
                 return false;
             }
         }

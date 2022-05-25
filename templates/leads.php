@@ -1,7 +1,7 @@
 <?php
 $leads_list = new MSFB_List_Table('leads');
 ?>
-<div class="app">
+<div class="app" data-lead-table="true">
   <?php $leads_list->get_header(); ?>
   <!-- <div class="skfb-header">
     <div class="sk-container">

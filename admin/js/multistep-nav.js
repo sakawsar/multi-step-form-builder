@@ -5,11 +5,30 @@
             $.each($('button[data-msfb-prev]'),(k,v) => {
                 let has_node = $(v).attr('data-msfb-prev')
                 if( has_node ) {
-                    let node_id = $(v).closest('div[data-msfb-node]').attr('data-msfb-node')
-                    nodes.push(node_id)
+                    if( $(v).closest('div[data-msfb-node]').attr('data-msfb-skipped') != "true" ){
+                        let node_id = $(v).closest('div[data-msfb-node]').attr('data-msfb-node')
+                        nodes.push(node_id)
+                    }
                 }
             })
-            msfb_get_formulation_data(nodes)
+            let lead_data = msfb_get_formulation_data(nodes)
+            // let redirect_url = 
+            $.ajax({
+                url: msfb.ajax_url,
+                type: "POST",
+                dataType: "json",
+                data: {
+                    action: "msfb_add_leads",
+                    dataset: {
+                        "formulation_id": $('.tw-msfb-container').attr('data-formulation-id'),
+                        "lead_data": JSON.stringify(lead_data)
+                    }
+                },
+                success: resp => {
+                    console.log(resp)
+                },
+                error: err => console.log(err)
+            })
             // console.log(nodes)
         }
         $('.msfb-select .tw-msfb-qtn-field div').on('click', e => {
@@ -55,12 +74,15 @@
                 if( this_el.hasClass('msfb-skip-step') ) {
                     this_el.closest('div[data-msfb-node]').attr('data-msfb-skipped',true)
                     is_skipped = true
+                } else {
+                    this_el.closest('div[data-msfb-node]').attr('data-msfb-skipped',false)
+                    is_skipped = false
                 }
             } else if ( this_el.attr('data-msfb-prev') ) {
                 node_id = this_el.attr('data-msfb-prev')
                 is_prev = true
             }
-            console.log(node_id)
+            // console.log(node_id)
             if ( node_id || is_prev || is_skipped ) {
                 this_el.closest('div[data-msfb-node]').fadeOut('fast',() => {
                     this_el.closest('div[data-msfb-node]').addClass('hidden')
@@ -128,7 +150,7 @@
         // upload
         $('.tw-msfb-upload-field input').on('change', e => {
             let this_el = $(e.currentTarget)
-            console.log(this_el)
+            // console.log(this_el)
             let files = this_el[0].files
             if( files.length > 0 ) {
                 this_el.closest('.tw-msfb-upload-field')
@@ -216,11 +238,12 @@
         // get the formulation data
         const msfb_get_formulation_data = node_ids => {
             let data = []
+            // console.log(node_ids)
             for (let i = 0; i < node_ids.length; i++) {
                 let dataset
                 let title
                 let value
-                let node_id = node_ids[i];
+                let node_id = node_ids[i]
                 let this_el = $(`div[data-msfb-node="${node_id}"]`)
                 if( this_el.attr('data-question-type') ) {
                     let field_type = this_el.attr('data-question-type')
@@ -254,45 +277,114 @@
                             value = this_el.attr('data-dropdown-value')
                         }
                     }
+                    dataset = { title, value}
                 } else {
-                    $.each($(`div[data-msfb-node="${node_id}"] .msfb-form-field`),(k,v) => {
+                    let form_fiels = this_el.find('.msfb-form-field')
+                    // console.log(form_fiels)
+                    // $.each(form_fiels,(k,v) => {
+                    // for( j = 0; j < form_fiels.length; j++ ){
+                    let form_data = []
+                    $.each(form_fiels,(k,v) => {
+                        // v = form_fiels[j]
+                        // console.log(v)
+                        let is_required = $(v).attr('data-msfb-required')
+                        title = $(v).attr('data-field-label')
                         if( $(v).hasClass('msfb-form-checkbox') ) {
-                            value = []
-                            $.each( $(v).find('input:checked'), (kke,vva) => {
-                                value.push($(vva).val())
-                            })
-                        } else if( $(v).hasClass('msfb-form-radio') ) {
                             let value = []
                             $.each( $(v).find('input:checked'), (kke,vva) => {
                                 value.push($(vva).val())
                             })
-                            if( $(v).find(`input:checked`).length > 0 ) {
+                            if( value.length == 0 && is_required) {
                                 validator = `${$(v).find('label.text-lg').html()} is required.`
+                                Swal.fire({
+                                    icon: "warning",
+                                    text: validator
+                                })
                                 return false
                             }
-                        } else if ( ( $(v).hasClass('msfb-form-text') && !$(v).hasClass('msfb-form-dropdown')) || $(v).hasClass('msfb-form-date') ) {
-                            if( $(v).find('input').val() == "" ) {
+                            if( value.length ) {
+                                form_data.push({ title, value})
+                            }
+                        } 
+                        if( $(v).hasClass('msfb-form-radio') ) {
+                            // console.log($(v))
+                            let value = []
+                            $.each( $(v).find('input:checked'), (kke,vva) => {
+                                value.push($(vva).val())
+                            })
+                            // if( $(v).find(`input:checked`).length > 0 ) {
+                            // console.log(value)
+                            if( value.length == 0 && is_required) {
                                 validator = `${$(v).find('label.text-lg').html()} is required.`
+                                Swal.fire({
+                                    icon: "warning",
+                                    text: validator
+                                })
                                 return false
                             }
-                        } else if ( $(v).hasClass('msfb-form-textarea') ) {
-                            if( $(v).find('textarea').val() == "" ) {
-                                validator = `${$(v).find('label.text-lg').html()} is required.`
-                                return false
-                            }
-                        } else if ( $(v).hasClass('msfb-form-dropdown') ) {
-                            if( $(v).attr('data-dropdown-value') == undefined || $(v).attr('data-dropdown-value') == null ) {
-                                validator = `${$(v).find('label.text-lg').html()} is required.`
-                                return false
+                            if( value.length ) {
+                                form_data.push({ title, value})
                             }
                         }
-                        title = $(v).attr('data-field-label')
+                        if ( ( $(v).hasClass('msfb-form-text') && !$(v).hasClass('msfb-form-dropdown')) || $(v).hasClass('msfb-form-date') ) {
+                            let value = []
+                            if( $(v).find('input').val() == "" && is_required) {
+                                validator = `${$(v).find('label.text-lg').html()} is required.`
+                                Swal.fire({
+                                    icon: "warning",
+                                    text: validator
+                                })
+                                return false
+                            }
+                            if( $(v).find('input').val() ) {
+                                value.push($(v).find('input').val())
+                                form_data.push({ title, value})
+                            }
+                        }
+                        if ( $(v).hasClass('msfb-form-textarea') ) {
+                            let value = []
+                            if( $(v).find('textarea').val() == "" && is_required) {
+                                validator = `${$(v).find('label.text-lg').html()} is required.`
+                                Swal.fire({
+                                    icon: "warning",
+                                    text: validator
+                                })
+                                return false
+                            }
+                            if( $(v).find('textarea').val() ) {
+                                value.push($(v).find('textarea').val())
+                                form_data.push({ title, value})
+                            }
+                        }
+                        if ( $(v).hasClass('msfb-form-dropdown') ) {
+                            let value = []
+                            if( ($(v).attr('data-dropdown-value') == undefined || $(v).attr('data-dropdown-value') == null) && is_required ) {
+                                validator = `${$(v).find('label.text-lg').html()} is required.`
+                                Swal.fire({
+                                    icon: "warning",
+                                    text: validator
+                                })
+                                return false
+                            }
+                            if( $(v).attr('data-dropdown-value') ) {
+                                value.push($(v).attr('data-dropdown-value'))
+                                form_data.push({ title, value})
+                            }
+                        }
+                        if ( $(v).hasClass('msfb-form-slider') ) {
+                            let value = []
+                            if( $(v).find('input').val() ) {
+                                value.push($(v).find('input').val())
+                                form_data.push({ title, value})
+                            }
+                        }
                     })
+                    dataset = { "form_data": {...form_data} }
                 }
-                dataset = { title, value }
                 data.push(dataset)
             }
-            console.log(data)
+            // console.log(data)
+            return data
         }
     })
 })(jQuery);

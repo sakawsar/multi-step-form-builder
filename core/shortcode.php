@@ -29,8 +29,10 @@ function msfb_ui_callback( $atts ){
 	// print_r($formulation);
 	// echo '</pre>';
     wp_enqueue_style( 'msfb_admin_tailwind' );
+    wp_enqueue_style( 'msfb_admin_fontawesome' );
 	?>
-	<div class="tw-msfb-container" data-formulation-data="<?php echo base64_encode(serialize($qtns)); ?>">
+	<div class="tw-msfb-container" data-formulation-id="<?php echo $formulation_id; ?>">
+	<!-- <div class="tw-msfb-container" data-formulation-data="<?php echo base64_encode(serialize($qtns)); ?>"> -->
 		<div class="tw-msfb-progress-bar">
 			<div class="tw-msfb-progress-bar__status"></div>
         </div>

@@ -1,4 +1,26 @@
 <?php
+add_action('wp_ajax_msfb_add_leads','msfb_add_leads_callback');
+function msfb_add_leads_callback(){
+    if(isset($_POST['dataset'])){
+        global $wpdb;
+        $table_name = $wpdb->prefix.'msfb_leads';
+        // $data = $_POST['dataset'];
+        
+        // if( isset( $qtn_data['question_id'] ) ){
+        //     $qtn_id = $qtn_data['question_id'];
+        //     unset($qtn_data['question_id']);
+        //     $wpdb->update($table_name,$qtn_data,array( 'id' => $qtn_id ));
+        //     $_POST['dataset']['status'] = 'updated';
+        // } else {
+        $wpdb->insert($table_name,$_POST['dataset']);
+        //     $_POST['dataset']['question_id'] = $wpdb->insert_id;
+        //     $_POST['dataset']['status'] = 'created';
+        // }
+        echo json_encode($_POST['dataset']);
+        exit;
+    }
+    exit;
+}
 add_action('wp_ajax_msfb_save_questions','msfb_save_questions_callback');
 function msfb_save_questions_callback(){
     if(isset($_POST['dataset'])){
