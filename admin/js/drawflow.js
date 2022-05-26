@@ -452,6 +452,18 @@ if(id != null){
         } else {
           formulation_name = this_el.attr('data-formula-name')
         }
+        let show_price = jQuery('#msfb-show-price:checked').val()
+        let redirect = jQuery('#msfb-redirect-url').val()
+        let color_scheme = jQuery('#msfb-color-scheme').val()
+        if( show_price ) {
+          formulation_data.show_price = show_price
+        }
+        if( redirect ){
+          formulation_data.redirect = redirect
+        }
+        if( color_scheme ){
+          formulation_data.color_scheme = color_scheme
+        }
         if ( formulation_name ) {
           this_el.find('i').attr('class','fa fa-spinner fa-spin')
           let request_data = {

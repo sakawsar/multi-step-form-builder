@@ -771,3 +771,7 @@ div[data-drawer-type]{
 #msfb-table-item-holder td[colspan]{
     text-align: center;
 }
+#msfb-show-price:checked,
+#msfb-show-price{
+    width:auto;
+}
