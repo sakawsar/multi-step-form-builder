@@ -33,7 +33,7 @@
                 <button class="skfb-btn" <?php echo $has_data ? "data-formula-id='{$formula_id}'" : ""; ?> <?php echo $has_data ? "data-formula-name='{$formula_name}'" : ""; ?> id="msfb-formulation-builder"><i class="fas fa-save"></i> Save</button>
                 <a href="<?php echo admin_url( 'admin.php?page=formula_builder&formulation_id' ); ?>" class="skfb-btn"><i class="fas fa-plus"></i> Add new</a>
                 <?php if(isset($_GET['formulation_id']) && sanitize_text_field( $_GET['formulation_id'] ) != "" ) { ?>
-                  <a href="<?php echo admin_url( 'admin.php?page=formula_builder&formulation_id='.sanitize_text_field( $_GET['formulation_id'] ).'&settings' ); ?>" class="skfb-btn"><i class="fas fa-cog"></i> Settings</a>
+                  <a id="msfb-formulation-settings" href="<?php echo admin_url( 'admin.php?page=formula_builder&formulation_id='.sanitize_text_field( $_GET['formulation_id'] ).'&settings' ); ?>" class="skfb-btn"><i class="fas fa-cog"></i> Settings</a>
                 <?php } ?>
               </div>
             </div>

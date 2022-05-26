@@ -1,4 +1,4 @@
-<div class="skfb-right-options">
+<div class="skfb-right-options" data-drawer-type="formulation" style="display:none;">
     <div class="sk-text-right">
       <button class="skfb-right-sidebar-close">
         <i class="fa fa-times"></i>

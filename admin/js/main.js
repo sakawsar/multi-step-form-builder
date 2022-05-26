@@ -488,4 +488,8 @@
         let act_el = msfb_active_question()
         $('.' + act_el).attr('data-msfb-slider-step',`${this_el.val()}`)
     })
+    $('#msfb-formulation-settings').on('click', e => {
+        e.preventDefault()
+        msfb_show_drawer("formulation");
+    })
 })(jQuery);
