@@ -137,17 +137,22 @@
     if( $("#msfb-search-name").length > 0 ) {
         $("#msfb-search-name").on('keyup', e => {
             let this_el = this__(e)
-            let this_val = this_el.val()
+            let this_val = this_el.val().toLowerCase()
             $('#msfb-table-item-holder tr').show()
             let i = 0;
             $.each( $('#msfb-table-item-holder tr'), (k,v) => {
-                let item_cats = $(v).find('td[data-msfb-row-name]');
-                if( item_cats.length > 0 ){
-                    if( item_cats.attr('data-msfb-row-name').indexOf(this_val) == -1 ){
-                        item_cats.closest('tr').hide()
-                    } else {
-                        i++
-                    }
+                // let item_cats = $(v).find('td[data-msfb-row-name]');
+                // if( item_cats.length > 0 ){
+                //     if( item_cats.attr('data-msfb-row-name').indexOf(this_val) == -1 ){
+                //         item_cats.closest('tr').hide()
+                //     } else {
+                //         i++
+                //     }
+                // }
+                if( $(v).html().toLowerCase().indexOf(this_val) == -1 ){
+                    $(v).hide()
+                } else {
+                    i++
                 }
             })
             msfb_upate_pagination(this_val,i)

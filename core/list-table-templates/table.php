@@ -5,9 +5,12 @@ $prefix = $wpdb->prefix;
 $table_data = [];
 if( $el_type == "leads" ) {
     $struct = [
-        'lead_date'     => 'Lead date',
+        'id'     => 'ID',
     ];
     $table_data['struct'] = apply_filters('msfb_lead_columns', $struct);
+    $table_name = $prefix.'msfb_leads';
+    $questions = $wpdb->get_results("SELECT * FROM $table_name",ARRAY_A);
+    $table_data['data'] = $wpdb->num_rows > 0 ? $questions : false;
 } elseif ( $el_type == "forms" ) {
     $struct = [
         'form_name'     => 'Form name'
@@ -44,9 +47,16 @@ if( $el_type == "leads" ) {
                 <th><?php echo $t_value; ?></th>
             <?php $i++; } ?>
             <?php if($this->has_category && $this->get_cates()){ ?>
-            <th>Category</th>
+            <th>
+                <?php if($el_type == "leads") {
+                    _e('Lead of','msfb');
+                } else {
+                    _e('Category','msfb');
+                }
+                ?>
+            </th>
             <?php } ?>
-            <th>Action</th>
+            <th><?php _e('Action','msfb'); ?></th>
         </tr>
     </thead>
     <tbody id="msfb-table-item-holder">
@@ -74,8 +84,9 @@ if( $el_type == "leads" ) {
                         ?>
                     <?php $i++; } ?>
                 <?php if($this->has_category && $this->get_cates()){ ?>
+                    <?php $item_data['cat_id'] = $el_type == "leads" ? $item_data['formulation_id'] : $item_data['cat_id']; ?>
                     <td>
-                        <select data-msfb-item-type="<?php echo $el_type; ?>" data-msfb-item-id="<?php echo $item_data['id']; ?>" data-msfb-cat-id="<?php echo $item_data['cat_id']; ?>">
+                        <select <?php echo $el_type == "leads" ? "disabled" : null;  ?> data-msfb-item-type="<?php echo $el_type; ?>" data-msfb-item-id="<?php echo $item_data['id']; ?>" data-msfb-cat-id="<?php echo $item_data['cat_id']; ?>">
                             <?php echo $this->get_cates("Select a category",$item_data['cat_id']); ?>
                         </select>
                     </td>

@@ -15,29 +15,29 @@ class MSFB_List_Table{
                 $this->details_url = "";
                 $this->add_new_url = false;
                 $this->add_button = false;
-                $this->has_search = false;
-                $this->search_placeholder = "Search lead";
+                $this->has_search = true;
+                $this->search_placeholder = __("Search lead","msfb");
                 $this->cat_type = "lead";
                 break;
             case 'questions':
                 $this->title = __('Questions','msfb');
                 $this->add_new_url = admin_url( 'admin.php?page=questions_builder&question_id' );
-                $this->add_button = "Add question";
-                $this->search_placeholder = "Search question by name";
+                $this->add_button = __("Add question","msfb");
+                $this->search_placeholder = __("Search question by name","msfb");
                 $this->cat_type = "question";
                 break;
             case 'forms':
                 $this->title = __('Contact forms','msfb');
                 $this->add_new_url = admin_url( 'admin.php?page=contact_form_builder&form_id' );
-                $this->add_button = "Add form";
-                $this->search_placeholder = "Search form by name";
+                $this->add_button = __("Add form","msfb");
+                $this->search_placeholder = __("Search form by name","msfb");
                 $this->cat_type = "from";
                 break;
             case 'formulations':
                 $this->title = __('Formulations','msfb');
                 $this->add_new_url = admin_url( 'admin.php?page=formula_builder&formulation_id' );
-                $this->add_button = "Add formulation";
-                $this->search_placeholder = "Search formulation by name";
+                $this->add_button = __("Add formulation","msfb");
+                $this->search_placeholder = __("Search formulation by name","msfb");
                 $this->cat_type = "fromulation";
                 break;
         }
@@ -74,6 +74,7 @@ class MSFB_List_Table{
             $query = "";
             if( $this->cat_type == "lead" ) {
                 $query = "SELECT * FROM $table_name";
+                $intial_val = "Filter by Formulation";
             } else {
                 $query = "SELECT * FROM $table_name WHERE cat_type='$cat_type'";
             }
