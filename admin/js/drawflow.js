@@ -494,13 +494,13 @@ if(id != null){
                 if( resp.status != undefined && resp.status == "created" ) {
                     Swal.fire({
                         icon: "success",
-                        text: "Form has been added."
+                        text: "Formula has been added."
                     })
                     window.location.href = resp.redirect
                 } else if(resp.status != undefined && resp.status == "updated" ){
                     Swal.fire({
                         icon: "success",
-                        text: "Form has been updated."
+                        text: "Formula has been updated."
                     })
                 }
             },
