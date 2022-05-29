@@ -284,10 +284,15 @@
                     // $.each(form_fiels,(k,v) => {
                     // for( j = 0; j < form_fiels.length; j++ ){
                     let form_data = []
+                    let lead_map = []
                     $.each(form_fiels,(k,v) => {
                         // v = form_fiels[j]
                         // console.log(v)
                         let is_required = $(v).attr('data-msfb-required')
+                        let is_lead_col = $(v).attr('data-msfb-is-lead-col')
+                        if( is_lead_col ) {
+                            lead_map[k] = $(v).find('label.text-lg').html()
+                        }
                         title = $(v).attr('data-field-label')
                         if( $(v).hasClass('msfb-form-checkbox') ) {
                             let value = []
@@ -303,7 +308,11 @@
                                 return false
                             }
                             if( value.length ) {
-                                form_data.push({ title, value})
+                                if( is_lead_col ) {
+                                    form_data[k] = { title, value, "lead_col": k}
+                                } else {
+                                    form_data[k] = { title, value}
+                                }
                             }
                         } 
                         if( $(v).hasClass('msfb-form-radio') ) {
@@ -323,7 +332,11 @@
                                 return false
                             }
                             if( value.length ) {
-                                form_data.push({ title, value})
+                                if( is_lead_col ) {
+                                    form_data[k] = { title, value, "lead_col": k}
+                                } else {
+                                    form_data[k] = { title, value}
+                                }
                             }
                         }
                         if ( ( $(v).hasClass('msfb-form-text') && !$(v).hasClass('msfb-form-dropdown')) || $(v).hasClass('msfb-form-date') ) {
@@ -338,7 +351,11 @@
                             }
                             if( $(v).find('input').val() ) {
                                 value.push($(v).find('input').val())
-                                form_data.push({ title, value})
+                                if( is_lead_col ) {
+                                    form_data[k] = { title, value, "lead_col": k}
+                                } else {
+                                    form_data[k] = { title, value}
+                                }
                             }
                         }
                         if ( $(v).hasClass('msfb-form-textarea') ) {
@@ -353,7 +370,11 @@
                             }
                             if( $(v).find('textarea').val() ) {
                                 value.push($(v).find('textarea').val())
-                                form_data.push({ title, value})
+                                if( is_lead_col ) {
+                                    form_data[k] = { title, value, "lead_col": k}
+                                } else {
+                                    form_data[k] = { title, value}
+                                }
                             }
                         }
                         if ( $(v).hasClass('msfb-form-dropdown') ) {
@@ -368,22 +389,30 @@
                             }
                             if( $(v).attr('data-dropdown-value') ) {
                                 value.push($(v).attr('data-dropdown-value'))
-                                form_data.push({ title, value})
+                                if( is_lead_col ) {
+                                    form_data[k] = { title, value, "lead_col": k}
+                                } else {
+                                    form_data[k] = { title, value}
+                                }
                             }
                         }
                         if ( $(v).hasClass('msfb-form-slider') ) {
                             let value = []
                             if( $(v).find('input').val() ) {
                                 value.push($(v).find('input').val())
-                                form_data.push({ title, value})
+                                if( is_lead_col ) {
+                                    form_data[k] = { title, value, "lead_col": k}
+                                } else {
+                                    form_data[k] = { title, value}
+                                }
                             }
                         }
                     })
-                    dataset = { "form_data": {...form_data} }
+                    dataset = { "form_data": {...form_data}, "lead_map": {...lead_map} }
                 }
                 data.push(dataset)
             }
-            // console.log(data)
+            console.log(data)
             return data
         }
     })
