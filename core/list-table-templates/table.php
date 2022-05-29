@@ -14,7 +14,12 @@ if( $el_type == "leads" ) {
         $formulation_id = sanitize_text_field( $_GET['formulation_id'] );
         $sql = "SELECT * FROM $table_name WHERE formulation_id='$formulation_id'";
     } else {
-        $sql = "SELECT * FROM {$table_name}";
+        $table_name2 = $wpdb->prefix.'msfb_formulations';
+        $formulas = $wpdb->get_results("SELECT * FROM $table_name2",ARRAY_A);
+        if( $wpdb->num_rows > 0 ) {
+            $formulation_id = $formulas[0]['id'];
+            $sql = "SELECT * FROM $table_name WHERE formulation_id='$formulation_id'";
+        }
     }
     $questions = $wpdb->get_results($sql,ARRAY_A);
     $table_data['data'] = $wpdb->num_rows > 0 ? $questions : false;
@@ -101,9 +106,6 @@ if( $el_type == "leads" ) {
                                     $lead_form_data = $lead_data[count($lead_data) - 1];
                                     $lead_map = $lead_form_data['lead_map'];
                                     $lead_data = $lead_form_data['form_data'];
-                                    // echo '<pre>';
-                                    // print_r($lead_map);
-                                    // echo '</pre>';
                                     foreach($lead_map as $lead_key => $lead_val){
                                         if( isset($lead_data[$lead_key]) ) {
                                             printf("<td>%s</td>",implode(',',$lead_data[$lead_key]['value']));
