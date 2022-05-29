@@ -53,6 +53,16 @@ if( $el_type == "leads" ) {
             <?php $i=1; foreach($table_data['struct'] as $t_id => $t_value){ ?>
                 <th><?php echo $t_value; ?></th>
             <?php $i++; } ?>
+            <?php if( $el_type == "leads" && $table_data['data'] != false ) {
+                $table_head_data = $table_data['data'][0];
+                $table_head_data = json_decode( stripcslashes( $table_head_data['lead_data'] ), true );
+                $table_head_data = $table_head_data[count($table_head_data) - 1];
+                $table_head_data = $table_head_data['lead_map'];
+                foreach($table_head_data as $a_head_data){
+                    printf('<th>%s</th>',$a_head_data);
+                }
+            }
+            ?>
             <?php if($this->has_category && $this->get_cates()){ ?>
             <th>
                 <?php if($el_type == "leads") {
@@ -87,10 +97,20 @@ if( $el_type == "leads" ) {
                             } else {
                                 printf("<td>%s</td>",$item_data[$t_id]);
                                 if(isset($item_data['lead_data'])){
-                                    $lead_data = json_decode( stripcslashes( $item_data['lead_data'] ) );
-                                    echo '<pre>';
-                                    print_r($lead_data);
-                                    echo '</pre>';
+                                    $lead_data = json_decode( stripcslashes( $item_data['lead_data'] ), true );
+                                    $lead_form_data = $lead_data[count($lead_data) - 1];
+                                    $lead_map = $lead_form_data['lead_map'];
+                                    $lead_data = $lead_form_data['form_data'];
+                                    // echo '<pre>';
+                                    // print_r($lead_map);
+                                    // echo '</pre>';
+                                    foreach($lead_map as $lead_key => $lead_val){
+                                        if( isset($lead_data[$lead_key]) ) {
+                                            printf("<td>%s</td>",implode(',',$lead_data[$lead_key]['value']));
+                                        } else {
+                                            printf("<td>-</td>");
+                                        }
+                                    }
                                 }
                             }
                         }
