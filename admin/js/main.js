@@ -39,16 +39,21 @@
             let this_el = this__(e)
             let this_val = this_el.val()
             $('#msfb-table-item-holder tr').show()
-            let i = 0;
-            $.each( $('#msfb-table-item-holder tr'), (k,v) => {
-                let item_cats = $(v).find('select[data-msfb-cat-id]');
-                if( item_cats.attr('data-msfb-cat-id') != this_val ){
-                    item_cats.closest('tr').hide()
-                } else {
-                    i++
-                }
-            })
-            msfb_upate_pagination(this_val,i)
+            if( this_el.closest('.app').attr('data-lead-table') && this_el.closest('.app').attr('data-lead-table') == "true" ) {
+                let url = this_el.closest('.app').attr('data-lead-table-url') + '&formulation_id=' + this_val
+                window.location.href = url
+            } else {
+                let i = 0;
+                $.each( $('#msfb-table-item-holder tr'), (k,v) => {
+                    let item_cats = $(v).find('select[data-msfb-cat-id]');
+                    if( item_cats.attr('data-msfb-cat-id') != this_val ){
+                        item_cats.closest('tr').hide()
+                    } else {
+                        i++
+                    }
+                })
+                msfb_upate_pagination(this_val,i)
+            }
         })
     }
     const msfb_upate_pagination = (this_val, i) => {

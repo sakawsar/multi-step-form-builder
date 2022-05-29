@@ -9,7 +9,14 @@ if( $el_type == "leads" ) {
     ];
     $table_data['struct'] = apply_filters('msfb_lead_columns', $struct);
     $table_name = $prefix.'msfb_leads';
-    $questions = $wpdb->get_results("SELECT * FROM $table_name",ARRAY_A);
+    $sql = "";
+    if( isset($_GET['formulation_id']) && sanitize_text_field( $_GET['formulation_id'] ) != "" ) {
+        $formulation_id = sanitize_text_field( $_GET['formulation_id'] );
+        $sql = "SELECT * FROM $table_name WHERE formulation_id='$formulation_id'";
+    } else {
+        $sql = "SELECT * FROM {$table_name}";
+    }
+    $questions = $wpdb->get_results($sql,ARRAY_A);
     $table_data['data'] = $wpdb->num_rows > 0 ? $questions : false;
 } elseif ( $el_type == "forms" ) {
     $struct = [
@@ -79,6 +86,12 @@ if( $el_type == "leads" ) {
                                 printf("<td><code>[msfb_multistep_form id='%s']</code></td>",$item_data['id']);
                             } else {
                                 printf("<td>%s</td>",$item_data[$t_id]);
+                                if(isset($item_data['lead_data'])){
+                                    $lead_data = json_decode( stripcslashes( $item_data['lead_data'] ) );
+                                    echo '<pre>';
+                                    print_r($lead_data);
+                                    echo '</pre>';
+                                }
                             }
                         }
                         ?>

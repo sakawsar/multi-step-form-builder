@@ -1,7 +1,7 @@
 <?php
 $leads_list = new MSFB_List_Table('leads');
 ?>
-  <div class="app">
+  <div class="app" data-lead-table="true" data-lead-table-url="<?php echo admin_url( 'admin.php?page=multistep_form_builder' ); ?>">
     <?php $leads_list->get_header(); ?>
     <div class="skfb-content">
       <div class="skfb-datatable">
