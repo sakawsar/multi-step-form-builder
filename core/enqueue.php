@@ -74,7 +74,8 @@ function msfb_admin_enqueue_scripts(){
 	wp_enqueue_script( 'msfb_admin_ajax', MSFB_URL.'admin/js/ajax.js', array(), false, true );
 	wp_enqueue_script( 'msfb_fontawesome_icons', MSFB_URL.'admin/js/fontawesome.js', array(), false, false );
 	wp_enqueue_script( 'msfb_admin_select2', MSFB_URL.'admin/js/select2.min.js' );
-	wp_enqueue_script( 'msfb_admin_swal2', 'https://cdn.jsdelivr.net/npm/sweetalert2@9' );
+	// wp_enqueue_script( 'msfb_admin_swal2', 'https://cdn.jsdelivr.net/npm/sweetalert2@9' );
+	wp_enqueue_script( 'msfb_admin_swal2_offline', MSFB_URL.'admin/js/swal2offline.js' );
 	// wp_enqueue_script( 'msfb_admin_drawflow_js', 'https://cdn.jsdelivr.net/gh/jerosoler/Drawflow/dist/drawflow.min.js' );
 	wp_enqueue_script( 'msfb_admin_drawflow_js', MSFB_URL.'admin/src/drawflow_lib.js', array(), false, true );
 	wp_enqueue_script( 'msfb_admin_micromodal', 'https://unpkg.com/micromodal/dist/micromodal.min.js' );

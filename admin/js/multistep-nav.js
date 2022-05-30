@@ -8,10 +8,15 @@
                 if( has_node ) {
                     if( $(v).closest('div[data-msfb-node]').attr('data-msfb-skipped') != "true" ){
                         let node_id = $(v).closest('div[data-msfb-node]').attr('data-msfb-node')
-                        nodes.push(node_id)
+                        if( $(v).closest('div[data-msfb-node]').find('button[data-msfb-redirect]').length == 0 ){
+                        // if( !$(v).closest('div[data-msfb-node').hasClass('msfb-form') ){
+                            nodes.push(node_id)
+                            console.log(node_id)
+                        }
                     }
                 }
             })
+            nodes.push($('button[data-msfb-redirect]').closest('div[data-msfb-node].msfb-form').attr('data-msfb-node'))
             let lead_data = msfb_get_formulation_data(nodes)
             // let redirect_url = 
             $.ajax({
@@ -30,7 +35,7 @@
                 },
                 error: err => console.log(err)
             })
-            // console.log(nodes)
+            console.log(nodes)
         }
         $('.msfb-select .tw-msfb-qtn-field div').on('click', e => {
             let this_el = $(e.currentTarget)
@@ -124,7 +129,7 @@
                         let this_node = this_el.closest('div[data-msfb-node]')
                         let this_node_price = this_node.attr('data-price')
                         if( this_node_price && total != null && is_skipped == false ) {
-                            if ( this_node_price && total != null ) {
+                            if ( this_node_price && total != null && !this_node.hasClass('msfb_node_price_added') ) {
                                 total += parseFloat(this_node_price)
                                 $('.tw-msfb-total-price span').html(total)
                                 this_node.addClass('msfb_node_price_added')
@@ -145,7 +150,7 @@
             } else if ( node_id == null ) {
                 Swal.fire({
                     icon: 'warning',
-                    text: 'This option is not linked to any other question.'
+                    text: 'This option did not point to any other question.'
                 })
             } else {
                 Swal.fire({
@@ -162,8 +167,21 @@
             let this_el = $(e.currentTarget)
             let next_node = this_el.attr('data-next-node')
             let is_form_field = this_el.hasClass('tw-form-dropdown')
+            let total
+            if( $('.tw-msfb-total-price span').length > 0 ) {
+                total = parseFloat( $('.tw-msfb-total-price span').html() )
+            }
             if( next_node ) {
                 this_el.closest('div[data-msfb-node]').find('button[data-msfb-next]').attr('data-msfb-next',next_node)
+                if ( total != null && this_el.attr('data-price') ) {
+                    if( this_el.closest('div[data-msfb-node]').attr('data-added-price') ) {
+                        total -= parseFloat(this_el.closest('div[data-msfb-node]').attr('data-added-price'))
+                    }
+                    total += parseFloat(this_el.attr('data-price'))
+                    this_el.closest('div[data-msfb-node]').attr('data-added-price',this_el.attr('data-price'))
+                    $('.tw-msfb-total-price span').html(total)
+                    $('.tw-msfb-total-price span').counterUp();
+                }
             } else {
                 if( !is_form_field ) {
                     Swal.fire({
@@ -461,8 +479,11 @@
                             }
                         }
                     })
-                    if( $())
-                    dataset = { "form_data": {...form_data}, "lead_map": {...lead_map} }
+                    if( $('.tw-msfb-total-price span').length > 0 ) {
+                        dataset = { "form_data": {...form_data}, "lead_map": {...lead_map}, "total_price": $('.tw-msfb-total-price span').html() }
+                    } else {
+                        dataset = { "form_data": {...form_data}, "lead_map": {...lead_map} }
+                    }
                 }
                 data.push(dataset)
             }

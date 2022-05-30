@@ -58,7 +58,8 @@ function msfb_ui_callback( $atts ){
 				'name' => $a_qtn['name'],
 				'inputs' => $a_qtn['inputs'],
 				'outputs' => $a_qtn['outputs'],
-				'step' => empty($a_qtn['inputs']['input_1']['connections']) ? 1 : 0
+				'step' => empty($a_qtn['inputs']['input_1']['connections']) ? 1 : 0,
+				'redirect' => isset($formulation_data['redirect']) ? $formulation_data['redirect'] : home_url( '/' )
 			];
 			msfb_get_the_step($qtn_data);
 			// echo '<pre>';
@@ -83,6 +84,7 @@ function msfb_get_the_step( $dataset ) {
 		$data['id'] = $dataset['id'];
 		$data['step_data'] = $dataset;
 		$data['step'] = $dataset['step'];
+		$data['redirect'] = $dataset['redirect'];
 		$data_type = $dataset['type'];
 		if( $data_type == "question" ) {
 			$qtn_type = $data['question_type'];
@@ -140,7 +142,7 @@ function msfb_step_navigation( $data ) {
 					<button class="msfb-skip-step" data-msfb-next="<?php echo $next_node; ?>">Skip</button>
 				<?php } ?>
 			<?php } else { ?>
-				<button data-msfb-redirect="">Finish</button>
+				<button data-msfb-redirect="<?php echo $data['redirect']; ?>">Finish</button>
 			<?php }?>
 		</div>
 	</div> <!-- end of the wrapper -->
