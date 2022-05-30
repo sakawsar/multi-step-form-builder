@@ -28,7 +28,7 @@
       </div>
       <div class="skfb__field-box __2">
         <?php
-          $color_scheme = "#ffffff";
+          $color_scheme = "#0693e3";
           if( isset($this_formula_data['formulation_data']['color_scheme']) ){
             $color_scheme = $this_formula_data['formulation_data']['color_scheme'];
           }

@@ -32,6 +32,14 @@
                 },
                 success: resp => {
                     console.log(resp)
+                    if( resp.formulation_id ) {
+                        Swal.fire({
+                            icon: "success",
+                            text: "Form data successfully submitted."
+                        }).then( data => {
+                            window.location.href = $('button[data-msfb-redirect]').attr('data-msfb-redirect')
+                        })
+                    }
                 },
                 error: err => console.log(err)
             })
