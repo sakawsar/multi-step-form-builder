@@ -1,5 +1,6 @@
 (function ($) {
     $(document).ready(() => {
+        $('.tw-msfb-total-price span').counterUp();
         const msfb_visited_path = () => {
             let nodes = [$('.tw-msfb-btn-container[data-msfb-root]').attr('data-msfb-root')]
             $.each($('button[data-msfb-prev]'),(k,v) => {
@@ -32,25 +33,51 @@
             // console.log(nodes)
         }
         $('.msfb-select .tw-msfb-qtn-field div').on('click', e => {
-            // console.log(e)
             let this_el = $(e.currentTarget)
-            $.each($('.msfb-select .tw-msfb-qtn-field div'),(k,v) => {
+            let this_node = this_el.closest('div[data-msfb-node]').attr('data-msfb-node')
+            let total
+            if( $('.tw-msfb-total-price span').length > 0 ) {
+                total = parseFloat( $('.tw-msfb-total-price span').html() )
+            }
+            $.each($(`div[data-msfb-node=${this_node}] .tw-msfb-qtn-field div`),(k,v) => {
+                if( $(v).hasClass('selected') ) {
+                    if ( this_el.attr('data-price') && total != null ) {
+                        total -= parseFloat($(v).attr('data-price'))
+                        $('.tw-msfb-total-price span').html(total)
+                    }
+                }
                 $(v).removeClass('selected')
             })
-            if( this_el.hasClass('selected') ) {
-                this_el.removeClass('selected');
-            } else {
-                this_el.addClass('selected');
-                this_el.closest('div[data-msfb-node]').find('button[data-msfb-next]').attr('data-msfb-next',this_el.attr('data-next-node'))
+            this_el.addClass('selected');
+            this_el.closest('div[data-msfb-node]').find('button[data-msfb-next]').attr('data-msfb-next',this_el.attr('data-next-node'))
+            if ( this_el.attr('data-price') && total != null ) {
+                total += parseFloat(this_el.attr('data-price'))
+                console.log(this_el.attr('data-price'))
+                $('.tw-msfb-total-price span').html(total)
+                $('.tw-msfb-total-price span').counterUp();
             }
         })
         $('.msfb-multiselect .tw-msfb-qtn-field div').on('click', e => {
             // console.log(e)
             let this_el = $(e.currentTarget)
+            let total
+            if( $('.tw-msfb-total-price span').length > 0 ) {
+                total = parseFloat( $('.tw-msfb-total-price span').html() )
+            }
             if( this_el.hasClass('selected') ) {
                 this_el.removeClass('selected');
+                if ( this_el.attr('data-price') && total != null ) {
+                    total -= parseFloat(this_el.attr('data-price'))
+                    $('.tw-msfb-total-price span').html(total)
+                    $('.tw-msfb-total-price span').counterUp();
+                }
             } else {
                 this_el.addClass('selected');
+                if ( this_el.attr('data-price') && total != null ) {
+                    total += parseFloat(this_el.attr('data-price'))
+                    $('.tw-msfb-total-price span').html(total)
+                    $('.tw-msfb-total-price span').counterUp();
+                }
             }
         })
         $('button[data-msfb-next], button[data-msfb-prev]').on('click', e => {
@@ -90,14 +117,40 @@
                     $(`div[data-msfb-node="${node_id}"]`).fadeIn('medium')
                     if( !is_prev ) {
                         $(`div[data-msfb-node="${node_id}"]`).find('button[data-msfb-prev]').attr('data-msfb-prev',this_el_node)
+                        let total
+                        if( $('.tw-msfb-total-price span').length > 0 ) {
+                            total = parseFloat( $('.tw-msfb-total-price span').html() )
+                        }
+                        let this_node = this_el.closest('div[data-msfb-node]')
+                        let this_node_price = this_node.attr('data-price')
+                        if( this_node_price && total != null && is_skipped == false ) {
+                            if ( this_node_price && total != null ) {
+                                total += parseFloat(this_node_price)
+                                $('.tw-msfb-total-price span').html(total)
+                                this_node.addClass('msfb_node_price_added')
+                                $('.tw-msfb-total-price span').counterUp();
+                            }
+                        } else if ( is_skipped == true ) {
+                            if ( this_node_price && total != null && this_node.hasClass('msfb_node_price_added') ) {
+                                total -= parseFloat(this_node_price)
+                                $('.tw-msfb-total-price span').html(total)
+                                this_node.removeClass('msfb_node_price_added')
+                                $('.tw-msfb-total-price span').counterUp();
+                            }
+                        }
                     } else {
                         this_el.closest('div[data-msfb-node]').find('button[data-msfb-prev]').attr('data-msfb-prev','')
                     }
                 })
+            } else if ( node_id == null ) {
+                Swal.fire({
+                    icon: 'warning',
+                    text: 'This option is not linked to any other question.'
+                })
             } else {
                 Swal.fire({
                     icon: 'warning',
-                    text: 'Selct an option first'
+                    text: 'Select an option first'
                 })
             }
         })
@@ -408,6 +461,7 @@
                             }
                         }
                     })
+                    if( $())
                     dataset = { "form_data": {...form_data}, "lead_map": {...lead_map} }
                 }
                 data.push(dataset)

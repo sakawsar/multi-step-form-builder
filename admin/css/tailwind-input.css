@@ -11,6 +11,9 @@
 .tw-msfb-progress-bar__status{
     @apply w-4/5 h-2 bg-blue-400 absolute left-0 rounded;
 }
+.tw-msfb-total-price{
+    @apply w-full text-[24px] text-center my-[32px];
+}
 .tw-msfb-qtn-field{
     min-height: 224px;
     height: auto;

@@ -25,6 +25,7 @@ function msfb_ui_callback( $atts ){
 	$json_data = json_decode(stripslashes( $json_data ),true);
 	$json_data = $json_data['drawflow']['Home']['data'];
 	$formulation = $json_data;
+	$formulation_data = json_decode(stripslashes($results[0]->formulation_data),true);
 	// echo '<pre>';
 	// print_r($formulation);
 	// echo '</pre>';
@@ -36,6 +37,14 @@ function msfb_ui_callback( $atts ){
 		<div class="tw-msfb-progress-bar">
 			<div class="tw-msfb-progress-bar__status"></div>
         </div>
+		<?php
+		// echo '<pre>';
+		// print_r($formulation_data);
+		// echo '</pre>';
+		?>
+		<?php if(isset($formulation_data['show_price'])){ ?>
+			<h2 class="tw-msfb-total-price">Estimated cost: <span>0</span></h2>
+		<?php } ?>
 		<?php
 		foreach($formulation as $key => $a_qtn){
 			unset($a_qtn['html']);

@@ -496,52 +496,12 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-right: 2rem !important;
 }
 
-.mt-4 {
-  margin-top: 1rem !important;
-}
-
-.mb-2 {
-  margin-bottom: 0.5rem !important;
-}
-
-.mr-8 {
-  margin-right: 2rem !important;
-}
-
-.mt-4 {
-  margin-top: 1rem !important;
-}
-
-.mb-2 {
-  margin-bottom: 0.5rem !important;
-}
-
-.mr-8 {
-  margin-right: 2rem !important;
-}
-
 .flex {
   display: flex !important;
 }
 
 .hidden {
   display: none !important;
-}
-
-.w-4\/5 {
-  width: 80% !important;
-}
-
-.w-full {
-  width: 100% !important;
-}
-
-.w-4\/5 {
-  width: 80% !important;
-}
-
-.w-full {
-  width: 100% !important;
 }
 
 .w-4\/5 {
@@ -598,36 +558,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .text-8xl {
   font-size: 6rem !important;
   line-height: 1 !important;
-}
-
-.text-lg {
-  font-size: 1.125rem !important;
-  line-height: 1.75rem !important;
-}
-
-.text-4xl {
-  font-size: 2.25rem !important;
-  line-height: 2.5rem !important;
-}
-
-.text-xl {
-  font-size: 1.25rem !important;
-  line-height: 1.75rem !important;
-}
-
-.text-lg {
-  font-size: 1.125rem !important;
-  line-height: 1.75rem !important;
-}
-
-.text-4xl {
-  font-size: 2.25rem !important;
-  line-height: 2.5rem !important;
-}
-
-.text-xl {
-  font-size: 1.25rem !important;
-  line-height: 1.75rem !important;
 }
 
 .text-lg {
@@ -717,6 +647,14 @@ Ensure the default browser behavior of the `hidden` attribute.
   border-radius: 0.25rem;
   --tw-bg-opacity: 1;
   background-color: rgb(96 165 250 / var(--tw-bg-opacity));
+}
+
+.tw-msfb-total-price {
+  margin-top: 32px;
+  margin-bottom: 32px;
+  width: 100%;
+  text-align: center;
+  font-size: 24px;
 }
 
 .tw-msfb-qtn-field{

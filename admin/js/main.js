@@ -502,4 +502,12 @@
         e.preventDefault()
         msfb_show_drawer("formulation");
     })
+    // $('.tw-msfb-total-price span').counterUp({
+    //     delay: 10,
+    //     time: 1000
+    // })
+    $('.tw-msfb-multiselect-qtn__item').on('click', e => {
+        let this_el = this__(e)
+        console.log(this_el)
+    })
 })(jQuery);
