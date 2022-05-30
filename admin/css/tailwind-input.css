@@ -9,7 +9,8 @@
     @apply w-4/5 mx-auto mb-8 h-2 bg-gray-100 relative rounded shadow-lg;
 }
 .tw-msfb-progress-bar__status{
-    @apply w-4/5 h-2 bg-blue-400 absolute left-0 rounded;
+    @apply w-4/5 h-2 absolute left-0 rounded;
+    background-color: var(--msfb-color);
 }
 .tw-msfb-total-price{
     @apply w-full text-[24px] text-center my-[32px];
@@ -27,11 +28,13 @@
     height: 240px;
 }
 .tw-msfb-multiselect-qtn__item.selected{
-    @apply w-2/4 p-4 bg-white border-2 border-blue-400 rounded-lg shadow-lg flex flex-col justify-center gap-8 items-center;
+    @apply w-2/4 p-4 bg-white border-2 rounded-lg shadow-lg flex flex-col justify-center gap-8 items-center;
     height: 240px;
+    border-color: var(--msfb-color);
 }
 .tw-msfb-multiselect-qtn__item i{
-    @apply text-8xl text-blue-400
+    @apply text-8xl;
+    color: var(--msfb-color);
 }
 .tw-msfb-multiselect-qtn__item p{
     @apply text-2xl;
@@ -58,10 +61,19 @@
     @apply absolute top-16 left-0 w-full outline-2 shadow-lg rounded-lg hidden;
 }
 .tw-msfb-dropdown-qtn__item{
-    @apply bg-white p-4 hover:bg-blue-400 hover:text-white font-medium text-gray-600 outline-2 outline-red-500;
+    @apply bg-white p-4 font-medium text-gray-600 outline-2;
+    outline: var(--msfb-color);
+}
+.tw-msfb-dropdown-qtn__item:hover{
+    @apply bg-white p-4;
+    background-color: var(--msfb-color);
+    color: white;
+    outline: var(--msfb-color);
+    @apply font-medium outline-2 
 }
 .tw-msfb-dropdown-qtn__item:last-of-type{
-    @apply bg-white p-4 hover:bg-blue-400 hover:text-white font-medium text-gray-600;
+    /* @apply bg-white p-4 hover:bg-red-400 hover:text-white font-medium text-gray-600; */
+    /* @apply bg-white p-4 hover:bg-red-400 hover:text-white font-medium text-gray-600; */
     border: 0px!important;
 }
 /** dropdown end */
@@ -71,7 +83,8 @@
 .tw-msfb-upload-field,
 .tw-msfb-slider-field,
 .tw-msfb-textarea-field{
-    @apply p-4 text-black relative bg-white border-2 border-blue-400 rounded-lg;
+    @apply p-4 text-black relative bg-white border-2 rounded-lg;
+    border-color: var(--msfb-color);
 }
 .tw-msfb-textarea-field{
     min-height: 224px;
@@ -82,7 +95,7 @@
     height: 8px;
     padding: 0px;
     border: 0px;
-    background: rgb(96, 165, 250);
+    background: var(--msfb-color);
     outline: none;
     opacity: 0.7;
     -webkit-transition: .2s;
@@ -97,7 +110,7 @@
     appearance: none;
     width: 25px;
     height: 25px;
-    background: rgb(96, 165, 250);
+    background: var(--msfb-color);
     clip-path: circle();
     cursor: pointer;
 }
@@ -105,7 +118,7 @@
 .tw-msfb-slider-field::-moz-range-thumb {
     width: 25px;
     height: 25px;
-    background: rgb(96, 165, 250);
+    background: var(--msfb-color);
     cursor: pointer;
 }
 
@@ -121,7 +134,7 @@
     @apply w-1/2 m-auto flex flex-wrap flex-row mb-4;
 }
 .tw-msfb-text-field:focus{
-    @apply border-blue-400;
+    border-color: var(--msfb-color);
 }
 .tw-msfb-dropdown-field{
     cursor: pointer;
@@ -133,14 +146,15 @@
     @apply flex flex-row gap-4 justify-center my-16;
 }
 .tw-msfb-btn-container button{
-    @apply px-8 py-2 rounded-lg text-white bg-blue-400 text-lg;
+    @apply px-8 py-2 rounded-lg text-white text-lg;
+    background-color: var(--msfb-color);
 }
 /** checkbox custom design */
 /* .msfb-form-checkbox input{
     appearance: none;
     height: 20px;
     width: 20px;
-    background: blue;
+    background: red;
     display: flex;
     flex-direction: column;
 }

@@ -32,6 +32,11 @@ function msfb_ui_callback( $atts ){
     wp_enqueue_style( 'msfb_admin_tailwind' );
     wp_enqueue_style( 'msfb_admin_fontawesome' );
 	?>
+	<style>
+		:root {
+			--msfb-color: <?php echo $formulation_data['color_scheme']; ?>;
+		}
+	</style>
 	<div class="tw-msfb-container" data-formulation-id="<?php echo $formulation_id; ?>">
 	<!-- <div class="tw-msfb-container" data-formulation-data="<?php echo base64_encode(serialize($qtns)); ?>"> -->
 		<div class="tw-msfb-progress-bar">
