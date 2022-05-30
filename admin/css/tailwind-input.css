@@ -21,10 +21,10 @@
 }
 /** multiselect **/
 .tw-msfb-multiselect-qtn{
-    @apply flex flex-row gap-4 w-4/5 m-auto mt-4;
+    @apply flex flex-col sm:flex-row gap-4 w-full sm:w-4/5 m-auto mt-4;
 }
 .tw-msfb-multiselect-qtn__item{
-    @apply w-2/4 p-4 bg-white border border-gray-100 rounded-lg shadow-lg flex flex-col justify-center gap-8 items-center;
+    @apply w-full sm:w-1/2 p-4 bg-white border border-gray-100 rounded-lg shadow-lg flex flex-col justify-center gap-8 items-center;
     height: 240px;
 }
 .tw-msfb-multiselect-qtn__item.selected{
@@ -131,7 +131,7 @@
     @apply border-solid border-2 w-1/2 m-auto;
 }
 .msfb-form-field{
-    @apply w-1/2 m-auto flex flex-wrap flex-row mb-4;
+    @apply w-full m-auto flex flex-wrap flex-row mb-4 md:w-1/2 lg:w-1/2 xl:w-1/2;
 }
 .tw-msfb-text-field:focus{
     border-color: var(--msfb-color);

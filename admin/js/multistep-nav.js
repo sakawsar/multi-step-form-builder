@@ -3,20 +3,23 @@
         $('.tw-msfb-total-price span').counterUp();
         const msfb_visited_path = () => {
             let nodes = [$('.tw-msfb-btn-container[data-msfb-root]').attr('data-msfb-root')]
+            let visited_nodes = []
             $.each($('button[data-msfb-prev]'),(k,v) => {
                 let has_node = $(v).attr('data-msfb-prev')
                 if( has_node ) {
+                    let node_id = $(v).closest('div[data-msfb-node]').attr('data-msfb-node')
                     if( $(v).closest('div[data-msfb-node]').attr('data-msfb-skipped') != "true" ){
-                        let node_id = $(v).closest('div[data-msfb-node]').attr('data-msfb-node')
                         if( $(v).closest('div[data-msfb-node]').find('button[data-msfb-redirect]').length == 0 ){
                         // if( !$(v).closest('div[data-msfb-node').hasClass('msfb-form') ){
                             nodes.push(node_id)
                             console.log(node_id)
                         }
                     }
+                    visited_nodes.push(node_id)
                 }
             })
             nodes.push($('button[data-msfb-redirect]').closest('div[data-msfb-node].msfb-form').attr('data-msfb-node'))
+            visited_nodes.push($('button[data-msfb-redirect]').closest('div[data-msfb-node].msfb-form').attr('data-msfb-node'))
             let lead_data = msfb_get_formulation_data(nodes)
             // let redirect_url = 
             $.ajax({
@@ -44,6 +47,7 @@
                 error: err => console.log(err)
             })
             console.log(nodes)
+            console.log('visited nodes',visited_nodes)
         }
         $('.msfb-select .tw-msfb-qtn-field div').on('click', e => {
             let this_el = $(e.currentTarget)
