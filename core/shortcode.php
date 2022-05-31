@@ -40,7 +40,7 @@ function msfb_ui_callback( $atts ){
 	<div class="tw-msfb-container" data-formulation-id="<?php echo $formulation_id; ?>">
 	<!-- <div class="tw-msfb-container" data-formulation-data="<?php echo base64_encode(serialize($qtns)); ?>"> -->
 		<div class="tw-msfb-progress-bar">
-			<div class="tw-msfb-progress-bar__status" style="width:50%;"></div>
+			<div class="tw-msfb-progress-bar__status" style="width:0%;"></div>
         </div>
 		<?php if(isset($formulation_data['show_price'])){ ?>
 			<h2 class="tw-msfb-total-price">Estimated cost: <span>0</span></h2>
@@ -130,7 +130,7 @@ function msfb_ui_callback( $atts ){
 			}
 		}
 		?>
-		<div id="msfb-progressbar-step" data-step="<?php echo $max; ?>"></div>
+		<div id="msfb-progressbar-step" data-current-step="0" data-step="<?php echo 100 / $max; ?>"></div>
 		<?php
 		// echo '<pre>';
 		// print_r($max);

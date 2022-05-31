@@ -103,6 +103,9 @@
             let node_id
             let is_prev
             let is_skipped
+            let step_holder = $('#msfb-progressbar-step')
+            let step_unit_val = parseFloat($('#msfb-progressbar-step').attr('data-step'))
+            let step_val = parseFloat($('#msfb-progressbar-step').attr('data-current-step'))
             if( this_el.attr('data-msfb-next') ) {
                 node_id = this_el.attr('data-msfb-next')
                 if( this_el.closest('div').attr('data-msfb-required') == "true" || this_el.closest('div[data-msfb-node]').hasClass('msfb-form') ) {
@@ -155,9 +158,13 @@
                                 $('.tw-msfb-total-price span').counterUp();
                             }
                         }
+                        step_val += step_unit_val
                     } else {
+                        step_val -= step_unit_val
                         this_el.closest('div[data-msfb-node]').find('button[data-msfb-prev]').attr('data-msfb-prev','')
                     }
+                    $('.tw-msfb-progress-bar__status').animate({"width":`${step_val}%`})
+                    step_holder.attr('data-current-step',step_val)
                 })
             } else if ( node_id == null ) {
                 Swal.fire({
@@ -224,6 +231,7 @@
                 return false
             }
             msfb_visited_path()
+            $('.tw-msfb-progress-bar__status').animate({"width":`100%`})
         })
         // slider change
         $('.tw-msfb-slider-field').on('change', e => {
