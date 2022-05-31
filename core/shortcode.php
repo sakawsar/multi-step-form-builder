@@ -40,18 +40,18 @@ function msfb_ui_callback( $atts ){
 	<div class="tw-msfb-container" data-formulation-id="<?php echo $formulation_id; ?>">
 	<!-- <div class="tw-msfb-container" data-formulation-data="<?php echo base64_encode(serialize($qtns)); ?>"> -->
 		<div class="tw-msfb-progress-bar">
-			<div class="tw-msfb-progress-bar__status"></div>
+			<div class="tw-msfb-progress-bar__status" style="width:50%;"></div>
         </div>
-		<?php
-		// echo '<pre>';
-		// print_r($formulation_data);
-		// echo '</pre>';
-		?>
 		<?php if(isset($formulation_data['show_price'])){ ?>
 			<h2 class="tw-msfb-total-price">Estimated cost: <span>0</span></h2>
 		<?php } ?>
 		<?php
+		$map = [];
+		$root = 0;
 		foreach($formulation as $key => $a_qtn){
+			if( $root == 0){
+				$root = empty($a_qtn['inputs']['input_1']['connections']) ? $key : 0;
+			}
 			unset($a_qtn['html']);
 			$key = $a_qtn['id'];
 			$name = explode('-',$a_qtn['name']);
@@ -67,10 +67,75 @@ function msfb_ui_callback( $atts ){
 				'redirect' => isset($formulation_data['redirect']) ? $formulation_data['redirect'] : home_url( '/' )
 			];
 			msfb_get_the_step($qtn_data);
-			// echo '<pre>';
-			// print_r($qtn_data);
-			// echo '</pre>';
+			$nodes = [];
+			foreach( $a_qtn['outputs'] as $a_output){
+				if( count($a_output['connections']) ) {
+					foreach($a_output['connections'] as $connection){
+						$nodes[] = $connection['node'];
+					}
+				}
+			}
+			// foreach( $a_qtn['inputs'] as $a_output){
+			// 	if( count($a_output['connections']) ) {
+			// 		foreach($a_output['connections'] as $connection){
+			// 			$nodes[] = $connection['node'];
+			// 		}
+			// 	}
+			// }
+			$map[$key] = array_unique($nodes);
+			$edges = [];
+			foreach($map as $key => $edge){
+				if( count($edge) > 0) {
+					foreach($edge as $a_edge){
+						$edges[] = [$key,$a_edge];
+					}
+				}
+			}
 		}
+		function msfb_chain_diver( $graph, array $start, $require_back_track = [], $path = [], $paths = []){
+			$start = array_shift($start);
+			$vertax = $graph[$start];
+			$vertax_children = count($vertax);
+			$path[] = $start;
+			$tracked_path = [];
+			if( $vertax_children > 0 ) {
+				$current_pointer = $vertax[$vertax_children - 1];
+				if( $vertax_children > 1 ) {
+					array_pop($vertax);
+					if( !in_array($start,$require_back_track) ){
+						$require_back_track[] = $start;
+					}
+					$tracked_path = $path;
+				} else {
+					if( in_array($start,$require_back_track) ){
+						array_shift($require_back_track);
+					}
+				}
+				$graph[$start] = $vertax;
+				return msfb_chain_diver( $graph, [$current_pointer], $require_back_track, $path, $paths );
+			} else {
+				$paths[] = $path;
+				if( $require_back_track ) {
+					return msfb_chain_diver( $graph, $require_back_track, $require_back_track, $tracked_path, $paths );
+				} else {
+					return $paths;
+				}
+			}
+		}
+		$dfs_data = msfb_chain_diver($map,[$root]);
+		$max = 0;
+		foreach($dfs_data as $a_path){
+			if( $max < count($a_path) ) {
+				$max = count($a_path);
+			}
+		}
+		?>
+		<div id="msfb-progressbar-step" data-step="<?php echo $max; ?>"></div>
+		<?php
+		// echo '<pre>';
+		// print_r($max);
+		// print_r($dfs_data);
+		// echo '</pre>';
 		?>
 	</div>
 	<?php

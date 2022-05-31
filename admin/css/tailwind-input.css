@@ -9,7 +9,7 @@
     @apply w-4/5 mx-auto mb-8 h-2 bg-gray-100 relative rounded shadow-lg;
 }
 .tw-msfb-progress-bar__status{
-    @apply w-4/5 h-2 absolute left-0 rounded;
+    @apply h-2 absolute left-0 rounded;
     background-color: var(--msfb-color);
 }
 .tw-msfb-total-price{
