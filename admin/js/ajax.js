@@ -308,6 +308,108 @@ jQuery(document).ready($ => {
     })
     // let field label
     const msfb_field_label = raw_label => raw_label.replace('<i class="fa fa-times-circle"></i> ','')
+    $('#msfb-save-form-settings').on('click', e => {
+        let this_el = this__(e)
+        let request_data = {}
+        let form_id = this_el.attr('data-form-id')
+        request_data = { form_id }
+        let sender_name = $('#msfb_senderName').val()
+        if( !sender_name ) {
+            msfb_error_message("Sender name is required.")
+            return false
+        }
+        request_data = { sender_name, ...request_data}
+        let sender_email = $('#msfb_senderEmail').val()
+        if( !sender_email ) {
+            msfb_error_message("Sender email is required.")
+            return false
+        }
+        request_data = { sender_email, ...request_data}
+        let recipient_email = $('#msfb_recipientEmail').val()
+        if( !recipient_email ) {
+            msfb_error_message("Recipient email is required.")
+            return false
+        }
+        request_data = { recipient_email, ...request_data}
+        let msfb_BCCRecipientEmail = $('#msfb_BCCRecipientEmail').val()
+        if( msfb_BCCRecipientEmail ) {
+            request_data = { msfb_BCCRecipientEmail, ...request_data}
+        }
+        let msfb_replyTo = $('#msfb_replyTo').val()
+        if( msfb_replyTo ) {
+            request_data = { msfb_replyTo, ...request_data}
+        }
+        let msfb_subject = $('#msfb_subject').val()
+        if( !msfb_subject ) {
+            msfb_error_message("Subject is required.")
+            return false
+        }
+        request_data = { msfb_subject, ...request_data}
+        let msfb_mgs = $('#msfb_mgs').val()
+        if( !msfb_mgs ) {
+            msfb_error_message("Message body is required.")
+            return false
+        }
+        request_data = { msfb_mgs, ...request_data}
+        /** smtp data */
+        let smtp_server = $('#msfb_smtpServer').val()
+        if( !smtp_server ) {
+            msfb_error_message("SMTP server is required.")
+            return false
+        }
+        request_data = { smtp_server, ...request_data}
+        let smtp_username = $('#msfb_smtpUsername').val()
+        if( !smtp_username ) {
+            msfb_error_message("SMTP username is required.")
+            return false
+        }
+        request_data = { smtp_username, ...request_data}
+        let msfb_smtpPass = $('#msfb_smtpPass').val()
+        if( !msfb_smtpPass ) {
+            msfb_error_message("SMTP password is required.")
+            return false
+        }
+        request_data = { msfb_smtpPass, ...request_data}
+        let msfb_smtpPort = $('#msfb_smtpPort').val()
+        if( !msfb_smtpPort ) {
+            msfb_error_message("SMTP port is required.")
+            return false
+        }
+        request_data = { msfb_smtpPort, ...request_data}
+        this_el.html(`<i class="fa fa-spinner fa-spin"></i> Save`)
+        console.log(request_data)
+        // return false
+        $.ajax({
+            url: msfb.ajax_url,
+            type: "POST",
+            dataType: "json",
+            data: {
+                action: "msfb_save_forms_settings",
+                dataset: request_data
+            },
+            success: resp => {
+                console.log(resp)
+                this_el.html(`<i class="fas fa-save"></i> Save`)
+                // this_el.attr('data-form-id',resp.form_id)
+                // if( resp.status != undefined && resp.status == "created" ) {
+                //     Swal.fire({
+                //         icon: "success",
+                //         text: "Form has been added."
+                //     })
+                //     window.location.href = resp.redirect
+                // } else if(resp.status != undefined && resp.status == "updated" ){
+                //     Swal.fire({
+                //         icon: "success",
+                //         text: "Form has been updated."
+                //     })
+                // }
+            },
+            error: err => {
+                this_el.html(`<i class="fas fa-save"></i> Save`)
+                console.log(err)
+            }
+        })
+    })
     $('#msfb-save-form').on('click', e => {
         let this_el = this__(e)
         let form_name = $('.msfb-form-builder').attr('data-form-name')

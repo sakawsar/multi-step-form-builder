@@ -1,4 +1,8 @@
 <?php
+add_action('wp_ajax_msfb_save_forms_settings','msfb_save_forms_settings_callback');
+function msfb_save_forms_settings_callback(){
+    
+}
 add_action('wp_ajax_msfb_add_leads','msfb_add_leads_callback');
 function msfb_add_leads_callback(){
     if(isset($_POST['dataset'])){
