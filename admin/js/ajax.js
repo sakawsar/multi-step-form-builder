@@ -390,19 +390,17 @@ jQuery(document).ready($ => {
             success: resp => {
                 console.log(resp)
                 this_el.html(`<i class="fas fa-save"></i> Save`)
-                // this_el.attr('data-form-id',resp.form_id)
-                // if( resp.status != undefined && resp.status == "created" ) {
-                //     Swal.fire({
-                //         icon: "success",
-                //         text: "Form has been added."
-                //     })
-                //     window.location.href = resp.redirect
-                // } else if(resp.status != undefined && resp.status == "updated" ){
-                //     Swal.fire({
-                //         icon: "success",
-                //         text: "Form has been updated."
-                //     })
-                // }
+                if( resp.status != undefined && resp.status == "success" ) {
+                    Swal.fire({
+                        icon: "success",
+                        text: "The form settings has been updated."
+                    })
+                } else if(resp.status != undefined && resp.status == "error" ){
+                    Swal.fire({
+                        icon: "error",
+                        text: resp.message
+                    })
+                }
             },
             error: err => {
                 this_el.html(`<i class="fas fa-save"></i> Save`)

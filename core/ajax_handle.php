@@ -1,7 +1,29 @@
 <?php
 add_action('wp_ajax_msfb_save_forms_settings','msfb_save_forms_settings_callback');
 function msfb_save_forms_settings_callback(){
-    
+    if(isset($_POST['dataset'])){
+        $data = $_POST['dataset'];
+        $form_id = $data['form_id'];
+        global $wpdb;
+        $table_name = $wpdb->prefix.'msfb_forms';
+        $result = $wpdb->get_results("SELECT * FROM $table_name WHERE id='$form_id'",ARRAY_A);
+        if( $wpdb->num_rows > 0 ) {
+            $form_data = json_decode( stripslashes( $result[0]['form_data'] ) , true );
+            $form_data['settings'] = $data;
+            $wpdb->update($table_name,[
+                'form_data' => addslashes( json_encode( $form_data ) )
+            ],['id' => $form_id]);
+            $form_data['status'] = 'success';
+            echo json_encode( $form_data );
+        } else {
+            echo [
+                'status' => 'error',
+                'message' => 'No data found'
+            ];
+        }
+        exit;
+    }
+    exit;
 }
 add_action('wp_ajax_msfb_add_leads','msfb_add_leads_callback');
 function msfb_add_leads_callback(){
