@@ -6,7 +6,7 @@
                     <div class="skfb-nav-logo">
                         <h3><?php echo $this->title; ?></h3>
                     </div>
-                    <?php if($this->add_new_url){ ?>
+                    <?php if($this->add_new_url && $this->cat_type != "lead"){ ?>
                     <div>
                         <a href="<?php echo $this->add_new_url; ?>" class="skfb-btn"><i class="fas fa-plus"></i><span><?php echo $this->add_button; ?></span></a>
                     </div>
