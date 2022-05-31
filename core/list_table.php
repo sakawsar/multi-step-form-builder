@@ -13,7 +13,7 @@ class MSFB_List_Table{
                 $this->title = __('Leads','msfb');
                 // $this->has_category = false;
                 $this->details_url = "";
-                $this->add_new_url = false;
+                $this->add_new_url = admin_url('admin.php?page=multistep_form_builder&lead_id');
                 $this->add_button = false;
                 $this->has_search = true;
                 $this->search_placeholder = __("Search lead","msfb");

@@ -130,6 +130,8 @@ if( $el_type == "leads" ) {
                     <i data-msfb-delete-id="<?php echo $item_data['id']; ?>" data-msfb-item-type="<?php echo $el_type; ?>" class="fa fa-trash"></i>
                     <?php if($el_type != "leads"){ ?>
                         <a href="<?php echo $this->add_new_url.'='.$item_data['id']; ?>"><i class="fa fa-edit"></i></a>
+                    <?php } else { ?>
+                        <a href="<?php echo $this->add_new_url.'='.$item_data['id']; ?>"><i class="fa fa-eye"></i></a>
                     <?php } ?>
                 </td>
             </tr>
