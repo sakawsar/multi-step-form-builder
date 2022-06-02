@@ -37,7 +37,7 @@ if( isset( $_GET['lead_id'] ) && sanitize_text_field( $_GET['lead_id'] )){
           ?>
           <table class="sk-table skfb-leads-details-table">
             <tbody>
-              <?php foreach($lead_raw_data as $a_row){ if( !isset($a_row['form_data']) ) { ?>
+              <?php $total_price = 0; foreach($lead_raw_data as $a_row){ if( !isset($a_row['form_data']) ) { ?>
               <tr>
                 <th><?php echo $a_row['title']; ?></th>
                 <td>
@@ -50,7 +50,9 @@ if( isset( $_GET['lead_id'] ) && sanitize_text_field( $_GET['lead_id'] )){
                   ?>
                 </td>
               </tr>
-              <?php } else { ?>
+              <?php } else { 
+                $total_price = $a_row['total_price'];
+              ?>
                 <tr>
                     <td><h2>Form data</h2></td>
                     <td></td>
@@ -71,6 +73,10 @@ if( isset( $_GET['lead_id'] ) && sanitize_text_field( $_GET['lead_id'] )){
                 <?php } ?>
               <?php
               }} ?>
+                <tr>
+                    <td><h2 style="margin:0px;">Total price</h2></td>
+                    <td><?php echo $total_price; ?></td>
+                </tr>
             </tbody>
           </table>
         </div>

@@ -22,6 +22,7 @@
             visited_nodes.push($('button[data-msfb-redirect]').closest('div[data-msfb-node].msfb-form').attr('data-msfb-node'))
             let lead_data = msfb_get_formulation_data(nodes)
             // let redirect_url = 
+            console.log(lead_data)
             $.ajax({
                 url: msfb.ajax_url,
                 type: "POST",
@@ -499,11 +500,12 @@
                             }
                         }
                     })
-                    if( $('.tw-msfb-total-price span').length > 0 ) {
-                        dataset = { "form_data": {...form_data}, "lead_map": {...lead_map}, "total_price": $('.tw-msfb-total-price span').html() }
-                    } else {
-                        dataset = { "form_data": {...form_data}, "lead_map": {...lead_map} }
-                    }
+                    let form_id = $('button[data-msfb-redirect]').closest('div[data-msfb-node].msfb-form').attr('data-form-id')
+                    dataset = { form_id, "form_data": {...form_data}, "lead_map": {...lead_map}, "total_price": $('.tw-msfb-total-price span').html() }
+                    // if( $('.tw-msfb-total-price span').length > 0 ) {
+                    // } else {
+                    //     dataset = { form_id, "form_data": {...form_data}, "lead_map": {...lead_map} }
+                    // }
                 }
                 data.push(dataset)
             }

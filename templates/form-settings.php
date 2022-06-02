@@ -1,11 +1,15 @@
 <?php
 global $wpdb;
 $table_name = $wpdb->prefix.'msfb_forms';
+$form_settings = [];
 if(isset($_GET['form_id']) && sanitize_text_field( $_GET['form_id'] )){
   $form_id = sanitize_text_field( $_GET['form_id'] );
   $results = $wpdb->get_results("SELECT * FROM $table_name WHERE id='$form_id'",ARRAY_A);
+  $form_data = json_decode( stripslashes( $results[0]['form_data'] ) , true );
+  $form_settings = $form_data['settings'];
   // echo '<pre>';
-  // print_r( json_decode( stripslashes( $results[0]['form_data'] ) , true ) );
+  // // print_r( json_decode( stripslashes( $results[0]['form_data'] ) , true ) );
+  // print_r( $form_settings );
   // echo '</pre>';
 }
 ?>
@@ -36,31 +40,31 @@ if(isset($_GET['form_id']) && sanitize_text_field( $_GET['form_id'] )){
             <div class="sk-col-md-6">
               <div class="skfb__field-box">
                 <label for="senderName" class="skfb__with-icon"><i class="fas fa-user"></i>Sender name</label>
-                <input type="text" placeholder="Albert Einstein" id="msfb_senderName" />
+                <input type="text" value="<?php echo isset($form_settings['sender_name']) ? $form_settings['sender_name'] : null; ?>" placeholder="Albert Einstein" id="msfb_senderName" />
               </div>
               <div class="skfb__field-box">
                 <label for="senderEmail" class="skfb__with-icon"><i class="fas fa-envelope"></i>Sender email</label>
-                <input type="text" placeholder="abc@xyz.com" id="msfb_senderEmail" />
+                <input type="text" value="<?php echo isset($form_settings['sender_email']) ? $form_settings['sender_email'] : null; ?>" placeholder="abc@xyz.com" id="msfb_senderEmail" />
               </div>
               <div class="skfb__field-box">
                 <label for="recipientEmail" class="skfb__with-icon"><i class="fas fa-envelope"></i>Recipient e-mail</label>
-                <input type="text" placeholder="abc@xyz.com" id="msfb_recipientEmail" />
+                <input type="text" value="<?php echo isset($form_settings['recipient_email']) ? $form_settings['recipient_email'] : null; ?>" placeholder="abc@xyz.com" id="msfb_recipientEmail" />
               </div>
               <div class="skfb__field-box">
                 <label for="BCCRecipientEmail" class="skfb__with-icon"><i class="fas fa-envelope"></i>BCC recipient e-mail (comma separated)</label>
-                <input type="text" placeholder="abc@xyz.com" id="msfb_BCCRecipientEmail" />
+                <input type="text" value="<?php echo isset($form_settings['msfb_BCCRecipientEmail']) ? $form_settings['msfb_BCCRecipientEmail'] : null; ?>" placeholder="abc@xyz.com" id="msfb_BCCRecipientEmail" />
               </div>
               <div class="skfb__field-box">
                 <label for="replyTo" class="skfb__with-icon"><i class="fas fa-envelope"></i>Reply-To (reply address) - the following placeholders can be inserted:</label>
-                <input type="text" placeholder="abc@xyz.com" id="msfb_replyTo" />
+                <input type="text" value="<?php echo isset($form_settings['msfb_replyTo']) ? $form_settings['msfb_replyTo'] : null; ?>" placeholder="abc@xyz.com" id="msfb_replyTo" />
               </div>
               <div class="skfb__field-box">
                 <label for="subject" class="skfb__with-icon"><i class="fas fa-stream"></i>Subject - the following placeholders can be inserted:</label>
-                <input type="text" placeholder="Placeholder subject" id="msfb_subject" />
+                <input type="text" value="<?php echo isset($form_settings['msfb_subject']) ? $form_settings['msfb_subject'] : null; ?>" placeholder="Placeholder subject" id="msfb_subject" />
               </div>
               <div class="skfb__field-box">
                 <label for="mgs" class="skfb__with-icon"><i class="fas fa-envelope-open-text"></i>Message - the following placeholders can be inserted:</label>
-                <input type="text" placeholder="Messages" id="msfb_mgs" />
+                <input type="text" value="<?php echo isset($form_settings['msfb_mgs']) ? $form_settings['msfb_mgs'] : null; ?>" placeholder="Messages" id="msfb_mgs" />
               </div>
             </div> <!-- /.col- -->
 
@@ -85,23 +89,23 @@ if(isset($_GET['form_id']) && sanitize_text_field( $_GET['form_id'] )){
                 <div class="skfb__form-title __2">SMTP server</div>
                 <div class="skfb__field-box">
                   <label for="smtpServer" class="skfb__with-icon"><i class="fas fa-server"></i>SMTP server</label>
-                  <input type="text" placeholder="123.123.123.123" id="msfb_smtpServer" />
+                  <input type="text" value="<?php echo isset($form_settings['smtp_server']) ? $form_settings['smtp_server'] : null; ?>" placeholder="123.123.123.123" id="msfb_smtpServer" />
                 </div>
                 <div class="skfb__field-box">
                   <label for="smtpUsername" class="skfb__with-icon"><i class="fas fa-stream"></i>SMTP username</label>
-                  <input type="text" placeholder="abc@xyz.com" id="msfb_smtpUsername" />
+                  <input type="text" value="<?php echo isset($form_settings['smtp_username']) ? $form_settings['smtp_username'] : null; ?>" placeholder="abc@xyz.com" id="msfb_smtpUsername" />
                 </div>
                 <div class="sk-row">
                   <div class="sk-col-md-6">
                     <div class="skfb__field-box">
                       <label for="smtpPass" class="skfb__with-icon"><i class="fas fa-key"></i>SMTP password</label>
-                      <input type="text" placeholder="########" id="msfb_smtpPass" />
+                      <input type="text" value="<?php echo isset($form_settings['msfb_smtpPass']) ? $form_settings['msfb_smtpPass'] : null; ?>" placeholder="########" id="msfb_smtpPass" />
                     </div>
                   </div>
                   <div class="sk-col-md-6">
                     <div class="skfb__field-box">
                       <label for="smtpPort" class="skfb__with-icon"><i class="fas fa-passport"></i>SMTP Port</label>
-                      <input type="text" placeholder="467" id="msfb_smtpPort" />
+                      <input type="text" value="<?php echo isset($form_settings['msfb_smtpPort']) ? $form_settings['msfb_smtpPort'] : null; ?>" placeholder="467" id="msfb_smtpPort" />
                     </div>
                   </div>
                 </div>

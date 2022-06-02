@@ -42,9 +42,11 @@ function msfb_ui_callback( $atts ){
 		<div class="tw-msfb-progress-bar">
 			<div class="tw-msfb-progress-bar__status" style="width:0%;"></div>
         </div>
-		<?php if(isset($formulation_data['show_price'])){ ?>
-			<h2 class="tw-msfb-total-price">Estimated cost: <span>0</span></h2>
-		<?php } ?>
+
+		<?php $price_display = "style='display:none;'"; if(isset($formulation_data['show_price'])){ 
+			$price_display = "style='display:block;'";
+		 } ?>
+		<h2 class="tw-msfb-total-price" <?php echo $price_display; ?>>Estimated cost: <span>0</span></h2>
 		<?php
 		$map = [];
 		$root = 0;
@@ -152,6 +154,7 @@ function msfb_get_the_step( $dataset ) {
 		$data = $results[0];
 		// the element id replaced by node id & element id passed under step data as item_id
 		$data['id'] = $dataset['id'];
+		$data['item_id'] = $dataset['item_id'];
 		$data['step_data'] = $dataset;
 		$data['step'] = $dataset['step'];
 		$data['redirect'] = $dataset['redirect'];

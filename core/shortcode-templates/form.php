@@ -2,7 +2,7 @@
 function msfb_form_step( $data ){
     $form_data = json_decode( stripcslashes( $data['form_data'] ), true );
 ?>
-<div class="msfb-form w-4/5 m-auto flex flex-col mt-4 gap-4 <?php echo $data['step'] != 1 ? 'hidden':''; ?>" data-msfb-node="<?php echo $data['id']; ?>">
+<div data-form-id="<?php echo $data['item_id']; ?>" class="msfb-form w-4/5 m-auto flex flex-col mt-4 gap-4 <?php echo $data['step'] != 1 ? 'hidden':''; ?>" data-msfb-node="<?php echo $data['id']; ?>">
     <?php if($form_data['form_title']){ ?>
         <h1 class="text-center text-4xl"><?php echo $form_data['form_title']; ?></h1>
     <?php } ?>

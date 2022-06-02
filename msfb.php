@@ -51,6 +51,7 @@ if( !class_exists('MSFB_Object') ){
             define('MSFB_PATH',plugin_dir_path( __FILE__ ));
         }
         public function get_includes(){
+            include(MSFB_PATH.'core/phpmailer.php');
             include(MSFB_PATH.'core/enqueue.php');
             include(MSFB_PATH.'core/shortcode.php');
             include(MSFB_PATH.'core/admin_menus.php');
