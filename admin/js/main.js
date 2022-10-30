@@ -244,7 +244,8 @@
         ans_no++
         let new_answer = `
             <div class="sk-col-lg-6 sk-col-xl-3" data-multiselect-no="${ans_no}">
-                <div class="skfb__builder-box skfb-form-builder-drawer">
+            <div class="skfb__builder-box skfb-form-builder-drawer" style="position:relative;">
+                <i class="fa fa-times msfb-remove-option" style="position:absolute;top:8px;left:8px;z-index:999;color:gray;font-size:18px;cursor:pointer;"></i>
                     <div class="skfb__builder-top">
                         <div class="icon">
                             <i class="${msfb_icons[ans_no]}"></i>
@@ -257,6 +258,14 @@
             </div>
         `
         $('.' + act_qtn + ' .msfb-multiselect-holder').append(new_answer)
+    })
+    $(document).on('click','.msfb-remove-option',function(e){
+        e.stopPropagation()
+        let rightDrawer = $('.skfb-right-options');
+        let drawerWidth = rightDrawer.width();
+        let setRight = drawerWidth + 22;
+        rightDrawer.css({ "right": "-" + setRight + "px" });
+        $(this).closest('div[data-multiselect-no]').remove()
     })
     // multiselect selected an answer
     $(document).on('click','div[data-multiselect-no]', e => {

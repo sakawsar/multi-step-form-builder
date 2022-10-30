@@ -14,7 +14,8 @@
                     foreach($question_data['question_data'] as $answer){
                         ?>
                         <div class="sk-col-lg-6 sk-col-xl-3" data-multiselect-no="<?php echo $i; ?>">
-                            <div class="skfb__builder-box skfb-form-builder-drawer">
+                            <div class="skfb__builder-box skfb-form-builder-drawer" style="position:relative;">
+                                <i class="fa fa-times msfb-remove-option" style="position:absolute;top:8px;left:8px;z-index:999;color:gray;font-size:18px;cursor:pointer;"></i>
                                 <div class="skfb__builder-top">
                                     <div class="icon">
                                         <i class="<?php echo $answer['icon_class']; ?>"></i>
@@ -140,7 +141,8 @@
                     foreach($question_data['question_data'] as $answer){
                         ?>
                         <div class="sk-col-lg-6 sk-col-xl-3" data-multiselect-no="<?php echo $i; ?>">
-                            <div class="skfb__builder-box skfb-form-builder-drawer">
+                            <div class="skfb__builder-box skfb-form-builder-drawer" style="position:relative;">
+                                <i class="fa fa-times msfb-remove-option" style="position:absolute;top:8px;left:8px;z-index:999;color:gray;font-size:18px;cursor:pointer;"></i>
                                 <div class="skfb__builder-top">
                                     <div class="icon">
                                         <i class="<?php echo $answer['icon_class']; ?>"></i>
