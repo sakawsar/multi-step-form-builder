@@ -8,6 +8,20 @@ if(id != null){
     if( msfb.raw_data ) {
       editor.import(msfb.raw_data);
     }
+    editor.zoom_max = 1.5
+    editor.zoom_min = 0.5
+    // zoom in
+    document.getElementById('msfb_drawflow_zoom_in').addEventListener('click',function(){
+      editor.zoom_in()
+    })
+    // zoom out
+    document.getElementById('msfb_drawflow_zoom_out').addEventListener('click',function(){
+      editor.zoom_out()
+    })
+    // zoom reset
+    document.getElementById('msfb_drawflow_zoom_reset').addEventListener('click',function(){
+      editor.zoom_reset()
+    })
     // Events!
     editor.on('nodeCreated', function(id) {
       // console.log("Node created " + id);
