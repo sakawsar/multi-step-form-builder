@@ -18,7 +18,11 @@
                                 <i class="fa fa-times msfb-remove-option" style="position:absolute;top:8px;left:8px;z-index:999;color:gray;font-size:18px;cursor:pointer;"></i>
                                 <div class="skfb__builder-top">
                                     <div class="icon">
-                                        <i class="<?php echo $answer['icon_class']; ?>"></i>
+                                        <?php if ( isset($answer['icon_class']) ) { ?>
+                                            <i class="<?php echo $answer['icon_class']; ?>"></i>
+                                        <?php } elseif( isset($answer['img_url']) ) { ?>
+                                            <img style="height:64px;" src="<?php echo $answer['img_url']; ?>"/>
+                                        <?php } ?>
                                     </div>
                                 </div>
                                 <div class="skfb__builder-bottom">
@@ -145,7 +149,11 @@
                                 <i class="fa fa-times msfb-remove-option" style="position:absolute;top:8px;left:8px;z-index:999;color:gray;font-size:18px;cursor:pointer;"></i>
                                 <div class="skfb__builder-top">
                                     <div class="icon">
-                                        <i class="<?php echo $answer['icon_class']; ?>"></i>
+                                    <?php if ( isset($answer['icon_class']) ) { ?>
+                                            <i class="<?php echo $answer['icon_class']; ?>"></i>
+                                        <?php } elseif( isset($answer['img_url']) ) { ?>
+                                            <img style="height:64px;" src="<?php echo $answer['img_url']; ?>"/>
+                                        <?php } ?>
                                     </div>
                                 </div>
                                 <div class="skfb__builder-bottom">

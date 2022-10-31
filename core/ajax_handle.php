@@ -221,3 +221,45 @@ function msfb_bulk_action_callback(){
     }
     exit;
 }
+add_action('wp_ajax_msfb_custom_icon_upload','msfb_custom_icon_upload_callback');
+// add_action('wp_ajax_nopriv_msfb_image_upload','msfb_image_upload');
+function msfb_custom_icon_upload_callback(){
+	if(isset($_FILES['main_image'])){
+		// $return = [];
+		$attach_data = upload_user_file($_FILES['main_image']);
+        $id = $attach_data[1];
+        $url = $attach_data[0];
+		// update_post_meta($id,'_thumbnail_id',$id);
+		// $return[] = $attach_id;
+	    echo json_encode(array('url' => $url, 'id' => $id));
+	}
+	exit();
+}
+
+function upload_user_file( $file = array() ) {    
+    require_once( ABSPATH . 'wp-admin/includes/admin.php' );
+    $file_return = wp_handle_upload( $file, array('test_form' => false ) );
+    if( isset( $file_return['error'] ) || isset( $file_return['upload_error_handler'] ) ) {
+        return $file_return;
+    } else {
+        $filename = $file_return['file'];
+        $attachment = array(
+            'post_mime_type' => $file_return['type'],
+            'post_title' => preg_replace( '/\.[^.]+$/', '', basename( $filename ) ),
+            'post_content' => '',
+            'post_status' => 'inherit',
+            'guid' => $file_return['url']
+        );
+        $attachment_id = wp_insert_attachment( $attachment, $file_return['url'] );
+        update_post_meta( $attachment_id, 'msfb_custom_icon', true);
+        require_once(ABSPATH . 'wp-admin/includes/image.php');
+        $attachment_data = wp_generate_attachment_metadata( $attachment_id, $filename );
+        wp_update_attachment_metadata( $attachment_id, $attachment_data );
+        if( 0 < intval( $attachment_id ) ) {
+          // return $attachment_id;
+		  // test
+          // wp_get_attachment_url( $post_id = 0 )
+          return [wp_get_attachment_url( $attachment_id ), $attachment_id];
+        }
+    }
+}

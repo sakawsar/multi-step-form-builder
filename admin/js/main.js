@@ -317,6 +317,32 @@
         let act_qtn = msfb_active_question()
         let sel_ans = $('.' + act_qtn).attr('data-selected-ans')
         $(`div[data-multiselect-no="${sel_ans}"] .icon i`).attr('class',icon_classes)
+        icon_holder = $(`div[data-multiselect-no="${sel_ans}"] .icon`)
+        if( icon_holder.find('i').length > 0 ) {
+            icon_holder.find('i').show()
+        } else {
+            icon_holder.append('<i class="' + icon_classes + '"></i>')
+        }
+        if( icon_holder.find('img').length > 0 ){
+            icon_holder.find('img').hide()
+        }
+    })
+    // multiselect/ single select image update
+    $('.msfb_custom_icon_image').on('click',e => {
+        let this_el = this__(e)
+        let url = this_el.attr('src')
+        // let icon_classes = this_el.attr('class')
+        let act_qtn = msfb_active_question()
+        let sel_ans = $('.' + act_qtn).attr('data-selected-ans')
+        let img_html = '<img style="height:64px;" src="' + url + '"/>'
+        let icon_holder = $(`div[data-multiselect-no="${sel_ans}"] .icon`)
+        icon_holder.find('i').hide()
+        if( icon_holder.find('img').length > 0 ) {
+            icon_holder.find('img').show()
+            icon_holder.find('img').attr('src',url)
+        } else {
+            $(`div[data-multiselect-no="${sel_ans}"] .icon`).append(img_html)
+        }
     })
     // question name update
     $('.msfb-qtn-name').on('keyup',e => {

@@ -57,9 +57,17 @@ jQuery(document).ready($ => {
             let multiselect_opts = []
             $.each(select_opts,(k,v) => {
                 let opt_data = {
-                    "icon_class": $(v).find('.icon i').attr('class'),
+                    // "icon_class": $(v).find('.icon i').attr('class'),
                     "answer": $(v).find('.skfb__answer').html(),
                     "price": $(v).find('.skfb__answer').attr('data-price')
+                }
+                let icon = $(v).find('.icon i')
+                let img = $(v).find('.icon img')
+                if( icon.length > 0 && icon.css('display') != 'none' ) {
+                    opt_data.icon_class = icon.attr('class')
+                }
+                if( img.length > 0 && img.css('display') != 'none' ) {
+                    opt_data.img_url = img.attr('src')
                 }
                 multiselect_opts.push(opt_data)
             })
@@ -74,9 +82,17 @@ jQuery(document).ready($ => {
             let single_select_opts = []
             $.each(select_opts,(k,v) => {
                 let opt_data = {
-                    "icon_class": $(v).find('.icon i').attr('class'),
+                    // "icon_class": $(v).find('.icon i').attr('class'),
                     "answer": $(v).find('.skfb__answer').html(),
                     "price": $(v).find('.skfb__answer').attr('data-price')
+                }
+                let icon = $(v).find('.icon i')
+                let img = $(v).find('.icon img')
+                if( icon.length > 0 && icon.css('display') != 'none' ) {
+                    opt_data.icon_class = icon.attr('class')
+                }
+                if( img.length > 0 && img.css('display') != 'none' ) {
+                    opt_data.img_url = img.attr('src')
                 }
                 single_select_opts.push(opt_data)
             })
@@ -165,6 +181,41 @@ jQuery(document).ready($ => {
                 this_el.html(`<i class="fas fa-save"></i> Save`)
             }
         })
+    })
+    // upload custom icon
+    $('#msfb-upload-custom-icon').on('click',function(){
+        let this_el = $(this)
+        let formData = new FormData()
+        var files = $('#msfb-custom-icon')[0].files;
+	    if ( files.length > 0 ) {
+	    	formData.append('main_image', files[0]);
+	    	formData.append('action', 'msfb_custom_icon_upload');
+	    } else {
+            Swal.fire({
+                icon: "warning",
+                text: "No file choosen to be uploaded."
+            })
+            return false
+        }
+        this_el.html('<i class="fa fa-spinner fa-spin"></i> Upload')
+        $.ajax({
+	        url: msfb.ajax_url,
+	        type: "POST",
+	        dataType: "json",
+	        data: formData,
+	        contentType: false,
+	        processData: false,
+	        success: function (resp) {
+                console.log(resp)
+                $('#msfb-custom-icon').val('')
+                this_el.html('Upload')
+                $('.skfb__custom_icon_select_field').prepend('<img style="height:50px;width:auto;margin:16px 16px 0px 0px;" src="' + resp.url + '"/>')
+	        },
+	        error:function(err){
+	            console.log(err);
+                this_el.html('Upload')
+	        }
+	    });
     })
     // delete an item
     $('i[data-msfb-delete-id]').on('click',e => {

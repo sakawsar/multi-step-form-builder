@@ -22,6 +22,37 @@ function msfb_mendatory_fields( $id, $question_data ){
                 ?>
             </div>
         </div>
+        <div class="skfb__field-box __2">
+            <label for="msfb-pick-icon">Upload Custom icons</label>
+            
+            <div class=""> 
+                <input id="msfb-custom-icon" type="file" accept="image/*"/>
+                <button id="msfb-upload-custom-icon" type="button" style="border:2px solid white;margin-bottom:16px;" class="skfb-btn">Upload</button>
+            </div>
+            <label for="msfb-pick-icon">Custom icons</label>
+            <div class="skfb__icon_select_field skfb__custom_icon_select_field skfb__overflow_scroll"> 
+                <?php
+                $images = new WP_Query(array(
+                    'post_type' => 'attachment',
+                    'post_status' => 'inherit',
+                    'meta_query' => array(
+                        array(
+                            'key'   => 'msfb_custom_icon',
+                            'value' => true
+                        )
+                    )
+                ));
+                if( $images->have_posts() ) {
+                    while($images->have_posts()){
+                        $images->the_post();
+                        $id = get_the_ID();
+                        $url = wp_get_attachment_url($id);
+                        echo '<img class="msfb_custom_icon_image" style="height:50px;width:auto;margin:16px 16px 0px 0px;" src="'.$url.'"/>';
+                    }
+                }
+                ?>
+            </div>
+        </div>
         <?php
         return false;
     }
