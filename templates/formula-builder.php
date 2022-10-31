@@ -97,7 +97,7 @@
                       }
                     </style>
                   <select class="sk-form-control" id="msfb_list_questions_by_category">
-                    <option>Filter questions/form by category</option>
+                    <option value="">Filter questions/form by category</option>
                     <?php foreach($qt_cats as $a_cat){ ?>
                       <option data-type="<?php echo $a_cat->cat_type; ?>" value="<?php echo $a_cat->id; ?>"><?php echo $a_cat->cat_name; ?></option>
                     <?php } ?>

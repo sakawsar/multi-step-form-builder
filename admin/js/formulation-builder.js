@@ -19,8 +19,10 @@
             let cat_id = $(this).val()
             $.each(elements,function(k,el){
                 $(el).show()
-                if( $(el).attr('data-element-cat-id') != cat_id ) {
-                    $(el).hide()
+                if( cat_id ) {
+                    if( $(el).attr('data-element-cat-id') != cat_id ) {
+                        $(el).hide()
+                    }
                 }
             })
         })
