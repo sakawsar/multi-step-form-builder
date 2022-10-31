@@ -69,7 +69,22 @@ function msfb_add_leads_callback(){
         }
         $data['form_settings'] = $form_settings;
         $data['form_fields'] = $field_with_bracket;
-        $email = wp_mail( $form_settings['recipient_email'], $form_settings['msfb_subject'], $form_settings['msfb_mgs'] );
+        $headers = [];
+        if( isset($form_settings['sender_name']) && isset($form_settings['sender_email'])) {
+            $headers[] = 'From: '.$form_settings['sender_name'].' <'.$form_settings['sender_email'].'>';
+        }
+        if( isset($form_settings['msfb_BCCRecipientEmail']) ) {
+            $headers[] = 'Bcc: '.$form_settings['msfb_BCCRecipientEmail'];
+        }
+        if( isset($form_settings['msfb_replyTo']) ) {
+            $headers[] = 'reply-to: '.$form_settings['msfb_replyTo'];
+        }
+        $email = wp_mail( 
+                    $form_settings['recipient_email'],
+                    $form_settings['msfb_subject'],
+                    $form_settings['msfb_mgs'],
+                    $headers
+                );
         $data['email_sent'] = $email;
         $wpdb->insert($table_name,$data);
         echo json_encode($data);
