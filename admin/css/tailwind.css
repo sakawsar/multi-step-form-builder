@@ -712,7 +712,7 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .tw-msfb-multiselect-qtn__item.selected {
   display: flex;
-  width: 50%;
+  width: 100%;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -725,6 +725,15 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+@media (min-width: 640px) {
+  .tw-msfb-multiselect-qtn__item.selected {
+    width: 50%;
+  }
+}
+
+.tw-msfb-multiselect-qtn__item.selected{
   height: 240px;
   border-color: var(--msfb-color);
 }
