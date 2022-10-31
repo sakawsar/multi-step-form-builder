@@ -161,7 +161,7 @@ jQuery(document).ready($ => {
                 dataset: fields_data
             },
             success:resp => {
-                console.log(resp)
+                //console.log(resp)
                 this_el.html(`<i class="fas fa-save"></i> Save`)
                 this_el.attr('data-qtn-id',resp.question_id)
                 if( resp.status != undefined && resp.status == "created" ) {
@@ -177,7 +177,7 @@ jQuery(document).ready($ => {
                 }
             },
             error:err => {
-                console.log(err)
+                //console.log(err)
                 this_el.html(`<i class="fas fa-save"></i> Save`)
             }
         })
@@ -206,13 +206,13 @@ jQuery(document).ready($ => {
 	        contentType: false,
 	        processData: false,
 	        success: function (resp) {
-                console.log(resp)
+                //console.log(resp)
                 $('#msfb-custom-icon').val('')
                 this_el.html('Upload')
                 $('.skfb__custom_icon_select_field').prepend('<img style="height:50px;width:auto;margin:16px 16px 0px 0px;" src="' + resp.url + '"/>')
 	        },
 	        error:function(err){
-	            console.log(err);
+	            //console.log(err);
                 this_el.html('Upload')
 	        }
 	    });
@@ -241,13 +241,13 @@ jQuery(document).ready($ => {
                         dataset: [item_id, item_type]
                     },
                     success: resp => {
-                        console.log(resp)
+                        //console.log(resp)
                         if( resp.status ) {
                             window.location.reload()
                         }
                     },
                     error: err => {
-                        console.log(err)
+                        //console.log(err)
                     }
                 })
             }
@@ -268,13 +268,13 @@ jQuery(document).ready($ => {
                 dataset: [cat_id, item_id, item_type]
             },
             success: resp => {
-                console.log(resp)
+                //console.log(resp)
                 if( resp.status ) {
                     window.location.reload()
                 }
             },
             error: err => {
-                console.log(err)
+                //console.log(err)
             }
         })
     })
@@ -283,7 +283,7 @@ jQuery(document).ready($ => {
         e.preventDefault()
         let this_el = this__(e)
         let cat_type = this_el.attr('data-msfb-cat-type')
-        console.log('working')
+        //console.log('working')
         const { value: cat_name } = await Swal.fire({
             title: 'Add a category',
             text: "Category name",
@@ -292,7 +292,7 @@ jQuery(document).ready($ => {
             inputPlaceholder: 'Category name'
         })
         if (cat_name) {
-            console.log(cat_name)
+            //console.log(cat_name)
             this_el.find('i').attr('class','fa fa-spinner fa-spin')
             $.ajax({
                 url: msfb.ajax_url,
@@ -312,7 +312,7 @@ jQuery(document).ready($ => {
                     window.location.reload()
                 },
                 error: err => {
-                    console.log(err)
+                    //console.log(err)
                     this_el.find('i').attr('class','fa fa-plus')
                 }
             })
@@ -329,7 +329,7 @@ jQuery(document).ready($ => {
             checked_item_ids.push($(v).attr('data-msfb-item-id'))
         })
         if( checked_item_ids.length > 0 && $('#msfb-bulk-action').val() != "" ) {
-            console.log(checked_item_ids)
+            //console.log(checked_item_ids)
             this_el.find('i').attr('class','fa fa-spinner fa-spin')
             $.ajax({
                 url: msfb.ajax_url,
@@ -344,14 +344,14 @@ jQuery(document).ready($ => {
                     }
                 },
                 success: resp => {
-                    console.log(resp)
+                    //console.log(resp)
                     this_el.find('i').attr('class','fas fa-check')
                     if( resp.status ){
                         window.location.reload()
                     }
                 },
                 error: err => {
-                    console.log(err)
+                    //console.log(err)
                     this_el.find('i').attr('class','fas fa-check')
                 }
             })
@@ -428,7 +428,7 @@ jQuery(document).ready($ => {
         // }
         // request_data = { msfb_smtpPort, ...request_data}
         this_el.html(`<i class="fa fa-spinner fa-spin"></i> Save`)
-        console.log(request_data)
+        //console.log(request_data)
         // return false
         $.ajax({
             url: msfb.ajax_url,
@@ -439,7 +439,7 @@ jQuery(document).ready($ => {
                 dataset: request_data
             },
             success: resp => {
-                console.log(resp)
+                //console.log(resp)
                 this_el.html(`<i class="fas fa-save"></i> Save`)
                 if( resp.status != undefined && resp.status == "success" ) {
                     Swal.fire({
@@ -455,7 +455,7 @@ jQuery(document).ready($ => {
             },
             error: err => {
                 this_el.html(`<i class="fas fa-save"></i> Save`)
-                console.log(err)
+                //console.log(err)
             }
         })
     })
@@ -480,7 +480,7 @@ jQuery(document).ready($ => {
             msfb_error_message("Add at least one field.")
             return false
         }
-        // console.log(form_fields.map())
+        // //console.log(form_fields.map())
         let form_data = []
         let field_data = []
         form_data['form_name'] = form_name
@@ -530,7 +530,7 @@ jQuery(document).ready($ => {
             a_field_data = { ...a_field_data }
             field_data[k] = a_field_data
         })
-        console.log(field_data)
+        //console.log(field_data)
         form_data['form_data'] = JSON.stringify({ 
             'form_title': form_title,
             'form_desc': form_desc,
@@ -539,7 +539,7 @@ jQuery(document).ready($ => {
         if( this_el.attr('data-form-id') ) {
             form_data['form_id'] = this_el.attr('data-form-id')
         }
-        console.log(form_data)
+        //console.log(form_data)
         this_el.html(`<i class="fa fa-spinner fa-spin"></i> Save`)
         $.ajax({
             url: msfb.ajax_url,
@@ -550,7 +550,7 @@ jQuery(document).ready($ => {
                 dataset: { ...form_data }
             },
             success: resp => {
-                console.log(resp)
+                //console.log(resp)
                 this_el.html(`<i class="fas fa-save"></i> Save`)
                 this_el.attr('data-form-id',resp.form_id)
                 if( resp.status != undefined && resp.status == "created" ) {
@@ -568,7 +568,7 @@ jQuery(document).ready($ => {
             },
             error: err => {
                 this_el.html(`<i class="fas fa-save"></i> Save`)
-                console.log(err)
+                //console.log(err)
             }
         })
     })

@@ -12,7 +12,7 @@
                         if( $(v).closest('div[data-msfb-node]').find('button[data-msfb-redirect]').length == 0 ){
                         // if( !$(v).closest('div[data-msfb-node').hasClass('msfb-form') ){
                             nodes.push(node_id)
-                            console.log(node_id)
+                            //console.log(node_id)
                         }
                     }
                     visited_nodes.push(node_id)
@@ -22,7 +22,7 @@
             visited_nodes.push($('button[data-msfb-redirect]').closest('div[data-msfb-node].msfb-form').attr('data-msfb-node'))
             let lead_data = msfb_get_formulation_data(nodes)
             // let redirect_url = 
-            console.log(lead_data)
+            //console.log(lead_data)
             $.ajax({
                 url: msfb.ajax_url,
                 type: "POST",
@@ -35,7 +35,7 @@
                     }
                 },
                 success: resp => {
-                    console.log(resp)
+                    // //console.log(resp)
                     if( resp.formulation_id ) {
                         Swal.fire({
                             icon: "success",
@@ -47,8 +47,8 @@
                 },
                 error: err => console.log(err)
             })
-            console.log(nodes)
-            console.log('visited nodes',visited_nodes)
+            //console.log(nodes)
+            //console.log('visited nodes',visited_nodes)
         }
         $('.msfb-select .tw-msfb-qtn-field div').on('click', e => {
             let this_el = $(e.currentTarget)
@@ -70,13 +70,13 @@
             this_el.closest('div[data-msfb-node]').find('button[data-msfb-next]').attr('data-msfb-next',this_el.attr('data-next-node'))
             if ( this_el.attr('data-price') && total != null ) {
                 total += parseFloat(this_el.attr('data-price'))
-                console.log(this_el.attr('data-price'))
+                //console.log(this_el.attr('data-price'))
                 $('.tw-msfb-total-price span').html(total)
                 $('.tw-msfb-total-price span').counterUp();
             }
         })
         $('.msfb-multiselect .tw-msfb-qtn-field div').on('click', e => {
-            // console.log(e)
+            // //console.log(e)
             let this_el = $(e.currentTarget)
             let total
             if( $('.tw-msfb-total-price span').length > 0 ) {
@@ -130,7 +130,7 @@
                 node_id = this_el.attr('data-msfb-prev')
                 is_prev = true
             }
-            // console.log(node_id)
+            // //console.log(node_id)
             if ( node_id || is_prev || is_skipped ) {
                 this_el.closest('div[data-msfb-node]').fadeOut('fast',() => {
                     this_el.closest('div[data-msfb-node]').addClass('hidden')
@@ -242,7 +242,7 @@
         // upload
         $('.tw-msfb-upload-field input').on('change', e => {
             let this_el = $(e.currentTarget)
-            // console.log(this_el)
+            // //console.log(this_el)
             let files = this_el[0].files
             if( files.length > 0 ) {
                 this_el.closest('.tw-msfb-upload-field')
@@ -251,7 +251,7 @@
                 this_el.closest('.tw-msfb-upload-field').find('i').removeClass('fa-upload')
                 this_el.closest('.tw-msfb-upload-field').find('i').addClass('fa-file')
             }
-            // console.log(this_el[0].files[0])
+            // //console.log(this_el[0].files[0])
         })
         // $('button[data-msfb-next]').on('click', e => {
         //     let this_el = $(e.currentTarget)
@@ -324,14 +324,14 @@
                         }
                     }
                 })
-                // console.log('This is form step')
+                // //console.log('This is form step')
             }
             return validator
         }
         // get the formulation data
         const msfb_get_formulation_data = node_ids => {
             let data = []
-            // console.log(node_ids)
+            // //console.log(node_ids)
             for (let i = 0; i < node_ids.length; i++) {
                 let dataset
                 let title
@@ -374,14 +374,14 @@
                 } else {
                     let field_is_required_msg = msfb.translate.field_is_required
                     let form_fiels = this_el.find('.msfb-form-field')
-                    // console.log(form_fiels)
+                    // //console.log(form_fiels)
                     // $.each(form_fiels,(k,v) => {
                     // for( j = 0; j < form_fiels.length; j++ ){
                     let form_data = []
                     let lead_map = []
                     $.each(form_fiels,(k,v) => {
                         // v = form_fiels[j]
-                        // console.log(v)
+                        // //console.log(v)
                         let is_required = $(v).attr('data-msfb-required')
                         let is_lead_col = $(v).attr('data-msfb-is-lead-col')
                         if( is_lead_col ) {
@@ -410,13 +410,13 @@
                             }
                         } 
                         if( $(v).hasClass('msfb-form-radio') ) {
-                            // console.log($(v))
+                            // //console.log($(v))
                             let value = []
                             $.each( $(v).find('input:checked'), (kke,vva) => {
                                 value.push($(vva).val())
                             })
                             // if( $(v).find(`input:checked`).length > 0 ) {
-                            // console.log(value)
+                            // //console.log(value)
                             if( value.length == 0 && is_required) {
                                 validator = `${$(v).find('label.text-lg').html()} ${field_is_required_msg}`
                                 Swal.fire({
@@ -511,7 +511,7 @@
                 }
                 data.push(dataset)
             }
-            console.log(data)
+            //console.log(data)
             return data
         }
     })
