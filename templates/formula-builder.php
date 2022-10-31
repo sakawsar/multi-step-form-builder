@@ -163,7 +163,7 @@
               <?php } ?>
             </div>
           </div> <!-- /.col- -->
-          <div class="sk-col-md-9 sk-col-lg-10" id="msfb_drawflow" style="min-height:600px;background:#f9f9f9;box-shadow:0px 0px 10px 4px #f9f9f9;" ondrop="drop(event)" ondragover="allowDrop(event)">
+          <div class="sk-col-md-9 sk-col-lg-10" id="msfb_drawflow" ondrop="drop(event)" ondragover="allowDrop(event)">
             <!-- <div class="btn-lock">
               <i id="lock" class="fas fa-lock" onclick="editor.editor_mode='fixed'; changeMode('lock');"></i>
               <i id="unlock" class="fas fa-lock-open" onclick="editor.editor_mode='edit'; changeMode('unlock');" style="display:none;"></i>
