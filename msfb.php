@@ -23,6 +23,7 @@ if( !class_exists('MSFB_Object') ){
             $this->get_consts();
             $this->get_includes();
             add_action('admin_menu',array($this,'msfb_admin_menu'));
+            // add_action( 'plugins_loaded', array($this,'msfb_load_plugin_textdomain', 12 ));
             register_activation_hook(__FILE__, array($this,'msfb_activate'));
         }
         function msfb_activate(){
@@ -67,6 +68,11 @@ if( !class_exists('MSFB_Object') ){
             include(MSFB_PATH.'core/database.php');
             include(MSFB_PATH.'core/ajax_handle.php');
             include(MSFB_PATH.'core/list_table.php');
+        }
+        function msfb_load_plugin_textdomain() {
+            $locale = apply_filters( 'plugin_locale', get_locale(), 'msfb' );
+            load_textdomain( 'msfb', WP_LANG_DIR . "/msfb-$locale.mo" );
+            load_plugin_textdomain( 'msfb', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
         }
     }
     MSFB_Object::get_instance();
