@@ -34,6 +34,7 @@
                 <a href="<?php echo admin_url( 'admin.php?page=formula_builder&formulation_id' ); ?>" class="skfb-btn"><i class="fas fa-plus"></i> Add new</a>
                 <?php if(isset($_GET['formulation_id']) && sanitize_text_field( $_GET['formulation_id'] ) != "" ) { ?>
                   <a id="msfb-formulation-settings" href="<?php echo admin_url( 'admin.php?page=formula_builder&formulation_id='.sanitize_text_field( $_GET['formulation_id'] ).'&settings' ); ?>" class="skfb-btn"><i class="fas fa-cog"></i> Settings</a>
+                  <button class="skfb-btn" id="msfb-preview-formula-btn" type="button"><i class="fa fa-eye"></i> Preview</button>
                 <?php } ?>
               </div>
             </div>
@@ -174,7 +175,16 @@
               <i class="fas fa-search-plus" title="Zoom In" id="msfb_drawflow_zoom_in"></i>
             </div>
           </div> <!-- /.col- -->
+          <?php if( $formula_id ) { ?>
+          <div class="sk-col-md-9 sk-col-lg-9" id="msfb-preview-formula" style="display:none;">
+            <?php echo do_shortcode("[msfb_multistep_form disabled='yes' id='".$formula_id."']"); ?>
+          </div>
+          <?php } ?>
         </div> <!-- /.row -->
+        <!-- <div class="sk-row">
+          <div class="sk-col-md-3 sk-col-lg-3"></div>
+          
+        </div> -->
       </div>
     </div>
   </div>

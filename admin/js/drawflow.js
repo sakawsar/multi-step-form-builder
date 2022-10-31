@@ -401,12 +401,36 @@ if(id != null){
       let label_data = label.split('-')
       return label_data[1]
     }
+    jQuery('#msfb-preview-formula-btn').on('click',function(){
+      let this_el = jQuery(this)
+      let prev_html = this_el.html()
+      if( !this_el.attr('data-previewing') ) {
+        this_el.html('<i class="fa fa-times"></i> Close preview')
+        this_el.attr('data-previewing',true)
+        jQuery('#msfb_drawflow').hide(function(){
+          jQuery('#msfb-preview-formula').fadeIn()
+        })
+      } else {
+        this_el.removeAttr('data-previewing')
+        this_el.html('<i class="fa fa-eye"></i> Preview')
+        jQuery('#msfb-preview-formula').hide(function(){
+          jQuery('#msfb_drawflow').fadeIn()
+        })
+      }
+    })
     jQuery('#msfb-formulation-builder').on('click',async (e) => {
 
         let this_el = jQuery(e.currentTarget)
         console.log(editor.export());
         let data = editor.export()
         let node_data = data.drawflow.Home.data
+        if( Object.keys(node_data).length == 0 ) {
+          Swal.fire({
+            icon: "warning",
+            text: "No Formula found."
+          })
+          return false
+        }
         let formulation_data = []
         // console.log(node_data)
         // return false
@@ -516,6 +540,8 @@ if(id != null){
                     Swal.fire({
                         icon: "success",
                         text: "Formula has been updated."
+                    }).then( ok => {
+                      window.location.reload()
                     })
                 }
             },

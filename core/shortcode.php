@@ -11,7 +11,8 @@ include(MSFB_PATH.'core/shortcode-templates/form.php');
 add_shortcode('msfb_multistep_form','msfb_ui_callback');
 function msfb_ui_callback( $atts ){
 	$atts = shortcode_atts( array(
-		'id' => ''
+		'id' => '',
+		'disabled' => 'no'
 	), $atts );
 	if( !$atts['id'] ){
 		return __('Formulation id is required','msfb');
@@ -19,6 +20,7 @@ function msfb_ui_callback( $atts ){
 	ob_start();
 	global $wpdb;
 	$formulation_id = $atts['id'];
+	$is_disabled = $atts['disabled'] == "yes" ? true : false;
 	$table_name = $wpdb->prefix.'msfb_formulations';
 	$results = $wpdb->get_results("SELECT * FROM $table_name WHERE id='$formulation_id'");
 	$json_data = $results[0]->raw_data;
@@ -66,7 +68,8 @@ function msfb_ui_callback( $atts ){
 				'inputs' => $a_qtn['inputs'],
 				'outputs' => $a_qtn['outputs'],
 				'step' => empty($a_qtn['inputs']['input_1']['connections']) ? 1 : 0,
-				'redirect' => isset($formulation_data['redirect']) ? $formulation_data['redirect'] : home_url( '/' )
+				'redirect' => isset($formulation_data['redirect']) ? $formulation_data['redirect'] : home_url( '/' ),
+				'is_disabled' => $is_disabled
 			];
 			msfb_get_the_step($qtn_data);
 			$nodes = [];
@@ -158,6 +161,7 @@ function msfb_get_the_step( $dataset ) {
 		$data['step_data'] = $dataset;
 		$data['step'] = $dataset['step'];
 		$data['redirect'] = $dataset['redirect'];
+		$data['is_disabled'] = $dataset['is_disabled'];
 		$data_type = $dataset['type'];
 		if( $data_type == "question" ) {
 			$qtn_type = $data['question_type'];
@@ -215,7 +219,7 @@ function msfb_step_navigation( $data ) {
 					<button class="msfb-skip-step" data-msfb-next="<?php echo $next_node; ?>">Skip</button>
 				<?php } ?>
 			<?php } else { ?>
-				<button data-msfb-redirect="<?php echo $data['redirect']; ?>">Finish</button>
+				<button <?php echo $data['is_disabled'] ? 'disabled' : ''; ?> data-msfb-redirect="<?php echo $data['redirect']; ?>">Finish</button>
 			<?php }?>
 		</div>
 	</div> <!-- end of the wrapper -->
