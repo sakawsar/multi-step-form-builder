@@ -80,12 +80,17 @@
               $cat_table = $wpdb->prefix.'msfb_category';
               $qt_cats = $wpdb->get_results("SELECT * FROM  $cat_table WHERE cat_type in ('question','from')");
               ?>
-              <h6 class="sk-head skfb-bb-primary sk-text-primary">Filter questions/forms</h6>
+              <h6 class="sk-head skfb-bb-primary sk-text-primary">Filter <span style="padding:2px 4px;background:#4992ff;color:white;">questions</span>/<span style="padding:2px 4px;background:yellow;color:black;">forms</span></h6>
               <div style="margin-top:8px;" class="skfb-search-box __2">
                     <style>
                       #msfb_list_questions_by_category option[data-type="question"]{
                         border-top:4px solid white;
                         background:#4992ff;
+                      }
+                      #msfb_list_questions_by_category option[data-type="from"]{
+                        border-top:4px solid white;
+                        background:yellow;
+                        color:black;
                       }
                       #msfb_list_questions_by_category option:hover{
                         background:gray!important;
