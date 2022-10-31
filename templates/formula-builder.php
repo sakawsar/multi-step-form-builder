@@ -47,7 +47,7 @@
         <div class="sk-row">
           <div class="sk-col-md-3 sk-col-lg-2 skfb__overflow_scroll">
             <div class="skfb-feilds-panel">
-              <h6 class="sk-head skfb-bb-primary sk-text-primary">Click to select field</h6>
+              <h6 class="sk-head skfb-bb-primary sk-text-primary">Search questions</h6>
               <!-- <div class="skfb__field-box __3">
                 <select class="sk-form-control sk-custom-select skfb__custom-select">
                   <option value="">Element type</option>
@@ -77,6 +77,32 @@
               </div>
               <?php
               global $wpdb;
+              $cat_table = $wpdb->prefix.'msfb_category';
+              $qt_cats = $wpdb->get_results("SELECT * FROM  $cat_table WHERE cat_type in ('question','from')");
+              ?>
+              <h6 class="sk-head skfb-bb-primary sk-text-primary">Filter questions/forms</h6>
+              <div style="margin-top:8px;" class="skfb-search-box __2">
+                    <style>
+                      #msfb_list_questions_by_category option[data-type="question"]{
+                        border-top:4px solid white;
+                        background:#4992ff;
+                      }
+                      #msfb_list_questions_by_category option:hover{
+                        background:gray!important;
+                      }
+                    </style>
+                  <select class="sk-form-control" id="msfb_list_questions_by_category">
+                    <option>Filter questions/form by category</option>
+                    <?php foreach($qt_cats as $a_cat){ ?>
+                      <option data-type="<?php echo $a_cat->cat_type; ?>" value="<?php echo $a_cat->id; ?>"><?php echo $a_cat->cat_name; ?></option>
+                    <?php } ?>
+                  </select>
+                <!-- <form action="#">
+                  <input type="search" class="sk-form-control" id="msfb-search-formula-element" placeholder="Search Elements by Name">
+                  <button class="skfb-search-btn"><i class="fas fa-search"></i></button>
+                </form> -->
+              </div>
+              <?php
               $form_table = $wpdb->prefix.'msfb_forms';
               $question_table = $wpdb->prefix.'msfb_questions';
               $all_questions = $wpdb->get_results("SELECT * FROM $question_table",ARRAY_A);
@@ -91,7 +117,7 @@
               }, $all_forms);
               ?>
               <?php foreach($all_questions as $a_question) { ?>
-              <div data-element-type="question" data-question-type="<?php echo $a_question['question_type']; ?>" data-element-name="<?php echo $a_question['question_name']; ?>" class="skfb-card skfb-feild-draggable" draggable="true" ondragstart="<?php echo 'drag'; ?>(event)" data-node="question-<?php echo $a_question['id']; ?>">
+              <div data-element-type="question" data-element-cat-id="<?php echo $a_question['cat_id']; ?>" data-question-type="<?php echo $a_question['question_type']; ?>" data-element-name="<?php echo $a_question['question_name']; ?>" class="skfb-card skfb-feild-draggable" draggable="true" ondragstart="<?php echo 'drag'; ?>(event)" data-node="question-<?php echo $a_question['id']; ?>">
                 <div class="sk-row sk-align-items-center">
                   <div class="sk-col-12">
                     <div class="skfb-prev-input">
@@ -151,7 +177,7 @@
               </div>
               <?php } ?>
               <?php foreach($all_forms as $a_form) { ?>
-                <div data-element-type="form" data-element-name="<?php echo $a_form['form_name']; ?>" class="skfb-card skfb-feild-draggable" draggable="true" ondragstart="<?php echo 'drag'; ?>(event)" data-node="form-<?php echo $a_form['id']; ?>">
+                <div data-element-type="form" data-element-cat-id="<?php echo $a_form['cat_id']; ?>" data-element-name="<?php echo $a_form['form_name']; ?>" class="skfb-card skfb-feild-draggable" draggable="true" ondragstart="<?php echo 'drag'; ?>(event)" data-node="form-<?php echo $a_form['id']; ?>">
                   <div class="sk-row sk-align-items-center">
                     <div class="sk-col-12">
                       <div class="skfb-prev-input" style="color:gray;text-align:center;">
