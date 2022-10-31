@@ -21,7 +21,11 @@ function msfb_multiselect_step( $data ){
             }
         ?>
         <div class="tw-msfb-multiselect-qtn__item" data-price="<?php echo isset($option['price']) ? $option['price'] : ""; ?>" data-next-node="<?php echo $node; ?>">
-            <i class="<?php echo $option['icon_class']; ?>"></i>
+            <?php if ( isset($option['icon_class']) ) { ?>
+                <i class="<?php echo $option['icon_class']; ?>"></i>
+            <?php } elseif( isset($option['img_url']) ) { ?>
+                <img style="height:6rem;" src="<?php echo $option['img_url']; ?>"/>
+            <?php } ?>
             <p><?php echo $option['answer']; ?></p>
         </div>
         <?php $i++; } ?>
