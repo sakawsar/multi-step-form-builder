@@ -29,6 +29,13 @@ if( !class_exists('MSFB_Object') ){
             msfb_create_the_database();
             flush_rewrite_rules();
         }
+        function msfb_enqueue_question_style(){
+            wp_enqueue_style( 'msfb_admin_question_style' );
+        }
+        function msfb_enqueue_formula_style(){
+            wp_enqueue_style( 'msfb_admin_tailwind' );
+            wp_enqueue_style( 'msfb_admin_fontawesome' );
+        }
         public function msfb_admin_menu(){
             add_menu_page( __('Multistep form builder','msfb'), __('Multistep form builder','msfb'), 'manage_options', 'multistep_form_builder', 'msfb_menu_callback' );
             // All leads
@@ -36,9 +43,11 @@ if( !class_exists('MSFB_Object') ){
             // Contact forms
             add_submenu_page( 'multistep_form_builder', __('Contact forms','msfb'), __('Contact forms','msfb'), 'manage_options', 'contact_form_builder', 'contact_form_builder_callback' );
             // Questions
-            add_submenu_page( 'multistep_form_builder', __('Questions','msfb'), __('Questions','msfb'), 'manage_options', 'questions_builder', 'questions_builder_callback' );
+            $question_builder_hook = add_submenu_page( 'multistep_form_builder', __('Questions','msfb'), __('Questions','msfb'), 'manage_options', 'questions_builder', 'questions_builder_callback' );
+            add_action('admin_print_styles-'.$question_builder_hook,[$this,'msfb_enqueue_question_style']);
             // Formula
-            add_submenu_page( 'multistep_form_builder', __('Formula','msfb'), __('Formula','msfb'), 'manage_options', 'formula_builder', 'formula_builder_callback' );
+            $formula_builder_hook = add_submenu_page( 'multistep_form_builder', __('Formula','msfb'), __('Formula','msfb'), 'manage_options', 'formula_builder', 'formula_builder_callback' );
+            add_action('admin_print_styles-'.$formula_builder_hook,[$this,'msfb_enqueue_formula_style']);
             // Settings
             add_submenu_page( 'multistep_form_builder', __('Settings','msfb'), __('Settings','msfb'), 'manage_options', 'msfb_settings', 'msfb_settings_callback' );
             // Help center

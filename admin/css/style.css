@@ -762,16 +762,3 @@ ul.skfb-table-pagination {
 .select2-container--default .select2-selection--single .select2-selection__arrow b {
     border: none;
 }
-div[data-question-type]:hover{
-    border:1px solid #4992ff;
-}
-div[data-drawer-type]{
-    display:none;
-}
-#msfb-table-item-holder td[colspan]{
-    text-align: center;
-}
-#msfb-show-price:checked,
-#msfb-show-price{
-    width:auto;
-}

@@ -33,6 +33,10 @@ function msfb_admin_enqueue_scripts(){
 	wp_enqueue_script( 'msfb_admin_jquery_step', MSFB_URL.'admin/js/jquery.steps.min.js' );
 	wp_enqueue_script( 'msfb_admin_jquery_ui_touch_punch', MSFB_URL.'admin/js/jquery.ui.touch-punch.min.js' );
 	wp_enqueue_script( 'msfb_admin_localize', MSFB_URL.'admin/js/localize.js' );
+	// added those from the frontend
+	wp_enqueue_script( 'msfb_waypoints_offline', MSFB_URL.'admin/js/waypoints.js' );
+	wp_enqueue_script( 'msfb_countup', MSFB_URL.'admin/js/countup.min.js' );
+	wp_enqueue_script( 'msfb_multiselect-nav', MSFB_URL.'admin/js/multistep-nav.js' );
 	global $wpdb;
 	$form_table = $wpdb->prefix.'msfb_forms';
 	$question_table = $wpdb->prefix.'msfb_questions';
@@ -88,6 +92,8 @@ function msfb_admin_enqueue_scripts(){
 	wp_register_style( 'msfb_admin_jquery_steps', MSFB_URL.'admin/css/jquery.steps.css' );
 	wp_register_style( 'msfb_admin_select2', MSFB_URL.'admin/css/select2.min.css' );
 	wp_register_style( 'msfb_admin_style', MSFB_URL.'admin/css/style.css' );
+	// addes this style from the frontend
+	wp_register_style( 'msfb_admin_question_style', MSFB_URL.'admin/css/question-style.css' );
 	wp_register_style( 'msfb_admin_drawflow_style', MSFB_URL.'admin/css/drawflow.css' );
 	// wp_register_style( 'msfb_admin_drawflow_style', 'https://cdn.jsdelivr.net/gh/jerosoler/Drawflow@0.0.48/dist/drawflow.min.css' );
 	wp_register_style( 'msfb_admin_drawflow_beautiful', MSFB_URL.'admin/css/drawflow-beautiful.css' );
