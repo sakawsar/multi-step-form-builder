@@ -1,5 +1,6 @@
 (function ($) {
     $(document).ready(() => {
+        let field_is_required_msg = msfb.translate.field_is_required
         $('.tw-msfb-total-price span').counterUp();
         const msfb_visited_path = () => {
             let nodes = [$('.tw-msfb-btn-container[data-msfb-root]').attr('data-msfb-root')]
@@ -39,9 +40,9 @@
                     if( resp.formulation_id ) {
                         Swal.fire({
                             icon: "success",
-                            text: "Form data successfully submitted."
+                            text: msfb.translate.form_data_successfully_submitted
                         }).then( data => {
-                            // window.location.href = $('button[data-msfb-redirect]').attr('data-msfb-redirect')
+                            window.location.href = $('button[data-msfb-redirect]').attr('data-msfb-redirect')
                         })
                     }
                 },
@@ -170,12 +171,12 @@
             } else if ( node_id == null ) {
                 Swal.fire({
                     icon: 'warning',
-                    text: 'This option did not point to any other question.'
+                    text: msfb.translate.this_option_did_not_point_to_any_other_question
                 })
             } else {
                 Swal.fire({
                     icon: 'warning',
-                    text: 'Select an option first'
+                    text: msfb.translate.select_an_option_first
                 })
             }
         })
@@ -206,7 +207,7 @@
                 if( !is_form_field ) {
                     Swal.fire({
                         icon: 'warning',
-                        text: 'This option did not point to any other field'
+                        text: msfb.translate.this_option_did_not_point_to_any_other_question
                     })
                     return false
                 }
@@ -302,22 +303,22 @@
                     if( $(v).attr('data-msfb-required') == "1" ) {
                         if( $(v).hasClass('msfb-form-checkbox') ) {
                             if( $(v).find(`input:checked`).length === 0 ) {
-                                validator = `${$(v).find('label.text-lg').html()} is required.`
+                                validator = `${$(v).find('label.text-lg').html()} ${field_is_required_msg}`
                                 return false
                             }
                         } else if ( ( $(v).hasClass('msfb-form-text') && !$(v).hasClass('msfb-form-dropdown')) || $(v).hasClass('msfb-form-date') ) {
                             if( $(v).find('input').val() == "" ) {
-                                validator = `${$(v).find('label.text-lg').html()} is required.`
+                                validator = `${$(v).find('label.text-lg').html()} ${field_is_required_msg}`
                                 return false
                             }
                         } else if ( $(v).hasClass('msfb-form-textarea') ) {
                             if( $(v).find('textarea').val() == "" ) {
-                                validator = `${$(v).find('label.text-lg').html()} is required.`
+                                validator = `${$(v).find('label.text-lg').html()} ${field_is_required_msg}`
                                 return false
                             }
                         } else if ( $(v).hasClass('msfb-form-dropdown') ) {
                             if( $(v).attr('data-dropdown-value') == undefined || $(v).attr('data-dropdown-value') == null ) {
-                                validator = `${$(v).find('label.text-lg').html()} is required.`
+                                validator = `${$(v).find('label.text-lg').html()} ${field_is_required_msg}`
                                 return false
                             }
                         }
@@ -392,7 +393,7 @@
                                 value.push($(vva).val())
                             })
                             if( value.length == 0 && is_required) {
-                                validator = `${$(v).find('label.text-lg').html()} is required.`
+                                validator = `${$(v).find('label.text-lg').html()} ${field_is_required_msg}`
                                 Swal.fire({
                                     icon: "warning",
                                     text: validator
@@ -416,7 +417,7 @@
                             // if( $(v).find(`input:checked`).length > 0 ) {
                             // console.log(value)
                             if( value.length == 0 && is_required) {
-                                validator = `${$(v).find('label.text-lg').html()} is required.`
+                                validator = `${$(v).find('label.text-lg').html()} ${field_is_required_msg}`
                                 Swal.fire({
                                     icon: "warning",
                                     text: validator
@@ -434,7 +435,7 @@
                         if ( ( $(v).hasClass('msfb-form-text') && !$(v).hasClass('msfb-form-dropdown')) || $(v).hasClass('msfb-form-date') ) {
                             let value = []
                             if( $(v).find('input').val() == "" && is_required) {
-                                validator = `${$(v).find('label.text-lg').html()} is required.`
+                                validator = `${$(v).find('label.text-lg').html()} ${field_is_required_msg}`
                                 Swal.fire({
                                     icon: "warning",
                                     text: validator
@@ -453,7 +454,7 @@
                         if ( $(v).hasClass('msfb-form-textarea') ) {
                             let value = []
                             if( $(v).find('textarea').val() == "" && is_required) {
-                                validator = `${$(v).find('label.text-lg').html()} is required.`
+                                validator = `${$(v).find('label.text-lg').html()} ${field_is_required_msg}`
                                 Swal.fire({
                                     icon: "warning",
                                     text: validator
@@ -472,7 +473,7 @@
                         if ( $(v).hasClass('msfb-form-dropdown') ) {
                             let value = []
                             if( ($(v).attr('data-dropdown-value') == undefined || $(v).attr('data-dropdown-value') == null) && is_required ) {
-                                validator = `${$(v).find('label.text-lg').html()} is required.`
+                                validator = `${$(v).find('label.text-lg').html()} ${field_is_required_msg}`
                                 Swal.fire({
                                     icon: "warning",
                                     text: validator

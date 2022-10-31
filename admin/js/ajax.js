@@ -403,30 +403,30 @@ jQuery(document).ready($ => {
         }
         request_data = { msfb_mgs, ...request_data}
         /** smtp data */
-        let smtp_server = $('#msfb_smtpServer').val()
-        if( !smtp_server ) {
-            msfb_error_message("SMTP server is required.")
-            return false
-        }
-        request_data = { smtp_server, ...request_data}
-        let smtp_username = $('#msfb_smtpUsername').val()
-        if( !smtp_username ) {
-            msfb_error_message("SMTP username is required.")
-            return false
-        }
-        request_data = { smtp_username, ...request_data}
-        let msfb_smtpPass = $('#msfb_smtpPass').val()
-        if( !msfb_smtpPass ) {
-            msfb_error_message("SMTP password is required.")
-            return false
-        }
-        request_data = { msfb_smtpPass, ...request_data}
-        let msfb_smtpPort = $('#msfb_smtpPort').val()
-        if( !msfb_smtpPort ) {
-            msfb_error_message("SMTP port is required.")
-            return false
-        }
-        request_data = { msfb_smtpPort, ...request_data}
+        // let smtp_server = $('#msfb_smtpServer').val()
+        // if( !smtp_server ) {
+        //     msfb_error_message("SMTP server is required.")
+        //     return false
+        // }
+        // request_data = { smtp_server, ...request_data}
+        // let smtp_username = $('#msfb_smtpUsername').val()
+        // if( !smtp_username ) {
+        //     msfb_error_message("SMTP username is required.")
+        //     return false
+        // }
+        // request_data = { smtp_username, ...request_data}
+        // let msfb_smtpPass = $('#msfb_smtpPass').val()
+        // if( !msfb_smtpPass ) {
+        //     msfb_error_message("SMTP password is required.")
+        //     return false
+        // }
+        // request_data = { msfb_smtpPass, ...request_data}
+        // let msfb_smtpPort = $('#msfb_smtpPort').val()
+        // if( !msfb_smtpPort ) {
+        //     msfb_error_message("SMTP port is required.")
+        //     return false
+        // }
+        // request_data = { msfb_smtpPort, ...request_data}
         this_el.html(`<i class="fa fa-spinner fa-spin"></i> Save`)
         console.log(request_data)
         // return false

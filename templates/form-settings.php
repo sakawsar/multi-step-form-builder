@@ -85,7 +85,7 @@ if(isset($_GET['form_id']) && sanitize_text_field( $_GET['form_id'] )){
                 </div>
               </div> -->
 
-              <div>
+              <!-- <div>
                 <div class="skfb__form-title __2">SMTP server</div>
                 <div class="skfb__field-box">
                   <label for="smtpServer" class="skfb__with-icon"><i class="fas fa-server"></i>SMTP server</label>
@@ -109,8 +109,8 @@ if(isset($_GET['form_id']) && sanitize_text_field( $_GET['form_id'] )){
                     </div>
                   </div>
                 </div>
-              </div>
-            </div> <!-- /.col- -->
+              </div> -->
+            </div>
           </div> <!-- /.row -->
 
           <!-- <div class="skfb__submit-btn__wrapper __2">
