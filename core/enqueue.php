@@ -4,7 +4,14 @@ function msfb_enqueue_scripts(){
 	//js
 	wp_enqueue_script( 'msfb_localize', MSFB_URL.'admin/js/localize.js' );
 	$localize_data = array(
-		'ajax_url' => admin_url( 'admin-ajax.php' )
+		'ajax_url' => admin_url( 'admin-ajax.php' ),
+		'translate' => array(
+			'form_data_successfully_submitted' => get_option('form_data_successfully_submitted','Form data successfully submitted.'),
+			'this_option_did_not_point_to_any_other_question' => get_option('this_option_did_not_point_to_any_other_question','This option did not point to any other question.'),
+			'select_an_option_first' => get_option('select_an_option_first','Select an option first.'),
+			'field_is_required' => get_option('field_is_required','Field is required.'),
+			'this_step_is_required' => get_option('this_step_is_required','This step is required'),
+		)
 	);
 	wp_localize_script( 'msfb_localize', 'msfb', $localize_data);
 	wp_enqueue_script( 'jquery' );
@@ -54,13 +61,7 @@ function msfb_admin_enqueue_scripts(){
 		'ajax_url' => admin_url( 'admin-ajax.php' ),
 		'max_rows' => get_option('msfb_row_count') ?: 5,
 		'all_questions' => $all_questions,
-		'all_forms' => $all_forms,
-		'translate' => array(
-			'form_data_successfully_submitted' => 'Form data successfully submitted.',
-			'this_option_did_not_point_to_any_other_question' => 'This option did not point to any other question.',
-			'select_an_option_first' => 'Select an option first.',
-			'field_is_required' => 'Field is required.',
-		)
+		'all_forms' => $all_forms
 	);
 	if( isset($_GET['formulation_id']) && sanitize_text_field( $_GET['formulation_id'] ) != "" ) {
 		global $wpdb;

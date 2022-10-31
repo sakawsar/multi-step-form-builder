@@ -1,6 +1,5 @@
 (function ($) {
     $(document).ready(() => {
-        let field_is_required_msg = msfb.translate.field_is_required
         $('.tw-msfb-total-price span').counterUp();
         const msfb_visited_path = () => {
             let nodes = [$('.tw-msfb-btn-container[data-msfb-root]').attr('data-msfb-root')]
@@ -113,7 +112,7 @@
                 if( this_el.closest('div').attr('data-msfb-required') == "true" || this_el.closest('div[data-msfb-node]').hasClass('msfb-form') ) {
                     let msfb_validation = msfb_required_validator(this_el_node)
                     if( msfb_validation == false ) {
-                        msfb_swal2_warning("This step is required")
+                        msfb_swal2_warning(msfb.translate.this_step_is_required)
                         return false
                     } else if ( msfb_validation !== true && msfb_validation !== false && typeof(msfb_validation) == "string" ) {
                         msfb_swal2_warning(msfb_validation)
@@ -226,7 +225,7 @@
             let node_id = this_el.closest('div[data-msfb-node]').attr('data-msfb-node')
             let msfb_validation = msfb_required_validator(node_id)
             if( msfb_validation == false ) {
-                msfb_swal2_warning("This step is required")
+                msfb_swal2_warning(msfb.translate.this_step_is_required)
                 return false
             } else if ( msfb_validation !== true && msfb_validation !== false && typeof(msfb_validation) == "string" ) {
                 msfb_swal2_warning(msfb_validation)
@@ -260,7 +259,7 @@
         //     if( btn_holder.attr('data-msfb-required') ) {
         //         Swal.fire({
         //             icon: "warning",
-        //             text: "This step is required"
+        //             text: msfb.translate.this_step_is_required
         //         })
         //     }
         // })
@@ -299,6 +298,7 @@
                     }
                 }
             } else {
+                let field_is_required_msg = msfb.translate.field_is_required
                 $.each($(`div[data-msfb-node="${node_id}"] .msfb-form-field`),(k,v) => {
                     if( $(v).attr('data-msfb-required') == "1" ) {
                         if( $(v).hasClass('msfb-form-checkbox') ) {
@@ -372,6 +372,7 @@
                     }
                     dataset = { title, value}
                 } else {
+                    let field_is_required_msg = msfb.translate.field_is_required
                     let form_fiels = this_el.find('.msfb-form-field')
                     // console.log(form_fiels)
                     // $.each(form_fiels,(k,v) => {
