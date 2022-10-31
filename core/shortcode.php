@@ -48,7 +48,7 @@ function msfb_ui_callback( $atts ){
 		<?php $price_display = "style='display:none;'"; if(isset($formulation_data['show_price'])){ 
 			$price_display = "style='display:block;'";
 		 } ?>
-		<h2 class="tw-msfb-total-price" <?php echo $price_display; ?>>Estimated cost: <span>0</span></h2>
+		<h2 class="tw-msfb-total-price" <?php echo $price_display; ?>><?php echo get_option('msfb_translate_estimated_cost','Estimated cost:'); ?> <span>0</span><?php echo get_option('msfb_currency_symb','$'); ?></h2>
 		<?php
 		$map = [];
 		$root = 0;
@@ -210,16 +210,16 @@ function msfb_step_navigation( $data ) {
 	?>
 		<div <?php echo $required; ?> class="tw-msfb-btn-container" <?php echo $root_node; ?> data-step-type="<?php echo $step_data['type']; ?>">
 			<?php if( $data['step'] != 1 ) { ?>
-				<button data-msfb-prev="">Back</button>
+				<button data-msfb-prev=""><?php echo get_option('msfb_translate_back','Back'); ?></button>
 			<?php } ?>
 			<?php if( !empty($step_data['outputs']['output_1']['connections']) ) { ?>
 				<?php $next_node = count($step_data['outputs']) == 1 ? $step_data['outputs']['output_1']['connections'][0]['node'] : ""; ?>
-				<button data-msfb-next="<?php echo $next_node; ?>">Next</button>
+				<button data-msfb-next="<?php echo $next_node; ?>"><?php echo get_option('msfb_translate_next','Next'); ?></button>
 				<?php if( !$required && $is_skippable ) { ?>
-					<button class="msfb-skip-step" data-msfb-next="<?php echo $next_node; ?>">Skip</button>
+					<button class="msfb-skip-step" data-msfb-next="<?php echo $next_node; ?>"><?php echo get_option('msfb_translate_skip','Skip'); ?></button>
 				<?php } ?>
 			<?php } else { ?>
-				<button <?php echo $data['is_disabled'] ? 'disabled' : ''; ?> data-msfb-redirect="<?php echo $data['redirect']; ?>">Finish</button>
+				<button <?php echo $data['is_disabled'] ? 'disabled' : ''; ?> data-msfb-redirect="<?php echo $data['redirect']; ?>"><?php echo get_option('msfb_translate_finish','Finish'); ?></button>
 			<?php }?>
 		</div>
 	</div> <!-- end of the wrapper -->

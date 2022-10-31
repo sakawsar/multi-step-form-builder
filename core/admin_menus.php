@@ -52,11 +52,18 @@ function msfb_settings_callback(){
     if(isset($_POST['save_settings'])){
         $row_count = sanitize_text_field( $_POST['msfb_row_count'] );
         update_option('msfb_row_count',$row_count);
+        update_option('msfb_currency_symb',sanitize_text_field( $_POST['msfb_currency_symb'] ));
         update_option('form_data_successfully_submitted',sanitize_text_field( $_POST['form_data_successfully_submitted'] ));
         update_option('this_option_did_not_point_to_any_other_question',sanitize_text_field( $_POST['this_option_did_not_point_to_any_other_question'] ));
         update_option('select_an_option_first',sanitize_text_field( $_POST['select_an_option_first'] ));
         update_option('field_is_required',sanitize_text_field( $_POST['field_is_required'] ));
         update_option('this_step_is_required',sanitize_text_field( $_POST['this_step_is_required'] ));
+        // translate words
+        update_option('msfb_translate_back',sanitize_text_field( $_POST['msfb_translate_back'] ));
+        update_option('msfb_translate_next',sanitize_text_field( $_POST['msfb_translate_next'] ));
+        update_option('msfb_translate_skip',sanitize_text_field( $_POST['msfb_translate_skip'] ));
+        update_option('msfb_translate_finish',sanitize_text_field( $_POST['msfb_translate_finish'] ));
+        update_option('msfb_translate_estimated_cost',sanitize_text_field( $_POST['msfb_translate_estimated_cost'] ));
         printf("<div class='is-dismissible notice notice-success'><p>%s</p></div>",__('Settings has been saved.','msfb'));
     }
     ?>
@@ -66,6 +73,12 @@ function msfb_settings_callback(){
                 <th><?php _e('Row limit for each page','msfb'); ?></th>
                 <td>
                     <input type="number" name="msfb_row_count" value="<?php echo get_option('msfb_row_count') ?: ""; ?>" placeholder="Row count"/>
+                </td>
+            </tr>
+            <tr>
+                <th><?php _e('Currency symbol','msfb'); ?></th>
+                <td>
+                    <input type="text" name="msfb_currency_symb" value="<?php echo get_option('msfb_currency_symb','$') ?: ""; ?>"/>
                 </td>
             </tr>
             <tr>
@@ -99,6 +112,36 @@ function msfb_settings_callback(){
                 <th><?php _e('This step is required.','msfb'); ?></th>
                 <td>
                     <input type="text" name="this_step_is_required" value="<?php echo get_option('this_step_is_required','This step is required.') ?: ""; ?>"/>
+                </td>
+            </tr>
+            <tr>
+                <th><?php _e('Back','msfb'); ?></th>
+                <td>
+                    <input type="text" name="msfb_translate_back" value="<?php echo get_option('msfb_translate_back','Back') ?: ""; ?>"/>
+                </td>
+            </tr>
+            <tr>
+                <th><?php _e('Finish','msfb'); ?></th>
+                <td>
+                    <input type="text" name="msfb_translate_finish" value="<?php echo get_option('msfb_translate_finish','Finish') ?: ""; ?>"/>
+                </td>
+            </tr>
+            <tr>
+                <th><?php _e('Next','msfb'); ?></th>
+                <td>
+                    <input type="text" name="msfb_translate_next" value="<?php echo get_option('msfb_translate_next','Next') ?: ""; ?>"/>
+                </td>
+            </tr>
+            <tr>
+                <th><?php _e('Skip','msfb'); ?></th>
+                <td>
+                    <input type="text" name="msfb_translate_skip" value="<?php echo get_option('msfb_translate_skip','Skip') ?: ""; ?>"/>
+                </td>
+            </tr>
+            <tr>
+                <th><?php _e('Estimated cost:','msfb'); ?></th>
+                <td>
+                    <input type="text" name="msfb_translate_estimated_cost" value="<?php echo get_option('msfb_translate_estimated_cost','Estimated cost:') ?: ""; ?>"/>
                 </td>
             </tr>
             <tr>
