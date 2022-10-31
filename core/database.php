@@ -59,6 +59,7 @@ function msfb_create_the_database() {
             id INT(11) NOT NULL AUTO_INCREMENT,
             formulation_id TEXT NOT NULL,
             lead_data TEXT NOT NULL,
+            lead_time INT(100),
             PRIMARY KEY (id)
         ) $charset_collate;";
 		dbDelta( $sql );

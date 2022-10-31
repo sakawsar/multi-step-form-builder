@@ -39,12 +39,12 @@ function formula_builder_callback(){
 }
 function msfb_help_center_callback(){
    msfb_enqueue_style();
-    wp_redirect( 'https://google.com', 301 );
+    wp_redirect( 'https://multi-step-form.com/help-center', 301 );
     exit();
 }
 function msfb_support_callback(){
    msfb_enqueue_style();
-    wp_redirect( 'https://youtube.com', 301 );
+    wp_redirect( 'https://multi-step-form.com/support', 301 );
     exit();
 }
 function msfb_settings_callback(){

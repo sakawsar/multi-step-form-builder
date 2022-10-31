@@ -42,6 +42,8 @@ function msfb_add_leads_callback(){
             $data[count($data) - 1]['date'] = current_time( 'mysql' );
         }
         $table_name = $wpdb->prefix.'msfb_leads';
+        $data['lead_time'] = current_time( 'timestamp' );
+        $wpdb->insert($table_name,$data);
         // $data = $_POST['dataset'];
         $data['json_data'] = json_decode( stripslashes( $data['lead_data'] ), true );
         $form_data = json_decode( stripslashes( $data['lead_data'] ), true );
@@ -86,7 +88,6 @@ function msfb_add_leads_callback(){
                     $headers
                 );
         $data['email_sent'] = $email;
-        $wpdb->insert($table_name,$data);
         echo json_encode($data);
         exit;
     }
