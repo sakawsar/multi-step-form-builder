@@ -41,7 +41,7 @@
                             icon: "success",
                             text: "Form data successfully submitted."
                         }).then( data => {
-                            window.location.href = $('button[data-msfb-redirect]').attr('data-msfb-redirect')
+                            // window.location.href = $('button[data-msfb-redirect]').attr('data-msfb-redirect')
                         })
                     }
                 },

@@ -6,7 +6,7 @@ if(isset($_GET['form_id']) && sanitize_text_field( $_GET['form_id'] )){
   $form_id = sanitize_text_field( $_GET['form_id'] );
   $results = $wpdb->get_results("SELECT * FROM $table_name WHERE id='$form_id'",ARRAY_A);
   $form_data = json_decode( stripslashes( $results[0]['form_data'] ) , true );
-  $form_settings = $form_data['settings'];
+  $form_settings = isset($form_data['settings']) ? $form_data['settings'] : [] ;
   // echo '<pre>';
   // // print_r( json_decode( stripslashes( $results[0]['form_data'] ) , true ) );
   // print_r( $form_settings );

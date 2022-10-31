@@ -25,6 +25,14 @@ function msfb_save_forms_settings_callback(){
     }
     exit;
 }
+function msfb_get_form_data( $form_id ){
+    global $wpdb;
+    $table_name = $wpdb->prefix.'msfb_forms';
+    $results = $wpdb->get_results("SELECT * FROM $table_name WHERE id='$form_id'",ARRAY_A);
+    $form_data = json_decode( stripslashes( $results[0]['form_data'] ) , true );
+    $form_settings = isset($form_data['settings']) ? $form_data['settings'] : [] ;
+    return $form_settings;
+}
 add_action('wp_ajax_msfb_add_leads','msfb_add_leads_callback');
 function msfb_add_leads_callback(){
     if(isset($_POST['dataset'])){
@@ -35,17 +43,35 @@ function msfb_add_leads_callback(){
         }
         $table_name = $wpdb->prefix.'msfb_leads';
         // $data = $_POST['dataset'];
-        
-        // if( isset( $qtn_data['question_id'] ) ){
-        //     $qtn_id = $qtn_data['question_id'];
-        //     unset($qtn_data['question_id']);
-        //     $wpdb->update($table_name,$qtn_data,array( 'id' => $qtn_id ));
-        //     $_POST['dataset']['status'] = 'updated';
-        // } else {
+        $data['json_data'] = json_decode( stripslashes( $data['lead_data'] ), true );
+        $form_data = json_decode( stripslashes( $data['lead_data'] ), true );
+        $form_fields = [];
+        foreach($form_data as $row){
+            if( isset($row['form_data']) ) {
+                $form_fields = $row;
+                $data['form_data'] = $form_fields;
+                break;
+            }
+        }
+        $field_with_bracket = [];
+        foreach($form_fields['form_data'] as $a_field){
+            $field_with_bracket['{'.$a_field['title'].'}'] = implode(',',$a_field['value']);
+        }
+        $form_id = $form_fields['form_id'];
+        $form_settings = msfb_get_form_data( $form_id );
+        foreach($field_with_bracket as $field_key => $field_val){
+            foreach($form_settings as $set_key => $set_value){
+                if( strpos($set_value,$field_key) !== false ) {
+                    $matched[$field_key] = array($field_key,$field_val,$set_value);
+                    $form_settings[$set_key] = str_replace($field_key,$field_val,$set_value);
+                }
+            }
+        }
+        $data['form_settings'] = $form_settings;
+        $data['form_fields'] = $field_with_bracket;
+        $email = wp_mail( $form_settings['recipient_email'], $form_settings['msfb_subject'], $form_settings['msfb_mgs'] );
+        $data['email_sent'] = $email;
         $wpdb->insert($table_name,$data);
-        //     $_POST['dataset']['question_id'] = $wpdb->insert_id;
-        //     $_POST['dataset']['status'] = 'created';
-        // }
         echo json_encode($data);
         exit;
     }
