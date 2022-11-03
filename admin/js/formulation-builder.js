@@ -15,7 +15,7 @@
                 })
             }
         })
-        $('#msfb_list_questions_by_category').on('change',function(){
+        $('#msfb_list_questions_by_category, #msfb_list_questions_by_category2').on('change',function(){
             let cat_id = $(this).val()
             $.each(elements,function(k,el){
                 $(el).show()

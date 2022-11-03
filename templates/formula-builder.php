@@ -80,10 +80,11 @@
               $cat_table = $wpdb->prefix.'msfb_category';
               $qt_cats = $wpdb->get_results("SELECT * FROM  $cat_table WHERE cat_type in ('question','from')");
               ?>
-              <h6 class="sk-head skfb-bb-primary sk-text-primary">Filter <span style="padding:2px 4px;background:#4992ff;color:white;">questions</span>/<span style="padding:2px 4px;background:yellow;color:black;">forms</span></h6>
+              <h6 class="sk-head skfb-bb-primary sk-text-primary">Filter questions</h6>
+              <!-- <h6 class="sk-head skfb-bb-primary sk-text-primary">Filter <span style="padding:2px 4px;background:#4992ff;color:white;">questions</span>/<span style="padding:2px 4px;background:yellow;color:black;">forms</span></h6> -->
               <div style="margin-top:8px;" class="skfb-search-box __2">
                     <style>
-                      #msfb_list_questions_by_category option[data-type="question"]{
+                      /* #msfb_list_questions_by_category option[data-type="question"]{
                         border-top:4px solid white;
                         background:#4992ff;
                       }
@@ -94,11 +95,19 @@
                       }
                       #msfb_list_questions_by_category option:hover{
                         background:gray!important;
-                      }
+                      } */
                     </style>
                   <select class="sk-form-control" id="msfb_list_questions_by_category">
-                    <option value="">Filter questions/form by category</option>
-                    <?php foreach($qt_cats as $a_cat){ ?>
+                    <option value="">Filter questions by category</option>
+                    <?php foreach($qt_cats as $a_cat){ if( $a_cat->cat_type != "question") continue; ?>
+                      <option data-type="<?php echo $a_cat->cat_type; ?>" value="<?php echo $a_cat->id; ?>"><?php echo $a_cat->cat_name; ?></option>
+                    <?php } ?>
+                  </select>
+                  <h6 class="sk-head skfb-bb-primary sk-text-primary">Filter forms</h6>
+                  <!-- <h6 class="sk-head skfb-bb-primary sk-text-primary">Filter <span style="padding:2px 4px;background:#4992ff;color:white;">questions</span>/<span style="padding:2px 4px;background:yellow;color:black;">forms</span></h6> -->
+                  <select class="sk-form-control" id="msfb_list_questions_by_category2">
+                    <option value="">Filter forms by category</option>
+                    <?php foreach($qt_cats as $a_cat){ if( $a_cat->cat_type != "from") continue; ?>
                       <option data-type="<?php echo $a_cat->cat_type; ?>" value="<?php echo $a_cat->id; ?>"><?php echo $a_cat->cat_name; ?></option>
                     <?php } ?>
                   </select>
