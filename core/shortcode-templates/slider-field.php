@@ -9,7 +9,7 @@ function msfb_slider_step( $data ){
     // print_r($question_data);
     // echo '</pre>';
 ?>
-<div data-price="<?php echo isset($data['question_price']) && $data['question_price'] != "" ? $data['question_price'] : ""; ?>" class="msfb-slider w-4/5 m-auto flex flex-col mt-4 gap-4 <?php echo $data['step'] != 1 ? 'hidden':''; ?>" data-question-type="<?php echo $data['question_type']; ?>" data-msfb-node="<?php echo $data['id']; ?>">
+<div data-base-price="<?php echo isset($data['question_price']) && $data['question_price'] != "" ? $data['question_price'] : ""; ?>"  data-price="<?php echo isset($data['question_price']) && $data['question_price'] != "" ? floatval($data['question_price']) * floatval($default_val) : ""; ?>" class="msfb-slider w-4/5 m-auto flex flex-col mt-4 gap-4 <?php echo $data['step'] != 1 ? 'hidden':''; ?>" data-question-type="<?php echo $data['question_type']; ?>" data-msfb-node="<?php echo $data['id']; ?>">
     <?php if($data['question_title']){ ?>
         <h1 class="text-center text-4xl"><?php echo $data['question_title']; ?></h1>
     <?php } ?>

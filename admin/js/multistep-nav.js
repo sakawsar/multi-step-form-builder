@@ -75,6 +75,12 @@
                 $('.tw-msfb-total-price span').counterUp();
             }
         })
+        $('.tw-msfb-slider-field').on('change',function(){
+            let price_holder =  $(this).closest('div[data-price]')
+            let base_price = parseFloat( price_holder.attr('data-base-price') )
+            let new_price = parseFloat($(this).val()) * base_price
+            price_holder.attr('data-price',new_price)
+        })
         $('.msfb-multiselect .tw-msfb-qtn-field div').on('click', e => {
             // //console.log(e)
             let this_el = $(e.currentTarget)
