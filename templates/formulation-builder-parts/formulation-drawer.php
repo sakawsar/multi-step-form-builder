@@ -23,8 +23,8 @@
             $url = $this_formula_data['formulation_data']['redirect'];
           }
         ?>
-        <label for="formName"><?php _e('Redirect URL','msfb'); ?></label>
-        <input value="<?php echo $url; ?>" type="text" placeholder="Redirect URL" id="msfb-redirect-url"/>
+        <label for="formName"><?php _e('Thank you page URL','msfb'); ?></label>
+        <input value="<?php echo $url; ?>" type="text" placeholder="Thank you page URL" id="msfb-redirect-url"/>
       </div>
       <div class="skfb__field-box __2">
         <?php
