@@ -11,3 +11,7 @@ div[data-drawer-type]{
 #msfb-show-price{
     width:auto;
 }
+.msfb_custom_icon_image:hover{
+    cursor: pointer;
+    outline: 2px solid gray;    
+}
