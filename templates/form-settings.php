@@ -2,6 +2,7 @@
 global $wpdb;
 $table_name = $wpdb->prefix.'msfb_forms';
 $form_settings = [];
+$form_data = [];
 if(isset($_GET['form_id']) && sanitize_text_field( $_GET['form_id'] )){
   $form_id = sanitize_text_field( $_GET['form_id'] );
   $results = $wpdb->get_results("SELECT * FROM $table_name WHERE id='$form_id'",ARRAY_A);
@@ -11,6 +12,15 @@ if(isset($_GET['form_id']) && sanitize_text_field( $_GET['form_id'] )){
   // // print_r( json_decode( stripslashes( $results[0]['form_data'] ) , true ) );
   // print_r( $form_settings );
   // echo '</pre>';
+}
+$field_labels = [];
+$available_vars = "";
+if( !empty($form_data) ) {
+  foreach( $form_data['field_data'] as $a_field ) {
+    $field_labels[] = '{'.$a_field['field_label'].'}';
+  }
+  $field_labels[] = '{totalPrice}';
+  $available_vars = '<label for="senderEmail" class="skfb__with-icon"><i class="fas fa-info"></i>'.implode(', ',$field_labels).'</label>';
 }
 ?>
 <div class="app">
@@ -39,32 +49,41 @@ if(isset($_GET['form_id']) && sanitize_text_field( $_GET['form_id'] )){
           <div class="sk-row ">
             <div class="sk-col-md-6">
               <div class="skfb__field-box">
-                <label for="senderName" class="skfb__with-icon"><i class="fas fa-user"></i>Sender name</label>
+                <label for="mgs" class="skfb__with-icon" style="color:red;"><i class="fas fa-info"></i>You can place variables using the label of the form field like {Field label}. The label texts are case sensitive.</label>
+                <label for="mgs" class="skfb__with-icon" style="color:red;"><i class="fas fa-info"></i>To add the total calculated price use {totalPrice} variable.</label>
+                <br><label for="senderName" class="skfb__with-icon"><i class="fas fa-user"></i>Sender name - the following variables can be inserted:</label>
+                <?php echo $available_vars;?>
                 <input type="text" value="<?php echo isset($form_settings['sender_name']) ? $form_settings['sender_name'] : null; ?>" placeholder="Albert Einstein" id="msfb_senderName" />
               </div>
               <div class="skfb__field-box">
-                <label for="senderEmail" class="skfb__with-icon"><i class="fas fa-envelope"></i>Sender email</label>
+                <label for="senderEmail" class="skfb__with-icon"><i class="fas fa-envelope"></i>Sender email - the following variables can be inserted:</label>
+                <?php echo $available_vars;?>
                 <input type="text" value="<?php echo isset($form_settings['sender_email']) ? $form_settings['sender_email'] : null; ?>" placeholder="abc@xyz.com" id="msfb_senderEmail" />
               </div>
               <div class="skfb__field-box">
-                <label for="recipientEmail" class="skfb__with-icon"><i class="fas fa-envelope"></i>Recipient e-mail</label>
+                <label for="recipientEmail" class="skfb__with-icon"><i class="fas fa-envelope"></i>Recipient e-mail - the following variables can be inserted:</label>
+                <?php echo $available_vars;?>
                 <input type="text" value="<?php echo isset($form_settings['recipient_email']) ? $form_settings['recipient_email'] : null; ?>" placeholder="abc@xyz.com" id="msfb_recipientEmail" />
               </div>
               <div class="skfb__field-box">
-                <label for="BCCRecipientEmail" class="skfb__with-icon"><i class="fas fa-envelope"></i>BCC recipient e-mail (comma separated)</label>
+                <label for="BCCRecipientEmail" class="skfb__with-icon"><i class="fas fa-envelope"></i>BCC recipient e-mail (comma separated) - the following variables can be inserted:</label>
+                <?php echo $available_vars;?>
                 <input type="text" value="<?php echo isset($form_settings['msfb_BCCRecipientEmail']) ? $form_settings['msfb_BCCRecipientEmail'] : null; ?>" placeholder="abc@xyz.com" id="msfb_BCCRecipientEmail" />
               </div>
               <div class="skfb__field-box">
-                <label for="replyTo" class="skfb__with-icon"><i class="fas fa-envelope"></i>Reply-To (reply address) - the following placeholders can be inserted:</label>
+                <label for="replyTo" class="skfb__with-icon"><i class="fas fa-envelope"></i>Reply-To (reply address) - the following variables can be inserted:</label>
+                <?php echo $available_vars;?>
                 <input type="text" value="<?php echo isset($form_settings['msfb_replyTo']) ? $form_settings['msfb_replyTo'] : null; ?>" placeholder="abc@xyz.com" id="msfb_replyTo" />
               </div>
               <div class="skfb__field-box">
-                <label for="subject" class="skfb__with-icon"><i class="fas fa-stream"></i>Subject - the following placeholders can be inserted:</label>
+                <label for="subject" class="skfb__with-icon"><i class="fas fa-stream"></i>Subject - the following variables can be inserted:</label>
+                <?php echo $available_vars;?>
                 <input type="text" value="<?php echo isset($form_settings['msfb_subject']) ? $form_settings['msfb_subject'] : null; ?>" placeholder="Placeholder subject" id="msfb_subject" />
               </div>
               <div class="skfb__field-box">
-                <label for="mgs" class="skfb__with-icon"><i class="fas fa-envelope-open-text"></i>Message - the following placeholders can be inserted:</label>
-                <input type="text" value="<?php echo isset($form_settings['msfb_mgs']) ? $form_settings['msfb_mgs'] : null; ?>" placeholder="Messages" id="msfb_mgs" />
+                <label for="mgs" class="skfb__with-icon"><i class="fas fa-envelope-open-text"></i>Message - the following variables can be inserted:</label>
+                <?php echo $available_vars;?>
+                <textarea style="height:300px;" type="text" placeholder="Messages" id="msfb_mgs"><?php echo isset($form_settings['msfb_mgs']) ? $form_settings['msfb_mgs'] : null; ?></textarea>
               </div>
             </div> <!-- /.col- -->
 
@@ -76,11 +95,11 @@ if(isset($_GET['form_id']) && sanitize_text_field( $_GET['form_id'] )){
                   <input type="text" placeholder="Albert Einstein" id="senderName" />
                 </div>
                 <div class="skfb__field-box">
-                  <label for="subject" class="skfb__with-icon"><i class="fas fa-stream"></i>Subject - the following placeholders can be inserted:</label>
+                  <label for="subject" class="skfb__with-icon"><i class="fas fa-stream"></i>Subject - the following variables can be inserted:</label>
                   <input type="text" placeholder="Placeholder subject" id="subject" />
                 </div>
                 <div class="skfb__field-box">
-                  <label for="mgs" class="skfb__with-icon"><i class="fas fa-envelope-open-text"></i>Message - the following placeholders can be inserted:</label>
+                  <label for="mgs" class="skfb__with-icon"><i class="fas fa-envelope-open-text"></i>Message - the following variables can be inserted:</label>
                   <input type="text" placeholder="Messages" id="mgs" />
                 </div>
               </div> -->
