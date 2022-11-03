@@ -15,10 +15,10 @@ $form_list = new MSFB_List_Table('forms');
           </div>
           <div class="sk-col-md-4">
             <div class="skfb-search-box">
-              <form action="">
+              <!-- <form action=""> -->
                 <input type="search" id="msfb-search-name" class="sk-form-control" placeholder="<?php echo $form_list->search_placeholder; ?>">
                 <button class="skfb-search-btn"><i class="fas fa-search"></i></button>
-              </form>
+              <!-- </form> -->
             </div>
           </div>
         </div>

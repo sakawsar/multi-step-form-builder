@@ -14,12 +14,12 @@
             </div>
             <div class="sk-col-md-4">
               <div class="skfb-search-box">
-                <form action="">
+                <!-- <form action=""> -->
                   <?php if($qtn_table->has_search){ ?>
                     <input type="search" id="msfb-search-name" class="sk-form-control" placeholder="<?php echo $qtn_table->search_placeholder; ?>">
                   <?php } ?>
                   <button class="skfb-search-btn"><i class="fas fa-search"></i></button>
-                </form>
+                <!-- </form> -->
               </div>
             </div>
           </div>
