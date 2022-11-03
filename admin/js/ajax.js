@@ -471,10 +471,10 @@ jQuery(document).ready($ => {
             msfb_error_message("Form title is required.")
         }
         let form_desc = $('#msfb-form-desc').val()
-        if( !form_desc ) {
-            msfb_error_message("Form description is required.")
-            return false
-        }
+        // if( !form_desc ) {
+        //     msfb_error_message("Form description is required.")
+        //     return false
+        // }
         let form_fields = $('.msfb-form-builder div[data-field-type].skfb__field-box')
         if( form_fields.length == 0 ) {
             msfb_error_message("Add at least one field.")
