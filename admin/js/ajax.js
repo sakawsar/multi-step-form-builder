@@ -40,14 +40,14 @@ jQuery(document).ready($ => {
             msfb_error_message("Question title field is reqeuired.")
             return false;
         }
-        if( qtn_desc == undefined || qtn_desc == "" || qtn_desc == "Description" ){
-            msfb_error_message("Question description field is reqeuired.")
-            return false;
-        }
-        if( qtn_desc == undefined || qtn_desc == "" || qtn_desc == "Description" ){
-            msfb_error_message("Question description field is reqeuired.")
-            return false;
-        }
+        // if( qtn_desc == undefined || qtn_desc == "" || qtn_desc == "Description" ){
+        //     msfb_error_message("Question description field is reqeuired.")
+        //     return false;
+        // }
+        // if( qtn_desc == undefined || qtn_desc == "" || qtn_desc == "Description" ){
+        //     msfb_error_message("Question description field is reqeuired.")
+        //     return false;
+        // }
         if( act_el == "msfb-multiselect" ) {
             let select_opts = $(`.${act_el} div[data-multiselect-no]`)
             if( select_opts.length == 0 ) {
