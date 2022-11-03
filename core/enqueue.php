@@ -11,6 +11,7 @@ function msfb_enqueue_scripts(){
 			'select_an_option_first' => get_option('select_an_option_first','Select an option first.'),
 			'field_is_required' => get_option('field_is_required','Field is required.'),
 			'this_step_is_required' => get_option('this_step_is_required','This step is required'),
+			'msfb_select_from_dropdown' => get_option('msfb_select_from_dropdown','Select from dropdown'),
 		)
 	);
 	wp_localize_script( 'msfb_localize', 'msfb', $localize_data);
@@ -68,6 +69,7 @@ function msfb_admin_enqueue_scripts(){
 			'select_an_option_first' => get_option('select_an_option_first','Select an option first.'),
 			'field_is_required' => get_option('field_is_required','Field is required.'),
 			'this_step_is_required' => get_option('this_step_is_required','This step is required'),
+			'msfb_select_from_dropdown' => get_option('msfb_select_from_dropdown','Select from dropdown'),
 		)
 	);
 	if( isset($_GET['formulation_id']) && sanitize_text_field( $_GET['formulation_id'] ) != "" ) {

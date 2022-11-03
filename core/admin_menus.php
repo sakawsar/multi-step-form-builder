@@ -59,6 +59,7 @@ function msfb_settings_callback(){
         update_option('field_is_required',sanitize_text_field( $_POST['field_is_required'] ));
         update_option('this_step_is_required',sanitize_text_field( $_POST['this_step_is_required'] ));
         // translate words
+        update_option('msfb_select_from_dropdown',sanitize_text_field( $_POST['msfb_select_from_dropdown'] ));
         update_option('msfb_translate_back',sanitize_text_field( $_POST['msfb_translate_back'] ));
         update_option('msfb_translate_next',sanitize_text_field( $_POST['msfb_translate_next'] ));
         update_option('msfb_translate_skip',sanitize_text_field( $_POST['msfb_translate_skip'] ));
@@ -112,6 +113,12 @@ function msfb_settings_callback(){
                 <th><?php _e('This step is required.','msfb'); ?></th>
                 <td>
                     <input type="text" name="this_step_is_required" value="<?php echo get_option('this_step_is_required','') ?: ""; ?>" placeholder="This step is required."/>
+                </td>
+            </tr>
+            <tr>
+                <th><?php _e('Select from dropdown','msfb'); ?></th>
+                <td>
+                    <input type="text" name="msfb_select_from_dropdown" value="<?php echo get_option('msfb_select_from_dropdown',''); ?>" placeholder="Select from dropdown"/>
                 </td>
             </tr>
             <tr>

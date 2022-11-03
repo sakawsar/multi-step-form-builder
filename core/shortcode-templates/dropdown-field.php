@@ -16,7 +16,7 @@ function msfb_dropdown_step( $data ){
     <!-- dropdown -->
     <div class="msfb-multiselect-qtn tw-msfb-qtn-field tw-msfb-dropdown-qtn relative">
         <div class="tw-msfb-dropdown-field">
-            <p>Select from dropdown</p>
+            <p><?php echo get_option('msfb_select_from_dropdown','Select from dropdown'); ?></p>
             <i class="fa fa-angle-down"></i>
             <div class="item-holder">
                 <?php 

@@ -35,13 +35,13 @@
                     }
                 },
                 success: resp => {
-                    // //console.log(resp)
+                    console.log(resp)
                     if( resp.formulation_id ) {
                         Swal.fire({
                             icon: "success",
                             text: msfb.translate.form_data_successfully_submitted
                         }).then( data => {
-                            window.location.href = $('button[data-msfb-redirect]').attr('data-msfb-redirect')
+                            // window.location.href = $('button[data-msfb-redirect]').attr('data-msfb-redirect')
                         })
                     }
                 },
@@ -75,12 +75,12 @@
                 $('.tw-msfb-total-price span').counterUp();
             }
         })
-        $('.tw-msfb-slider-field').on('change',function(){
-            let price_holder =  $(this).closest('div[data-price]')
-            let base_price = parseFloat( price_holder.attr('data-base-price') )
-            let new_price = parseFloat($(this).val()) * base_price
-            price_holder.attr('data-price',new_price)
-        })
+        // $('.tw-msfb-slider-field').on('change',function(){
+        //     let price_holder =  $(this).closest('div[data-price]')
+        //     let base_price = parseFloat( price_holder.attr('data-base-price') )
+        //     let new_price = parseFloat($(this).val()) * base_price
+        //     price_holder.attr('data-price',new_price)
+        // })
         $('.msfb-multiselect .tw-msfb-qtn-field div').on('click', e => {
             // //console.log(e)
             let this_el = $(e.currentTarget)
@@ -142,14 +142,17 @@
                     this_el.closest('div[data-msfb-node]').addClass('hidden')
                     $(`div[data-msfb-node="${node_id}"]`).removeClass('hidden')
                     $(`div[data-msfb-node="${node_id}"]`).fadeIn('medium')
+                    let this_node = this_el.closest('div[data-msfb-node]')
+                    let this_node_price = this_node.attr('data-price')
+                    let total
+                    if( $('.tw-msfb-total-price span').length > 0 ) {
+                        total = parseFloat( $('.tw-msfb-total-price span').html() )
+                    }
                     if( !is_prev ) {
                         $(`div[data-msfb-node="${node_id}"]`).find('button[data-msfb-prev]').attr('data-msfb-prev',this_el_node)
-                        let total
                         if( $('.tw-msfb-total-price span').length > 0 ) {
                             total = parseFloat( $('.tw-msfb-total-price span').html() )
                         }
-                        let this_node = this_el.closest('div[data-msfb-node]')
-                        let this_node_price = this_node.attr('data-price')
                         if( this_node_price && total != null && is_skipped == false ) {
                             if ( this_node_price && total != null && !this_node.hasClass('msfb_node_price_added') ) {
                                 total += parseFloat(this_node_price)
@@ -168,6 +171,36 @@
                         step_val += step_unit_val
                     } else {
                         step_val -= step_unit_val
+                        let option_fields = ['msfb-single-select-field','msfb-multiselect','msfb-dropdown-field']
+                        let this_qtn_type = this_node.attr('data-question-type')
+                        if ( this_node_price && total != null && this_node.hasClass('msfb_node_price_added') && option_fields.indexOf(this_qtn_type) == -1 ) {
+                            total -= parseFloat(this_node_price)
+                            $('.tw-msfb-total-price span').html(total)
+                            this_node.removeClass('msfb_node_price_added')
+                            $('.tw-msfb-total-price span').counterUp();
+                        } 
+                        else if ( option_fields.indexOf(this_qtn_type) > -1 ) {
+                            let price = 0
+                            switch (this_qtn_type) {
+                                case 'msfb-multiselect':
+                                    price = this_node.find('.tw-msfb-qtn-field div.selected').length > 0 ? this_node.find('.tw-msfb-qtn-field div.selected').attr('data-price') : 0
+                                    this_node.find('.tw-msfb-qtn-field div').removeClass('selected')
+                                    break;
+                                case 'msfb-single-select-field':
+                                    price = this_node.find('.tw-msfb-qtn-field div.selected').length > 0 ? this_node.find('.tw-msfb-qtn-field div.selected').attr('data-price') : 0
+                                    this_node.find('.tw-msfb-qtn-field div').removeClass('selected')
+                                    break;
+                                case 'msfb-dropdown-field':
+                                    price = this_node.attr('data-added-price') ? this_node.attr('data-added-price') : 0
+                                    this_node.attr('data-added-price','')
+                                    this_node.find('.tw-msfb-dropdown-field p').html(msfb.translate.msfb_select_from_dropdown)
+                                    break;
+                            }
+                            this_node.find('button[data-msfb-next]').attr('data-msfb-next','')
+                            total -= parseFloat(price)
+                            $('.tw-msfb-total-price span').html(total)
+                            $('.tw-msfb-total-price span').counterUp();
+                        }
                         this_el.closest('div[data-msfb-node]').find('button[data-msfb-prev]').attr('data-msfb-prev','')
                     }
                     $('.tw-msfb-progress-bar__status').animate({"width":`${step_val}%`})
