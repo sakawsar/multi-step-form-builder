@@ -67,6 +67,13 @@ function msfb_add_leads_callback(){
                     $matched[$field_key] = array($field_key,$field_val,$set_value);
                     $form_settings[$set_key] = str_replace($field_key,$field_val,$set_value);
                 }
+                if( strpos($set_value,'{totalPrice}') !== false ) {
+                    if( isset( $data['form_data']['total_price'] ) ) {
+                        $totalPrice = $data['form_data']['total_price'].get_option('msfb_currency_symb','$');
+                        $matched[$field_key] = array($field_key,$field_val,$set_value);
+                        $form_settings[$set_key] = str_replace('{totalPrice}',$totalPrice,$set_value);
+                    }
+                }
             }
         }
         $data['form_settings'] = $form_settings;
