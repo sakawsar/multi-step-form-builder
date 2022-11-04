@@ -75,12 +75,12 @@
                 $('.tw-msfb-total-price span').counterUp();
             }
         })
-        // $('.tw-msfb-slider-field').on('change',function(){
-        //     let price_holder =  $(this).closest('div[data-price]')
-        //     let base_price = parseFloat( price_holder.attr('data-base-price') )
-        //     let new_price = parseFloat($(this).val()) * base_price
-        //     price_holder.attr('data-price',new_price)
-        // })
+        $('.tw-msfb-slider-field').on('change',function(e){
+            let price_holder =  $(this).closest('div[data-price]')
+            let base_price = parseFloat( price_holder.attr('data-base-price') )
+            let new_price = parseFloat($(this).val()) * base_price
+            price_holder.attr('data-price',new_price)
+        })
         $('.msfb-multiselect .tw-msfb-qtn-field div').on('click', e => {
             // //console.log(e)
             let this_el = $(e.currentTarget)
@@ -143,7 +143,7 @@
                     $(`div[data-msfb-node="${node_id}"]`).removeClass('hidden')
                     $(`div[data-msfb-node="${node_id}"]`).fadeIn('medium')
                     let this_node = this_el.closest('div[data-msfb-node]')
-                    let this_node_price = this_node.attr('data-price')
+                    let this_node_price = parseFloat(this_node.attr('data-price'))
                     let total
                     if( $('.tw-msfb-total-price span').length > 0 ) {
                         total = parseFloat( $('.tw-msfb-total-price span').html() )
@@ -155,6 +155,13 @@
                         }
                         if( this_node_price && total != null && is_skipped == false ) {
                             if ( this_node_price && total != null && !this_node.hasClass('msfb_node_price_added') ) {
+                                // if (this_node.attr('data-question-type') == "msfb-slider-field" && this_node.attr('data-slider-prev-price') ) {
+                                //     let prev_price = parseFloat(this_node.attr('data-slider-prev-price'))
+                                //     if( this_node_price != prev_price ) {
+                                //         total += this_node_price - prev_price
+                                //     }
+                                // } else {
+                                // }
                                 total += parseFloat(this_node_price)
                                 $('.tw-msfb-total-price span').html(total)
                                 this_node.addClass('msfb_node_price_added')
@@ -171,9 +178,19 @@
                         step_val += step_unit_val
                     } else {
                         step_val -= step_unit_val
+                        // check if the node is previous question is slider
+                        let prev_node_id = this_node.find('button[data-msfb-prev]').attr('data-msfb-prev')
+                        let prev_node = $(`div[data-msfb-node="${prev_node_id}"]`)
+                        let prev_qtn_type = prev_node.attr('data-question-type')
+                        if( prev_qtn_type == "msfb-slider-field" ) {
+                            prev_node.attr('data-slider-prev-price',prev_node.attr('data-price'))
+                        }
                         let option_fields = ['msfb-single-select-field','msfb-multiselect','msfb-dropdown-field']
                         let this_qtn_type = this_node.attr('data-question-type')
                         if ( this_node_price && total != null && this_node.hasClass('msfb_node_price_added') && option_fields.indexOf(this_qtn_type) == -1 ) {
+                            if (this_qtn_type == "msfb-slider-field" && this_node.attr('data-slider-prev-price') ) {
+                                this_node_price = parseFloat(this_node.attr('data-slider-prev-price'))
+                            }
                             total -= parseFloat(this_node_price)
                             $('.tw-msfb-total-price span').html(total)
                             this_node.removeClass('msfb_node_price_added')
@@ -183,20 +200,28 @@
                             let price = 0
                             switch (this_qtn_type) {
                                 case 'msfb-multiselect':
-                                    price = this_node.find('.tw-msfb-qtn-field div.selected').length > 0 ? this_node.find('.tw-msfb-qtn-field div.selected').attr('data-price') : 0
-                                    this_node.find('.tw-msfb-qtn-field div').removeClass('selected')
+                                    let selected_ans = this_node.find('.tw-msfb-qtn-field div.selected')
+                                    if( this_node.find('.tw-msfb-qtn-field div.selected').length > 0 ) {
+                                        $.each(selected_ans,function(k,v){
+                                            price += parseFloat($(v).attr('data-price'))
+                                            $(v).removeClass('selected')
+                                        })
+                                    }
+                                    // price = this_node.find('.tw-msfb-qtn-field div.selected').length > 0 ? this_node.find('.tw-msfb-qtn-field div.selected').attr('data-price') : 0
+                                    // this_node.find('.tw-msfb-qtn-field div').removeClass('selected')
                                     break;
                                 case 'msfb-single-select-field':
                                     price = this_node.find('.tw-msfb-qtn-field div.selected').length > 0 ? this_node.find('.tw-msfb-qtn-field div.selected').attr('data-price') : 0
                                     this_node.find('.tw-msfb-qtn-field div').removeClass('selected')
+                                    this_node.find('button[data-msfb-next]').attr('data-msfb-next','')
                                     break;
                                 case 'msfb-dropdown-field':
                                     price = this_node.attr('data-added-price') ? this_node.attr('data-added-price') : 0
                                     this_node.attr('data-added-price','')
                                     this_node.find('.tw-msfb-dropdown-field p').html(msfb.translate.msfb_select_from_dropdown)
+                                    this_node.find('button[data-msfb-next]').attr('data-msfb-next','')
                                     break;
                             }
-                            this_node.find('button[data-msfb-next]').attr('data-msfb-next','')
                             total -= parseFloat(price)
                             $('.tw-msfb-total-price span').html(total)
                             $('.tw-msfb-total-price span').counterUp();
