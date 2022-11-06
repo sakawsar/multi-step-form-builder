@@ -1,7 +1,7 @@
 (function ($) {
     $(document).ready(() => {
         $('.tw-msfb-total-price span').counterUp();
-        const msfb_visited_path = () => {
+        const msfb_visited_path = ( btn ) => {
             let nodes = [$('.tw-msfb-btn-container[data-msfb-root]').attr('data-msfb-root')]
             let visited_nodes = []
             $.each($('button[data-msfb-prev]'),(k,v) => {
@@ -23,6 +23,7 @@
             let lead_data = msfb_get_formulation_data(nodes)
             // let redirect_url = 
             //console.log(lead_data)
+            btn.html('<i class="fa fa-spinner fa-spin"></i> ' + msfb.translate.finish)
             $.ajax({
                 url: msfb.ajax_url,
                 type: "POST",
@@ -35,6 +36,10 @@
                     }
                 },
                 success: resp => {
+                    btn.html(msfb.translate.finish)
+                    $('html, body').animate({
+                        scrollTop: $(".tw-msfb-container").offset().top
+                    }, 500)
                     console.log(resp)
                     if( resp.formulation_id ) {
                         Swal.fire({
@@ -45,7 +50,13 @@
                         })
                     }
                 },
-                error: err => console.log(err)
+                error: err => {
+                    btn.html(msfb.translate.finish)
+                    $('html, body').animate({
+                        scrollTop: $(".tw-msfb-container").offset().top
+                    }, 500)
+                    console.log(err)
+                }
             })
             //console.log(nodes)
             //console.log('visited nodes',visited_nodes)
@@ -288,9 +299,6 @@
             }
         })
         $('button[data-msfb-redirect]').on('click', e => {
-            $('html, body').animate({
-                scrollTop: $(".tw-msfb-container").offset().top
-            }, 500)
             let this_el = $(e.currentTarget)
             let node_id = this_el.closest('div[data-msfb-node]').attr('data-msfb-node')
             let msfb_validation = msfb_required_validator(node_id)
@@ -301,7 +309,7 @@
                 msfb_swal2_warning(msfb_validation)
                 return false
             }
-            msfb_visited_path()
+            msfb_visited_path( this_el )
             $('.tw-msfb-progress-bar__status').animate({"width":`100%`})
         })
         // slider change

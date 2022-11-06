@@ -12,6 +12,7 @@ function msfb_enqueue_scripts(){
 			'field_is_required' => get_option('field_is_required','Field is required.'),
 			'this_step_is_required' => get_option('this_step_is_required','This step is required'),
 			'msfb_select_from_dropdown' => get_option('msfb_select_from_dropdown','Select from dropdown'),
+			'finish' => get_option('msfb_translate_finish','Finish'),
 		)
 	);
 	wp_localize_script( 'msfb_localize', 'msfb', $localize_data);
@@ -70,6 +71,7 @@ function msfb_admin_enqueue_scripts(){
 			'field_is_required' => get_option('field_is_required','Field is required.'),
 			'this_step_is_required' => get_option('this_step_is_required','This step is required'),
 			'msfb_select_from_dropdown' => get_option('msfb_select_from_dropdown','Select from dropdown'),
+			'finish' => get_option('msfb_translate_finish','Finish'),
 		)
 	);
 	if( isset($_GET['formulation_id']) && sanitize_text_field( $_GET['formulation_id'] ) != "" ) {
