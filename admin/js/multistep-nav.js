@@ -105,6 +105,9 @@
             }
         })
         $('button[data-msfb-next], button[data-msfb-prev]').on('click', e => {
+            $('html, body').animate({
+                scrollTop: $(".tw-msfb-container").offset().top
+            }, 500)
             let this_el = $(e.currentTarget)
             let this_el_node = this_el.closest('div[data-msfb-node]').attr('data-msfb-node')
             let node_id
