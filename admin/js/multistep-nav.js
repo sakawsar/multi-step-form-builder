@@ -41,7 +41,7 @@
                             icon: "success",
                             text: msfb.translate.form_data_successfully_submitted
                         }).then( data => {
-                            // window.location.href = $('button[data-msfb-redirect]').attr('data-msfb-redirect')
+                            window.location.href = $('button[data-msfb-redirect]').attr('data-msfb-redirect')
                         })
                     }
                 },
@@ -288,6 +288,9 @@
             }
         })
         $('button[data-msfb-redirect]').on('click', e => {
+            $('html, body').animate({
+                scrollTop: $(".tw-msfb-container").offset().top
+            }, 500)
             let this_el = $(e.currentTarget)
             let node_id = this_el.closest('div[data-msfb-node]').attr('data-msfb-node')
             let msfb_validation = msfb_required_validator(node_id)
