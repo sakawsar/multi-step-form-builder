@@ -620,7 +620,7 @@ Ensure the default browser behavior of the `hidden` attribute.
   display: flex;
   height: auto;
   flex-direction: column;
-  padding: 4rem;
+  padding-top: 4rem;
   min-height: 640px;
 }
 
