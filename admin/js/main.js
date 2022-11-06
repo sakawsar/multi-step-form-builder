@@ -31,6 +31,10 @@
             rightDrawer.css({ "right": "-" + setRight + "px" });
         });
     });
+    $('#msfb-color-scheme').on('input',function(){
+        $('label[for="msfb-color-scheme"] code').html($(this).val())
+        $('label[for="msfb-color-scheme"] div').css({background: $(this).val()})
+    })
     // get this value function
     const this__ = el => $(el.currentTarget)
     // filter by category

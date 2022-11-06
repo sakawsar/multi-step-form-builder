@@ -34,7 +34,31 @@
           }
         ?>
         <label for="formName"><?php _e('Color scheme','msfb'); ?></label>
-        <input style="width:50%;padding:0px;" value="<?php echo $color_scheme; ?>" type="color" id="msfb-color-scheme"/>
+        <div>
+          <label for="msfb-color-scheme" style="
+                padding: 8px;
+                background: white;
+                display: flex;
+            "><code style="
+                width: calc( 100% - 50px );
+                color:gray;
+            "><?php echo $color_scheme; ?></code><div style="
+                height: 30px;
+                width: 50px;
+                background: <?php echo $color_scheme; ?>;
+            "></div>
+          </label>
+          <style>
+            .colorpick-eyedropper-input-trigger{
+              display:none!important;
+            }
+          </style>
+          <input style="width: 0;
+                        padding: 0;
+                        margin: 0;
+                        height: 0;
+                        visibility: hidden;" value="<?php echo $color_scheme; ?>" type="color" id="msfb-color-scheme"/>
+        </div>
       </div>
     </div> <!-- /.skfb__field-opt__boxes -->
   </div>
