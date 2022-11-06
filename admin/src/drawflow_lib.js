@@ -309,6 +309,14 @@
                                   this.connection_ele.classList.add("node_in_" + s), this.connection_ele.classList.add("node_out_" + l), this.connection_ele.classList.add(c), this.connection_ele.classList.add(o);
                                   var d = s.slice(5),
                                       a = l.slice(5);
+                                  if( this.drawflow.drawflow[this.module].data[a].outputs[c].connections.length > 0 ) {
+                                    this.connection_ele.remove();
+                                    Swal.fire({
+                                        icon: "warning",
+                                        text: msfb.translate.cannot_create_mul_con
+                                    })
+                                    return false
+                                  }
                                   this.drawflow.drawflow[this.module].data[a].outputs[c].connections.push({ node: d, output: o }),
                                       this.drawflow.drawflow[this.module].data[d].inputs[o].connections.push({ node: a, input: c }),
                                       this.updateConnectionNodes("node-" + a),

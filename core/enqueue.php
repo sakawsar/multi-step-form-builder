@@ -72,6 +72,7 @@ function msfb_admin_enqueue_scripts(){
 			'this_step_is_required' => get_option('this_step_is_required','This step is required'),
 			'msfb_select_from_dropdown' => get_option('msfb_select_from_dropdown','Select from dropdown'),
 			'finish' => get_option('msfb_translate_finish','Finish'),
+			'cannot_create_mul_con' => get_option('cannot_create_mul_con',"Cannot create multiple connection from one output."),
 		)
 	);
 	if( isset($_GET['formulation_id']) && sanitize_text_field( $_GET['formulation_id'] ) != "" ) {

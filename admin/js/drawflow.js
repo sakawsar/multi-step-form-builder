@@ -32,7 +32,7 @@ if(id != null){
     })
 
     editor.on('nodeSelected', function(id) {
-      // console.log("Node selected " + id);
+      console.log("Node selected " + id);
     })
 
     editor.on('moduleCreated', function(name) {
@@ -70,7 +70,7 @@ if(id != null){
     })
 
     editor.on('addReroute', function(id) {
-      // console.log("Reroute added " + id);
+      console.log("Reroute added " + id);
     })
 
     editor.on('removeReroute', function(id) {

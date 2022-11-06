@@ -58,6 +58,7 @@ function msfb_settings_callback(){
         update_option('select_an_option_first',sanitize_text_field( $_POST['select_an_option_first'] ));
         update_option('field_is_required',sanitize_text_field( $_POST['field_is_required'] ));
         update_option('this_step_is_required',sanitize_text_field( $_POST['this_step_is_required'] ));
+        update_option('cannot_create_mul_con',sanitize_text_field( $_POST['cannot_create_mul_con'] ));
         // translate words
         update_option('msfb_select_from_dropdown',sanitize_text_field( $_POST['msfb_select_from_dropdown'] ));
         update_option('msfb_translate_back',sanitize_text_field( $_POST['msfb_translate_back'] ));
@@ -113,6 +114,12 @@ function msfb_settings_callback(){
                 <th><?php _e('This step is required.','msfb'); ?></th>
                 <td>
                     <input type="text" name="this_step_is_required" value="<?php echo get_option('this_step_is_required','') ?: ""; ?>" placeholder="This step is required."/>
+                </td>
+            </tr>
+            <tr>
+                <th><?php _e('Cannot create multiple connection from one output.','msfb'); ?></th>
+                <td>
+                    <input type="text" name="cannot_create_mul_con" value="<?php echo get_option('cannot_create_mul_con','') ?: ""; ?>" placeholder="Cannot create multiple connection from one output."/>
                 </td>
             </tr>
             <tr>
