@@ -38,7 +38,7 @@ if( !class_exists('MSFB_Object') ){
             wp_enqueue_style( 'msfb_admin_fontawesome' );
         }
         public function msfb_admin_menu(){
-            add_menu_page( __('Multistep form builder','msfb'), __('Multistep form builder','msfb'), 'manage_options', 'multistep_form_builder', 'msfb_menu_callback', '', 5 );
+            add_menu_page( __('Multistep form builder','msfb'), __('Multistep form builder','msfb'), 'manage_options', 'multistep_form_builder', 'msfb_menu_callback', '', 10 );
             // All leads
             add_submenu_page( 'multistep_form_builder', __('Leads','msfb'), __('Leads','msfb'), 'manage_options', 'multistep_form_builder', 'msfb_menu_callback' );
             // Contact forms
