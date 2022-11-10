@@ -96,7 +96,44 @@
                       #msfb_list_questions_by_category option:hover{
                         background:gray!important;
                       } */
+                      .msfb-filter-tab{
+                        display:flex;
+                        flex-direction:row;
+                        gap: 4px;
+                        justify-content: center;
+                        margin-bottom:16px;
+                        border-bottom:1px solid #4992ff;
+                      }
+                      .msfb-filter-tab div{
+                        border: 1px solid #4992ff;
+                        border-bottom:1px solid white;
+                        padding:8px 16px;
+                        border-radius: 8px 8px 0px 0px;
+                        z-index:999;
+                        color:#4992ff;
+                      }
+                      .msfb-filter-tab div:hover{
+                        /* position:absolute; */
+                        border: 1px solid ##4992ff;
+                        border-bottom:1px solid #4992ff;
+                        padding:8px 16px;
+                        border-radius: 8px 8px 0px 0px;
+                        z-index:999;
+                        color:white;
+                        background: #4992ff;
+                      }
+                      .msfb-tab-selected{
+                        margin-bottom:-1px;
+                      }
                     </style>
+                  <div class="msfb-filter-tab">
+                    <div class="msfb-qtn-tab msfb-tab-selected">
+                      <p>Question</p>
+                    </div>
+                    <div class="msfb-form-tab">
+                      <p>Form</p>
+                    </div>
+                  </div>
                   <select class="sk-form-control" id="msfb_list_questions_by_category">
                     <option value="">Filter questions by category</option>
                     <?php foreach($qt_cats as $a_cat){ if( $a_cat->cat_type != "question") continue; ?>
