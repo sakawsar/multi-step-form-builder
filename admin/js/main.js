@@ -194,7 +194,12 @@
                 msfb_hide_drawer(element)
             }
         }
-    })
+        if( clicked_field == "msfb-slider-field" ) {
+            $('label[for="msfb-price"]').html("Price value per Unit")
+        } else {
+            $('label[for="msfb-price"]').html("Price")
+        }
+    }) 
     const msfb_active_question = () => {
         let act_el = $('div[data-msfb-active="1"]')
         if( act_el.length > 0 ){
