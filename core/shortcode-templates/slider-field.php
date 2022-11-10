@@ -2,10 +2,10 @@
 function msfb_slider_step( $data ){
     $step_data = $data['step_data'];
     $question_data = json_decode( stripslashes( $data['question_data'] ), true);
-    $min_val = $question_data['min_val'] ?: 0;
-    $max_val = $question_data['max_val'] ?: 10;
-    $step = $question_data['step'] ?: 1;
-    $default_val = $question_data['default_val'] ?: 5;
+    $min_val = isset($question_data['min_val']) ? $question_data['min_val'] : 0;
+    $max_val = isset($question_data['max_val']) ? $question_data['max_val'] : 10;
+    $step = isset($question_data['step']) ? $question_data['step'] : 1;
+    $default_val = isset($question_data['default_val']) ? $question_data['default_val'] : 5;
     // echo '<pre>';
     // print_r($question_data);
     // echo '</pre>';

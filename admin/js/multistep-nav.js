@@ -168,14 +168,17 @@
                             total = parseFloat( $('.tw-msfb-total-price span').html() )
                         }
                         if( this_node_price && total != null && is_skipped == false ) {
+                            if (this_node.attr('data-question-type') == "msfb-slider-field" && this_node.attr('data-slider-prev-price') && this_node.hasClass('msfb_node_price_added') ) {
+                                let prev_price = parseFloat(this_node.attr('data-slider-prev-price'))
+                                if( this_node_price != prev_price ) {
+                                    total -= prev_price
+                                    total += this_node_price
+                                    $('.tw-msfb-total-price span').html(total)
+                                    $('.tw-msfb-total-price span').counterUp();
+                                }
+                            // } else {
+                            }
                             if ( this_node_price && total != null && !this_node.hasClass('msfb_node_price_added') ) {
-                                // if (this_node.attr('data-question-type') == "msfb-slider-field" && this_node.attr('data-slider-prev-price') ) {
-                                //     let prev_price = parseFloat(this_node.attr('data-slider-prev-price'))
-                                //     if( this_node_price != prev_price ) {
-                                //         total += this_node_price - prev_price
-                                //     }
-                                // } else {
-                                // }
                                 total += parseFloat(this_node_price)
                                 $('.tw-msfb-total-price span').html(total)
                                 this_node.addClass('msfb_node_price_added')
@@ -198,12 +201,14 @@
                         let prev_qtn_type = prev_node.attr('data-question-type')
                         if( prev_qtn_type == "msfb-slider-field" ) {
                             prev_node.attr('data-slider-prev-price',prev_node.attr('data-price'))
+                            // prev_node.removeClass('msfb_node_price_added')
                         }
                         let option_fields = ['msfb-single-select-field','msfb-multiselect','msfb-dropdown-field']
                         let this_qtn_type = this_node.attr('data-question-type')
                         if ( this_node_price && total != null && this_node.hasClass('msfb_node_price_added') && option_fields.indexOf(this_qtn_type) == -1 ) {
                             if (this_qtn_type == "msfb-slider-field" && this_node.attr('data-slider-prev-price') ) {
                                 this_node_price = parseFloat(this_node.attr('data-slider-prev-price'))
+                                this_node.attr('data-slider-prev-price',0)
                             }
                             total -= parseFloat(this_node_price)
                             $('.tw-msfb-total-price span').html(total)
