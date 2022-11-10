@@ -402,6 +402,12 @@ jQuery(document).ready($ => {
             return false
         }
         request_data = { msfb_subject, ...request_data}
+        let msfb_lead_subject = $('#msfb_lead_subject').val()
+        if( !msfb_lead_subject ) {
+            msfb_error_message("Lead email subject is required.")
+            return false
+        }
+        request_data = { msfb_lead_subject, ...request_data}
         let msfb_mgs = $('#msfb_mgs').val()
         if( !msfb_mgs ) {
             msfb_error_message("Message body is required.")

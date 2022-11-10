@@ -20,6 +20,8 @@ if( !empty($form_data) ) {
     $field_labels[] = '{'.$a_field['field_label'].'}';
   }
   $field_labels[] = '{totalPrice}';
+  $field_labels[] = '{leadTime}';
+  $field_labels[] = '{questionAndAnswer}';
   $available_vars = '<label for="senderEmail" class="skfb__with-icon"><i class="fas fa-info"></i>'.implode(', ',$field_labels).'</label>';
 }
 ?>
@@ -85,6 +87,11 @@ if( !empty($form_data) ) {
                 <label for="subject" class="skfb__with-icon"><i class="fas fa-stream"></i>Subject - the following variables can be inserted:</label>
                 <?php echo $available_vars;?>
                 <input type="text" value="<?php echo isset($form_settings['msfb_subject']) ? $form_settings['msfb_subject'] : null; ?>" placeholder="Placeholder subject" id="msfb_subject" />
+              </div>
+              <div class="skfb__field-box">
+                <label for="subject" class="skfb__with-icon"><i class="fas fa-stream"></i>Lead email subject - the following variables can be inserted:</label>
+                <?php echo $available_vars;?>
+                <input type="text" value="<?php echo isset($form_settings['msfb_lead_subject']) ? $form_settings['msfb_lead_subject'] : null; ?>" placeholder="Placeholder subject" id="msfb_lead_subject" />
               </div>
               <div class="skfb__field-box">
                 <label for="mgs" class="skfb__with-icon"><i class="fas fa-envelope-open-text"></i>Message - the following variables can be inserted:</label>

@@ -40,7 +40,7 @@
                     $('html, body').animate({
                         scrollTop: $(".tw-msfb-container").offset().top
                     }, 500)
-                    console.log(resp)
+                    // console.log(resp)
                     if( resp.formulation_id ) {
                         Swal.fire({
                             icon: "success",

@@ -74,6 +74,31 @@ function msfb_add_leads_callback(){
                         $form_settings[$set_key] = str_replace('{totalPrice}',$totalPrice,$set_value);
                     }
                 }
+                if( strpos($set_value,'{leadTime}') !== false ) {
+                    if( isset( $data['lead_time'] ) ) {
+                        $leadtime = date('d M, Y',$data['lead_time']).' '.date('h:i:s A',$data['lead_time']);
+                        $matched[$field_key] = array($field_key,$field_val,$set_value);
+                        $form_settings[$set_key] = str_replace('{leadTime}',$leadtime,$set_value);
+                    }
+                }
+                if( strpos($set_value,'{questionAndAnswer}') !== false ) {
+                    if( !empty($data['json_data']) ) {
+                        $lead_data = $data['json_data'];
+                        $lead_qtn_data = [];
+                        foreach($lead_data as $a_row){
+                            // continue;
+                            if( !isset($a_row['title']) || !isset($a_row['value'])) continue;
+                            $values = !is_array($a_row['value']) ? $a_row['value'] : null;
+                            $values = is_array($a_row['value']) && count($a_row['value']) > 1 ? implode(', ',$a_row['value']) : $a_row['value'][0];
+                            $lead_qtn_data[] = $a_row['title'].' - '.$values;
+                        }
+                        $question_ans = "No question found.";
+                        if( !empty($lead_qtn_data) ) {
+                            $question_ans = count($lead_qtn_data) > 1 ? implode("<br>",$lead_qtn_data) : $lead_qtn_data[0];
+                        }
+                        $form_settings[$set_key] = str_replace('{questionAndAnswer}',$question_ans,$set_value);
+                    }
+                }
             }
         }
         $data['form_settings'] = $form_settings;
@@ -94,7 +119,14 @@ function msfb_add_leads_callback(){
                     $form_settings['msfb_mgs'],
                     $headers
                 );
+        $lead_email = wp_mail( 
+                    $form_settings['lead_email'],
+                    $form_settings['msfb_lead_subject'],
+                    $form_settings['msfb_lead_mgs'],
+                    $headers
+                );
         $data['email_sent'] = $email;
+        $data['lead_email_sent'] = $lead_email;
         echo json_encode($data);
         exit;
     }
