@@ -4,6 +4,7 @@ function msfb_slider_step( $data ){
     $question_data = json_decode( stripslashes( $data['question_data'] ), true);
     $min_val = $question_data['min_val'] ?: 0;
     $max_val = $question_data['max_val'] ?: 10;
+    $step = $question_data['step'] ?: 1;
     $default_val = $question_data['default_val'] ?: 5;
     // echo '<pre>';
     // print_r($question_data);
@@ -19,7 +20,7 @@ function msfb_slider_step( $data ){
     <!-- slider -->
     <div class="msfb-slider-qtn tw-msfb-qtn-field tw-msfb-slider-qtn relative items-center text-xl">
         <p class="mb-8 msfb-slider-field-value">Value: <strong><?php echo $default_val; ?></strong></p>
-        <input type="range" class="tw-msfb-slider-field" min="<?php echo $min_val; ?>" max="<?php echo $max_val; ?>"  value="<?php echo $default_val; ?>"/>
+        <input type="range" step="<?php echo $step; ?>" class="tw-msfb-slider-field" min="<?php echo $min_val; ?>" max="<?php echo $max_val; ?>"  value="<?php echo $default_val; ?>"/>
         <div class="flex flex-row justify-between w-full mt-4">
             <p class="msfb-min-val"><strong><?php echo $min_val; ?></strong></p>
             <p class="msfb-max-val"><strong><?php echo $max_val; ?></strong></p>
