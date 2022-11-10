@@ -97,36 +97,6 @@ function msfb_ui_callback( $atts ){
 				}
 			}
 		}
-		function msfb_chain_diver( $graph, array $start, $require_back_track = [], $path = [], $paths = []){
-			$start = array_shift($start);
-			$vertax = $graph[$start];
-			$vertax_children = count($vertax);
-			$path[] = $start;
-			$tracked_path = [];
-			if( $vertax_children > 0 ) {
-				$current_pointer = $vertax[$vertax_children - 1];
-				if( $vertax_children > 1 ) {
-					array_pop($vertax);
-					if( !in_array($start,$require_back_track) ){
-						$require_back_track[] = $start;
-					}
-					$tracked_path = $path;
-				} else {
-					if( in_array($start,$require_back_track) ){
-						array_shift($require_back_track);
-					}
-				}
-				$graph[$start] = $vertax;
-				return msfb_chain_diver( $graph, [$current_pointer], $require_back_track, $path, $paths );
-			} else {
-				$paths[] = $path;
-				if( $require_back_track ) {
-					return msfb_chain_diver( $graph, $require_back_track, $require_back_track, $tracked_path, $paths );
-				} else {
-					return $paths;
-				}
-			}
-		}
 		$dfs_data = msfb_chain_diver($map,[$root]);
 		$max = 0;
 		foreach($dfs_data as $a_path){
@@ -145,6 +115,36 @@ function msfb_ui_callback( $atts ){
 	</div>
 	<?php
 	return ob_get_clean();
+}
+function msfb_chain_diver( $graph, array $start, $require_back_track = [], $path = [], $paths = []){
+	$start = array_shift($start);
+	$vertax = $graph[$start];
+	$vertax_children = count($vertax);
+	$path[] = $start;
+	$tracked_path = [];
+	if( $vertax_children > 0 ) {
+		$current_pointer = $vertax[$vertax_children - 1];
+		if( $vertax_children > 1 ) {
+			array_pop($vertax);
+			if( !in_array($start,$require_back_track) ){
+				$require_back_track[] = $start;
+			}
+			$tracked_path = $path;
+		} else {
+			if( in_array($start,$require_back_track) ){
+				array_shift($require_back_track);
+			}
+		}
+		$graph[$start] = $vertax;
+		return msfb_chain_diver( $graph, [$current_pointer], $require_back_track, $path, $paths );
+	} else {
+		$paths[] = $path;
+		if( $require_back_track ) {
+			return msfb_chain_diver( $graph, $require_back_track, $require_back_track, $tracked_path, $paths );
+		} else {
+			return $paths;
+		}
+	}
 }
 function msfb_get_the_step( $dataset ) {
 	$type = $dataset['type'];
