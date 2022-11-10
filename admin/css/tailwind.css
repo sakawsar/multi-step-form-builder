@@ -951,6 +951,7 @@ Ensure the default browser behavior of the `hidden` attribute.
   color: rgb(255 255 255 / var(--tw-text-opacity));
   background-color: var(--msfb-color);
   outline: none;
+  border:none;
 }
 
 /** checkbox custom design */
