@@ -70,7 +70,7 @@ function msfb_mendatory_fields( $id, $question_data ){
         <textarea class="msfb-desc" placeholder="Description"><?php echo $has_data ? $question_data['question_desc'] : ""; ?></textarea>
     </div>
     <div class="skfb__field-box __2">
-        <label for="msfb-price"><?php $question_data['question_type'] == "msfb-slider-field" ? "Price value per Unit" : "Price"; ?></label>
+        <label for="msfb-price"><?php echo $question_data['question_type'] == "msfb-slider-field" ? "Price value per Unit" : "Price"; ?></label>
         <input type="number" placeholder="Price" value="<?php echo $has_data ? $question_data['question_price'] : ""; ?>" class="msfb-price" />
     </div>
     <div class="skfb__field-box __2">
