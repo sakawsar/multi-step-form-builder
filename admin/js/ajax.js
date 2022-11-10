@@ -376,6 +376,12 @@ jQuery(document).ready($ => {
             return false
         }
         request_data = { sender_email, ...request_data}
+        let lead_email = $('#msfb_leadEmail').val()
+        if( !lead_email ) {
+            msfb_error_message("Lead email is required.")
+            return false
+        }
+        request_data = { lead_email, ...request_data}
         let recipient_email = $('#msfb_recipientEmail').val()
         if( !recipient_email ) {
             msfb_error_message("Recipient email is required.")
@@ -402,6 +408,12 @@ jQuery(document).ready($ => {
             return false
         }
         request_data = { msfb_mgs, ...request_data}
+        let msfb_lead_mgs = $('#msfb_lead_mgs').val()
+        if( !msfb_lead_mgs ) {
+            msfb_error_message("Lead message body is required.")
+            return false
+        }
+        request_data = { msfb_lead_mgs, ...request_data}
         /** smtp data */
         // let smtp_server = $('#msfb_smtpServer').val()
         // if( !smtp_server ) {

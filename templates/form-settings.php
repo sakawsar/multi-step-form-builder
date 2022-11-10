@@ -56,9 +56,15 @@ if( !empty($form_data) ) {
                 <input type="text" value="<?php echo isset($form_settings['sender_name']) ? $form_settings['sender_name'] : null; ?>" placeholder="Albert Einstein" id="msfb_senderName" />
               </div>
               <div class="skfb__field-box">
-                <label for="senderEmail" class="skfb__with-icon"><i class="fas fa-envelope"></i>Sender email - the following variables can be inserted:</label>
-                <?php echo $available_vars;?>
+                <label for="senderEmail" class="skfb__with-icon"><i class="fas fa-envelope"></i>Sender email</label>
+                <!-- <label for="senderEmail" class="skfb__with-icon"><i class="fas fa-envelope"></i>Sender email - the following variables can be inserted:</label> -->
+                <?php //echo $available_vars;?>
                 <input type="text" value="<?php echo isset($form_settings['sender_email']) ? $form_settings['sender_email'] : null; ?>" placeholder="abc@xyz.com" id="msfb_senderEmail" />
+              </div>
+              <div class="skfb__field-box">
+                <label for="senderEmail" class="skfb__with-icon"><i class="fas fa-envelope"></i>Lead sending email</label>
+                <?php //echo $available_vars;?>
+                <input type="text" value="<?php echo isset($form_settings['lead_email']) ? $form_settings['lead_email'] : null; ?>" placeholder="abc@xyz.com" id="msfb_leadEmail" />
               </div>
               <div class="skfb__field-box">
                 <label for="recipientEmail" class="skfb__with-icon"><i class="fas fa-envelope"></i>Recipient e-mail - the following variables can be inserted:</label>
@@ -84,6 +90,11 @@ if( !empty($form_data) ) {
                 <label for="mgs" class="skfb__with-icon"><i class="fas fa-envelope-open-text"></i>Message - the following variables can be inserted:</label>
                 <?php echo $available_vars;?>
                 <textarea style="height:300px;" type="text" placeholder="Messages" id="msfb_mgs"><?php echo isset($form_settings['msfb_mgs']) ? $form_settings['msfb_mgs'] : null; ?></textarea>
+              </div>
+              <div class="skfb__field-box">
+                <label for="mgs" class="skfb__with-icon"><i class="fas fa-envelope-open-text"></i>Lead Message - the following variables can be inserted:</label>
+                <?php echo $available_vars;?>
+                <textarea style="height:300px;" type="text" placeholder="Messages" id="msfb_lead_mgs"><?php echo isset($form_settings['msfb_lead_mgs']) ? $form_settings['msfb_lead_mgs'] : null; ?></textarea>
               </div>
             </div> <!-- /.col- -->
 
