@@ -200,27 +200,6 @@
             $('label[for="msfb-price"]').html("Price")
         }
     })
-    $('.msfb-filter-tab div').on('click',function(){
-        let elements = $('div[data-element-name]')
-        $.each(elements,function(k,v){
-            $(v).show()
-        })
-        $('#msfb_list_questions_by_category, #msfb_list_questions_by_category2').prop('selectedIndex',0)
-        let type=$(this).attr('data-type')
-        if( type == "qtn" ) {
-            $('.msfb-qtn-tab').addClass('msfb-tab-selected')
-            $('.msfb-form-tab').removeClass('msfb-tab-selected')
-            $('.msfb-form-els-holder').fadeOut(function(){
-                $('.msfb-qtn-els-holder').fadeIn()
-            })
-        } else if ( type == "form" ) {
-            $('.msfb-form-tab').addClass('msfb-tab-selected')
-            $('.msfb-qtn-tab').removeClass('msfb-tab-selected')
-            $('.msfb-qtn-els-holder').fadeOut(function(){
-                $('.msfb-form-els-holder').fadeIn()
-            })
-        }
-    })
     const msfb_active_question = () => {
         let act_el = $('div[data-msfb-active="1"]')
         if( act_el.length > 0 ){
@@ -358,7 +337,7 @@
         }
     })
     // multiselect/ single select image update
-    $('.msfb_custom_icon_image').on('click',e => {
+    $(document).on('click','.msfb_custom_icon_image',e => {
         let this_el = this__(e)
         let url = this_el.attr('src')
         // let icon_classes = this_el.attr('class')

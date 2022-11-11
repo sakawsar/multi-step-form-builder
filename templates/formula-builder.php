@@ -47,6 +47,14 @@
         <div class="sk-row">
           <div class="sk-col-md-3 sk-col-lg-2 skfb__overflow_scroll">
             <div class="skfb-feilds-panel">
+            <div class="msfb-filter-tab">
+                    <div class="msfb-qtn-tab msfb-tab-selected" data-type="qtn">
+                      <p>Question</p>
+                    </div>
+                    <div class="msfb-form-tab" data-type="form">
+                      <p>Form</p>
+                    </div>
+                  </div>
               <h6 class="sk-head skfb-bb-primary sk-text-primary">Search elements</h6>
               <!-- <div class="skfb__field-box __3">
                 <select class="sk-form-control sk-custom-select skfb__custom-select">
@@ -129,14 +137,7 @@
                         /* color:white!important; */
                       }
                     </style>
-                  <div class="msfb-filter-tab">
-                    <div class="msfb-qtn-tab msfb-tab-selected" data-type="qtn">
-                      <p>Question</p>
-                    </div>
-                    <div class="msfb-form-tab" data-type="form">
-                      <p>Form</p>
-                    </div>
-                  </div>
+                  
                   <div class="msfb-qtn-els-holder">
                     <!-- <h6 class="sk-head skfb-bb-primary sk-text-primary">Filter questions</h6> -->
                     <select class="sk-form-control" id="msfb_list_questions_by_category">

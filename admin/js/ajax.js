@@ -209,7 +209,7 @@ jQuery(document).ready($ => {
                 //console.log(resp)
                 $('#msfb-custom-icon').val('')
                 this_el.html('Upload')
-                $('.skfb__custom_icon_select_field').prepend('<img style="height:50px;width:auto;margin:16px 16px 0px 0px;" src="' + resp.url + '"/>')
+                $('.skfb__custom_icon_select_field').prepend('<img class="msfb_custom_icon_image" style="height:50px;width:auto;margin:16px 16px 0px 0px;" src="' + resp.url + '"/>')
 	        },
 	        error:function(err){
 	            //console.log(err);
