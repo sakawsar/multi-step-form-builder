@@ -38,16 +38,25 @@ function formula_builder_callback(){
     }
 }
 function msfb_help_center_callback(){
-   msfb_enqueue_style();
-    wp_redirect( 'https://multi-step-form.com/help-center', 301 );
+   ?>
+    <script>
+        window.location.href = "https://multi-step-form.com/help-center";
+    </script>
+   <?php
     exit();
 }
 function msfb_support_callback(){
-   msfb_enqueue_style();
-    wp_redirect( 'https://multi-step-form.com/support', 301 );
+    ?>
+    <script>
+        window.location.href = "https://multi-step-form.com/support";
+    </script>
+   <?php
     exit();
 }
 function msfb_settings_callback(){
+    function get_the_label( $label, $tooltip_title ){
+        printf('%s <i title="%s" class="fa fa-question-circle"></i>',$label,$tooltip_title);
+    }
     printf('<h1>%s</h1>',__('Multistep form builder settings','msfb'));
     if(isset($_POST['save_settings'])){
         $row_count = sanitize_text_field( $_POST['msfb_row_count'] );
@@ -72,23 +81,46 @@ function msfb_settings_callback(){
     <table class="form-table">
         <form method="post">
             <tr>
-                <th><?php _e('Row limit for each page','msfb'); ?></th>
+                <th>
+                    <?php 
+                        get_the_label(__('Row limit for each page','msfb'), __('This row count is to show the number of rows in any table (Lead, question or Q-Flow)','msfb'));
+                    ?>
+                </th>
                 <td>
                     <input type="number" name="msfb_row_count" value="<?php echo get_option('msfb_row_count') ?: ""; ?>" placeholder="Row count"/>
+                    <p>
+                        <?php _e('This row count is to show the number of rows in any table (Lead, question or Q-Flow)','msfb'); ?>
+                    </p>
                 </td>
             </tr>
             <tr>
-                <th><?php _e('Currency symbol','msfb'); ?></th>
+                <th>
+                    <?php 
+                        get_the_label(__('Currency symbol','msfb'), __('The currency symbol which will show in the pricing of the Q-Flow.','msfb'));
+                    ?>
+                </th>
                 <td>
                     <input type="text" name="msfb_currency_symb" value="<?php echo get_option('msfb_currency_symb','') ?: ""; ?>" placeholder="$"/>
+                    <p>
+                        <?php _e('The currency symbol which will show in the pricing of the Q-Flow.','msfb') ?>
+                    </p>
                 </td>
             </tr>
             <tr>
-                <th><h2>Translations of word and sentences</h2></th>
+                <th>
+                    <h2>
+                        <?php 
+                            _e('Translations of word and sentences','msfb')
+                            ?>
+                    </h2>
+                    <p>
+                        <?php _e('Those are the fields to translate the word and sentences which is written in English.','msfb'); ?>
+                    </p>
+                </th>
             </tr>
             <tr>
                 <th><?php _e('Form data successfully submitted.','msfb'); ?></th>
-                <td>
+                <td> 
                     <input type="text" name="form_data_successfully_submitted" value="<?php echo get_option('form_data_successfully_submitted','') ?: ""; ?>" placeholder="Form data successfully submitted."/>
                 </td>
             </tr>
