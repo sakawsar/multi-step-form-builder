@@ -58,12 +58,12 @@ function msfb_mendatory_fields( $id, $question_data ){
     }
     ?>
     <div class="skfb__field-box __2">
-        <label for="msfb-qtn-name">Question Name</label>
+        <label for="msfb-qtn-name"><?php _e('Question Name','msfb'); ?> <i class="fa fa-question-circle" title="<?php _e('You can give this question a name or a designation so that you can find it again in the questions overview.','msfb'); ?>"></i></label>
         <input type="text" value="<?php echo $has_data ? $question_data['question_name'] : ""; ?>" placeholder="Question Name" class="msfb-qtn-name" />
     </div>
     <div class="skfb__field-box __2">
-        <label for="msfb-title">Title</label>
-        <input type="text" placeholder="Title" value="<?php echo $has_data ? $question_data['question_title'] : ""; ?>" class="msfb-title" />
+        <label for="msfb-title"><?php _e('Question','msfb'); ?></label>
+        <input type="text" placeholder="<?php _e('Question','msfb'); ?>" value="<?php echo $has_data ? $question_data['question_title'] : ""; ?>" class="msfb-title" />
     </div>
     <div class="skfb__field-box __2">
         <label for="msfb-desc">Description</label>
