@@ -38,8 +38,8 @@ class MSFB_List_Table{
                 $this->title = sprintf('%s <i title="%s" class="fa fa-question-circle"></i>',__('Q-Flow','msfb'),__('Here you can link the questions (Step 1) and contact forms (Step 2) together in a visual drag-n-drop builder. You can upload the icons individually, store a price value behind each question/answer (may or may not be displayed to the interested person), and have individual questions followed by different answers. this is the heart of our plugin, which we are very proud of.','msfb'));
                 // $this->title = __('Q-Flow','msfb');
                 $this->add_new_url = admin_url( 'admin.php?page=formula_builder&formulation_id' );
-                $this->add_button = __("Add formulation","msfb");
-                $this->search_placeholder = __("Search formulation by name","msfb");
+                $this->add_button = __("Add q-flow","msfb");
+                $this->search_placeholder = __("Search q-flow by name","msfb");
                 $this->cat_type = "fromulation";
                 break;
         }

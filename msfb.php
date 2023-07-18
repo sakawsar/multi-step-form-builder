@@ -47,7 +47,7 @@ if( !class_exists('MSFB_Object') ){
             $question_builder_hook = add_submenu_page( 'multistep_form_builder', __('Questions','msfb'), __('Questions','msfb'), 'manage_options', 'questions_builder', 'questions_builder_callback' );
             add_action('admin_print_styles-'.$question_builder_hook,[$this,'msfb_enqueue_question_style']);
             // Formula
-            $formula_builder_hook = add_submenu_page( 'multistep_form_builder', __('Formula','msfb'), __('Formula','msfb'), 'manage_options', 'formula_builder', 'formula_builder_callback' );
+            $formula_builder_hook = add_submenu_page( 'multistep_form_builder', __('Q-Flows','msfb'), __('Q-Flows','msfb'), 'manage_options', 'formula_builder', 'formula_builder_callback' );
             add_action('admin_print_styles-'.$formula_builder_hook,[$this,'msfb_enqueue_formula_style']);
             // Settings
             add_submenu_page( 'multistep_form_builder', __('Settings','msfb'), __('Settings','msfb'), 'manage_options', 'msfb_settings', 'msfb_settings_callback' );
