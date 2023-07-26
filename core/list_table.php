@@ -18,6 +18,7 @@ class MSFB_List_Table{
                 $this->has_search = true;
                 $this->search_placeholder = __("Search lead","msfb");
                 $this->cat_type = "lead";
+                $this->label = "Leads";
                 break;
             case 'questions':
                 $this->title = sprintf('%s <i title="%s" class="fa fa-question-circle"></i>',__('Questions','msfb'),__('Here you can create your individual questions that you can later place and link in the Q-Flow.','msfb'));
@@ -25,6 +26,7 @@ class MSFB_List_Table{
                 $this->add_button = __("Add question","msfb");
                 $this->search_placeholder = __("Search question by name","msfb");
                 $this->cat_type = "question";
+                $this->label = "Questions";
                 break;
             case 'forms':
                 $this->title = sprintf('%s <i title="%s" class="fa fa-question-circle"></i>',__('Contact forms','msfb'),__('Here you can create the Contact form which is the final step at the end of the Q-Flow. The interested person can enter their contact details here in order to send the whole Q-Flow to you. This contact form should be the last step in each Q-Flow to submit the Q-Flow.','msfb'));
@@ -33,6 +35,7 @@ class MSFB_List_Table{
                 $this->add_button = __("Add form","msfb");
                 $this->search_placeholder = __("Search form by name","msfb");
                 $this->cat_type = "from";
+                $this->label = "Forms";
                 break;
             case 'formulations':
                 $this->title = sprintf('%s <i title="%s" class="fa fa-question-circle"></i>',__('Q-Flow','msfb'),__('Here you can link the questions (Step 1) and contact forms (Step 2) together in a visual drag-n-drop builder. You can upload the icons individually, store a price value behind each question/answer (may or may not be displayed to the interested person), and have individual questions followed by different answers. this is the heart of our plugin, which we are very proud of.','msfb'));
@@ -41,6 +44,7 @@ class MSFB_List_Table{
                 $this->add_button = __("Add q-flow","msfb");
                 $this->search_placeholder = __("Search q-flow by name","msfb");
                 $this->cat_type = "fromulation";
+                $this->label = "Q-Flows";
                 break;
         }
     }

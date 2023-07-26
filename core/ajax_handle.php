@@ -1,4 +1,26 @@
 <?php
+add_action('wp_ajax_msfb_export_data','msfb_export_data_callback');
+function msfb_export_data_callback(){
+    if( isset($_POST['dataset']) ) {
+        $data_type = $_POST['dataset'];
+        global $wpdb;
+        $table_name = $wpdb->prefix.'msfb_'.$data_type;
+        $results = $wpdb->get_results("SELECT * FROM $table_name",ARRAY_A);
+        wp_die(json_encode($results));
+    }
+    exit;
+}
+add_action('wp_ajax_msfb_import_data','msfb_import_data_callback');
+function msfb_import_data_callback(){
+    if( isset($_POST['dataset']) ) {
+        $data_type = $_POST['dataset'];
+        // global $wpdb;
+        // $table_name = $wpdb->prefix.'msfb_'.$data_type;
+        // $results = $wpdb->get_results("SELECT * FROM $table_name",ARRAY_A);
+        wp_die(json_encode($data_type));
+    }
+    exit;
+}
 add_action('wp_ajax_msfb_save_forms_settings','msfb_save_forms_settings_callback');
 function msfb_save_forms_settings_callback(){
     if(isset($_POST['dataset'])){
