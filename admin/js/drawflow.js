@@ -26,8 +26,8 @@ if(id != null){
         let prev_options = jQuery(prev_html).find('ul li').length
         // current options of the node
         let current_options = jQuery(updated_html).find('ul li').length
-        console.log('current options',current_options, prev_options)
-        console.log('node_name',node_name)
+        // console.log('current options',current_options, prev_options)
+        // console.log('node_name',node_name)
         // update the html 
         msfb.raw_data.drawflow.Home.data[the_node_key].html = updated_html // update the previous node dom
         // update the outputs
@@ -36,7 +36,7 @@ if(id != null){
       editor.import(msfb.raw_data);
       for (let i = 0; i < node_data.length; i++) {
         let a_node_data = node_data[i]
-        console.log(a_node_data)
+        // console.log(a_node_data)
         let node_name = node_data[i].node_name
         let prev_options = node_data[i].prev_options
         let current_options = node_data[i].current_options
@@ -46,7 +46,7 @@ if(id != null){
           if( prev_options !== current_options ) {
               if( prev_options > current_options ) {
                   let offset = prev_options - current_options
-                  console.log(node_name,offset)
+                  // console.log(node_name,offset)
                   for( let j = 1; j <= offset; j++ ) {
                     let this_opt_key = `output_${prev_options - j}`
                     let this_in_key = `input_${prev_options - j}`
