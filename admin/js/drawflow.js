@@ -35,6 +35,8 @@ if(id != null){
       }
       editor.import(msfb.raw_data);
       for (let i = 0; i < node_data.length; i++) {
+        let a_node_data = node_data[i]
+        console.log(a_node_data)
         let node_name = node_data[i].node_name
         let prev_options = node_data[i].prev_options
         let current_options = node_data[i].current_options
@@ -42,20 +44,22 @@ if(id != null){
         let qtn_type = jQuery('div[data-node="'+node_name+'"]').attr('data-question-type')
         if ( qtn_type == "msfb-single-select-field" || qtn_type == "msfb-dropdown-field" ) {
           if( prev_options !== current_options ) {
-            for( let i = 1; i <= current_options; i++ ) {
               if( prev_options > current_options ) {
                   let offset = prev_options - current_options
+                  console.log(node_name,offset)
                   for( let j = 1; j <= offset; j++ ) {
                     let this_opt_key = `output_${prev_options - j}`
+                    let this_in_key = `input_${prev_options - j}`
                     editor.removeNodeOutput(node_id,this_opt_key)
+                    editor.removeNodeInput(node_id,this_in_key)
                   }
-              } else if( prev_options > current_options ) {
+              } else if( prev_options < current_options ) {
                 let offset = current_options - prev_options
                 for( let j = 1; j <= offset; j++ ) {
                   editor.addNodeOutput(node_id)
+                  editor.addNodeInput(node_id)
                 }
               }
-            }
           }
         }
       }
