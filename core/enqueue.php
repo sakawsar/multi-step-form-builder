@@ -95,7 +95,7 @@ function msfb_admin_enqueue_scripts(){
 	wp_enqueue_script( 'msfb_admin_form_builder', MSFB_URL.'admin/js/form-builder.js', array(), false, true );
 	wp_enqueue_script( 'msfb_admin_formulation_builder', MSFB_URL.'admin/js/formulation-builder.js', array(), false, true );
 	wp_enqueue_script( 'msfb_admin_ajax', MSFB_URL.'admin/js/ajax.js', array(), false, true );
-	wp_enqueue_script( 'msfb_admin_export', MSFB_URL.'admin/js/export.js', array(), false, true );
+	wp_enqueue_script( 'msfb_admin_export', MSFB_URL.'admin/js/export-import.js', array(), false, true );
 	wp_enqueue_script( 'msfb_fontawesome_icons', MSFB_URL.'admin/js/fontawesome.js', array(), false, false );
 	wp_enqueue_script( 'msfb_admin_select2', MSFB_URL.'admin/js/select2.min.js' );
 	// wp_enqueue_script( 'msfb_admin_swal2', 'https://cdn.jsdelivr.net/npm/sweetalert2@9' );

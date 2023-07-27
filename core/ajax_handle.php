@@ -10,14 +10,43 @@ function msfb_export_data_callback(){
     }
     exit;
 }
+function msfb_validator( $data_type ){
+    $dataset = array(
+        'questions' => ['id', 'question_name', 'cat_id', 'question_title', 'question_desc', 'question_price', 'question_required', 'question_type', 'question_data'],
+        'forms' => array('id','cat_id','form_name','form_data'),
+        // 'forms' => array('id','cat_id','form_name','form_data'),
+    );
+    return $dataset[$data_type];
+}
 add_action('wp_ajax_msfb_import_data','msfb_import_data_callback');
 function msfb_import_data_callback(){
     if( isset($_POST['dataset']) ) {
-        $data_type = $_POST['dataset'];
-        // global $wpdb;
-        // $table_name = $wpdb->prefix.'msfb_'.$data_type;
-        // $results = $wpdb->get_results("SELECT * FROM $table_name",ARRAY_A);
-        wp_die(json_encode($data_type));
+        $dataset = $_POST['dataset'];
+        $dataset = json_decode( stripslashes( $dataset ), true );
+        $data_type = $dataset['data_type'];
+        $data = $dataset['data'];
+        $keys = [];
+        $validator_keys = [];
+        foreach( $data as $a_row ){
+            $row_keys = array_keys($a_row);
+            $keys[] = $row_keys;
+            $validator_keys[] = msfb_validator($data_type);
+            if( $row_keys !== msfb_validator($data_type) ) {
+                wp_die(json_encode(array(
+                    'status' => 'error',
+                    'message' => 'Invalid data format.'
+                )));
+            }
+            global $wpdb;
+            $table_name = $wpdb->prefix.'msfb_'.$data_type;
+            unset($a_row['id']);
+            $wpdb->insert($table_name,$a_row);
+        }
+        wp_die(json_encode([
+            'status' => 'success',
+            'message' => 'Data imported successfully.'
+        ]));
+        // wp_die(json_encode([$data, $validator_keys, $keys, 'whole_data' => $dataset]));
     }
     exit;
 }

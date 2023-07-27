@@ -26,6 +26,7 @@ jQuery(document).ready(function($){
     })
     $('#msfb-import-data').on('change',function(e){
         e.preventDefault()
+        let data_type = $(this).attr('data-msfb-import-type')
         let file = $(this).prop('files')[0]
         console.log(file)
         let reader = new FileReader()
@@ -38,10 +39,18 @@ jQuery(document).ready(function($){
                 dataType: "json",
                 data: {
                     action: 'msfb_import_data',
-                    dataset: data
+                    dataset: JSON.stringify({ data, data_type })
                 },
                 success:function(resp){
                     console.log(resp)
+                    if( resp.status && resp.message ) {
+                        Swal.fire({
+                            icon: resp.status,
+                            text: resp.message,
+                        }).then( ok => {
+                            window.location.reload()
+                        })
+                    }
                 },
                 error:function(err){
                     console.log(err)
