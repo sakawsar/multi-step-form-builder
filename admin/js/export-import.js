@@ -16,7 +16,8 @@ jQuery(document).ready(function($){
                 let dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(resp));
                 let anchor = document.createElement('a')
                 anchor.setAttribute("href",dataStr)
-                anchor.setAttribute("download", "scene.json")
+                let file_name = data_type + '-' + new Date().getTime() + '.json'
+                anchor.setAttribute("download", file_name)
                 anchor.click()
             },
             error:function(err){
