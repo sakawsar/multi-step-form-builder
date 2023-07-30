@@ -89,12 +89,12 @@
               $qt_cats = $wpdb->get_results("SELECT * FROM  $cat_table WHERE cat_type in ('question','from')");
               ?>
               <h6 class="sk-head skfb-bb-primary sk-text-primary">Filter by category</h6>
-              <!-- <h6 class="sk-head skfb-bb-primary sk-text-primary">Filter <span style="padding:2px 4px;background:#4992ff;color:white;">questions</span>/<span style="padding:2px 4px;background:yellow;color:black;">forms</span></h6> -->
+              <!-- <h6 class="sk-head skfb-bb-primary sk-text-primary">Filter <span style="padding:2px 4px;background:#244A60;color:white;">questions</span>/<span style="padding:2px 4px;background:yellow;color:black;">forms</span></h6> -->
               <div style="margin-top:8px;" class="skfb-search-box __2">
                     <style>
                       /* #msfb_list_questions_by_category option[data-type="question"]{
                         border-top:4px solid white;
-                        background:#4992ff;
+                        background:#244A60;
                       }
                       #msfb_list_questions_by_category option[data-type="from"]{
                         border-top:4px solid white;
@@ -110,30 +110,30 @@
                         gap: 4px;
                         justify-content: center;
                         margin-bottom:16px;
-                        border-bottom:1px solid #4992ff;
+                        border-bottom:1px solid #244A60;
                       }
                       .msfb-filter-tab div{
-                        border: 1px solid #4992ff;
+                        border: 1px solid #244A60;
                         border-bottom:1px solid white;
                         padding:8px 16px;
                         border-radius: 8px 8px 0px 0px;
                         z-index:999;
-                        color:#4992ff;
+                        color:#244A60;
                         cursor:pointer;
                       }
                       .msfb-filter-tab div:hover{
                         /* position:absolute; */
-                        border: 1px solid ##4992ff;
-                        border-bottom:1px solid #4992ff;
+                        border: 1px solid ##244A60;
+                        border-bottom:1px solid #244A60;
                         padding:8px 16px;
                         border-radius: 8px 8px 0px 0px;
                         z-index:999;
                         color:white!important;
-                        background: #4992ff;
+                        background: #244A60;
                       }
                       .msfb-tab-selected{
                         margin-bottom:-1px;
-                        /* background: #4992ff; */
+                        /* background: #244A60; */
                         /* color:white!important; */
                       }
                     </style>
@@ -149,7 +149,7 @@
                   </div>
                   <div class="msfb-form-els-holder" style="display:none;">
                     <!-- <h6 class="sk-head skfb-bb-primary sk-text-primary">Filter forms</h6> -->
-                    <!-- <h6 class="sk-head skfb-bb-primary sk-text-primary">Filter <span style="padding:2px 4px;background:#4992ff;color:white;">questions</span>/<span style="padding:2px 4px;background:yellow;color:black;">forms</span></h6> -->
+                    <!-- <h6 class="sk-head skfb-bb-primary sk-text-primary">Filter <span style="padding:2px 4px;background:#244A60;color:white;">questions</span>/<span style="padding:2px 4px;background:yellow;color:black;">forms</span></h6> -->
                     <select class="sk-form-control" id="msfb_list_questions_by_category2">
                       <option value="">Filter forms by category</option>
                       <?php foreach($qt_cats as $a_cat){ if( $a_cat->cat_type != "from") continue; ?>

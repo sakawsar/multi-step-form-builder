@@ -579,7 +579,7 @@ a {
     color: #000;
 }
 .sk-text-primary {
-    color: #4992ff;
+    color: #244A60;
 }
 .sk-head {
     font-family: 'Roboto', sans-serif;
@@ -598,7 +598,7 @@ h6.sk-head {
     font-size: 24px;
 }
 .skfb-bb-primary {
-    border-bottom: 1px solid #4992ff;
+    border-bottom: 1px solid #244A60;
 }
 .sk-form-control {
     width: 100%;
@@ -617,7 +617,7 @@ h6.sk-head {
     background-repeat: no-repeat;
     background-size: 16px;
     background-position: right 8px top 50%;
-    color: #4992ff;
+    color: #244A60;
 }
 .skfb-datatable .sk-custom-select{
     min-width: 250px;
@@ -638,7 +638,7 @@ input.sk-custom-checkbox {
     -webkit-border-radius: 0;
             border-radius: 0;
     outline: none;
-    border: 1px solid #4992ff;
+    border: 1px solid #244A60;
 }
 
 input.sk-custom-checkbox.md {
@@ -656,7 +656,7 @@ input.sk-custom-checkbox.md {
     /* inset: 3px; */
 /* } */
 /* input.sk-custom-checkbox:checked::before {
-    background: #4992ff;
+    background: #244A60;
     content: "";
     border-radius: 0px;
     height: 15px;
@@ -672,7 +672,7 @@ input.sk-custom-checkbox.md {
 }
 
 .sk-table th {
-    color: #4992ff;
+    color: #244A60;
 }
 
 .sk-table th,
@@ -702,7 +702,7 @@ input.sk-custom-checkbox.md {
 /*========= Titles ==========*/
 .skfb_question_seleted{
     padding:15px 0px!important;
-    border: 1px solid #4992ff;
+    border: 1px solid #244A60;
 }
 .skfb__form-title {
     font-family: 'Poppins', sans-serif;
@@ -721,7 +721,7 @@ input.sk-custom-checkbox.md {
     text-align: center;
     margin:0px;
     padding:15px 0px;
-    border: 1px solid #4992ff;
+    border: 1px solid #244A60;
 }
 .skfb__icon_select_field{
     height:200px;
@@ -765,7 +765,7 @@ input.sk-custom-checkbox.md {
     text-align: center;
     margin:0px;
     padding:15px 0px;
-    border: 1px solid #4992ff;
+    border: 1px solid #244A60;
 }
 
 /* Some builds */

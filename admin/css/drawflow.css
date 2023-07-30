@@ -27,14 +27,14 @@
     width: 160px;
     min-height: 40px;
     border-radius: 8px;
-    border: 2px solid #4992ff;
+    border: 2px solid #244A60;
     color: #000;
     z-index: 2;
     padding: 15px;
     cursor: pointer!important;
 }
 .drawflow .drawflow-node.selected {
-    background: #4992ff;
+    background: #244A60;
     color:white;
 }
 .drawflow .drawflow-node:hover {
@@ -53,7 +53,7 @@
     position: relative;
     width: 20px;
     height: 20px;
-    background: #4992ff;
+    background: #244A60;
     border-radius: 50%;
     border: 1px solid white;
     cursor: crosshair;
@@ -63,7 +63,7 @@
 .drawflow .drawflow-node .input {
     left: -27px;
     top: 2px;
-    background: #4992ff;
+    background: #244A60;
 }
 .drawflow .drawflow-node .output {
     right: -6px;
@@ -85,11 +85,11 @@
     pointer-events: all;
 }
 .drawflow .connection .main-path:hover {
-    stroke: #4992ff;
+    stroke: #244A60;
     cursor: pointer;
 }
 .drawflow .connection .main-path.selected {
-    stroke: #4992ff;
+    stroke: #244A60;
 }
 .drawflow .connection .point {
     cursor: move;
@@ -147,7 +147,7 @@
     font-size: 24px;
     color: white;
     padding: 5px 10px;
-    background: #4992ff;
+    background: #244A60;
     border-radius: 4px;
     border-right: 1px solid var(--border-color);
     z-index: 5;
@@ -162,7 +162,7 @@
   font-size: 24px;
   color: white;
   padding: 5px 10px!important;
-  background: #4992ffbd;
+  background: #244A60bd;
   border-radius: 4px;
   border-right: 1px solid var(--border-color);
   z-index: 5;

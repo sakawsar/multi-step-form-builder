@@ -24,7 +24,7 @@
     font-size: 14px;
     border: 0;
     outline: 0;
-    background: #4992ff;
+    background: #244A60;
     color: #fff;
     cursor: pointer;
     margin: 5px 5px;
@@ -54,11 +54,11 @@
 }
 
 .skfb-search-box.__2 .sk-form-control {
-    border-color: #4992ff;
+    border-color: #244A60;
     font-size: 14px;
 }
 .skfb-search-box.__2 .skfb-search-btn {
-    color: #4992ff;
+    color: #244A60;
 }
 /* Table */
 .skfb-table-wrap {
@@ -121,7 +121,7 @@ ul.skfb-table-pagination {
     cursor: pointer;
 }
 .skfb-table-pagination > li.active > .skfb-table-pagination-indecator {
-    background: #4992ff;
+    background: #244A60;
 }
 .skfb-table-pagination > li > .skfb-table-pagination-number {
     color: #000;
@@ -134,7 +134,7 @@ ul.skfb-table-pagination {
 }
 
 .skfb-table-pagination > li.skfb-paginate-arrow {
-    color: #4992ff;
+    color: #244A60;
     cursor:pointer;
 }
 
@@ -195,7 +195,7 @@ ul.skfb-table-pagination {
 .skfb-right-options {
     width: 260px;
     min-height: 100vh;
-    background: #4992ff;
+    background: #244A60;
     padding: 10px;
     position: fixed;
     top: 30px;
@@ -212,7 +212,7 @@ ul.skfb-table-pagination {
     outline: 0;
     width: 25px;
     font-size: 16px;
-    color: #4992ff;
+    color: #244A60;
     height: 20px;
     line-height: 21px;
     cursor: pointer;
@@ -232,7 +232,7 @@ ul.skfb-table-pagination {
 /* Skfb Field */
 .skfb-feild-draggable p {
     font-family: 'Roboto', sans-serif;
-    color: #4992ff;
+    color: #244A60;
     text-align: center;
     font-weight: 400;
     margin: 3px auto;
@@ -241,7 +241,7 @@ ul.skfb-table-pagination {
     background: none;
     border: 0;
     outline: 0;
-    color: #4992ff;
+    color: #244A60;
     font-size: 18px;
     cursor: pointer;
 }
@@ -258,13 +258,13 @@ ul.skfb-table-pagination {
     width: 15px;
     height: 15px;
     background: #fff;
-    border: 1px solid #4992ff;
+    border: 1px solid #244A60;
 }
 .skfb-prev-input .skfb-prev-checkbox > li.active span {
     width: 100%;
     height: 100%;
     display: block;
-    background: #4992ff;
+    background: #244A60;
     border: 2px solid #fff;
 }
 .skfb-prev-input .skfb-prev-text {
@@ -359,7 +359,7 @@ ul.skfb-table-pagination {
 .skfb__field-box label {
     display: block;
     font-family: 'Poppins', sans-serif;
-    color: #4992ff;
+    color: #244A60;
     font-size: 14px;
     font-weight: normal;
     margin-bottom: 8px;
@@ -375,7 +375,7 @@ ul.skfb-table-pagination {
 .skfb__field-box select {
     display: block;
     font-family: 'Poppins', sans-serif;
-    color: #4992ff;
+    color: #244A60;
     font-size: 14px;
     font-weight: normal;
     margin-bottom: 8px;
@@ -430,37 +430,37 @@ ul.skfb-table-pagination {
 }
 
 .skfb__field-box.__4 input {
-    border-color: #4992ff;
+    border-color: #244A60;
     -webkit-border-radius: 0;
             border-radius: 0;
 }
 
 ::-webkit-input-placeholder {
-    color: #4992ff;
+    color: #244A60;
 }
 
 ::-moz-placeholder {
-    color: #4992ff;
+    color: #244A60;
 }
 
 :-ms-input-placeholder {
-    color: #4992ff;
+    color: #244A60;
 }
 
 ::-ms-input-placeholder {
-    color: #4992ff;
+    color: #244A60;
 }
 
 ::placeholder {
-    color: #4992ff;
+    color: #244A60;
 }
 
 :-ms-input-placeholder {
-    color: #4992ff;
+    color: #244A60;
 }
 
 ::-ms-input-placeholder {
-    color: #4992ff;
+    color: #244A60;
 }
 
 .skfb__input-option__lists {
@@ -552,7 +552,7 @@ ul.skfb-table-pagination {
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.25);
 }
 .skfb__question-builder .skfb__builder-box.active {
-    border-color: #4992ff;
+    border-color: #244A60;
 }
 
 .skfb__question-builder .skfb__builder-box .skfb__builder-top {
@@ -571,7 +571,7 @@ ul.skfb-table-pagination {
     min-height: 120px;
 }
 .skfb__question-builder .skfb__builder-box .icon {
-    color: #4992ff;
+    color: #244A60;
     font-size: 64px;
 }
 
@@ -626,7 +626,7 @@ ul.skfb-table-pagination {
     -webkit-justify-content: center;
         -ms-flex-pack: center;
             justify-content: center;
-    border: 1px solid #4992ff;
+    border: 1px solid #244A60;
     -webkit-border-radius: 8px;
             border-radius: 8px;
     cursor: pointer;
@@ -635,12 +635,12 @@ ul.skfb-table-pagination {
     display:none;
 }
 .sk-table-action i{
-    color:#4992ff;
+    color:#244A60;
     font-size:24px;
 }
 
 .skfb__uploader .skfb__icon {
-    color: #4992ff;
+    color: #244A60;
     font-size: 90px;
 }
 
@@ -667,7 +667,7 @@ ul.skfb-table-pagination {
 
 .skfb__lb-val .skfb__item .skfb__item-in input {
     padding: 7px;
-    border: 1px solid #4992ff;
+    border: 1px solid #244A60;
     margin-bottom: 0;
 }
 
@@ -686,7 +686,7 @@ ul.skfb-table-pagination {
 
 .skfb__range-slider .skfb__value {
     font-family: 'Poppins', sans-serif;
-    color: #4992ff;
+    color: #244A60;
     font-size: 14px;
     font-weight: normal;
     text-align: center;
@@ -703,7 +703,7 @@ ul.skfb-table-pagination {
 }
 
 .skfb__range-slider .skfb__range-minMax {
-    color: #4992ff;
+    color: #244A60;
     font-size: 14px;
     font-weight: 400;
     display: -webkit-box;
@@ -738,12 +738,12 @@ ul.skfb-table-pagination {
     height: auto;
 }
 .select2-container--default .select2-selection--single {
-    border: 1px solid #4992ff;
+    border: 1px solid #244A60;
     -webkit-border-radius: inherit;
             border-radius: inherit;
 }
 .select2-container--default .select2-selection--single .select2-selection__rendered {
-    color: #4992ff;
+    color: #244A60;
     padding: 7px 9px;
     line-height: inherit;
 }
