@@ -360,6 +360,37 @@
         $('.' + act_qtn).attr('data-qtn-name',this_el.val())
     })
     // title update
+    // console.log(msfb_active_question())
+    let msfb_mutation_els = $(".skfb__form-title, .skfb__form-desc, .skfb__answer")
+    let msfb_mutation_config = {
+        attributes: true,
+        childList: true,
+        characterData: true,
+        subtree: true
+    }
+    var MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
+    let msfb_mutation_observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutationRecord) {
+            if( mutationRecord.type != 'characterData' ) return
+            // console.log('style changed!', mutationRecord, mutationRecord.target.data)
+            let text_data = mutationRecord.target.data
+            let target_el_class = mutationRecord.target.parentElement.classList.value
+            if( target_el_class.indexOf('skfb__answer') > -1 ) {
+                $('#msfb-answer').val(mutationRecord.target.data)
+            } else if ( target_el_class.indexOf('skfb__form-title') > -1 ) {
+                $('.msfb-title').val(text_data)
+            } else if ( target_el_class.indexOf('skfb__form-desc') > -1 ) {
+                $('.msfb-desc').val(text_data)
+            }
+        });
+    });
+    msfb_mutation_els.map((k,v) => {
+        msfb_mutation_observer.observe(v, msfb_mutation_config)
+    })
+    $('.skfb__form-title').on('change', e => {
+        console.log(e)
+        // $('.msfb-title').val($(e).html())
+    })
     $('.msfb-title').on('keyup',e => {
         let this_el = this__(e)
         let act_qtn = msfb_active_question()

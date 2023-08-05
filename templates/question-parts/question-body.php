@@ -2,8 +2,8 @@
 <div class="sk-col-md-9 sk-col-lg-10 msfb-multiselect" data-msfb-active="<?php echo !empty($question_data) && $question_data['question_type'] == "msfb-multiselect" || empty($question_data) ? 1 : 0; ?>" data-body-type="msfb-multiselect" style="<?php msfb_question_body_show($question_id,'msfb-multiselect'); ?>" data-qtn-name="<?php echo !empty($question_data) ? $question_data['question_name'] : ""; ?>">
     <div class="skfb__form-wrapper">
         <header class="skfb__form-header">
-        <h2 class="skfb__form-title skfb_question_seleted"><?php echo !empty($question_data) ? $question_data['question_title'] : "Title"; ?></h2>
-        <p class="skfb__form-desc"><?php echo !empty($question_data) ? $question_data['question_desc'] : "Description"; ?></p>
+            <h2 contenteditable="true" class="skfb__form-title skfb_question_seleted"><?php echo !empty($question_data) ? $question_data['question_title'] : "Title"; ?></h2>
+            <p contenteditable="true" class="skfb__form-desc"><?php echo !empty($question_data) ? $question_data['question_desc'] : "Description"; ?></p>
         </header>
 
         <div class="skfb__question-builder">
@@ -26,7 +26,7 @@
                                     </div>
                                 </div>
                                 <div class="skfb__builder-bottom">
-                                    <p class="skfb__answer" data-price="<?php echo isset($answer['price']) ? $answer['price'] : ""; ?>"><?php echo $answer['answer']; ?></p>
+                                    <p contenteditable="true" class="skfb__answer" data-price="<?php echo isset($answer['price']) ? $answer['price'] : ""; ?>"><?php echo $answer['answer']; ?></p>
                                 </div>
                             </div>
                         </div>
@@ -52,8 +52,8 @@
 <div class="sk-col-md-9 sk-col-lg-10 msfb-date-field" data-msfb-active="<?php echo !empty($question_data) && $question_data['question_type'] == "msfb-date-field" ? 1 : 0; ?>" data-msfb-date-format="Y-m-d" data-body-type="msfb-date-field" style="<?php msfb_question_body_show($question_id,'msfb-date-field'); ?>" data-qtn-name="<?php echo !empty($question_data) ? $question_data['question_name'] : ""; ?>">
     <div class="skfb__form-wrapper">
         <header class="skfb__form-header">
-        <h2 class="skfb__form-title skfb_question_seleted"><?php echo !empty($question_data) ? $question_data['question_title'] : "Title"; ?></h2>
-        <p class="skfb__form-desc"><?php echo !empty($question_data) ? $question_data['question_desc'] : "Description"; ?></p>
+            <h2 contenteditable="true" class="skfb__form-title skfb_question_seleted"><?php echo !empty($question_data) ? $question_data['question_title'] : "Title"; ?></h2>
+            <p contenteditable="true" class="skfb__form-desc"><?php echo !empty($question_data) ? $question_data['question_desc'] : "Description"; ?></p>
         </header>
 
         <form action="#" class="skfb__form">
@@ -68,8 +68,8 @@
 <div class="sk-col-md-9 sk-col-lg-10 msfb-map-field" data-msfb-active="<?php echo !empty($question_data) && $question_data['question_type'] == "msfb-map-field" ? 1 : 0; ?>" data-body-type="msfb-map-field" style="<?php msfb_question_body_show($question_id,'msfb-map-field'); ?>" data-qtn-name="<?php echo !empty($question_data) ? $question_data['question_name'] : ""; ?>">
     <div class="skfb__form-wrapper __2">
         <header class="skfb__form-header">
-        <h2 class="skfb__form-title skfb_question_seleted"><?php echo !empty($question_data) ? $question_data['question_title'] : "Title"; ?></h2>
-        <p class="skfb__form-desc"><?php echo !empty($question_data) ? $question_data['question_desc'] : "Description"; ?></p>
+            <h2 contenteditable="true" class="skfb__form-title skfb_question_seleted"><?php echo !empty($question_data) ? $question_data['question_title'] : "Title"; ?></h2>
+            <p contenteditable="true" class="skfb__form-desc"><?php echo !empty($question_data) ? $question_data['question_desc'] : "Description"; ?></p>
         </header>
         <div class="sk-row">
         <div class="sk-col-md-6">
@@ -106,8 +106,8 @@
 <div class="sk-col-md-9 sk-col-lg-10 msfb-dropdown-field" data-msfb-active="<?php echo !empty($question_data) && $question_data['question_type'] == "msfb-dropdown-field" ? 1 : 0; ?>" data-body-type="msfb-dropdown-field" style="<?php msfb_question_body_show($question_id,'msfb-dropdown-field'); ?>" data-qtn-name="<?php echo !empty($question_data) ? $question_data['question_name'] : ""; ?>">
     <div class="skfb__form-wrapper">
         <header class="skfb__form-header">
-        <h2 class="skfb__form-title skfb_question_seleted"><?php echo !empty($question_data) ? $question_data['question_title'] : "Title"; ?></h2>
-        <p class="skfb__form-desc"><?php echo !empty($question_data) ? $question_data['question_desc'] : "Description"; ?></p>
+            <h2 contenteditable="true" class="skfb__form-title skfb_question_seleted"><?php echo !empty($question_data) ? $question_data['question_title'] : "Title"; ?></h2>
+            <p contenteditable="true" class="skfb__form-desc"><?php echo !empty($question_data) ? $question_data['question_desc'] : "Description"; ?></p>
         </header>
 
         <div class="sk-row sk-justify-content-center">
@@ -133,8 +133,8 @@
 <div class="sk-col-md-9 sk-col-lg-10 msfb-single-select-field" data-msfb-active="<?php echo !empty($question_data) && $question_data['question_type'] == "msfb-single-select-field" ? 1 : 0; ?>" data-body-type="msfb-single-select-field" style="<?php msfb_question_body_show($question_id,'msfb-single-select-field'); ?>" data-qtn-name="<?php echo !empty($question_data) ? $question_data['question_name'] : ""; ?>">
     <div class="skfb__form-wrapper">
         <header class="skfb__form-header">
-        <h2 class="skfb__form-title skfb_question_seleted"><?php echo !empty($question_data) ? $question_data['question_title'] : "Title"; ?></h2>
-        <p class="skfb__form-desc"><?php echo !empty($question_data) ? $question_data['question_desc'] : "Description"; ?></p>
+            <h2 contenteditable="true" class="skfb__form-title skfb_question_seleted"><?php echo !empty($question_data) ? $question_data['question_title'] : "Title"; ?></h2>
+            <p contenteditable="true" class="skfb__form-desc"><?php echo !empty($question_data) ? $question_data['question_desc'] : "Description"; ?></p>
         </header>
 
         <div class="skfb__question-builder">
@@ -157,7 +157,7 @@
                                     </div>
                                 </div>
                                 <div class="skfb__builder-bottom">
-                                    <p class="skfb__answer" data-price="<?php echo isset($answer['price']) ? $answer['price'] : ""; ?>"><?php echo $answer['answer']; ?></p>
+                                    <p contenteditable="true" class="skfb__answer" data-price="<?php echo isset($answer['price']) ? $answer['price'] : ""; ?>"><?php echo $answer['answer']; ?></p>
                                 </div>
                             </div>
                         </div>
@@ -186,8 +186,8 @@ $slider_data = !empty($question_data) && $question_data['question_type'] == "msf
 <div class="sk-col-md-9 sk-col-lg-10 msfb-slider-field" data-msfb-active="<?php echo !empty($question_data) && $question_data['question_type'] == "msfb-slider-field" ? 1 : 0; ?>" data-body-type="msfb-slider-field" style="<?php msfb_question_body_show($question_id,'msfb-slider-field'); ?>" data-msfb-default-val="<?php echo $slider_data ? $slider_data['question_data']['default_val'] : "10"; ?>" data-msfb-step-value="<?php echo $slider_data && isset($slider_data['question_data']['step']) ? $slider_data['question_data']['step'] : "0.01"; ?>" data-qtn-name="<?php echo !empty($question_data) ? $question_data['question_name'] : ""; ?>">
     <div class="skfb__form-wrapper">
         <header class="skfb__form-header">
-            <h2 class="skfb__form-title skfb_question_seleted"><?php echo !empty($question_data) ? $question_data['question_title'] : "Title"; ?></h2>
-            <p class="skfb__form-desc"><?php echo !empty($question_data) ? $question_data['question_desc'] : "Description"; ?></p>
+            <h2 contenteditable="true" class="skfb__form-title skfb_question_seleted"><?php echo !empty($question_data) ? $question_data['question_title'] : "Title"; ?></h2>
+            <p contenteditable="true" class="skfb__form-desc"><?php echo !empty($question_data) ? $question_data['question_desc'] : "Description"; ?></p>
         </header>
         <div class="skfb__field-box skfb-form-builder-drawer">
             <div class="skfb__range-slider">
@@ -209,8 +209,8 @@ $slider_data = !empty($question_data) && $question_data['question_type'] == "msf
 <div class="sk-col-md-9 sk-col-lg-10 msfb-text-field" data-msfb-active="<?php echo !empty($question_data) && $question_data['question_type'] == "msfb-text-field" ? 1 : 0; ?>" data-body-type="msfb-text-field"  style="<?php msfb_question_body_show($question_id,'msfb-text-field'); ?>" data-qtn-name="<?php echo !empty($question_data) ? $question_data['question_name'] : ""; ?>">
     <div class="skfb__form-wrapper">
         <header class="skfb__form-header">
-            <h2 class="skfb__form-title skfb_question_seleted"><?php echo !empty($question_data) ? $question_data['question_title'] : "Title"; ?></h2>
-            <p class="skfb__form-desc"><?php echo !empty($question_data) ? $question_data['question_desc'] : "Description"; ?></p>
+            <h2 contenteditable="true" class="skfb__form-title skfb_question_seleted"><?php echo !empty($question_data) ? $question_data['question_title'] : "Title"; ?></h2>
+            <p contenteditable="true" class="skfb__form-desc"><?php echo !empty($question_data) ? $question_data['question_desc'] : "Description"; ?></p>
         </header>
 
         <form action="#" class="skfb__form">
@@ -225,8 +225,8 @@ $slider_data = !empty($question_data) && $question_data['question_type'] == "msf
 <div class="sk-col-md-9 sk-col-lg-10 msfb-textarea-field" data-msfb-active="<?php echo !empty($question_data) && $question_data['question_type'] == "msfb-textarea-field" ? 1 : 0; ?>" data-body-type="msfb-textarea-field" style="<?php msfb_question_body_show($question_id,'msfb-textarea-field'); ?>" data-qtn-name="<?php echo !empty($question_data) ? $question_data['question_name'] : ""; ?>">
     <div class="skfb__form-wrapper">
         <header class="skfb__form-header">
-            <h2 class="skfb__form-title skfb_question_seleted"><?php echo !empty($question_data) ? $question_data['question_title'] : "Title"; ?></h2>
-            <p class="skfb__form-desc"><?php echo !empty($question_data) ? $question_data['question_desc'] : "Description"; ?></p>
+            <h2 contenteditable="true" class="skfb__form-title skfb_question_seleted"><?php echo !empty($question_data) ? $question_data['question_title'] : "Title"; ?></h2>
+            <p contenteditable="true" class="skfb__form-desc"><?php echo !empty($question_data) ? $question_data['question_desc'] : "Description"; ?></p>
         </header>
 
         <form action="#" class="skfb__form">
@@ -241,8 +241,8 @@ $slider_data = !empty($question_data) && $question_data['question_type'] == "msf
 <div class="sk-col-md-9 sk-col-lg-10 msfb-upload-field" data-msfb-active="<?php echo !empty($question_data) && $question_data['question_type'] == "msfb-upload-field" ? 1 : 0; ?>" data-body-type="msfb-upload-field" style="<?php msfb_question_body_show($question_id,'msfb-upload-field'); ?>" data-qtn-name="<?php echo !empty($question_data) ? $question_data['question_name'] : ""; ?>">
     <div class="skfb__form-wrapper">
         <header class="skfb__form-header">
-            <h2 class="skfb__form-title skfb_question_seleted"><?php echo !empty($question_data) ? $question_data['question_title'] : "Title"; ?></h2>
-            <p class="skfb__form-desc"><?php echo !empty($question_data) ? $question_data['question_desc'] : "Description"; ?></p>
+            <h2 contenteditable="true" class="skfb__form-title skfb_question_seleted"><?php echo !empty($question_data) ? $question_data['question_title'] : "Title"; ?></h2>
+            <p contenteditable="true" class="skfb__form-desc"><?php echo !empty($question_data) ? $question_data['question_desc'] : "Description"; ?></p>
         </header>
 
         <div class="skfb__uploader skfb-form-builder-drawer">
