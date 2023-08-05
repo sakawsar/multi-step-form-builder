@@ -28,6 +28,23 @@
       </div>
       <div class="skfb__field-box __2">
         <?php
+          $current_position = "top";
+          if( isset($this_formula_data['formulation_data']['msfb_nav_menu_position']) ){
+            $current_position = $this_formula_data['formulation_data']['msfb_nav_menu_position'];
+          }
+        ?>
+        <label for="formName"><?php _e('Position of the menu','msfb').' '.$current_position; ?></label>
+        <label for="msfb_nav_menu_top_position">
+          <input type="radio" <?php checked('top', $current_position, true); ?> class="sk-custom-checkbox msfb_nav_menu_position" name="msfb_nav_menu_position" value="top" id="msfb_nav_menu_top_position">
+          <?php _e('Top','msfb'); ?>
+        </label>
+        <label for="msfb_nav_menu_bottom_position">
+          <input type="radio" <?php checked('bottom', $current_position, true); ?> class="sk-custom-checkbox msfb_nav_menu_position" name="msfb_nav_menu_position" value="buttom" id="msfb_nav_menu_bottom_position">
+          <?php _e('Bottom','msfb'); ?>
+        </label>
+      </div>
+      <div class="skfb__field-box __2">
+        <?php
           $color_scheme = "#0693e3";
           if( isset($this_formula_data['formulation_data']['color_scheme']) ){
             $color_scheme = $this_formula_data['formulation_data']['color_scheme'];
