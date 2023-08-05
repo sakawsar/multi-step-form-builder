@@ -69,9 +69,11 @@ function msfb_ui_callback( $atts ){
 				'outputs' => $a_qtn['outputs'],
 				'step' => empty($a_qtn['inputs']['input_1']['connections']) ? 1 : 0,
 				'redirect' => isset($formulation_data['redirect']) ? $formulation_data['redirect'] : home_url( '/' ),
-				'is_disabled' => $is_disabled,
-				'nav_position' => $formulation_data['msfb_nav_menu_position']
+				'is_disabled' => $is_disabled
 			];
+			if( isset($formulation_data['msfb_nav_menu_position']) ) {
+				$qtn_data['nav_position'] = $formulation_data['msfb_nav_menu_position'];
+			}
 			msfb_get_the_step($qtn_data);
 			$nodes = [];
 			foreach( $a_qtn['outputs'] as $a_output){
@@ -163,7 +165,9 @@ function msfb_get_the_step( $dataset ) {
 		$data['step'] = $dataset['step'];
 		$data['redirect'] = $dataset['redirect'];
 		$data['is_disabled'] = $dataset['is_disabled'];
-		$data['nav_position'] = $dataset['nav_position'];
+		if( isset($dataset['nav_position'])) {
+			$data['nav_position'] = $dataset['nav_position'];
+		}
 		$data_type = $dataset['type'];
 		if( $data_type == "question" ) {
 			$qtn_type = $data['question_type'];
@@ -197,7 +201,7 @@ function msfb_get_the_step( $dataset ) {
 			msfb_form_step( $data );
 		}
 		// if nav position changed
-		if( $data['nav_position'] != 'bottom' ) {
+		if( isset($data['nav_position']) && $data['nav_position'] != 'bottom' ) {
 			echo '</div>';
 		} else {
 			msfb_step_navigation( $data );
@@ -229,6 +233,6 @@ function msfb_step_navigation( $data ) {
 				<button <?php echo $data['is_disabled'] ? 'disabled' : ''; ?> data-msfb-redirect="<?php echo $data['redirect']; ?>"><?php echo get_option('msfb_translate_finish','Finish'); ?></button>
 			<?php }?>
 		</div>
-	<?php echo isset($data['nav_position']) && $data['nav_position'] == 'bottom' ? '</div>' : ''; ?> <!-- end of the wrapper -->
+	<?php echo !isset($data['nav_position']) || $data['nav_position'] != 'top' ? '</div>' : ''; ?> <!-- end of the wrapper -->
 	<?php
 }
