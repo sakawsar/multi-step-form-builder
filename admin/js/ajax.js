@@ -182,8 +182,48 @@ jQuery(document).ready($ => {
             }
         })
     })
+    // drag and drop upload
+    
+    $('#msfb-drop-the-file').on('drop',function(e){
+        e.preventDefault()
+        e.stopPropagation()
+        // console.log('dropped',e)
+        let formData = new FormData()
+        var files = e.originalEvent.dataTransfer.files;
+	    if ( files.length > 0 ) {
+	    	formData.append('main_image', files[0]);
+	    	formData.append('action', 'msfb_custom_icon_upload');
+	    } else {
+            Swal.fire({
+                icon: "warning",
+                text: "No file choosen to be uploaded."
+            })
+            return false
+        }
+        $('label[for="msfb-custom-icon"]').find('div i').attr('class','fa fa-spinner fa-spin')
+        $.ajax({
+	        url: msfb.ajax_url,
+	        type: "POST",
+	        dataType: "json",
+	        data: formData,
+	        contentType: false,
+	        processData: false,
+	        success: function (resp) {
+                //console.log(resp)
+                $('label[for="msfb-custom-icon"]').find('div i').attr('class','fa fa-upload')
+                $('#msfb-custom-icon').val('')
+                // this_el.html('Upload')
+                $('.skfb__custom_icon_select_field').prepend('<img class="msfb_custom_icon_image" style="height:50px;width:auto;margin:16px 16px 0px 0px;" src="' + resp.url + '"/>')
+	        },
+	        error:function(err){
+	            //console.log(err);
+                $('label[for="msfb-custom-icon"]').find('div i').attr('class','fa fa-upload')
+	        }
+	    });
+    })
     // upload custom icon
-    $('#msfb-upload-custom-icon').on('click',function(){
+    $('#msfb-custom-icon').on('change',function(){
+        // console.log('changed')
         let this_el = $(this)
         let formData = new FormData()
         var files = $('#msfb-custom-icon')[0].files;
@@ -197,7 +237,7 @@ jQuery(document).ready($ => {
             })
             return false
         }
-        this_el.html('<i class="fa fa-spinner fa-spin"></i> Upload')
+        $('label[for="msfb-custom-icon"]').find('div i').attr('class','fa fa-spinner fa-spin')
         $.ajax({
 	        url: msfb.ajax_url,
 	        type: "POST",
@@ -208,12 +248,12 @@ jQuery(document).ready($ => {
 	        success: function (resp) {
                 //console.log(resp)
                 $('#msfb-custom-icon').val('')
-                this_el.html('Upload')
+                $('label[for="msfb-custom-icon"]').find('div i').attr('class','fa fa-upload')
                 $('.skfb__custom_icon_select_field').prepend('<img class="msfb_custom_icon_image" style="height:50px;width:auto;margin:16px 16px 0px 0px;" src="' + resp.url + '"/>')
 	        },
 	        error:function(err){
 	            //console.log(err);
-                this_el.html('Upload')
+                $('label[for="msfb-custom-icon"]').find('div i').attr('class','fa fa-upload')
 	        }
 	    });
     })

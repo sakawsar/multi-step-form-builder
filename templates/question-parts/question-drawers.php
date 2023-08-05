@@ -23,11 +23,28 @@ function msfb_mendatory_fields( $id, $question_data ){
             </div>
         </div>
         <div class="skfb__field-box __2">
-            <label for="msfb-pick-icon">Upload Custom icons</label>
+            <script>
+                function msfb_drag_over(e){
+                    e.preventDefault()
+                    e.stopPropagation()
+                    // console.log('dragging')
+                }
+                function msfb_drop_over(e){
+                    e.preventDefault()
+                    e.stopPropagation()
+                    console.log('dropped by function')
+                }
+            </script>
+            <label for="msfb-custom-icon">Upload Custom icons
+                <div ondragover="msfb_drag_over(event)" id="msfb-drop-the-file" style="padding:32px;border:4px dotted white;border-radius:8px;margin-top:8px;display: flex;flex-direction:column;gap:8px;align-items: center;justify-content: center;">
+                    <i class="fa fa-upload" style="font-size:32px;"></i>
+                    <p>Drag and drop</p>
+                </div>
+            </label>
             
             <div class=""> 
-                <input id="msfb-custom-icon" type="file" accept="image/*"/>
-                <button id="msfb-upload-custom-icon" type="button" style="border:2px solid white;margin-bottom:16px;" class="skfb-btn">Upload</button>
+                <input id="msfb-custom-icon" style="display:none;" type="file" accept="image/*"/>
+                <!-- <button id="msfb-upload-custom-icon" type="button" style="border:2px solid white;margin-bottom:16px;" class="skfb-btn">Upload</button> -->
             </div>
             <label for="msfb-pick-icon">Custom icons</label>
             <div class="skfb__icon_select_field skfb__custom_icon_select_field skfb__overflow_scroll"> 
