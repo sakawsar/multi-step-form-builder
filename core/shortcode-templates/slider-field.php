@@ -17,6 +17,7 @@ function msfb_slider_step( $data ){
     <?php if($data['question_desc']){ ?>
         <p class="text-center text-xl"><?php echo $data['question_desc']; ?></p>
     <?php } ?>
+    <?php isset($data['nav_position']) && $data['nav_position'] == 'top' ? msfb_step_navigation( $data ) : false; ?>
     <!-- slider -->
     <div class="msfb-slider-qtn tw-msfb-qtn-field tw-msfb-slider-qtn relative items-center text-xl">
         <p class="mb-8 msfb-slider-field-value">Value: <strong><?php echo $default_val; ?></strong></p>

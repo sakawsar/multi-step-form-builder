@@ -13,6 +13,7 @@ function msfb_upload_step( $data ){
         <?php if($data['question_desc']){ ?>
             <p class="text-center text-xl"><?php echo $data['question_desc']; ?></p>
         <?php } ?>
+        <?php isset($data['nav_position']) && $data['nav_position'] == 'top' ? msfb_step_navigation( $data ) : false; ?>
         <!-- upload field -->
         <div class="msfb-upload-qtn tw-msfb-qtn-field tw-msfb-upload-qtn relative">
             <label class="tw-msfb-upload-field flex flex-col items-center justify-center gap-4">

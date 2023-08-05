@@ -13,6 +13,7 @@ function msfb_date_step( $data ){
     <?php if($data['question_desc']){ ?>
         <p class="text-center text-xl"><?php echo $data['question_desc']; ?></p>
     <?php } ?>
+    <?php isset($data['nav_position']) && $data['nav_position'] == 'top' ? msfb_step_navigation( $data ) : false; ?>
      <!-- date field -->
     <div class="msfb-date-qtn tw-msfb-qtn-field tw-msfb-date-qtn relative">
         <input type="date" placeholder="<?php echo $question_data['placeholder']; ?>" class="tw-msfb-date-field w-full"/>

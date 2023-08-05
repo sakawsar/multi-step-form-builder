@@ -69,7 +69,8 @@ function msfb_ui_callback( $atts ){
 				'outputs' => $a_qtn['outputs'],
 				'step' => empty($a_qtn['inputs']['input_1']['connections']) ? 1 : 0,
 				'redirect' => isset($formulation_data['redirect']) ? $formulation_data['redirect'] : home_url( '/' ),
-				'is_disabled' => $is_disabled
+				'is_disabled' => $is_disabled,
+				'nav_position' => $formulation_data['msfb_nav_menu_position']
 			];
 			msfb_get_the_step($qtn_data);
 			$nodes = [];
@@ -162,6 +163,7 @@ function msfb_get_the_step( $dataset ) {
 		$data['step'] = $dataset['step'];
 		$data['redirect'] = $dataset['redirect'];
 		$data['is_disabled'] = $dataset['is_disabled'];
+		$data['nav_position'] = $dataset['nav_position'];
 		$data_type = $dataset['type'];
 		if( $data_type == "question" ) {
 			$qtn_type = $data['question_type'];
@@ -194,7 +196,12 @@ function msfb_get_the_step( $dataset ) {
 			// include(MSFB_PATH.'core/shortcode-templates/form.php');
 			msfb_form_step( $data );
 		}
-		msfb_step_navigation( $data );
+		// if nav position changed
+		if( $data['nav_position'] != 'bottom' ) {
+			echo '</div>';
+		} else {
+			msfb_step_navigation( $data );
+		}
 	}
 }
 function msfb_step_navigation( $data ) {
@@ -208,7 +215,7 @@ function msfb_step_navigation( $data ) {
 		$required = $data['question_required'] == 1 ? "data-msfb-required='true'" : "";
 	}
 	?>
-		<div <?php echo $required; ?> class="tw-msfb-btn-container" <?php echo $root_node; ?> data-step-type="<?php echo $step_data['type']; ?>">
+		<div <?php echo $required; ?> class="tw-msfb-btn-container" <?php echo isset($data['nav_position']) && $data['nav_position'] == 'top' ? 'style="margin:32px 0px;"' : ''; ?> <?php echo $root_node; ?> data-step-type="<?php echo $step_data['type']; ?>">
 			<?php if( $data['step'] != 1 ) { ?>
 				<button data-msfb-prev=""><?php echo get_option('msfb_translate_back','Back'); ?></button>
 			<?php } ?>
@@ -222,6 +229,6 @@ function msfb_step_navigation( $data ) {
 				<button <?php echo $data['is_disabled'] ? 'disabled' : ''; ?> data-msfb-redirect="<?php echo $data['redirect']; ?>"><?php echo get_option('msfb_translate_finish','Finish'); ?></button>
 			<?php }?>
 		</div>
-	</div> <!-- end of the wrapper -->
+	<?php echo isset($data['nav_position']) && $data['nav_position'] == 'bottom' ? '</div>' : ''; ?> <!-- end of the wrapper -->
 	<?php
 }

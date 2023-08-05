@@ -9,6 +9,7 @@ function msfb_form_step( $data ){
     <?php if($form_data['form_desc']){ ?>
         <p class="text-center text-xl"><?php echo $form_data['form_desc']; ?></p>
     <?php } ?>
+    <?php isset($data['nav_position']) && $data['nav_position'] == 'top' ? msfb_step_navigation( $data ) : false; ?>
     <!-- form step -->
     <div class="msfb-form-qtn tw-msfb-qtn-field tw-msfb-form-qtn relative items-center text-xl">
         <?php if(!empty($form_data['field_data'])){

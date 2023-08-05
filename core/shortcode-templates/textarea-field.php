@@ -13,6 +13,7 @@ function msfb_textarea_step( $data ){
     <?php if($data['question_desc']){ ?>
         <p class="text-center text-xl"><?php echo $data['question_desc']; ?></p>
     <?php } ?>
+    <?php isset($data['nav_position']) && $data['nav_position'] == 'top' ? msfb_step_navigation( $data ) : false; ?>
     <!-- textarea field -->
     <div class="msfb-textarea-qtn tw-msfb-qtn-field tw-msfb-textarea-qtn relative">
         <textarea placeholder="<?php echo $question_data['placeholder']; ?>" class="tw-msfb-textarea-field"></textarea>

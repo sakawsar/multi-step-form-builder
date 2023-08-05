@@ -10,6 +10,7 @@ function msfb_multiselect_step( $data ){
     <?php if($data['question_desc']){ ?>
         <p class="text-center text-xl"><?php echo $data['question_desc']; ?></p>
     <?php } ?>
+    <?php isset($data['nav_position']) && $data['nav_position'] == 'top' ? msfb_step_navigation( $data ) : false; ?>
     <!-- select -->
     <div class="msfb-multiselect-qtn tw-msfb-qtn-field tw-msfb-multiselect-qtn">
         <?php 
