@@ -29,11 +29,6 @@ function msfb_mendatory_fields( $id, $question_data ){
                     e.stopPropagation()
                     // console.log('dragging')
                 }
-                function msfb_drop_over(e){
-                    e.preventDefault()
-                    e.stopPropagation()
-                    console.log('dropped by function')
-                }
             </script>
             <label for="msfb-custom-icon">Upload Custom icons
                 <div ondragover="msfb_drag_over(event)" id="msfb-drop-the-file" style="padding:32px;border:4px dotted white;border-radius:8px;margin-top:8px;display: flex;flex-direction:column;gap:8px;align-items: center;justify-content: center;">
