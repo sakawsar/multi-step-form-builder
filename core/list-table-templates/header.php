@@ -47,5 +47,16 @@
     </div>
 </div>
 <?php if( $this->list_type == "leads" ) { ?>
+    <div style="padding:8px 16px;display:flex; flex-direction:row; gap:16px;align-items:center;">
+        <label for="msfb_update_chart">
+            <select name="" id="msfb_update_chart">
+                <option value="7">Last 7 days</option>
+                <option value="7">Yesterday</option>
+            </select>
+        </label>
+        <label for="msfb_update_chart_by_date_range">
+            <p>From: <input type="date" name="" id=""> To: <input type="date" name="" id=""></p>
+        </label>
+    </div>
     <canvas id="msfb-leads-states" style="padding:8px 16px;width:100%;height:360px;"></canvas>
 <?php } ?>

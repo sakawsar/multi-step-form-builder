@@ -8,6 +8,7 @@ const chart = new Chart(document.getElementById('msfb-leads-states').getContext(
             label: 'Leads per day',
             backgroundColor: '#244A60',
             borderColor: '#244A60',
+            fill: false,
             data: [0, 10, 5, 2, 20, 30, 45]
         }]
     },
