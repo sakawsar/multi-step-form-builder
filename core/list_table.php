@@ -80,7 +80,7 @@ class MSFB_List_Table{
             $query = "";
             if( $this->cat_type == "lead" ) {
                 $query = "SELECT * FROM $table_name";
-                $intial_val = "Filter by Formulation";
+                $intial_val = "Filter by Q-Flow";
             } else {
                 $query = "SELECT * FROM $table_name WHERE cat_type='$cat_type'";
             }

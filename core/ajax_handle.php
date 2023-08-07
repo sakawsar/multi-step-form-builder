@@ -1,4 +1,63 @@
 <?php
+add_action('wp_ajax_msfb_export_leads','msfb_export_leads_callback');
+function msfb_export_leads_callback(){
+    if( isset($_POST['dataset']) ) {
+        $q_flow_id = $_POST['dataset'];
+        // prepare dataset of leads from the database table by the q-flow id
+        global $wpdb;
+        $table_name = $wpdb->prefix.'msfb_leads';
+        $results = $wpdb->get_results("SELECT * FROM $table_name WHERE formulation_id=$q_flow_id",ARRAY_A);
+        $total_leads = $wpdb->num_rows;
+        // get the q-flow name
+        $q_flow_table_name = $wpdb->prefix.'msfb_formulations';
+        $q_flow_results = $wpdb->get_results("SELECT * FROM $q_flow_table_name WHERE id=$q_flow_id",ARRAY_A);
+        $q_flow_name = $q_flow_results[0]['formulation_name'];
+        // prepare CSV dataset
+        $csv_dataset = [];
+        $csv_heading = [];
+        // prepare the CSV file
+        //set virtual output path
+        ob_start();
+        $file_path = "php://output";
+        $file = fopen($file_path,'w');
+        foreach($results as $result) {
+            $lead_data = json_decode( stripslashes( $result['lead_data'] ), true );
+            // lead data has title and value that need to be lineared in an array
+            $a_csv_data = [];
+            foreach($lead_data as $a_lead_data) {
+                if( !isset($a_lead_data['title']) ) continue;
+                $csv_heading[] = $a_lead_data['title'];
+                $a_csv_data[] = is_array($a_lead_data['value']) ? implode(',',$a_lead_data['value']) : $a_lead_data['value'];
+            }
+            // assign the formulation name
+            $a_csv_data[] = $q_flow_name;
+            // get the timestamp of the lead
+            $a_csv_data[] = date('Y-m-d H:i:s', $result['lead_time']);
+            $csv_dataset[] = $a_csv_data;
+        }
+        $csv_heading[] = __("Q-Flow Name","msfb");
+        $csv_heading[] = __("Lead Time","msfb");
+        fputcsv($file,$csv_heading);
+        for ($i=0; $i < $total_leads; $i++) { 
+            fputcsv($file,$csv_dataset[$i]);
+        }
+        $csv_data = ob_get_contents();
+        ob_get_clean();
+        wp_die(
+            json_encode(
+                array(
+                    'status'    => 'success',
+                    'message'   => 'File generated successfully! Ready to download.',
+                    'dataset'   => $results,
+                    'csv_data'  => $csv_data,
+                    // 'file2' => "data:application/csv;base64,".base64_encode($csv_data),
+                    'file' => "data:application/vnd.ms-excel;base64,".base64_encode($csv_data)
+                )
+            )
+        );
+    }
+    wp_die();
+}
 add_action('wp_ajax_msfb_export_data','msfb_export_data_callback');
 function msfb_export_data_callback(){
     if( isset($_POST['dataset']) ) {

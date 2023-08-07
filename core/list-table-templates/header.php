@@ -17,10 +17,12 @@
                         <?php } ?>
                     <?php } ?>
                     <div>
-                        <a href="#" class="skfb-btn" data-msfb-export-type="<?php echo $this->list_type; ?>" data-msfb-cat-type="<?php echo $this->cat_type; ?>" id="msfb-export-data"><i class="fas fa-download"></i><span> Export <?php echo $this->label; ?></span></a>
                         <?php if( $this->cat_type != "lead" ){ ?>
+                            <a href="#" class="skfb-btn" data-msfb-export-type="<?php echo $this->list_type; ?>" data-msfb-cat-type="<?php echo $this->cat_type; ?>" id="msfb-export-data"><i class="fas fa-download"></i><span> Export <?php echo $this->label; ?></span></a>
                             <input type="file" name="" data-msfb-import-type="<?php echo $this->list_type; ?>" data-msfb-cat-type="<?php echo $this->cat_type; ?>" id="msfb-import-data" style="display:none;">
                             <label class="skfb-btn" for="msfb-import-data"><i class="fas fa-upload"></i><span> Import <?php echo $this->label; ?></span></label>
+                        <?php } else { ?>
+                            <button class="skfb-btn" id="msfb-export-leads"><i class="fas fa-download"></i> <?php _e('Export leads of current Q-Flow','msfb'); ?></button>
                         <?php } ?>
                     </div>
                 </div>
