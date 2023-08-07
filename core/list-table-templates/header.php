@@ -46,3 +46,6 @@
         </div>
     </div>
 </div>
+<?php if( $this->list_type == "leads" ) { ?>
+    <canvas id="msfb-leads-states" style="padding:8px 16px;width:100%;height:360px;"></canvas>
+<?php } ?>

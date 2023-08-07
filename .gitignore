@@ -1,0 +1,7 @@
+node_modules
+src
+.babelrc
+README.md
+index.html
+webpack.config.js
+tailwind.config.js

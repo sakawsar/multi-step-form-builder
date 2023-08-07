@@ -38,6 +38,7 @@ add_action('admin_enqueue_scripts','msfb_admin_enqueue_scripts');
 function msfb_admin_enqueue_scripts(){
 	//js
 	wp_enqueue_script( 'jquery' );
+	wp_enqueue_script( 'msfb-chart-js', MSFB_URL.'admin/js/chart.bundle.js', array('jquery'), '1.0', true );
 	wp_enqueue_script( 'msfb-jquery-ui', MSFB_URL.'admin/js/jquery-ui.js' );
 	wp_enqueue_script( 'msfb_admin_jquery_step', MSFB_URL.'admin/js/jquery.steps.min.js' );
 	wp_enqueue_script( 'msfb_admin_jquery_ui_touch_punch', MSFB_URL.'admin/js/jquery.ui.touch-punch.min.js' );

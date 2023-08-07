@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tailwindcss -i ./admin/css/tailwind-input.css -o ./admin/css/tailwind.css -w"
+    "build": "tailwindcss -i ./admin/css/tailwind-input.css -o ./admin/css/tailwind.css -w",
+    "build2": "webpack -w"
   },
   "repository": {
     "type": "git",
@@ -16,5 +17,19 @@
   "bugs": {
     "url": "https://github.com/sakawsar/multi-step-form-builder/issues"
   },
-  "homepage": "https://github.com/sakawsar/multi-step-form-builder#readme"
+  "homepage": "https://github.com/sakawsar/multi-step-form-builder#readme",
+  "dependencies": {
+    "chart.js": "^4.3.3",
+    "chartjs": "^0.3.24",
+    "jquery": "^3.7.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.21.3",
+    "@babel/preset-env": "^7.20.2",
+    "@webpack-cli/generators": "^3.0.7",
+    "babel-loader": "^9.1.2",
+    "webpack": "^5.88.2",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^4.13.1"
+  }
 }
