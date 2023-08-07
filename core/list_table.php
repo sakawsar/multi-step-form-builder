@@ -6,6 +6,7 @@ class MSFB_List_Table{
     public $add_new_url = false;
     public $has_category = true;
     public $has_search = true;
+    public $lead_data = null;
     function __construct($el_type){
         $this->list_type = $el_type;
         switch($el_type){

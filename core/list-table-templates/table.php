@@ -50,6 +50,19 @@ if( $el_type == "leads" ) {
     $formulations = $wpdb->get_results("SELECT * FROM $table_name",ARRAY_A);
     $table_data['data'] = $wpdb->num_rows > 0 ? $formulations : false;
 }
+if( $el_type == "leads" ) {
+    $this->lead_data = $table_data['data'];
+    ?>
+    <script>
+        console.log('working 222')
+        window.lead_data = '<?php echo addslashes( json_encode($table_data['data']) ); ?>';
+    </script>
+    <?php
+    add_action('admin_enqueue_scripts', function()use($table_data){
+        wp_localize_script('msfb_admin_localize','msfb2', $table_data['data']);
+    });
+    var_dump($table_data['data']);
+}
 ?>
 <table class="sk-table skfb-table-question">
     <thead>

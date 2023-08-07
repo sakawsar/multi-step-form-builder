@@ -50,13 +50,17 @@
     <div style="padding:8px 16px;display:flex; flex-direction:row; gap:16px;align-items:center;">
         <label for="msfb_update_chart">
             <select name="" id="msfb_update_chart">
-                <option value="7">Last 7 days</option>
-                <option value="7">Yesterday</option>
+                <option value="last_7_days"><?php _e('Last 7 days','msfb'); ?></option>
+                <option value="last_month"><?php _e('Last month','msfb'); ?></option>
+                <option value="yesterday"><?php _e('Yesterday','msfb'); ?></option>
+                <option value="All"><?php _e('All','msfb'); ?></option>
             </select>
         </label>
         <label for="msfb_update_chart_by_date_range">
-            <p>From: <input type="date" name="" id=""> To: <input type="date" name="" id=""></p>
+            <p>From: <input type="date" name="" id="msfb_chart_date_start"> To: <input type="date" name="" id="msfb_chart_date_end"></p>
         </label>
     </div>
     <canvas id="msfb-leads-states" style="padding:8px 16px;width:100%;height:360px;"></canvas>
-<?php } ?>
+<?php } 
+var_dump($this->lead_data);
+?>
