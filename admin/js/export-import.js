@@ -61,14 +61,7 @@ jQuery(document).ready(function($){
         reader.readAsText(file)
     })
     $('#msfb-export-leads').on('click',function(){
-        let q_flow_id = $('#msfb-filter-by-cat').val()
-        if( !q_flow_id ) {
-            $.each($('#msfb-filter-by-cat option'),function(i,v){
-                if( i == 1 ) {
-                    q_flow_id = $(this).val()
-                }
-            })
-        }
+        let q_flow_id = $('select[data-msfb-cat-id]').attr('data-msfb-cat-id')
         if( q_flow_id ) {
             console.log(q_flow_id)
             Swal.fire({
@@ -96,7 +89,7 @@ jQuery(document).ready(function($){
                                 $a.attr("href",resp.file);
                                 $("body").append($a);
                                 let date = new Date().toISOString()
-                                let file_name = 'leads-' + date + '.csv'
+                                let file_name = resp.q_flow_name + '-leads-' + date + '.csv'
                                 $a.attr("download",file_name);
                                 $a[0].click();
                                 $a.remove();

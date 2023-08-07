@@ -25,6 +25,15 @@ function msfb_export_leads_callback(){
             // lead data has title and value that need to be lineared in an array
             $a_csv_data = [];
             foreach($lead_data as $a_lead_data) {
+                if( isset($a_lead_data['form_id']) ) {
+                    $form_data = $a_lead_data['form_data'];
+                    foreach( $form_data as $key => $a_form_data ) {
+                        $csv_heading[] = $a_form_data['title'];
+                        $a_csv_data[] = is_array($a_form_data['value']) ? implode(',',$a_form_data['value']) : $a_form_data['value'];
+                    }
+                    $csv_heading[] = __("Total price","msfb");
+                    $a_csv_data[] = $a_lead_data['total_price'];
+                }
                 if( !isset($a_lead_data['title']) ) continue;
                 $csv_heading[] = $a_lead_data['title'];
                 $a_csv_data[] = is_array($a_lead_data['value']) ? implode(',',$a_lead_data['value']) : $a_lead_data['value'];
@@ -32,6 +41,7 @@ function msfb_export_leads_callback(){
             // assign the formulation name
             $a_csv_data[] = $q_flow_name;
             // get the timestamp of the lead
+            // $csv_dataset[] = $lead_data['total_price'];
             $a_csv_data[] = date('Y-m-d H:i:s', $result['lead_time']);
             $csv_dataset[] = $a_csv_data;
         }
@@ -49,7 +59,9 @@ function msfb_export_leads_callback(){
                     'status'    => 'success',
                     'message'   => 'File generated successfully! Ready to download.',
                     'dataset'   => $results,
+                    'csv_heading'  => $csv_heading,
                     'csv_data'  => $csv_data,
+                    'q_flow_name'   => str_replace(' ','_',$q_flow_name),
                     // 'file2' => "data:application/csv;base64,".base64_encode($csv_data),
                     'file' => "data:application/vnd.ms-excel;base64,".base64_encode($csv_data)
                 )
