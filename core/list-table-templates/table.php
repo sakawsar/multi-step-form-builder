@@ -66,22 +66,24 @@ if( $el_type == "leads" ) {
     $last_month_data = msfb_generate_date_array( 30 );
     // get date range data
     $date_range_data = msfb_get_date_range_struct( date('Y-m-d', strtotime('-30 days')), date('Y-m-d') );
-    foreach( $table_data['data'] as $a_lead_state_data ) {
-        $timestamp = end($a_lead_state_data);
-        $this_date = date('Y-m-d',$timestamp);
-        // set data to last 7 days
-        if( isset($last_7_day_data[$this_date]) ) {
-            $last_7_day_data[$this_date] = intval($last_7_day_data[$this_date]) + 1;
+    if( !empty($table_data['data']) ) {
+        foreach( $table_data['data'] as $a_lead_state_data ) {
+            $timestamp = end($a_lead_state_data);
+            $this_date = date('Y-m-d',$timestamp);
+            // set data to last 7 days
+            if( isset($last_7_day_data[$this_date]) ) {
+                $last_7_day_data[$this_date] = intval($last_7_day_data[$this_date]) + 1;
+            }
+            // set data to yesterday
+            if( isset($yesterday_data[$this_date]) ) {
+                $yesterday_data[$this_date] = intval($yesterday_data[$this_date]) + 1;
+            }
+            // set data to last month
+            if( isset($last_month_data[$this_date]) ) {
+                $last_month_data[$this_date] = intval($last_month_data[$this_date]) + 1;
+            }
+            $lead_state_data[$this_date] = isset($lead_state_data[$this_date]) ? intval($lead_state_data[$this_date]) + 1 : 1;
         }
-        // set data to yesterday
-        if( isset($yesterday_data[$this_date]) ) {
-            $yesterday_data[$this_date] = intval($yesterday_data[$this_date]) + 1;
-        }
-        // set data to last month
-        if( isset($last_month_data[$this_date]) ) {
-            $last_month_data[$this_date] = intval($last_month_data[$this_date]) + 1;
-        }
-        $lead_state_data[$this_date] = isset($lead_state_data[$this_date]) ? intval($lead_state_data[$this_date]) + 1 : 1;
     }
     function msfb_prepare_dataset($lead_state_data) {
         return json_encode(['labels' => array_keys($lead_state_data), 'data' => array_values($lead_state_data)]);

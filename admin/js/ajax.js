@@ -48,10 +48,31 @@ jQuery(document).ready($ => {
     // update chartjs
     $('#msfb_update_chart').on('change', e => {
         let set_type = $(e.currentTarget).val()
-        last_7_days
-        last_month
-        yesterday
-        all
+        console.log(set_type)
+        let this_data = {
+            labels: [],
+            data: []
+        }
+        switch(set_type) {
+            case "last_7_days":
+                this_data = JSON.parse(window.msfb_last_7_days)
+                break
+            case "yesterday":
+                console.log(window.msfb_yesterday_data)
+                this_data = JSON.parse(window.msfb_yesterday_data)
+                break
+            case "last_month":
+                console.log(window.msfb_last_month_data)
+                this_data = JSON.parse(window.msfb_last_month_data)
+                break
+            case "all":
+                console.log(window.msfb_all_data)
+                this_data = JSON.parse(window.msfb_all_data)
+                break
+        }
+        window.msfb_chart.data.labels = this_data.labels
+        window.msfb_chart.data.datasets[0].data = this_data.data
+        window.msfb_chart.update()
     })
     // get this value function
     const this__ = el => $(el.currentTarget)

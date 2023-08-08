@@ -62,5 +62,5 @@
     </div>
     <canvas id="msfb-leads-states" style="padding:8px 16px;width:100%;height:360px;"></canvas>
 <?php } 
-var_dump($this->lead_data);
+// var_dump($this->lead_data);
 ?>
