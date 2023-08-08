@@ -52,8 +52,8 @@
             <select name="" id="msfb_update_chart">
                 <option value="last_7_days"><?php _e('Last 7 days','msfb'); ?></option>
                 <option value="last_month"><?php _e('Last month','msfb'); ?></option>
-                <option value="yesterday"><?php _e('Yesterday','msfb'); ?></option>
-                <option value="all"><?php _e('All','msfb'); ?></option>
+                <!-- <option value="yesterday"><?php _e('Yesterday','msfb'); ?></option> -->
+                <!-- <option value="all"><?php _e('All','msfb'); ?></option> -->
             </select>
         </label>
         <label for="msfb_update_chart_by_date_range">

@@ -56,7 +56,7 @@ function msfb_generate_date_array( $days ) {
         $date = date( 'Y-m-d', strtotime( $date . ' -1 day' ) );
         $date_array[$date] = 0;
     }
-    return $date_array;
+    return array_reverse( $date_array );
 }
 if( $el_type == "leads" ) {
     $this->lead_data = $table_data['data'];
