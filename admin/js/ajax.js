@@ -13,6 +13,46 @@ jQuery(document).ready($ => {
             text: msg
         })
     }
+    // leads date range filter by ajax
+    $('#msfb_filter_lead_by_date_range').on('click',e => {
+        e.preventDefault()
+        if( !$('#msfb_chart_date_start').val() || !$('#msfb_chart_date_end').val()) {
+            Swal.fire({
+                icon: "warning",
+                text: "Please select start and end date"
+            })
+            return false
+        }
+        let start_date = $('#msfb_chart_date_start').val()
+        let end_date = $('#msfb_chart_date_end').val()
+        let data = {
+            action: 'msfb_leads_date_range',
+            dataset: [start_date,end_date, window.msfb_all_data]
+        }
+        $.ajax({
+            url: msfb.ajax_url,
+            type: "POST",
+            dataType: "json",
+            data,
+            success: res => {
+                console.log(res)
+                window.msfb_chart.data.labels = res.data.labels
+                window.msfb_chart.data.datasets[0].data = res.data.data
+                window.msfb_chart.update()
+            },
+            error: err => {
+                console.log(err)
+            }
+        })
+    })
+    // update chartjs
+    $('#msfb_update_chart').on('change', e => {
+        let set_type = $(e.currentTarget).val()
+        last_7_days
+        last_month
+        yesterday
+        all
+    })
     // get this value function
     const this__ = el => $(el.currentTarget)
     // save question

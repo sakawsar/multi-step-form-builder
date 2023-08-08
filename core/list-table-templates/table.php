@@ -50,18 +50,55 @@ if( $el_type == "leads" ) {
     $formulations = $wpdb->get_results("SELECT * FROM $table_name",ARRAY_A);
     $table_data['data'] = $wpdb->num_rows > 0 ? $formulations : false;
 }
+function msfb_generate_date_array( $days ) {
+    $date = current_time( 'mysql' );
+    for( $i = $days; $i >= 0; $i-- ) {
+        $date = date( 'Y-m-d', strtotime( $date . ' -1 day' ) );
+        $date_array[$date] = 0;
+    }
+    return $date_array;
+}
 if( $el_type == "leads" ) {
     $this->lead_data = $table_data['data'];
+    $lead_state_data = [];
+    $last_7_day_data = msfb_generate_date_array( 7 );
+    $yesterday_data = msfb_generate_date_array( 1 );
+    $last_month_data = msfb_generate_date_array( 30 );
+    // get date range data
+    $date_range_data = msfb_get_date_range_struct( date('Y-m-d', strtotime('-30 days')), date('Y-m-d') );
+    foreach( $table_data['data'] as $a_lead_state_data ) {
+        $timestamp = end($a_lead_state_data);
+        $this_date = date('Y-m-d',$timestamp);
+        // set data to last 7 days
+        if( isset($last_7_day_data[$this_date]) ) {
+            $last_7_day_data[$this_date] = intval($last_7_day_data[$this_date]) + 1;
+        }
+        // set data to yesterday
+        if( isset($yesterday_data[$this_date]) ) {
+            $yesterday_data[$this_date] = intval($yesterday_data[$this_date]) + 1;
+        }
+        // set data to last month
+        if( isset($last_month_data[$this_date]) ) {
+            $last_month_data[$this_date] = intval($last_month_data[$this_date]) + 1;
+        }
+        $lead_state_data[$this_date] = isset($lead_state_data[$this_date]) ? intval($lead_state_data[$this_date]) + 1 : 1;
+    }
+    function msfb_prepare_dataset($lead_state_data) {
+        return json_encode(['labels' => array_keys($lead_state_data), 'data' => array_values($lead_state_data)]);
+    }
     ?>
     <script>
-        console.log('working 222')
-        window.lead_data = '<?php echo addslashes( json_encode($table_data['data']) ); ?>';
+        window.msfb_all_data = '<?php echo msfb_prepare_dataset($lead_state_data); ?>';
+        window.msfb_last_7_days = '<?php echo msfb_prepare_dataset($last_7_day_data); ?>';
+        window.msfb_yesterday_data = '<?php echo msfb_prepare_dataset($yesterday_data); ?>';
+        window.msfb_last_month_data = '<?php echo msfb_prepare_dataset($last_month_data); ?>';
+        window.msfb_date_range_data = '<?php echo msfb_prepare_dataset($date_range_data); ?>';
     </script>
     <?php
     add_action('admin_enqueue_scripts', function()use($table_data){
-        wp_localize_script('msfb_admin_localize','msfb2', $table_data['data']);
+        wp_localize_script('msfb_admin_localize','msfb_cur_lead_data', $table_data['data']);
     });
-    var_dump($table_data['data']);
+    // var_dump($table_data['data']);
 }
 ?>
 <table class="sk-table skfb-table-question">

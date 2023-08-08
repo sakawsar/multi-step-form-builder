@@ -1,4 +1,40 @@
 <?php
+add_action('wp_ajax_msfb_leads_date_range','msfb_leads_date_range_callback');
+function msfb_leads_date_range_callback(){
+    if( isset($_POST['dataset']) ) {
+        $start_date = $_POST['dataset'][0];
+        $end_date = $_POST['dataset'][1];
+        $all_leads = json_decode( stripslashes( $_POST['dataset'][2] ), true );
+        $labels = $all_leads['labels'];
+        $lead_data = $all_leads['data'];
+        $date_array = msfb_get_date_range_struct($start_date, $end_date);
+        foreach($date_array as $a_date => $count) {
+            $date_key = array_search( $a_date, $labels );
+            if( $date_key !== false ) {
+                $date_array[$a_date] = $lead_data[$date_key];
+            }
+        }
+        wp_die(json_encode(
+            array(
+                'status' => 'success',
+                'data' => ['labels' => array_keys($date_array), 'data' => array_values($date_array)],
+                'all_leads' => $all_leads
+            )
+        ));
+    }
+    wp_die();
+}
+function msfb_get_date_range_struct($start_date, $end_date) { 
+    $start_date = strtotime($start_date); 
+    $end_date = strtotime($end_date); 
+    $date_array = array(); 
+    while ($start_date <= $end_date) { 
+        $date = date('Y-m-d', $start_date);
+        $date_array[$date] = 0;
+        $start_date = strtotime("+ 1 day", $start_date);
+    } 
+    return $date_array;
+}
 add_action('wp_ajax_msfb_export_leads','msfb_export_leads_callback');
 function msfb_export_leads_callback(){
     if( isset($_POST['dataset']) ) {

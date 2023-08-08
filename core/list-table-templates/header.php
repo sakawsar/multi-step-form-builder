@@ -53,11 +53,11 @@
                 <option value="last_7_days"><?php _e('Last 7 days','msfb'); ?></option>
                 <option value="last_month"><?php _e('Last month','msfb'); ?></option>
                 <option value="yesterday"><?php _e('Yesterday','msfb'); ?></option>
-                <option value="All"><?php _e('All','msfb'); ?></option>
+                <option value="all"><?php _e('All','msfb'); ?></option>
             </select>
         </label>
         <label for="msfb_update_chart_by_date_range">
-            <p>From: <input type="date" name="" id="msfb_chart_date_start"> To: <input type="date" name="" id="msfb_chart_date_end"></p>
+            <p>From: <input type="date" name="" id="msfb_chart_date_start"> To: <input type="date" name="" id="msfb_chart_date_end"> <button class="skfb-btn" id="msfb_filter_lead_by_date_range"><?php _e('Filter lead by date range','msfb'); ?></button></p>
         </label>
     </div>
     <canvas id="msfb-leads-states" style="padding:8px 16px;width:100%;height:360px;"></canvas>
