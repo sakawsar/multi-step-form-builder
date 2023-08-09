@@ -30,14 +30,20 @@
             let setRight = drawerWidth + 22;
             rightDrawer.css({ "right": "-" + setRight + "px" });
         });
-        $(document).on('click blur','.skfb__form-title, .skfb__form-desc',function(){
+        // $(document).on('click blur','.skfb__form-title, .skfb__form-desc',function(){
             $(document).on('click','body',function(e){
                 // console.log(e)
                 let the_target = $(e.target)
                 // console.log('target',the_target)
                 let class_list = the_target.attr('class')
-                // console.log('class_list',class_list)
-                if( the_target.closest('.skfb-right-options').length > 0 || class_list.indexOf('skfb__form-title') > -1 || class_list.indexOf('skfb__form-desc') > -1 ) {
+                console.log('class_list',class_list)
+                if( the_target.closest('.skfb__field-box').length > 0 ) {
+                    return false
+                } else if ( the_target.closest('.skfb-right-options').length > 0 ) {
+                    return false
+                } else if ( class_list && class_list.indexOf('skfb__form-title') > -1 ) {
+                    return false
+                } else if ( class_list && class_list.indexOf('skfb__form-desc') > -1 ) {
                     return false
                 } else {
                     let rightDrawer = $('.skfb-right-options');
@@ -46,7 +52,7 @@
                     rightDrawer.css({ "right": "-" + setRight + "px" });
                 }
             })
-        })
+        // })
     });
     $('#msfb-color-scheme').on('input',function(){
         $('label[for="msfb-color-scheme"] code').html($(this).val())
@@ -378,7 +384,7 @@
     })
     // title update
     // console.log(msfb_active_question())
-    let msfb_mutation_els = $(".skfb__form-title, .skfb__form-desc, .skfb__answer")
+    let msfb_mutation_els = $(".skfb__form-title, .skfb__form-desc, .skfb__answer, .msfb-field-label")
     let msfb_mutation_config = {
         attributes: true,
         childList: true,
@@ -396,8 +402,14 @@
                 $('#msfb-answer').val(mutationRecord.target.data)
             } else if ( target_el_class.indexOf('skfb__form-title') > -1 ) {
                 $('.msfb-title').val(text_data)
+                if( $('#msfb-form-title').length > 0 ) {
+                    $('#msfb-form-title').val(text_data)
+                }
             } else if ( target_el_class.indexOf('skfb__form-desc') > -1 ) {
                 $('.msfb-desc').val(text_data)
+                if( $('#msfb-form-desc').length > 0 ) {
+                    $('#msfb-form-desc').val(text_data)
+                }
             }
         });
     });

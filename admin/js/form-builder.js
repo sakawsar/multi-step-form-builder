@@ -62,6 +62,12 @@
                 <input disabled="true" type="text" placeholder="YYYY-MM-DD" id="date" data-id="datepicker" />
             </div>
         `
+        let file_upload_field = `
+            <div class="skfb__field-box skfb-form-builder-drawer" data-field-type="upload_form_field">
+                <label class="msfb-field-label" for="upload"><i class="fa fa-times-circle"></i> Upload file</label>
+                <input disabled="true" type="file" id="upload"/>
+            </div>
+        `
         let dropdown_field = `
             <div class="skfb__field-box skfb-form-builder-drawer" data-field-type="dropdown_form_field">
                 <label class="msfb-field-label" for="date"><i class="fa fa-times-circle"></i> Dropdown</label>
@@ -104,6 +110,9 @@
         $('#msfb-date-form-field').on('click', e => {
             form_field_holder.append(date_field)
         })
+        $('#msfb-upload-form-field').on('click', e => {
+            form_field_holder.append(file_upload_field)
+        })
         $('#msfb-slider-form-field').on('click', e => {
             form_field_holder.append(slider_field)
         })
@@ -136,6 +145,9 @@
             $('#msfb-form-title').val($('.skfb__form-title').html())
             $('#msfb-form-desc').val($('.skfb__form-desc').html())
         })
+        window.msfb_show_drawer = function( field_type ){
+            msfb_show_drawer( field_type )
+        }
         $(document).on('click','div[data-field-type]',e => {
             let this_el = this__(e)
             if( e.target.localName != "i" ){

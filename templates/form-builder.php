@@ -48,8 +48,8 @@
           <div class="sk-col-md-9 sk-col-lg-10 msfb-form-builder" <?php echo $has_data ? "data-form-name='".$this_form_data['form_name']."'" : ""; ?>>
             <div class="skfb__form-wrapper">
               <header class="skfb__form-header">
-                <h2 class="skfb__form-title"><?php echo $has_data ? $this_form_data['form_data']['form_title'] : "Form title"; ?></h2>
-                <p class="skfb__form-desc"><?php echo $has_data ? $this_form_data['form_data']['form_desc'] : "Form description"; ?></p>
+                <h2 contenteditable="true" class="skfb__form-title"><?php echo $has_data ? $this_form_data['form_data']['form_title'] : "Form title"; ?></h2>
+                <p contenteditable="true" class="skfb__form-desc"><?php echo $has_data ? $this_form_data['form_data']['form_desc'] : "Form description"; ?></p>
               </header>
               <form action="#" class="skfb__form">
                 <div class="skfb__sortable-data" id="msfb-form-field-holder">
@@ -61,7 +61,7 @@
                     ?>
                     <?php if( $a_field['field_type'] == "multiselect_form_field" || $a_field['field_type'] == "select_form_field" ){ ?>
                     <div <?php echo $is_required." ".$is_lead_column; ?> class="skfb__field-box skfb-form-builder-drawer" data-field-type="<?php echo $a_field['field_type']; ?>">
-                      <label class="msfb-field-label"><i class="fa fa-times-circle"></i> <?php echo $a_field['field_label']; ?></label>
+                      <label contenteditable="true" contenteditable="true" class="msfb-field-label"><i class="fa fa-times-circle"></i> <?php echo $a_field['field_label']; ?></label>
                       <ul class="skfb__input-option__lists">
                           <?php foreach($a_field['field_data'] as $a_option){ ?>
                           <li>
@@ -73,26 +73,31 @@
                     </div>
                     <?php } elseif( in_array($a_field['field_type'],["text_form_field","date_form_field"]) ) { ?>
                       <div <?php echo $is_required." ".$is_lead_column; ?> class="skfb__field-box skfb-form-builder-drawer" data-field-type="<?php echo $a_field['field_type']; ?>">
-                          <label class="msfb-field-label" for="textField"><i class="fa fa-times-circle"></i> <?php echo $a_field['field_label']; ?></label>
+                          <label contenteditable="true" class="msfb-field-label" for="textField"><i class="fa fa-times-circle"></i> <?php echo $a_field['field_label']; ?></label>
                           <input disabled="true" type="text" placeholder="<?php echo $a_field['field_data']['placeholder']; ?>" id="textField">
                       </div>
                     <?php } elseif( $a_field['field_type'] == "textarea_form_field" ) { ?>
                       <div <?php echo $is_required." ".$is_lead_column; ?> class="skfb__field-box skfb-form-builder-drawer" data-field-type="textarea_form_field">
-                        <label class="msfb-field-label" for="textArea"><i class="fa fa-times-circle"></i> <?php echo $a_field['field_label']; ?></label>
+                        <label contenteditable="true" class="msfb-field-label" for="textArea"><i class="fa fa-times-circle"></i> <?php echo $a_field['field_label']; ?></label>
                         <textarea name="textArea" cols="30" rows="4" placeholder="<?php echo $a_field['field_data']['placeholder']; ?>" id="textArea"></textarea>
                       </div>
                     <?php } elseif( $a_field['field_type'] == "slider_form_field" ) { ?>
                       <div <?php echo $is_required." ".$is_lead_column; ?> class="skfb__field-box skfb-form-builder-drawer msfb-form-field-selected" data-field-type="slider_form_field" msfb-slider-default-val="<?php echo $a_field['field_data']['default_val']; ?>" msfb-slider-max-val="<?php echo $a_field['field_data']['max_val']; ?>" msfb-slider-min-val="<?php echo $a_field['field_data']['min_val']; ?>" msfb-slider-step-val="<?php echo $a_field['field_data']['step_val']; ?>">
-                        <label class="msfb-field-label"><i class="fa fa-times-circle"></i> <?php echo $a_field['field_label']; ?></label>
+                        <label contenteditable="true" class="msfb-field-label"><i class="fa fa-times-circle"></i> <?php echo $a_field['field_label']; ?></label>
                           <div class="skfb-prev-input __2">
                               <div class="skfb-prev-slider">
                                   <span></span>
                               </div>
                           </div>
                       </div>
+                      <?php } elseif( $a_field['field_type'] == "upload_form_field" ) { ?>
+                      <div <?php echo $is_required." ".$is_lead_column; ?> class="skfb__field-box skfb-form-builder-drawer" data-field-type="upload_form_field">
+                          <label class="msfb-field-label" for="upload"><i class="fa fa-times-circle"></i> <?php echo $a_field['field_label']; ?></label>
+                          <input disabled="true" type="file" id="upload"/>
+                      </div>
                     <?php } elseif( $a_field['field_type'] == "dropdown_form_field" ) { ?>
                       <div <?php echo $is_required." ".$is_lead_column; ?> class="skfb__field-box skfb-form-builder-drawer" data-field-type="dropdown_form_field">
-                          <label class="msfb-field-label" for="date"><i class="fa fa-times-circle"></i> Dropdown</label>
+                          <label contenteditable="true" class="msfb-field-label" for="date"><i class="fa fa-times-circle"></i> Dropdown</label>
                           <select>
                             <?php foreach( $a_field['field_data'] as $a_opt) { ?>
                               <option value="<?php echo $a_opt['value']; ?>"><?php echo $a_opt['label']; ?></option>

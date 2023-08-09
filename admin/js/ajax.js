@@ -633,7 +633,7 @@ jQuery(document).ready($ => {
                     }
                 })
                 a_field_data['field_data'] = field_data
-            } else if ( field_type == "text_form_field" || field_type == "date_form_field" || field_type == "textarea_form_field" ) {
+            } else if ( field_type == "upload_form_field" || field_type == "text_form_field" || field_type == "text_form_field" || field_type == "date_form_field" || field_type == "textarea_form_field" ) {
                 a_field_data['field_data'] = {
                     "placeholder": field_type == "textarea_form_field" ? $(field).find('textarea').attr('placeholder') : $(field).find('input').attr('placeholder')
                 }

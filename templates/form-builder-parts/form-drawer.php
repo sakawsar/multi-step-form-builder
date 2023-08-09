@@ -12,7 +12,7 @@
     </div>
     <div class="skfb__field-box __2">
       <label for="formName">Form title</label>
-      <input type="text" placeholder="Form title" value="<?php echo $has_data ? $this_form_data['form_data']['form_title'] : ""; ?>" id="msfb-form-title" />
+      <input contenteditable="true" type="text" placeholder="Form title" value="<?php echo $has_data ? $this_form_data['form_data']['form_title'] : ""; ?>" id="msfb-form-title" />
     </div>
     <div class="skfb__field-box __2">
       <label for="formName">Form description</label>
@@ -135,6 +135,18 @@ function msfb_form_field_options( $id = "" ){
   <h5 class="sk-head __2 sk-text-white">Text field options</h5>
   <div class="skfb__field-opt__boxes skfb__overflow_scroll">
     <?php msfb_form_field_options("text_form_field"); ?>
+  </div> 
+</div>
+<!-- upload form field-->
+<div class="skfb-right-options" style="display:none;" data-drawer-type="upload_form_field">
+  <div class="sk-text-right">
+    <button class="skfb-right-sidebar-close">
+      <i class="fa fa-times"></i>
+    </button>
+  </div>
+  <h5 class="sk-head __2 sk-text-white">Upload field options</h5>
+  <div class="skfb__field-opt__boxes skfb__overflow_scroll">
+    <?php msfb_form_field_options("upload_form_field"); ?>
   </div> 
 </div>
 <!-- textarea form -->
