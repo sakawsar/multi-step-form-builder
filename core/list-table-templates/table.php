@@ -155,6 +155,9 @@ if( $el_type == "leads" ) {
                                 printf("<td>%s</td>",$item_data[$t_id]);
                                 if(isset($item_data['lead_data'])){
                                     $lead_data = json_decode( stripcslashes( $item_data['lead_data'] ), true );
+                                    echo '<pre>';
+                                    print_r($lead_data);
+                                    echo '</pre>';
                                     $lead_form_data = $lead_data[count($lead_data) - 1];
                                     $lead_map = $lead_form_data['lead_map'];
                                     $lead_data = $lead_form_data['form_data'];

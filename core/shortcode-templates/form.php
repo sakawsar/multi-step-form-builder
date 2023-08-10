@@ -89,6 +89,15 @@ function msfb_form_step( $data ){
                 </label>
             </div>
 
+            <!-- upload field -->
+            <?php } elseif($field['field_type'] == "upload_form_field"){ ?>
+            <div data-msfb-required="<?php echo $field['is_required']; ?>" data-msfb-is-lead-col="<?php echo $field['is_lead_column']; ?>" class="msfb-form-field msfb-form-upload" data-field-label="<?php echo trim(strip_tags( $field['field_label'] )); ?>">
+                <label class="w-full text-lg mb-2" style="color:var(--msfb-color);"><?php echo trim(strip_tags( $field['field_label'] )); ?></label>
+                <label class="w-full">
+                    <input type="file" style="padding:8px;" class="tw-msfb-text-field w-full" value="test" name="test"/>
+                </label>
+            </div>
+
 
             <!-- slider field -->
             <?php } elseif($field['field_type'] == "slider_form_field"){ ?>

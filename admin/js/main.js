@@ -36,7 +36,7 @@
                 let the_target = $(e.target)
                 // console.log('target',the_target)
                 let class_list = the_target.attr('class')
-                console.log('class_list',class_list)
+                // console.log('class_list',class_list)
                 if( the_target.closest('.skfb__field-box').length > 0 ) {
                     return false
                 } else if ( the_target.closest('.skfb-right-options').length > 0 ) {
