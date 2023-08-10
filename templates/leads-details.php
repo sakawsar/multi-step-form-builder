@@ -18,6 +18,14 @@ if( isset( $_GET['lead_id'] ) && sanitize_text_field( $_GET['lead_id'] )){
   // echo "Not a valid lead";
   $invalid = true;
 }
+if( !function_exists('msfb_showas_anchor_tag') ) {
+  function msfb_showas_anchor_tag( $value ) {
+    if( strpos($value, 'http://') !== false || strpos($value, 'http://') !== false ) {
+      return '<a href="'.$value.'">'.$value.'</a>';
+    }
+    return $value; 
+  }
+}
 ?>
 <div class="app">
   <div class="skfb-header">
@@ -48,11 +56,7 @@ if( isset( $_GET['lead_id'] ) && sanitize_text_field( $_GET['lead_id'] )){
                 <th><?php echo $a_row['title']; ?></th>
                 <td>
                   <?php 
-                  if( is_array($a_row['value'])) {
-                    echo implode(', ',$a_row['value']); 
-                  } else {
-                    echo $a_row['value']; 
-                  }
+                  echo msfb_showas_anchor_tag(is_array($a_row['value']) ? implode(', ',$a_row['value']) : $a_row['value']);
                   ?>
                 </td>
               </tr>
@@ -67,12 +71,8 @@ if( isset( $_GET['lead_id'] ) && sanitize_text_field( $_GET['lead_id'] )){
                   <tr>
                     <th><?php echo $a_field['title']; ?></th>
                     <td>
-                      <?php 
-                      if( is_array($a_field['value'])) {
-                        echo implode(', ',$a_field['value']); 
-                      } else {
-                        echo $a_field['value']; 
-                      }
+                      <?php
+                      echo msfb_showas_anchor_tag(is_array($a_field['value']) ? implode(', ',$a_field['value']) : $a_field['value']);
                       ?>
                     </td>
                   </tr>

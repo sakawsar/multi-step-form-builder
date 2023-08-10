@@ -17,7 +17,7 @@ function msfb_upload_step( $data ){
         <!-- upload field -->
         <div class="msfb-upload-qtn tw-msfb-qtn-field tw-msfb-upload-qtn relative">
             <label class="tw-msfb-upload-field flex flex-col items-center justify-center gap-4">
-                <input type="file" class="hidden"/>
+                <input type="file" class="hidden" accept=".png, .jpg, .jpeg, .pdf, .doc, .docx, .zip"/>
                 <i class="fa fa-upload text-8xl text-gray-400"></i>
                 <p class="text-gray-400">Drag & Drop</p>
             </label>
