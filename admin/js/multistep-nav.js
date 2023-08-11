@@ -23,7 +23,7 @@
             btn.html('<i class="fa fa-spinner fa-spin"></i> ' + msfb.translate.finish)
             let lead_data = await msfb_get_formulation_data(nodes)
             // let redirect_url = 
-            console.log('lead data',lead_data)
+            // console.log('lead data',lead_data)
             $.ajax({
                 url: msfb.ajax_url,
                 type: "POST",
@@ -36,16 +36,40 @@
                     }
                 },
                 success: resp => {
-                    console.log(resp)
+                    // console.log(resp)
                     btn.html(msfb.translate.finish)
                     $('html, body').animate({
                         scrollTop: $(".tw-msfb-container").offset().top
                     }, 500)
                     // console.log(resp)
+                    let lead_list = ''
+                    let form_list = ''
                     if( resp.formulation_id ) {
+                        
+                        for (let i = 0; i < lead_data.length; i++) {
+                            let field_data = lead_data[i]
+                            if( field_data.title ) {
+                                lead_list += `<li style="padding:8px 0px;border-bottom:1px solid gray;">${field_data.title}: ${Array.isArray(field_data.value) ? field_data.value.join(',') : field_data.value}</li>`
+                            } else {
+                                for( let j in field_data.form_data ) {
+                                    let form_data = field_data.form_data[j]
+                                    if( form_data.title ) {
+                                        form_list += `<li style="padding:8px 0px;border-bottom:1px solid gray;">${form_data.title}: ${Array.isArray(form_data.value) ? form_data.value.join(',') : form_data.value}</li>`
+                                    }
+                                }
+                            }
+                        }
                         Swal.fire({
                             icon: "success",
-                            text: msfb.translate.form_data_successfully_submitted
+                            title: msfb.translate.form_data_successfully_submitted,
+                            html: `
+                                <div class="msfb-brief-container">
+                                    <h2 style="font-weight:600;">Don’t worry, you´ll get all your answers via e-mail so that you can use this form also for briefings to other service provider.</h2>
+                                    <ul style="margin:8px 0px;" class="msfb-lead-data-list">${lead_list}</ul>
+                                    <h3 style="font-weight:600;">Form data</h3>
+                                    <ul style="margin:8px 0px;" class="msfb-lead-form-data-list">${form_list}</ul>
+                                </div>
+                            `
                         }).then( data => {
                             window.location.href = $('button[data-msfb-redirect]').attr('data-msfb-redirect')
                         })
@@ -662,7 +686,7 @@
                                             $('label[for="msfb-custom-icon"]').find('div i').attr('class','fa fa-upload')
                                         }
                                     });
-                                    console.log('form-value',the_value)
+                                    // console.log('form-value',the_value)
                                     value.push(the_value.url)
                                     title = $(v).attr('data-field-label')
                                     // value.push($(v).find('input').val())
