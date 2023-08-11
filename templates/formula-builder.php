@@ -178,6 +178,38 @@
               ?>
               <?php foreach($all_questions as $a_question) { ?>
               <div data-element-type="question" data-element-cat-id="<?php echo $a_question['cat_id']; ?>" data-question-type="<?php echo $a_question['question_type']; ?>" data-element-name="<?php echo $a_question['question_name']; ?>" class="skfb-card skfb-feild-draggable" draggable="true" ondragstart="<?php echo 'drag'; ?>(event)" data-node="question-<?php echo $a_question['id']; ?>">
+                <p style="margin-bottom:8px;display:flex;flex-flow:row nowrap;justify-content:center;">
+                  <?php
+                  $question_type_label = '';
+                  switch ($a_question['question_type']) {
+                    case 'msfb-single-select-field':
+                      $question_type_label = __('Single Select','msfb');
+                      break;
+                    case 'msfb-multiselect':
+                      $question_type_label = __('Multiselect Select','msfb');
+                      break;
+                    case 'msfb-text-field':
+                      $question_type_label = __('Text','msfb');
+                      break;
+                    case 'msfb-textarea-field':
+                      $question_type_label = __('Textarea','msfb');
+                      break;
+                    case 'msfb-slider-field':
+                      $question_type_label = __('Slider','msfb');
+                      break;
+                    case 'msfb-date-field':
+                      $question_type_label = __('Date','msfb');
+                      break;
+                    case 'msfb-upload-field':
+                      $question_type_label = __('File Upload','msfb');
+                      break;
+                    case 'msfb-dropdown-field':
+                      $question_type_label = __('Dropdown','msfb');
+                      break;
+                  }
+                  echo $question_type_label;
+                  ?>
+                </p>
                 <div class="sk-row sk-align-items-center">
                   <div class="sk-col-12">
                     <div class="skfb-prev-input">
@@ -238,6 +270,7 @@
               <?php } ?>
               <?php foreach($all_forms as $a_form) { ?>
                 <div data-element-type="form" data-element-cat-id="<?php echo $a_form['cat_id']; ?>" data-element-name="<?php echo $a_form['form_name']; ?>" class="skfb-card skfb-feild-draggable" draggable="true" ondragstart="<?php echo 'drag'; ?>(event)" data-node="form-<?php echo $a_form['id']; ?>">
+                  <p><?php _e('Form','msfb'); ?></p>
                   <div class="sk-row sk-align-items-center">
                     <div class="sk-col-12">
                       <div class="skfb-prev-input" style="color:gray;text-align:center;">
