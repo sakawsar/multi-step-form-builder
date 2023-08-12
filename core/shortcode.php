@@ -39,6 +39,7 @@ function msfb_ui_callback( $atts ){
 			--msfb-color: <?php echo $formulation_data['color_scheme']; ?>;
 		}
 	</style>
+	<div id="msfb-recaptcha"></div>
 	<div class="tw-msfb-container" data-formulation-id="<?php echo $formulation_id; ?>">
 	<!-- <div class="tw-msfb-container" data-formulation-data="<?php echo base64_encode(serialize($qtns)); ?>"> -->
 		<div class="tw-msfb-progress-bar">

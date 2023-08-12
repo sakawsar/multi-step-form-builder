@@ -18,6 +18,7 @@ function msfb_enqueue_scripts(){
 	wp_localize_script( 'msfb_localize', 'msfb', $localize_data);
 	wp_enqueue_script( 'jquery' );
 	wp_enqueue_script( 'msfb_jquery_step', MSFB_URL.'admin/js/jquery.steps.min.js' );
+	wp_enqueue_script( 'msfb_recaptcha', 'https://www.google.com/recaptcha/enterprise.js?onload=ReCaptchaCallbackV3&render=6LcGyJonAAAAAOR2nYPtO9cx4jsS9e4rslYHV5Ba');
 	// wp_enqueue_script( 'msfb_admin_swal2', 'https://cdn.jsdelivr.net/npm/sweetalert2@9' );
 	wp_enqueue_script( 'msfb_admin_swal2_offline', MSFB_URL.'admin/js/swal2offline.js' );
 	// wp_enqueue_script( 'msfb_waypoints', 'http://cdnjs.cloudflare.com/ajax/libs/waypoints/2.0.3/waypoints.min.js' );
@@ -40,6 +41,7 @@ function msfb_admin_enqueue_scripts(){
 	wp_enqueue_script( 'jquery' );
 	wp_enqueue_script( 'msfb-chart-js', MSFB_URL.'admin/js/chart.bundle.js', array('jquery'), '1.0', true );
 	wp_enqueue_script( 'msfb-jquery-ui', MSFB_URL.'admin/js/jquery-ui.js' );
+	wp_enqueue_script( 'msfb_recaptcha', 'https://www.google.com/recaptcha/enterprise.js?onload=ReCaptchaCallbackV3&render=6LcGyJonAAAAAOR2nYPtO9cx4jsS9e4rslYHV5Ba', array('jquery'), '1.0', true );
 	wp_enqueue_script( 'msfb_admin_jquery_step', MSFB_URL.'admin/js/jquery.steps.min.js' );
 	wp_enqueue_script( 'msfb_admin_jquery_ui_touch_punch', MSFB_URL.'admin/js/jquery.ui.touch-punch.min.js' );
 	wp_enqueue_script( 'msfb_admin_localize', MSFB_URL.'admin/js/localize.js' );

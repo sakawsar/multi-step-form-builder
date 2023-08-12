@@ -1,5 +1,30 @@
+var ReCaptchaCallbackV3 = function() {
+    if( document.getElementById('msfb-recaptcha') ) {
+        grecaptcha.enterprise.ready(function() {
+            grecaptcha.enterprise.render('msfb-recaptcha', {
+                "sitekey": "6LcGyJonAAAAAOR2nYPtO9cx4jsS9e4rslYHV5Ba",
+                "action": "login",
+                "theme": "dark"
+            });
+            grecaptcha.enterprise.execute("6LcGyJonAAAAAOR2nYPtO9cx4jsS9e4rslYHV5Ba").then(function(token) {
+                console.log("v3 Token: " + token);
+            });
+        });
+    }
+};
 (function ($) {
     $(document).ready(function () {
+        // window.msfb_recaptcha = function() {
+        //     // e.preventDefault();
+        //     // console.log('recaptcha',e)
+        //     grecaptcha.enterprise.execute(async () => {
+        //         const token = await grecaptcha.enterprise.execute('6LeGXZonAAAAAEt-1y2k6Q1R_6ni50q7biPCrEgL', {action: 'LOGIN'});
+        //         // IMPORTANT: The 'token' that results from execute is an encrypted response sent by
+        //         // reCAPTCHA Enterprise to the end user's browser.
+        //         // This token must be validated by creating an assessment.
+        //         // See https://cloud.google.com/recaptcha-enterprise/docs/create-assessment
+        //     });
+        // }
         // drawer scrollbar
         $( window ).resize(() => {
             $('.skfb__field-opt__boxes').height(window.innerHeight - 200)
