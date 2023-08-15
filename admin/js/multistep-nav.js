@@ -24,16 +24,21 @@
             let lead_data = await msfb_get_formulation_data(nodes)
             // let redirect_url = 
             // console.log('lead data',lead_data)
+            let payload = {
+                "formulation_id": $('.tw-msfb-container').attr('data-formulation-id'),
+                "lead_data": JSON.stringify(lead_data)
+            }
+            if( msfb_recaptcha_token ) {
+                payload = { ...payload, msfb_recaptcha_token}
+                // console.log('payload',payload)
+            }
             $.ajax({
                 url: msfb.ajax_url,
                 type: "POST",
                 dataType: "json",
                 data: {
                     action: "msfb_add_leads",
-                    dataset: {
-                        "formulation_id": $('.tw-msfb-container').attr('data-formulation-id'),
-                        "lead_data": JSON.stringify(lead_data)
-                    }
+                    dataset: payload
                 },
                 success: resp => {
                     // console.log(resp)
@@ -73,7 +78,18 @@
                         }).then( data => {
                             window.location.href = $('button[data-msfb-redirect]').attr('data-msfb-redirect')
                         })
+                    } else if ( resp.status && resp.status == 'error' ) {
+                        Swal.fire({
+                            icon: "warning",
+                            text: resp.message
+                        })
+                    } else {
+                        Swal.fire({
+                            icon: "warning",
+                            text: "Unknown error"
+                        })
                     }
+
                 },
                 error: err => {
                     btn.html(msfb.translate.finish)
@@ -330,6 +346,13 @@
         })
         $('button[data-msfb-redirect]').on('click', e => {
             let this_el = $(e.currentTarget)
+            if( ( msfb_recaptcha_client_id !== null || msfb_recaptcha_client_id !== undefined ) && !msfb_recaptcha_token ) {
+                Swal.fire({
+                    icon: "warning",
+                    text: msfb.translate.msfb_please_verify_recaptcha
+                })
+                return false
+            }
             let node_id = this_el.closest('div[data-msfb-node]').attr('data-msfb-node')
             let msfb_validation = msfb_required_validator(node_id)
             if( msfb_validation == false ) {

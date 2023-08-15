@@ -306,6 +306,19 @@ function msfb_add_leads_callback(){
     if(isset($_POST['dataset'])){
         global $wpdb;
         $data = $_POST['dataset'];
+        $msfb_recap_token = isset($_POST['dataset']['msfb_recaptcha_token']) ? $_POST['dataset']['msfb_recaptcha_token'] : '';
+        $msfb_recap_secret = get_option('msfb_recaptcha_secret',false);
+        if( $msfb_recap_token && $msfb_recap_secret ) {
+            $verify_token = file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret='.$msfb_recap_secret.'&response='.$msfb_recap_token);
+            $verify_token = json_decode($verify_token,true);
+            if( !isset($verify_token['success']) || $verify_token['success'] == false ) {
+                echo json_encode(array(
+                    'status' => 'error',
+                    'message' => __('Invalid reCAPTCHA token.')
+                ));
+                exit;
+            }
+        }
         if( isset($data[count($data) - 1]['form_id']) ) {
             $data[count($data) - 1]['date'] = current_time( 'mysql' );
         }

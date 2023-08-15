@@ -5,6 +5,7 @@ function msfb_enqueue_scripts(){
 	wp_enqueue_script( 'msfb_localize', MSFB_URL.'admin/js/localize.js' );
 	$localize_data = array(
 		'ajax_url' => admin_url( 'admin-ajax.php' ),
+		'msfb_recap_sitekey' => get_option('msfb_recap_sitekey'),
 		'translate' => array(
 			'form_data_successfully_submitted' => get_option('form_data_successfully_submitted','Form data successfully submitted.'),
 			'this_option_did_not_point_to_any_other_question' => get_option('this_option_did_not_point_to_any_other_question','This option did not point to any other question.'),
@@ -13,6 +14,7 @@ function msfb_enqueue_scripts(){
 			'this_step_is_required' => get_option('this_step_is_required','This step is required'),
 			'msfb_select_from_dropdown' => get_option('msfb_select_from_dropdown','Select from dropdown'),
 			'finish' => get_option('msfb_translate_finish','Finish'),
+			'msfb_please_verify_recaptcha' => get_option('msfb_please_verify_recaptcha','Please verify the recaptcha'),
 		)
 	);
 	wp_localize_script( 'msfb_localize', 'msfb', $localize_data);

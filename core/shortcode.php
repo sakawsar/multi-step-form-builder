@@ -39,7 +39,6 @@ function msfb_ui_callback( $atts ){
 			--msfb-color: <?php echo $formulation_data['color_scheme']; ?>;
 		}
 	</style>
-	<div id="msfb-recaptcha"></div>
 	<div class="tw-msfb-container" data-formulation-id="<?php echo $formulation_id; ?>">
 	<!-- <div class="tw-msfb-container" data-formulation-data="<?php echo base64_encode(serialize($qtns)); ?>"> -->
 		<div class="tw-msfb-progress-bar">
@@ -220,6 +219,9 @@ function msfb_step_navigation( $data ) {
 		$required = $data['question_required'] == 1 ? "data-msfb-required='true'" : "";
 	}
 	?>
+		<?php if( $step_data['type'] != "question" && get_option('msfb_recap_sitekey') ) { ?>
+			<div style="margin:16px auto;" id="msfb-recaptcha"></div>
+		<?php } ?>
 		<div <?php echo $required; ?> class="tw-msfb-btn-container" <?php echo isset($data['nav_position']) && $data['nav_position'] == 'top' ? 'style="margin:32px 0px;"' : ''; ?> <?php echo $root_node; ?> data-step-type="<?php echo $step_data['type']; ?>">
 			<?php if( $data['step'] != 1 ) { ?>
 				<button data-msfb-prev=""><?php echo get_option('msfb_translate_back','Back'); ?></button>

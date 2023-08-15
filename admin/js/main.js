@@ -1,14 +1,18 @@
+var msfb_recaptcha_token
+var msfb_recaptcha_client_id
+var msfb_recaptcha_verify_callback = function(token) {
+    msfb_recaptcha_token = token
+}
 var ReCaptchaCallbackV3 = function() {
     if( document.getElementById('msfb-recaptcha') ) {
         grecaptcha.enterprise.ready(function() {
-            grecaptcha.enterprise.render('msfb-recaptcha', {
-                "sitekey": "6LcGyJonAAAAAOR2nYPtO9cx4jsS9e4rslYHV5Ba",
-                "action": "login",
-                "theme": "dark"
+            msfb_recaptcha_client_id = grecaptcha.enterprise.render('msfb-recaptcha', {
+                "sitekey": msfb.msfb_recap_sitekey,
+                // "sitekey": "6LfbK6UnAAAAAM4ehqC59N3JBbg8tGVtZEKVKDTz",
+                "callback": "msfb_recaptcha_verify_callback",
+                "theme": "light"
             });
-            grecaptcha.enterprise.execute("6LcGyJonAAAAAOR2nYPtO9cx4jsS9e4rslYHV5Ba").then(function(token) {
-                console.log("v3 Token: " + token);
-            });
+            grecaptcha.enterprise.getResponse(msfb_recaptcha_client_id)
         });
     }
 };

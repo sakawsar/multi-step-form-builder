@@ -63,6 +63,10 @@ function msfb_settings_callback(){
         update_option('msfb_row_count',$row_count);
         update_option('msfb_currency_symb',sanitize_text_field( $_POST['msfb_currency_symb'] ));
         update_option('form_data_successfully_submitted',sanitize_text_field( $_POST['form_data_successfully_submitted'] ));
+        // update the site key
+        update_option('msfb_recap_sitekey',sanitize_text_field( $_POST['msfb_recap_sitekey'] ));
+        // update secret key
+        update_option('msfb_recap_secretkey',sanitize_text_field( $_POST['msfb_recap_secretkey'] ));
         update_option('this_option_did_not_point_to_any_other_question',sanitize_text_field( $_POST['this_option_did_not_point_to_any_other_question'] ));
         update_option('select_an_option_first',sanitize_text_field( $_POST['select_an_option_first'] ));
         update_option('field_is_required',sanitize_text_field( $_POST['field_is_required'] ));
@@ -74,6 +78,7 @@ function msfb_settings_callback(){
         update_option('msfb_translate_next',sanitize_text_field( $_POST['msfb_translate_next'] ));
         update_option('msfb_translate_skip',sanitize_text_field( $_POST['msfb_translate_skip'] ));
         update_option('msfb_translate_finish',sanitize_text_field( $_POST['msfb_translate_finish'] ));
+        update_option('msfb_please_verify_recaptcha',sanitize_text_field( $_POST['msfb_please_verify_recaptcha'] ));
         update_option('msfb_translate_estimated_cost',sanitize_text_field( $_POST['msfb_translate_estimated_cost'] ));
         printf("<div class='is-dismissible notice notice-success'><p>%s</p></div>",__('Settings has been saved.','msfb'));
     }
@@ -103,6 +108,32 @@ function msfb_settings_callback(){
                     <input type="text" name="msfb_currency_symb" value="<?php echo get_option('msfb_currency_symb','') ?: ""; ?>" placeholder="$"/>
                     <p>
                         <?php _e('The currency symbol which will show in the pricing of the Q-Flow.','msfb') ?>
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <?php
+                        _e('Google recaptcha site key','msfb');
+                    ?>
+                </th>
+                <td>
+                    <input type="text" name="msfb_recap_sitekey" value="<?php echo get_option('msfb_recap_sitekey','') ?: ""; ?>" placeholder="<?php _e('Google recaptcha site key','msfb'); ?>"/>
+                    <p>
+                        <?php _e('Create google recaptcha v2 checkbox app and put the sitekey of that app.','msfb') ?>
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <?php
+                        _e('Google recaptcha secret key','msfb');
+                    ?>
+                </th>
+                <td>
+                    <input type="text" name="msfb_recap_secretkey" value="<?php echo get_option('msfb_recap_secretkey','') ?: ""; ?>" placeholder="<?php _e('Google recaptcha secret key','msfb'); ?>"/>
+                    <p>
+                        <?php _e('Create google recaptcha v2 checkbox app and put the secret key of that app.','msfb') ?>
                     </p>
                 </td>
             </tr>
@@ -170,6 +201,12 @@ function msfb_settings_callback(){
                 <th><?php _e('Finish','msfb'); ?></th>
                 <td>
                     <input type="text" name="msfb_translate_finish" value="<?php echo get_option('msfb_translate_finish','Finish') ?: ""; ?>" placeholder="Finish"/>
+                </td>
+            </tr>
+            <tr>
+                <th><?php _e('Please verify recaptcha','msfb'); ?></th>
+                <td>
+                    <input type="text" name="msfb_please_verify_recaptcha" value="<?php echo get_option('msfb_please_verify_recaptcha','Please verify recaptcha') ?: ""; ?>" placeholder="Please verify recaptcha"/>
                 </td>
             </tr>
             <tr>
