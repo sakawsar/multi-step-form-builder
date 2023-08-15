@@ -4,7 +4,7 @@ var msfb_recaptcha_verify_callback = function(token) {
     msfb_recaptcha_token = token
 }
 var ReCaptchaCallbackV3 = function() {
-    if( document.getElementById('msfb-recaptcha') ) {
+    if( document.getElementById('msfb-recaptcha') && msfb.msfb_recap_sitekey ) {
         grecaptcha.enterprise.ready(function() {
             msfb_recaptcha_client_id = grecaptcha.enterprise.render('msfb-recaptcha', {
                 "sitekey": msfb.msfb_recap_sitekey,
@@ -73,6 +73,8 @@ var ReCaptchaCallbackV3 = function() {
                 } else if ( class_list && class_list.indexOf('skfb__form-title') > -1 ) {
                     return false
                 } else if ( class_list && class_list.indexOf('skfb__form-desc') > -1 ) {
+                    return false
+                } else if ( the_target.length > 0 && the_target[0].id == "msfb-formulation-settings" ) {
                     return false
                 } else {
                     let rightDrawer = $('.skfb-right-options');
