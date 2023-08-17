@@ -35,7 +35,7 @@ jQuery(document).ready($ => {
             dataType: "json",
             data,
             success: res => {
-                console.log(res)
+                // console.log(res)
                 window.msfb_chart.data.labels = res.data.labels
                 window.msfb_chart.data.datasets[0].data = res.data.data
                 window.msfb_chart.update()
