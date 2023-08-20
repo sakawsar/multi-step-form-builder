@@ -80,6 +80,7 @@ function msfb_settings_callback(){
         update_option('msfb_translate_finish',sanitize_text_field( $_POST['msfb_translate_finish'] ));
         update_option('msfb_please_verify_recaptcha',sanitize_text_field( $_POST['msfb_please_verify_recaptcha'] ));
         update_option('msfb_translate_estimated_cost',sanitize_text_field( $_POST['msfb_translate_estimated_cost'] ));
+        update_option('msfb_form_builder_send_text',sanitize_text_field( $_POST['msfb_form_builder_send_text'] ));
         printf("<div class='is-dismissible notice notice-success'><p>%s</p></div>",__('Settings has been saved.','msfb'));
     }
     ?>
@@ -152,79 +153,85 @@ function msfb_settings_callback(){
             <tr>
                 <th><?php _e('Form data successfully submitted.','msfb'); ?></th>
                 <td> 
-                    <input type="text" name="form_data_successfully_submitted" value="<?php echo get_option('form_data_successfully_submitted','Form data successfully submitted.'); ?>" placeholder="Form data successfully submitted."/>
+                    <input type="text" name="form_data_successfully_submitted" value="<?php echo get_option('form_data_successfully_submitted'); ?>" placeholder="<?php _e('Form data successfully submitted.'); ?>"/>
                 </td>
             </tr>
             <tr>
                 <th><?php _e('This option did not point to any other question.','msfb'); ?></th>
                 <td>
-                    <input type="text" name="this_option_did_not_point_to_any_other_question" value="<?php echo get_option('this_option_did_not_point_to_any_other_question','This option did not point to any other question.') ?: ""; ?>" placeholder="This option did not point to any other question."/>
+                    <input type="text" name="this_option_did_not_point_to_any_other_question" value="<?php echo get_option('this_option_did_not_point_to_any_other_question'); ?>" placeholder="This option did not point to any other question."/>
                 </td>
             </tr>
             <tr>
                 <th><?php _e('Select an option first.','msfb'); ?></th>
                 <td>
-                    <input type="text" name="select_an_option_first" value="<?php echo get_option('select_an_option_first','Select an option first.') ?: ""; ?>" placeholder="Select an option first."/>
+                    <input type="text" name="select_an_option_first" value="<?php echo get_option('select_an_option_first'); ?>" placeholder="Select an option first."/>
                 </td>
             </tr>
             <tr>
                 <th><?php _e('Field is required.','msfb'); ?></th>
                 <td>
-                    <input type="text" name="field_is_required" value="<?php echo get_option('field_is_required','Field is required.') ?: ""; ?>" placeholder="Field is required."/>
+                    <input type="text" name="field_is_required" value="<?php echo get_option('field_is_required'); ?>" placeholder="Field is required."/>
                 </td>
             </tr>
             <tr>
                 <th><?php _e('This step is required.','msfb'); ?></th>
                 <td>
-                    <input type="text" name="this_step_is_required" value="<?php echo get_option('this_step_is_required','This step is required.') ?: ""; ?>" placeholder="This step is required."/>
+                    <input type="text" name="this_step_is_required" value="<?php echo get_option('this_step_is_required'); ?>" placeholder="This step is required."/>
                 </td>
             </tr>
             <tr>
                 <th><?php _e('Cannot create multiple connection from one output.','msfb'); ?></th>
                 <td>
-                    <input type="text" name="cannot_create_mul_con" value="<?php echo get_option('cannot_create_mul_con','Cannot create multiple connection from one output.') ?: ""; ?>" placeholder="Cannot create multiple connection from one output."/>
+                    <input type="text" name="cannot_create_mul_con" value="<?php echo get_option('cannot_create_mul_con'); ?>" placeholder="Cannot create multiple connection from one output."/>
                 </td>
             </tr>
             <tr>
                 <th><?php _e('Select from dropdown','msfb'); ?></th>
                 <td>
-                    <input type="text" name="msfb_select_from_dropdown" value="<?php echo get_option('msfb_select_from_dropdown','Select from dropdown'); ?>" placeholder="Select from dropdown"/>
+                    <input type="text" name="msfb_select_from_dropdown" value="<?php echo get_option('msfb_select_from_dropdown'); ?>" placeholder="Select from dropdown"/>
                 </td>
             </tr>
             <tr>
                 <th><?php _e('Back','msfb'); ?></th>
                 <td>
-                    <input type="text" name="msfb_translate_back" value="<?php echo get_option('msfb_translate_back','Back') ?: ""; ?>" placeholder="Back"/>
+                    <input type="text" name="msfb_translate_back" value="<?php echo get_option('msfb_translate_back'); ?>" placeholder="Back"/>
                 </td>
             </tr>
             <tr>
                 <th><?php _e('Finish','msfb'); ?></th>
                 <td>
-                    <input type="text" name="msfb_translate_finish" value="<?php echo get_option('msfb_translate_finish','Finish') ?: ""; ?>" placeholder="Finish"/>
+                    <input type="text" name="msfb_translate_finish" value="<?php echo get_option('msfb_translate_finish'); ?>" placeholder="Finish"/>
                 </td>
             </tr>
             <tr>
                 <th><?php _e('Please verify recaptcha','msfb'); ?></th>
                 <td>
-                    <input type="text" name="msfb_please_verify_recaptcha" value="<?php echo get_option('msfb_please_verify_recaptcha','Please verify recaptcha') ?: ""; ?>" placeholder="Please verify recaptcha"/>
+                    <input type="text" name="msfb_please_verify_recaptcha" value="<?php echo get_option('msfb_please_verify_recaptcha'); ?>" placeholder="Please verify recaptcha"/>
                 </td>
             </tr>
             <tr>
                 <th><?php _e('Next','msfb'); ?></th>
                 <td>
-                    <input type="text" name="msfb_translate_next" value="<?php echo get_option('msfb_translate_next','Next') ?: ""; ?>" placeholder="Next"/>
+                    <input type="text" name="msfb_translate_next" value="<?php echo get_option('msfb_translate_next'); ?>" placeholder="Next"/>
                 </td>
             </tr>
             <tr>
                 <th><?php _e('Skip','msfb'); ?></th>
                 <td>
-                    <input type="text" name="msfb_translate_skip" value="<?php echo get_option('msfb_translate_skip','Skip') ?: ""; ?>" placeholder="Skip"/>
+                    <input type="text" name="msfb_translate_skip" value="<?php echo get_option('msfb_translate_skip'); ?>" placeholder="Skip"/>
                 </td>
             </tr>
             <tr>
                 <th><?php _e('Estimated cost:','msfb'); ?></th>
                 <td>
-                    <input type="text" name="msfb_translate_estimated_cost" value="<?php echo get_option('msfb_translate_estimated_cost','Estimated cost:') ?: ""; ?>" placeholder="Estimated cost:"/>
+                    <input type="text" name="msfb_translate_estimated_cost" value="<?php echo get_option('msfb_translate_estimated_cost'); ?>" placeholder="Estimated cost:"/>
+                </td>
+            </tr>
+            <tr>
+                <th><?php _e('Form builder send text:','msfb'); ?></th>
+                <td>
+                    <input type="text" name="msfb_form_builder_send_text" value="<?php echo get_option('msfb_form_builder_send_text'); ?>" placeholder="Send"/>
                 </td>
             </tr>
             <tr>
