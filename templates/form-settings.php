@@ -22,7 +22,7 @@ if( !empty($form_data) ) {
   $field_labels[] = '{totalPrice}';
   $field_labels[] = '{leadTime}';
   $field_labels[] = '{questionAndAnswer}';
-  $available_vars = '<label for="senderEmail" class="skfb__with-icon"><i class="fas fa-info"></i>'.implode(', ',$field_labels).'</label>';
+  $available_vars = '<label for="senderEmail" class="skfb__with-icon">'.implode(', ',$field_labels).'<i title="You can place variables using the label of the form field like {Field label}. The label texts are case sensitive." class="fas fa-question-circle"></i></label>';
 }
 ?>
 <div class="app">
@@ -33,7 +33,7 @@ if( !empty($form_data) ) {
           <div class="sk-col-12">
             <div class="sk-d-flex sk-align-items-center sk-flex-wrap sk-column-gap">
               <div href="#" class="skfb-nav-logo">
-                <h3>Form settings</h3>
+                <h3><?php _e('Contact Form settings','msfb'); ?></h3>
               </div>
               <!--  -->
               <div>
@@ -53,53 +53,56 @@ if( !empty($form_data) ) {
               <div class="skfb__field-box">
                 <label for="mgs" class="skfb__with-icon" style="color:red;"><i class="fas fa-info"></i>You can place variables using the label of the form field like {Field label}. The label texts are case sensitive.</label>
                 <label for="mgs" class="skfb__with-icon" style="color:red;"><i class="fas fa-info"></i>To add the total calculated price use {totalPrice} variable.</label>
-                <br><label for="senderName" class="skfb__with-icon"><i class="fas fa-user"></i>Sender name - the following variables can be inserted:</label>
+                <br><label for="senderName" class="skfb__with-icon"><i class="fas fa-user"></i><?php _e('Sender name - the following variables can be inserted:','msfb'); ?> <i title="<?php _e("After generating a lead if you want to set any auto responder. In this field you need to set the sender name of the auto responder email.","msfb"); ?>"  class="fa fa-question-circle"></i></label>
                 <?php echo $available_vars;?>
                 <input type="text" value="<?php echo isset($form_settings['sender_name']) ? $form_settings['sender_name'] : null; ?>" placeholder="Albert Einstein" id="msfb_senderName" />
               </div>
               <div class="skfb__field-box">
-                <label for="senderEmail" class="skfb__with-icon"><i class="fas fa-envelope"></i>Sender email</label>
+                <label for="senderEmail" class="skfb__with-icon"><i class="fas fa-envelope"></i>Sender email  <i title="<?php _e("After generating a lead if you want to set any auto responder. In this field you need to set the sender email address of the auto responder email.","msfb"); ?>" class="fa fa-question-circle"></i></label>
                 <!-- <label for="senderEmail" class="skfb__with-icon"><i class="fas fa-envelope"></i>Sender email - the following variables can be inserted:</label> -->
                 <?php //echo $available_vars;?>
                 <input type="text" value="<?php echo isset($form_settings['sender_email']) ? $form_settings['sender_email'] : null; ?>" placeholder="abc@xyz.com" id="msfb_senderEmail" />
               </div>
               <div class="skfb__field-box">
-                <label for="senderEmail" class="skfb__with-icon"><i class="fas fa-envelope"></i>Lead sending email</label>
-                <?php //echo $available_vars;?>
-                <input type="text" value="<?php echo isset($form_settings['lead_email']) ? $form_settings['lead_email'] : null; ?>" placeholder="abc@xyz.com" id="msfb_leadEmail" />
-              </div>
-              <div class="skfb__field-box">
-                <label for="recipientEmail" class="skfb__with-icon"><i class="fas fa-envelope"></i>Recipient e-mail - the following variables can be inserted:</label>
+                <label for="recipientEmail" class="skfb__with-icon"><i class="fas fa-envelope"></i>Recipient e-mail - the following variables can be inserted: <i title="<?php _e("After generating a lead if you want to set any auto responder. In this field you need to set the recipient email address of the auto responder email.","msfb"); ?>"  class="fa fa-question-circle"></i></label>
                 <?php echo $available_vars;?>
                 <input type="text" value="<?php echo isset($form_settings['recipient_email']) ? $form_settings['recipient_email'] : null; ?>" placeholder="abc@xyz.com" id="msfb_recipientEmail" />
               </div>
               <div class="skfb__field-box">
-                <label for="BCCRecipientEmail" class="skfb__with-icon"><i class="fas fa-envelope"></i>BCC recipient e-mail (comma separated) - the following variables can be inserted:</label>
+                <label for="BCCRecipientEmail" class="skfb__with-icon">
+                  <i class="fas fa-envelope"></i>BCC recipient e-mail (comma separated) - the following variables can be inserted: <i title="<?php _e("After generating a lead if you want to set any auto responder. In this field you need to set the BCC recipient email address of the auto responder email.","msfb"); ?>"  class="fa fa-question-circle"></i></label>
                 <?php echo $available_vars;?>
                 <input type="text" value="<?php echo isset($form_settings['msfb_BCCRecipientEmail']) ? $form_settings['msfb_BCCRecipientEmail'] : null; ?>" placeholder="abc@xyz.com" id="msfb_BCCRecipientEmail" />
               </div>
               <div class="skfb__field-box">
-                <label for="replyTo" class="skfb__with-icon"><i class="fas fa-envelope"></i>Reply-To (reply address) - the following variables can be inserted:</label>
+                <label for="replyTo" class="skfb__with-icon"><i class="fas fa-envelope"></i>Reply-To (reply address) - the following variables can be inserted: <i title="<?php _e("After generating a lead if you want to set any auto responder. In this field you need to set the reply-to email address of the auto responder email.","msfb"); ?>"  class="fa fa-question-circle"></i></label>
                 <?php echo $available_vars;?>
                 <input type="text" value="<?php echo isset($form_settings['msfb_replyTo']) ? $form_settings['msfb_replyTo'] : null; ?>" placeholder="abc@xyz.com" id="msfb_replyTo" />
               </div>
               <div class="skfb__field-box">
-                <label for="subject" class="skfb__with-icon"><i class="fas fa-stream"></i>Subject - the following variables can be inserted:</label>
+                <label for="subject" class="skfb__with-icon"><i class="fas fa-stream"></i>Subject - the following variables can be inserted: <i title="<?php _e("After generating a lead if you want to set any auto responder. In this field you need to set the subject of the auto responder email.","msfb"); ?>"  class="fa fa-question-circle"></i></label>
                 <?php echo $available_vars;?>
                 <input type="text" value="<?php echo isset($form_settings['msfb_subject']) ? $form_settings['msfb_subject'] : null; ?>" placeholder="Placeholder subject" id="msfb_subject" />
               </div>
               <div class="skfb__field-box">
-                <label for="subject" class="skfb__with-icon"><i class="fas fa-stream"></i>Lead email subject - the following variables can be inserted:</label>
+                <label for="mgs" class="skfb__with-icon"><i class="fas fa-envelope-open-text"></i>Message - the following variables can be inserted: <i title="<?php _e("After generating a lead if you want to set any auto responder. In this field you need to set the message of the auto responder email.","msfb"); ?>"  class="fa fa-question-circle"></i></label>
+                <?php echo $available_vars;?>
+                <textarea style="height:300px;" type="text" placeholder="Messages" id="msfb_mgs"><?php echo isset($form_settings['msfb_mgs']) ? $form_settings['msfb_mgs'] : null; ?></textarea>
+              </div>
+              <!-- subject for lead email -->
+              <div class="skfb__field-box">
+                <label for="senderEmail" class="skfb__with-icon"><i class="fas fa-envelope"></i>Lead sending email <i title="<?php _e("If you want to get the lead data as an email then in this field you need to put your lead email address.","msfb"); ?>" class="fa fa-question-circle"></i></label>
+                <?php //echo $available_vars;?>
+                <input type="text" value="<?php echo isset($form_settings['lead_email']) ? $form_settings['lead_email'] : null; ?>" placeholder="abc@xyz.com" id="msfb_leadEmail" />
+              </div>
+              <!-- email to send lead -->
+              <div class="skfb__field-box">
+                <label for="subject" class="skfb__with-icon"><i class="fas fa-stream"></i>Lead email subject - the following variables can be inserted: <i title="<?php _e("If you want to get the lead data as an email then in this field you need to put your lead email subject.","msfb"); ?>" class="fa fa-question-circle"></i></label>
                 <?php echo $available_vars;?>
                 <input type="text" value="<?php echo isset($form_settings['msfb_lead_subject']) ? $form_settings['msfb_lead_subject'] : null; ?>" placeholder="Placeholder subject" id="msfb_lead_subject" />
               </div>
               <div class="skfb__field-box">
-                <label for="mgs" class="skfb__with-icon"><i class="fas fa-envelope-open-text"></i>Message - the following variables can be inserted:</label>
-                <?php echo $available_vars;?>
-                <textarea style="height:300px;" type="text" placeholder="Messages" id="msfb_mgs"><?php echo isset($form_settings['msfb_mgs']) ? $form_settings['msfb_mgs'] : null; ?></textarea>
-              </div>
-              <div class="skfb__field-box">
-                <label for="mgs" class="skfb__with-icon"><i class="fas fa-envelope-open-text"></i>Lead Message - the following variables can be inserted:</label>
+                <label for="mgs" class="skfb__with-icon"><i class="fas fa-envelope-open-text"></i>Lead Message - the following variables can be inserted: <i title="<?php _e("If you want to get the lead data as an email then in this field you need to put your lead email message.","msfb"); ?>" class="fa fa-question-circle"></i></label>
                 <?php echo $available_vars;?>
                 <textarea style="height:300px;" type="text" placeholder="Messages" id="msfb_lead_mgs"><?php echo isset($form_settings['msfb_lead_mgs']) ? $form_settings['msfb_lead_mgs'] : null; ?></textarea>
               </div>
