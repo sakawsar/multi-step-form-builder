@@ -58,6 +58,7 @@ var ReCaptchaCallbackV3 = function() {
             let drawerWidth = rightDrawer.width();
             let setRight = drawerWidth + 22;
             rightDrawer.css({ "right": "-" + setRight + "px" });
+            $('.msfb-question-type-holders').fadeIn()
         });
         // prevent hide the drawer
         // $(document).on('click blur','.skfb__form-title, .skfb__form-desc',function(){
