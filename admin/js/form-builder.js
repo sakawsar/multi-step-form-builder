@@ -180,7 +180,8 @@
                     // update placeholder
                     let placeholder_field = drawer_holder.find('.msfb-placeholder-field')
                     if ( placeholder_field.length > 0 ) {
-                        placeholder_field.val(this_el.find('input').attr('placeholder'))
+                        let placeholder_val = this_el.find('input').attr('placeholder') ? this_el.find('textarea').attr('placeholder') : 'placeholder'
+                        placeholder_field.attr('placeholder',placeholder_val)
                     }
                     // slider fields update
                     if ( field_type == "slider_form_field" ) {

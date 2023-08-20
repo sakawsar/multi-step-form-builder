@@ -22,6 +22,35 @@
   </div> 
 </div>
 <?php
+function msfb_title_placeholder( $id ) {
+  $placeholder = "";
+  switch($id){
+    case "multiselect_form_field":
+      $placeholder = "Multiselect";
+      break;
+    case "select_form_field":
+      $placeholder = "Select";
+      break;
+    case "dropdown_form_field":
+      $placeholder = "Dropdown";
+      break;
+    case "text_form_field":
+      $placeholder = "Text";
+      break;
+    case "upload_form_field":
+      $placeholder = "Upload";
+      break;
+    case "textarea_form_field":
+      $placeholder = "Textarea";
+      break;
+    case "date_form_field":
+      $placeholder = "Date";
+      break;
+    case "slider_form_field":
+      $placeholder = "Slider";
+      break;
+  }
+}
 function msfb_form_field_options( $id = "" ){
   ?>
   <div class="skfb__field-box __2">
