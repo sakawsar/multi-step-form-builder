@@ -40,11 +40,11 @@ $is_update = $question_id != "" ? "data-qtn-id='{$question_id}'" : "";
           <div class="sk-col-12">
             <div class="sk-d-flex sk-align-items-center sk-flex-wrap sk-column-gap">
               <div class="skfb-nav-logo">
-                <h3>Question builder</h3>
+                <h3><?php _e('Question builder','msfb'); ?></h3>
               </div>
               <div>
-                <button class="skfb-btn" <?php echo $is_update; ?> id="msfb_save_question"><i class="fas fa-save"></i> Save</button>
-                <a href="<?php echo admin_url('admin.php?page=questions_builder&question_id'); ?>" class="skfb-btn"><i class="fas fa-plus"></i> Add new</a>
+                <button class="skfb-btn" <?php echo $is_update; ?> id="msfb_save_question"><i class="fas fa-save"></i> <?php _e('Save','msfb'); ?></button>
+                <a href="<?php echo admin_url('admin.php?page=questions_builder&question_id'); ?>" class="skfb-btn"><i class="fas fa-plus"></i> <?php _e('Add new','msfb'); ?></a>
               </div>
             </div>
           </div>
@@ -56,7 +56,7 @@ $is_update = $question_id != "" ? "data-qtn-id='{$question_id}'" : "";
         <div class="sk-row">
           <div class="sk-col-md-3 sk-col-lg-2 msfb-question-type-holders">
             <div class="skfb-feilds-panel">
-              <h6 class="sk-head skfb-bb-primary sk-text-primary">Click to select field</h6>
+              <h6 class="sk-head skfb-bb-primary sk-text-primary"><?php _e('Click to select field','msfb'); ?></h6>
               <?php include('question-parts/question-tools.php'); ?>
             </div>
           </div> <!-- /.col- -->

@@ -91,3 +91,9 @@ function msfb_create_the_database() {
 	// 	dbDelta( $sql );
 	// };
 }
+function msfb_get_cats( $type ){
+    global $wpdb;
+    $qtn_table_name = $wpdb->prefix.'msfb_category';
+    $get_cats = $wpdb->get_results("SELECT * FROM $qtn_table_name WHERE cat_type='{$type}'",ARRAY_A);
+    return !empty($get_cats) ? $get_cats : false;
+  }

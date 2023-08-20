@@ -213,6 +213,11 @@ jQuery(document).ready($ => {
         if( qtn_id != undefined && qtn_id != "" ) {
             fields_data.question_id = qtn_id
         }
+        let qtn_cat_field = $('#msfb-qtn-category-' + fields_data.question_type)
+        if( qtn_cat_field.length > 0 ) {
+            fields_data.cat_id = qtn_cat_field.val()
+        }
+        console.log(fields_data)
         $.ajax({
             url: msfb.ajax_url,
             type: "POST",
@@ -657,6 +662,10 @@ jQuery(document).ready($ => {
         })
         if( this_el.attr('data-form-id') ) {
             form_data['form_id'] = this_el.attr('data-form-id')
+        }
+        if( $('#msfb-form-category').length > 0 ) {
+            let msfb_form_cat = $('#msfb-form-category').val()
+            form_data.cat_id = msfb_form_cat
         }
         //console.log(form_data)
         this_el.html(`<i class="fa fa-spinner fa-spin"></i> Save`)

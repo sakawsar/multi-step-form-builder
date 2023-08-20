@@ -73,6 +73,20 @@ function msfb_mendatory_fields( $id, $question_data ){
         <label for="msfb-qtn-name"><?php _e('Question Name','msfb'); ?> <i class="fa fa-question-circle" title="<?php _e('You can give this question a name or a designation so that you can find it again in the questions overview.','msfb'); ?>"></i></label>
         <input type="text" value="<?php echo $has_data ? $question_data['question_name'] : ""; ?>" placeholder="Question Name" class="msfb-qtn-name" />
     </div>
+    <?php 
+    $cats = msfb_get_cats('question');
+    if( $cats ) {
+    ?>
+    <div class="skfb__field-box __2">
+        <label for="msfb-qtn-name"><?php _e('Question category','msfb'); ?> <i class="fa fa-question-circle" title="<?php _e('You can assign this question to a category so you can filter it later while building the q-flow.','msfb'); ?>"></i></label>
+        <select name="" id="msfb-qtn-category-<?php echo $id; ?>">
+            <option value=""><?php _e('Select a category','msfb'); ?></option>
+            <?php foreach($cats as $a_cat){ ?>
+                <option <?php selected($a_cat['id'],$question_data['cat_id'],true); ?> value="<?php echo $a_cat['id']; ?>"><?php echo $a_cat['cat_name']; ?></option>
+            <?php } ?>
+        </select>
+    </div>
+    <?php } ?>
     <div class="skfb__field-box __2">
         <label for="msfb-title"><?php _e('Question','msfb'); ?></label>
         <input type="text" placeholder="<?php _e('Question','msfb'); ?>" value="<?php echo $has_data ? $question_data['question_title'] : ""; ?>" class="msfb-title" />

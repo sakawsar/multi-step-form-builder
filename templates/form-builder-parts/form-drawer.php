@@ -7,9 +7,23 @@
   <h5 class="sk-head __2 sk-text-white">Default Options</h5>
   <div class="skfb__field-opt__boxes skfb__overflow_scroll">
     <div class="skfb__field-box __2">
-      <label for="formName">Form name</label>
+      <label for="formName">Form name 22</label>
       <input type="text" placeholder="Form name" id="msfb-form-name" />
     </div>
+    <?php 
+    $cats = msfb_get_cats('from');
+    if( $cats ) {
+    ?>
+    <div class="skfb__field-box __2">
+        <label for="msfb-qtn-name"><?php _e('Form category','msfb'); ?> <i class="fa fa-question-circle" title="<?php _e('You can assign this question to a category so you can filter it later while building the q-flow.','msfb'); ?>"></i></label>
+        <select name="" id="msfb-form-category">
+            <option value=""><?php _e('Select a category','msfb'); ?></option>
+            <?php foreach($cats as $a_cat){ ?>
+                <option <?php selected($a_cat['id'],$this_form_data['cat_id'],true); ?> value="<?php echo $a_cat['id']; ?>"><?php echo $a_cat['cat_name']; ?></option>
+            <?php } ?>
+        </select>
+    </div>
+    <?php } ?>
     <div class="skfb__field-box __2">
       <label for="formName">Form title</label>
       <input contenteditable="true" type="text" placeholder="Form title" value="<?php echo $has_data ? $this_form_data['form_data']['form_title'] : ""; ?>" id="msfb-form-title" />
