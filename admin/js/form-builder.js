@@ -121,6 +121,7 @@
         })
         // show specific drawer
         const msfb_show_drawer = element => {
+            $('.msfb-question-type-holders').fadeOut()
             let rightDrawer = $('div[data-drawer-type="' + element + '"]');
             rightDrawer.show();
             let drawerWidth = rightDrawer.width();
@@ -149,6 +150,7 @@
             msfb_show_drawer( field_type )
         }
         $(document).on('click','div[data-field-type]',e => {
+            console.log(e.target.localName)
             let this_el = this__(e)
             if( e.target.localName != "i" ){
                 let field_type = this_el.attr('data-field-type')

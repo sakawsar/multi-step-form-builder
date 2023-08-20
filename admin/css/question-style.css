@@ -1,5 +1,5 @@
 div[data-question-type]:hover{
-    border:1px solid #244A60;
+    outline:1px solid #244A60;
 }
 div[data-drawer-type]{
     display:none;

@@ -59,6 +59,7 @@ var ReCaptchaCallbackV3 = function() {
             let setRight = drawerWidth + 22;
             rightDrawer.css({ "right": "-" + setRight + "px" });
         });
+        // prevent hide the drawer
         // $(document).on('click blur','.skfb__form-title, .skfb__form-desc',function(){
             $(document).on('click','body',function(e){
                 // console.log(e)
@@ -79,6 +80,7 @@ var ReCaptchaCallbackV3 = function() {
                 } else if ( the_target.length > 0 && the_target[0].id == "msfb-formulation-settings" ) {
                     return false
                 } else {
+                    $('.msfb-question-type-holders').fadeIn()
                     let rightDrawer = $('.skfb-right-options');
                     let drawerWidth = rightDrawer.width();
                     let setRight = drawerWidth + 22;
@@ -265,6 +267,7 @@ var ReCaptchaCallbackV3 = function() {
         }
     }
     const msfb_show_drawer = element => {
+        $('.msfb-question-type-holders').fadeOut()
         $('div[data-drawer-type="' + element + '"]').show();
         let rightDrawer = $('div[data-drawer-type="' + element + '"]');
         let drawerWidth = rightDrawer.width();

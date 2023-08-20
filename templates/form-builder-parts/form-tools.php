@@ -1,4 +1,4 @@
-<div class="sk-col-md-3 sk-col-lg-2">
+<div class="sk-col-md-3 sk-col-lg-2 msfb-question-type-holders">
     <div class="skfb-feilds-panel">
         <h6 class="sk-head skfb-bb-primary sk-text-primary">Click to select field</h6>
         <div class="skfb-card skfb-feild-draggable" id="msfb-multiselect-form-field">

@@ -54,12 +54,14 @@ $is_update = $question_id != "" ? "data-qtn-id='{$question_id}'" : "";
     <div class="skfb-content">
       <div class="sk-container">
         <div class="sk-row">
-          <div class="sk-col-md-3 sk-col-lg-2">
+          <?php if( $question_id == "" ) { ?>
+          <div class="sk-col-md-3 sk-col-lg-2 msfb-question-type-holders">
             <div class="skfb-feilds-panel">
               <h6 class="sk-head skfb-bb-primary sk-text-primary">Click to select field</h6>
               <?php include('question-parts/question-tools.php'); ?>
             </div>
           </div> <!-- /.col- -->
+          <?php } ?>
           <?php
           // echo '<pre>';
           // print_r($question_data);
