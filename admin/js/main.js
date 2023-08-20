@@ -66,7 +66,9 @@ var ReCaptchaCallbackV3 = function() {
                 // console.log('target',the_target)
                 let class_list = the_target.attr('class')
                 // console.log('class_list',class_list)
-                if( the_target.closest('.skfb__field-box').length > 0 ) {
+                if( the_target.closest('.msfb-multiselect-holder').length > 0 ) {
+                    return false
+                } else if( the_target.closest('.skfb__field-box').length > 0 ) {
                     return false
                 } else if ( the_target.closest('.skfb-right-options').length > 0 ) {
                     return false
@@ -315,7 +317,7 @@ var ReCaptchaCallbackV3 = function() {
                         </div>
                     </div>
                     <div class="skfb__builder-bottom">
-                        <p class="skfb__answer">Answer</p>
+                        <p contenteditable="true" class="skfb__answer">Answer</p>
                     </div>
                 </div>
             </div>
@@ -415,7 +417,7 @@ var ReCaptchaCallbackV3 = function() {
     })
     // title update
     // console.log(msfb_active_question())
-    let msfb_mutation_els = $(".skfb__form-title, .skfb__form-desc, .skfb__answer, .msfb-field-label")
+    let msfb_mutation_els = $(".skfb__form-title, .skfb__form-desc, .skfb__answer, .msfb-field-label, body")
     let msfb_mutation_config = {
         attributes: true,
         childList: true,
@@ -425,6 +427,7 @@ var ReCaptchaCallbackV3 = function() {
     var MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
     let msfb_mutation_observer = new MutationObserver(function(mutations) {
         mutations.forEach(function(mutationRecord) {
+            // console.log('style changed!', mutationRecord, mutationRecord.target.data)
             if( mutationRecord.type != 'characterData' ) return
             // console.log('style changed!', mutationRecord, mutationRecord.target.data)
             let text_data = mutationRecord.target.data
