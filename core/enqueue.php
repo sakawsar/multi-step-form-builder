@@ -7,14 +7,14 @@ function msfb_enqueue_scripts(){
 		'ajax_url' => admin_url( 'admin-ajax.php' ),
 		'msfb_recap_sitekey' => get_option('msfb_recap_sitekey'),
 		'translate' => array(
-			'form_data_successfully_submitted' => get_option('form_data_successfully_submitted','Form data successfully submitted.'),
-			'this_option_did_not_point_to_any_other_question' => get_option('this_option_did_not_point_to_any_other_question','This option did not point to any other question.'),
-			'select_an_option_first' => get_option('select_an_option_first','Select an option first.'),
-			'field_is_required' => get_option('field_is_required','Field is required.'),
-			'this_step_is_required' => get_option('this_step_is_required','This step is required'),
-			'msfb_select_from_dropdown' => get_option('msfb_select_from_dropdown','Select from dropdown'),
-			'finish' => get_option('msfb_translate_finish','Finish'),
-			'msfb_please_verify_recaptcha' => get_option('msfb_please_verify_recaptcha','Please verify the recaptcha'),
+			'form_data_successfully_submitted' => get_option('form_data_successfully_submitted') ?: 'Form data successfully submitted.',
+			'this_option_did_not_point_to_any_other_question' => get_option('this_option_did_not_point_to_any_other_question') ?: 'This option did not point to any other question.',
+			'select_an_option_first' => get_option('select_an_option_first') ?: 'Select an option first.',
+			'field_is_required' => get_option('field_is_required') ?: 'Field is required.',
+			'this_step_is_required' => get_option('this_step_is_required') ?: 'This step is required',
+			'msfb_select_from_dropdown' => get_option('msfb_select_from_dropdown') ?: 'Select from dropdown',
+			'finish' => get_option('msfb_translate_finish') ?: 'Finish',
+			'msfb_please_verify_recaptcha' => get_option('msfb_please_verify_recaptcha') ?: 'Please verify the recaptcha',
 		)
 	);
 	wp_localize_script( 'msfb_localize', 'msfb', $localize_data);
@@ -70,14 +70,14 @@ function msfb_admin_enqueue_scripts(){
 		'all_questions' => $all_questions,
 		'all_forms' => $all_forms,
 		'translate' => array(
-			'form_data_successfully_submitted' => get_option('form_data_successfully_submitted','Form data successfully submitted.'),
-			'this_option_did_not_point_to_any_other_question' => get_option('this_option_did_not_point_to_any_other_question','This option did not point to any other question.'),
-			'select_an_option_first' => get_option('select_an_option_first','Select an option first.'),
-			'field_is_required' => get_option('field_is_required','Field is required.'),
-			'this_step_is_required' => get_option('this_step_is_required','This step is required'),
-			'msfb_select_from_dropdown' => get_option('msfb_select_from_dropdown','Select from dropdown'),
-			'finish' => get_option('msfb_translate_finish','Finish'),
-			'cannot_create_mul_con' => get_option('cannot_create_mul_con',"Cannot create multiple connection from one output."),
+			'form_data_successfully_submitted' => get_option('form_data_successfully_submitted') ?: 'Form data successfully submitted.',
+			'this_option_did_not_point_to_any_other_question' => get_option('this_option_did_not_point_to_any_other_question') ?: 'This option did not point to any other question.',
+			'select_an_option_first' => get_option('select_an_option_first') ?: 'Select an option first.',
+			'field_is_required' => get_option('field_is_required') ?: 'Field is required.',
+			'this_step_is_required' => get_option('this_step_is_required') ?: 'This step is required',
+			'msfb_select_from_dropdown' => get_option('msfb_select_from_dropdown') ?: 'Select from dropdown',
+			'finish' => get_option('msfb_translate_finish') ?: 'Finish',
+			'cannot_create_mul_con' => get_option('cannot_create_mul_con') ?: "Cannot create multiple connection from one output.",
 		)
 	);
 	if( isset($_GET['formulation_id']) && sanitize_text_field( $_GET['formulation_id'] ) != "" ) {

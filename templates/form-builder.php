@@ -111,7 +111,7 @@
                   <?php } ?>
                 </div>
                 <div class="skfb__submit-btn__wrapper">
-                  <button type="submit" class="skfb-btn"><i class="fas fa-envelope"></i> <?php echo get_option('msfb_form_builder_send_text','Send'); ?></button>
+                  <button type="submit" class="skfb-btn"><i class="fas fa-envelope"></i> <?php echo get_option('msfb_form_builder_send_text') ?: "Send"; ?></button>
                 </div>
               </form>
             </div> <!-- /.sk__form-wrapper -->
