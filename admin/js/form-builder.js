@@ -121,12 +121,13 @@
         })
         // show specific drawer
         const msfb_show_drawer = element => {
-            $('.msfb-question-type-holders').fadeOut()
-            let rightDrawer = $('div[data-drawer-type="' + element + '"]');
-            rightDrawer.show();
-            let drawerWidth = rightDrawer.width();
-            let setRight = drawerWidth + 20;
-            rightDrawer.css({ "right": 0 });
+            $('.msfb-question-type-holders').fadeOut(function(){
+                let rightDrawer = $('div[data-drawer-type="' + element + '"]');
+                rightDrawer.show();
+                let drawerWidth = rightDrawer.width();
+                let setRight = drawerWidth + 20;
+                rightDrawer.css({ "right": 0 });
+            })
         }
         const msfb_hide_all_drawer = () => {
             $('div[data-drawer-type]').hide()

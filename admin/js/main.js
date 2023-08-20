@@ -268,12 +268,13 @@ var ReCaptchaCallbackV3 = function() {
         }
     }
     const msfb_show_drawer = element => {
-        $('.msfb-question-type-holders').fadeOut()
-        $('div[data-drawer-type="' + element + '"]').show();
-        let rightDrawer = $('div[data-drawer-type="' + element + '"]');
-        let drawerWidth = rightDrawer.width();
-        let setRight = drawerWidth + 20;
-        rightDrawer.css({ "right": 0 });
+        $('.msfb-question-type-holders').fadeOut('medium',function(){
+            $('div[data-drawer-type="' + element + '"]').show();
+            let rightDrawer = $('div[data-drawer-type="' + element + '"]');
+            let drawerWidth = rightDrawer.width();
+            let setRight = drawerWidth + 20;
+            rightDrawer.css({ "right": 0 });
+        })
     }
     const msfb_hide_all_drawer = () => {
         $('div[data-drawer-type]').hide()
