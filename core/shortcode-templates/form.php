@@ -104,6 +104,7 @@ function msfb_form_step( $data ){
             <div data-msfb-required="<?php echo $field['is_required']; ?>" data-msfb-is-lead-col="<?php echo $field['is_lead_column']; ?>" class="msfb-form-field msfb-form-slider" data-field-label="<?php echo trim(strip_tags( $field['field_label'] )); ?>">
                 <label class="w-full text-lg mb-2" style="color:var(--msfb-color);"><?php echo trim(strip_tags( $field['field_label'] )); ?></label>
                 <input type="range" class="tw-msfb-slider-field"/>
+                <p class="msfb-slider-val" style="text-align: center;width: 100%;font-size: 1.125rem!important;margin-top: 12px;"></p>
             </div>
             <?php } ?>
 

@@ -366,9 +366,12 @@
             $('.tw-msfb-progress-bar__status').animate({"width":`100%`})
         })
         // slider change
-        $('.tw-msfb-slider-field').on('change', e => {
+        $('.tw-msfb-slider-field').on('input', e => {
             let this_el = $(e.currentTarget)
             $('.msfb-slider-field-value strong').html(this_el.val())
+            if( $('.msfb-slider-val').length > 0 ) {
+                this_el.closest('div').find('.msfb-slider-val').html(this_el.val())
+            }
         })
         // upload
         $('.tw-msfb-upload-field input').on('change', e => {
