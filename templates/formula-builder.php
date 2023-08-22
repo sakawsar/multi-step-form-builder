@@ -42,10 +42,10 @@
         </div>
       </div>
     </div>
-    <div class="skfb-content">
-      <div class="sk-container">
-        <div class="sk-row">
-          <div class="sk-col-md-3 sk-col-lg-2 skfb__overflow_scroll msfb-question-type-holders" style="height:600px;">
+    <div class="skfb-content msfb-heigh-75vh">
+      <div class="sk-container msfb-heigh-75vh">
+        <div class="sk-row msfb-heigh-75vh">
+          <div class="sk-col-md-3 sk-col-lg-2 skfb__overflow_scroll msfb-question-type-holders msfb-heigh-75vh" style="height:600px;">
             <div class="skfb-feilds-panel">
             <div class="msfb-filter-tab">
                     <div class="msfb-qtn-tab msfb-tab-selected" data-type="qtn">

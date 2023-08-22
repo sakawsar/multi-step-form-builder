@@ -430,10 +430,17 @@ var ReCaptchaCallbackV3 = function() {
         characterData: true,
         subtree: true
     }
+    $('.skfb__form-desc').on('keyup',function(){
+        let desc = $(this).val()
+        $('.msfb-desc').val(desc)
+        if( $('#msfb-form-desc').length > 0 ) {
+            $('#msfb-form-desc').val(desc)
+        }
+    })
     var MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
     let msfb_mutation_observer = new MutationObserver(function(mutations) {
         mutations.forEach(function(mutationRecord) {
-            // console.log('style changed!', mutationRecord, mutationRecord.target.data)
+            console.log('style changed!', mutationRecord, mutationRecord.target.data)
             if( mutationRecord.type != 'characterData' ) return
             // console.log('style changed!', mutationRecord, mutationRecord.target.data)
             let text_data = mutationRecord.target.data

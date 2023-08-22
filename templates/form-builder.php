@@ -49,7 +49,7 @@
             <div class="skfb__form-wrapper">
               <header class="skfb__form-header">
                 <h2 contenteditable="true" class="skfb__form-title"><?php echo $has_data ? $this_form_data['form_data']['form_title'] : "Form title"; ?></h2>
-                <p contenteditable="true" class="skfb__form-desc"><?php echo $has_data ? $this_form_data['form_data']['form_desc'] : "Form description"; ?></p>
+                <textarea style="width:100%;" contenteditable="true" class="skfb__form-desc"><?php echo $has_data ? $this_form_data['form_data']['form_desc'] : "Form description"; ?></textarea>
               </header>
               <form action="#" class="skfb__form">
                 <div class="skfb__sortable-data" id="msfb-form-field-holder">

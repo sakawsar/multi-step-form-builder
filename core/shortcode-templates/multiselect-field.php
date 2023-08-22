@@ -8,7 +8,7 @@ function msfb_multiselect_step( $data ){
         <h1 class="text-center text-4xl"><?php echo $data['question_title']; ?></h1>
     <?php } ?>
     <?php if($data['question_desc']){ ?>
-        <p class="text-center text-xl"><?php echo $data['question_desc']; ?></p>
+        <p style="white-space: pre-wrap;" class="text-center text-xl"><?php echo $data['question_desc']; ?></p>
     <?php } ?>
     <?php isset($data['nav_position']) && $data['nav_position'] == 'top' ? msfb_step_navigation( $data ) : false; ?>
     <!-- select -->

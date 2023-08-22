@@ -15,3 +15,6 @@ div[data-drawer-type]{
     cursor: pointer;
     outline: 2px solid gray;    
 }
+textarea.skfb__form-desc{
+    width:100%;
+}

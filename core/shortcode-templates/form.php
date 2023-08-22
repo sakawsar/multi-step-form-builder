@@ -7,7 +7,7 @@ function msfb_form_step( $data ){
         <h1 class="text-center text-4xl"><?php echo $form_data['form_title']; ?></h1>
     <?php } ?>
     <?php if($form_data['form_desc']){ ?>
-        <p class="text-center text-xl"><?php echo $form_data['form_desc']; ?></p>
+        <p style="white-space: pre-wrap;" class="text-center text-xl"><?php echo $form_data['form_desc']; ?></p>
     <?php } ?>
     <?php isset($data['nav_position']) && $data['nav_position'] == 'top' ? msfb_step_navigation( $data ) : false; ?>
     <!-- form step -->

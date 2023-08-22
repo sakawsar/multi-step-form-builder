@@ -22,6 +22,9 @@ a {
     margin-right: auto;
     margin-left: auto;
 }
+.msfb-heigh-75vh{
+    height:75vh!important;
+}
 /* 
 @media (min-width: 576px) {
     .sk-container {
