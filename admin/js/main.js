@@ -424,45 +424,47 @@ var ReCaptchaCallbackV3 = function() {
     // title update
     // console.log(msfb_active_question())
     let msfb_mutation_els = $(".skfb__form-title, .skfb__form-desc, .skfb__answer, .msfb-field-label, body")
-    let msfb_mutation_config = {
-        attributes: true,
-        childList: true,
-        characterData: true,
-        subtree: true
-    }
-    $('.skfb__form-desc').on('keyup',function(){
-        let desc = $(this).val()
-        $('.msfb-desc').val(desc)
-        if( $('#msfb-form-desc').length > 0 ) {
-            $('#msfb-form-desc').val(desc)
+    if( $(".skfb__form-title, .skfb__form-desc, .skfb__answer, .msfb-field-label").length > 0 ) {
+        let msfb_mutation_config = {
+            attributes: true,
+            childList: true,
+            characterData: true,
+            subtree: true
         }
-    })
-    var MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
-    let msfb_mutation_observer = new MutationObserver(function(mutations) {
-        mutations.forEach(function(mutationRecord) {
-            console.log('style changed!', mutationRecord, mutationRecord.target.data)
-            if( mutationRecord.type != 'characterData' ) return
-            // console.log('style changed!', mutationRecord, mutationRecord.target.data)
-            let text_data = mutationRecord.target.data
-            let target_el_class = mutationRecord.target.parentElement.classList.value
-            if( target_el_class.indexOf('skfb__answer') > -1 ) {
-                $('#msfb-answer').val(mutationRecord.target.data)
-            } else if ( target_el_class.indexOf('skfb__form-title') > -1 ) {
-                $('.msfb-title').val(text_data)
-                if( $('#msfb-form-title').length > 0 ) {
-                    $('#msfb-form-title').val(text_data)
-                }
-            } else if ( target_el_class.indexOf('skfb__form-desc') > -1 ) {
-                $('.msfb-desc').val(text_data)
-                if( $('#msfb-form-desc').length > 0 ) {
-                    $('#msfb-form-desc').val(text_data)
-                }
+        $('.skfb__form-desc').on('keyup',function(){
+            let desc = $(this).val()
+            $('.msfb-desc').val(desc)
+            if( $('#msfb-form-desc').length > 0 ) {
+                $('#msfb-form-desc').val(desc)
             }
+        })
+        var MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
+        let msfb_mutation_observer = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutationRecord) {
+                // console.log('style changed!', mutationRecord, mutationRecord.target.data)
+                if( mutationRecord.type != 'characterData' ) return
+                // console.log('style changed!', mutationRecord, mutationRecord.target.data)
+                let text_data = mutationRecord.target.data
+                let target_el_class = mutationRecord.target.parentElement.classList.value
+                if( target_el_class.indexOf('skfb__answer') > -1 ) {
+                    $('#msfb-answer').val(mutationRecord.target.data)
+                } else if ( target_el_class.indexOf('skfb__form-title') > -1 ) {
+                    $('.msfb-title').val(text_data)
+                    if( $('#msfb-form-title').length > 0 ) {
+                        $('#msfb-form-title').val(text_data)
+                    }
+                } else if ( target_el_class.indexOf('skfb__form-desc') > -1 ) {
+                    $('.msfb-desc').val(text_data)
+                    if( $('#msfb-form-desc').length > 0 ) {
+                        $('#msfb-form-desc').val(text_data)
+                    }
+                }
+            });
         });
-    });
-    msfb_mutation_els.map((k,v) => {
-        msfb_mutation_observer.observe(v, msfb_mutation_config)
-    })
+        msfb_mutation_els.map((k,v) => {
+            msfb_mutation_observer.observe(v, msfb_mutation_config)
+        })
+    }
     $('.skfb__form-title').on('change', e => {
         console.log(e)
         // $('.msfb-title').val($(e).html())
