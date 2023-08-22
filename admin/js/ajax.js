@@ -167,7 +167,7 @@ jQuery(document).ready($ => {
             fields_data.question_data = JSON.stringify( field_data )
         } else if ( act_el == "msfb-textarea-field" ) {
             let field_data = {
-                "placeholder": $(`.${act_el} textarea`).attr('placeholder')
+                "placeholder": $(`.${act_el} #textArea`).attr('placeholder')
             }
             fields_data.question_type = "msfb-textarea-field"
             fields_data.question_data = JSON.stringify( field_data )
@@ -217,7 +217,7 @@ jQuery(document).ready($ => {
         if( qtn_cat_field.length > 0 ) {
             fields_data.cat_id = qtn_cat_field.val()
         }
-        console.log(fields_data)
+        // console.log('fields data',fields_data)
         $.ajax({
             url: msfb.ajax_url,
             type: "POST",
@@ -638,9 +638,9 @@ jQuery(document).ready($ => {
                     }
                 })
                 a_field_data['field_data'] = field_data
-            } else if ( field_type == "upload_form_field" || field_type == "text_form_field" || field_type == "text_form_field" || field_type == "date_form_field" || field_type == "textarea_form_field" ) {
+            } else if ( field_type == "upload_form_field" || field_type == "text_form_field" || field_type == "date_form_field" || field_type == "textarea_form_field" ) {
                 a_field_data['field_data'] = {
-                    "placeholder": field_type == "textarea_form_field" ? $(field).find('textarea').attr('placeholder') : $(field).find('input').attr('placeholder')
+                    "placeholder": field_type == "textarea_form_field" ? $(field).find('#textArea').attr('placeholder') : $(field).find('input').attr('placeholder')
                 }
             }
             // is required

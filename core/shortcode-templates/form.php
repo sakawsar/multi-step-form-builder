@@ -76,7 +76,7 @@ function msfb_form_step( $data ){
             <?php } elseif($field['field_type'] == "textarea_form_field"){ ?>
             <div data-msfb-required="<?php echo $field['is_required']; ?>" data-msfb-is-lead-col="<?php echo $field['is_lead_column']; ?>" class="msfb-form-field msfb-form-textarea" data-field-label="<?php echo trim(strip_tags( $field['field_label'] )); ?>">
                 <label class="w-full text-lg mb-2" style="color:var(--msfb-color);"><?php echo trim(strip_tags( $field['field_label'] )); ?></label>
-                <textarea class="tw-msfb-textarea-field msfb-form-textarea w-full" placeholder="Test textarea"></textarea>
+                <textarea class="tw-msfb-textarea-field msfb-form-textarea w-full" placeholder="<?php echo $field['field_data']['placeholder']; ?>"></textarea>
             </div>
 
 

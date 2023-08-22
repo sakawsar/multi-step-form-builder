@@ -7,7 +7,7 @@
   <h5 class="sk-head __2 sk-text-white">Default Options</h5>
   <div class="skfb__field-opt__boxes skfb__overflow_scroll">
     <div class="skfb__field-box __2">
-      <label for="formName">Form name 22</label>
+      <label for="formName">Form name</label>
       <input type="text" placeholder="Form name" id="msfb-form-name" />
     </div>
     <?php 
@@ -172,7 +172,7 @@ function msfb_form_field_options( $id = "" ){
   </div>
   <h5 class="sk-head __2 sk-text-white">Textarea options</h5>
   <div class="skfb__field-opt__boxes skfb__overflow_scroll">
-    <?php msfb_form_field_options("textarea_form_field"); ?>
+    <?php msfb_form_field_options("textarea_form_field",$this_form_data); ?>
   </div> 
 </div>
 <!-- textarea form -->
