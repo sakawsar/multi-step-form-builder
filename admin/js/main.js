@@ -228,6 +228,7 @@ var ReCaptchaCallbackV3 = function() {
     }
     // change the questions by tool
     $('div[data-question-type]').on('click',e => {
+        $('.msfb-placeholder-qtn').hide()
         let field_types = [
             'msfb-multiselect',
             'msfb-date-field',

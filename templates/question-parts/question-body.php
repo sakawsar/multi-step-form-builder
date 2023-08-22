@@ -1,5 +1,11 @@
+<!-- placeholder -->
+<div class="sk-col-md-9 sk-col-lg-10 msfb-placeholder-qtn">
+    <div class="skfb__form-wrapper">
+        <h2 style="text-align:center;"><?php _e('Please choose your type of questions on the left side and add it by clicking the +. Important: you can only choose one of those elements per question.','msfb'); ?></h2>
+    </div> <!-- /.sk__form-wrapper -->
+</div> <!-- /.col- -->
 <!-- multiselect -->
-<div class="sk-col-md-9 sk-col-lg-10 msfb-multiselect" data-msfb-active="<?php echo !empty($question_data) && $question_data['question_type'] == "msfb-multiselect" || empty($question_data) ? 1 : 0; ?>" data-body-type="msfb-multiselect" style="<?php msfb_question_body_show($question_id,'msfb-multiselect'); ?>" data-qtn-name="<?php echo !empty($question_data) ? $question_data['question_name'] : ""; ?>">
+<div class="sk-col-md-9 sk-col-lg-10 msfb-multiselect" style="display:none;" data-msfb-active="<?php echo !empty($question_data) && $question_data['question_type'] == "msfb-multiselect" || empty($question_data) ? 1 : 0; ?>" data-body-type="msfb-multiselect" style="<?php msfb_question_body_show($question_id,'msfb-multiselect'); ?>" data-qtn-name="<?php echo !empty($question_data) ? $question_data['question_name'] : ""; ?>">
     <div class="skfb__form-wrapper">
         <header class="skfb__form-header">
             <h2 contenteditable="true" class="skfb__form-title skfb_question_seleted"><?php echo !empty($question_data) ? $question_data['question_title'] : "Title"; ?></h2>
