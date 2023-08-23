@@ -62,6 +62,9 @@ function msfb_settings_callback(){
         $row_count = sanitize_text_field( $_POST['msfb_row_count'] );
         update_option('msfb_row_count',$row_count);
         update_option('msfb_currency_symb',sanitize_text_field( $_POST['msfb_currency_symb'] ));
+        update_option('msfb_gdpr_page',sanitize_text_field( $_POST['msfb_gdpr_page'] ));
+        update_option('msfb_gdpr_page_anchor_text',sanitize_text_field( $_POST['msfb_gdpr_page_anchor_text'] ));
+        update_option('msfb_gdpr_policy_accept_text',sanitize_text_field( $_POST['msfb_gdpr_policy_accept_text'] ));
         update_option('form_data_successfully_submitted',sanitize_text_field( $_POST['form_data_successfully_submitted'] ));
         // update the site key
         update_option('msfb_recap_sitekey',sanitize_text_field( $_POST['msfb_recap_sitekey'] ));
@@ -114,6 +117,58 @@ function msfb_settings_callback(){
             </tr>
             <tr>
                 <th>
+                    <?php 
+                        get_the_label(__('GDPR policy accept text','msfb'), __('This text will show for the GDPR checkbox under any form.','msfb'));
+                    ?>
+                </th>
+                <td>
+                    <input type="text" name="msfb_gdpr_policy_accept_text" value="<?php echo get_option('msfb_gdpr_policy_accept_text','') ?: ""; ?>" placeholder="<?php _e('Text after GDPR checkbox','msfb'); ?>"/>
+                    <p>
+                        <?php _e('This text will show for the GDPR checkbox under any form.','msfb') ?>
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <?php 
+                        get_the_label(__('GDPR page anchor text','msfb'), __('This anchor text will show for the GDPR page under any form.','msfb'));
+                    ?>
+                </th>
+                <td>
+                    <input type="text" name="msfb_gdpr_page_anchor_text" value="<?php echo get_option('msfb_gdpr_page_anchor_text','') ?: ""; ?>" placeholder="<?php _e('Anchor text','msfb'); ?>"/>
+                    <p>
+                        <?php _e('This anchor text will show for the GDPR page under any form.','msfb') ?>
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <?php 
+                        get_the_label(__('GDPR policy page','msfb'), __('While submitting a form you need to accept GDPR policy.','msfb'));
+                    ?>
+                </th>
+                <td>
+                    <select name="msfb_gdpr_page" id="msfb_gdpr_page">
+                        <option value=""><?php _e('Select a page','msfb'); ?></option>
+                        <?php
+                        $query = new WP_Query( array(
+                            'post_type' => 'page',
+                            'posts_per_page' => -1,
+                            'post_status' => 'published'
+                        ) );
+                        while($query->have_posts()){
+                            $query->the_post();
+                            printf('<option %s value="%s">%s</option>',selected(get_option('msfb_gdpr_page'), get_the_ID(), true),get_the_ID(),get_the_title());
+                        }
+                        ?>
+                    </select>
+                    <p>
+                        <?php _e('While submitting a form you need to accept GDPR policy.','msfb') ?>
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <th>
                     <?php
                         _e('Google recaptcha site key','msfb');
                     ?>
@@ -149,6 +204,12 @@ function msfb_settings_callback(){
                         <?php _e('Those are the fields to translate the word and sentences which is written in English.','msfb'); ?>
                     </p>
                 </th>
+            </tr>
+            <tr>
+                <th><?php _e('Agree to the terms and conditions','msfb'); ?></th>
+                <td> 
+                    <input type="text" name="msfb_please_agree_to_the_terms_and_conditions" value="<?php echo get_option('msfb_please_agree_to_the_terms_and_conditions'); ?>" placeholder="<?php _e('Agree to the terms and conditions'); ?>"/>
+                </td>
             </tr>
             <tr>
                 <th><?php _e('Form data successfully submitted.','msfb'); ?></th>

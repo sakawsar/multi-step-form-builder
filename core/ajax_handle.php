@@ -305,8 +305,9 @@ add_action('wp_ajax_msfb_add_leads','msfb_add_leads_callback');
 function msfb_add_leads_callback(){
     if(isset($_POST['dataset'])){
         global $wpdb;
-        $data = $_POST['dataset'];
         $msfb_recap_token = isset($_POST['dataset']['msfb_recaptcha_token']) ? $_POST['dataset']['msfb_recaptcha_token'] : '';
+        unset($_POST['dataset']['msfb_recaptcha_token']);
+        $data = $_POST['dataset'];
         $msfb_recap_secret = get_option('msfb_recaptcha_secret',false);
         if( $msfb_recap_token && $msfb_recap_secret ) {
             $verify_token = file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret='.$msfb_recap_secret.'&response='.$msfb_recap_token);

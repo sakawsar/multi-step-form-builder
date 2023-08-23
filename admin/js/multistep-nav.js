@@ -20,6 +20,14 @@
             })
             nodes.push($('button[data-msfb-redirect]').closest('div[data-msfb-node].msfb-form').attr('data-msfb-node'))
             visited_nodes.push($('button[data-msfb-redirect]').closest('div[data-msfb-node].msfb-form').attr('data-msfb-node'))
+            // check the gdpr policy
+            if( $('#msfb_gdpr_checkbox:checked').length == 0 ) {
+                Swal.fire({
+                    icon: "warning",
+                    text: msfb.translate.msfb_please_agree_to_the_terms_and_conditions
+                })
+                return false
+            }
             btn.html('<i class="fa fa-spinner fa-spin"></i> ' + msfb.translate.finish)
             let lead_data = await msfb_get_formulation_data(nodes)
             // let redirect_url = 

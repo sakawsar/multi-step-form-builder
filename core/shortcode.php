@@ -222,6 +222,13 @@ function msfb_step_navigation( $data ) {
 		<?php if( $step_data['type'] != "question" && get_option('msfb_recap_sitekey') ) { ?>
 			<div style="margin:16px auto;" id="msfb-recaptcha"></div>
 		<?php } ?>
+		<?php if( $step_data['type'] != "question" && get_option('msfb_gdpr_page') && get_option('msfb_gdpr_page_anchor_text') ) { ?>
+			<label style="margin:auto;">
+				<input type="checkbox" name="" id="msfb_gdpr_checkbox">
+				<span><?php echo get_option('msfb_gdpr_policy_accept_text') ?: __('I have read and understood the privacy statement. You can read the privacy policy ','msfb'); ?></span>
+				<span><a target="_blank" href="<?php echo get_permalink( get_option('msfb_gdpr_page') ) ?: '#'; ?>"><?php echo get_option('msfb_gdpr_page_anchor_text') ?: __('here.','msfb'); ?></a></span>
+			</label>
+		<?php } ?>
 		<div <?php echo $required; ?> class="tw-msfb-btn-container" <?php echo isset($data['nav_position']) && $data['nav_position'] == 'top' ? 'style="margin:32px 0px;"' : ''; ?> <?php echo $root_node; ?> data-step-type="<?php echo $step_data['type']; ?>">
 			<?php if( $data['step'] != 1 ) { ?>
 				<button data-msfb-prev=""><?php echo get_option('msfb_translate_back') ?: 'Back'; ?></button>

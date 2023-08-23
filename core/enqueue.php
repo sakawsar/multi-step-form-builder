@@ -15,6 +15,7 @@ function msfb_enqueue_scripts(){
 			'msfb_select_from_dropdown' => get_option('msfb_select_from_dropdown') ?: 'Select from dropdown',
 			'finish' => get_option('msfb_translate_finish') ?: 'Finish',
 			'msfb_please_verify_recaptcha' => get_option('msfb_please_verify_recaptcha') ?: 'Please verify the recaptcha',
+			'msfb_please_agree_to_the_terms_and_conditions' => get_option('msfb_please_agree_to_the_terms_and_conditions') ?: __('Agree to the terms and conditions','msfb'),
 		)
 	);
 	wp_localize_script( 'msfb_localize', 'msfb', $localize_data);
