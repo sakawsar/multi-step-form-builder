@@ -315,7 +315,7 @@ var ReCaptchaCallbackV3 = function() {
         ans_no++
         let new_answer = `
             <div class="sk-col-lg-6 sk-col-xl-3" data-multiselect-no="${ans_no}">
-            <div class="skfb__builder-box skfb-form-builder-drawer" style="position:relative;">
+            <div class="skfb__builder-box skfb-form-builder-drawer active" style="position:relative;">
                 <i class="fa fa-times msfb-remove-option" style="position:absolute;top:8px;left:8px;z-index:999;color:gray;font-size:18px;cursor:pointer;"></i>
                     <div class="skfb__builder-top">
                         <div class="icon">
@@ -328,6 +328,9 @@ var ReCaptchaCallbackV3 = function() {
                 </div>
             </div>
         `
+        $.each($('.msfb-multiselect-holder div[data-multiselect-no] .active'),(k,v) => {
+            $(v).removeClass('active')
+        })
         $('.' + act_qtn + ' .msfb-multiselect-holder').append(new_answer)
     })
     $(document).on('click','.msfb-remove-option',function(e){
