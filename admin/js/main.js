@@ -228,6 +228,9 @@ var ReCaptchaCallbackV3 = function() {
     }
     // change the questions by tool
     $('div[data-question-type]').on('click',e => {
+        let act_el = $('div[data-msfb-active="1"]')
+        let title = act_el.find('.skfb__form-title').html()
+        let desc = act_el.find('.skfb__form-desc').val()
         $('.msfb-placeholder-qtn').hide()
         let field_types = [
             'msfb-multiselect',
@@ -245,8 +248,11 @@ var ReCaptchaCallbackV3 = function() {
         for (let i = 0; i < field_types.length; i++) {
             const element = field_types[i];
             if( element == clicked_field ){
-                $('.' + element).attr('data-msfb-active',1)
-                $('.' + element).show();
+                let cur_act_el = $('.' + element)
+                cur_act_el.attr('data-msfb-active',1)
+                cur_act_el.find('.skfb__form-title').html(title)
+                cur_act_el.find('.skfb__form-desc').val(desc)
+                cur_act_el.show();
                 // msfb_show_drawer(element)
             }else{
                 $('.' + element).hide();
