@@ -189,7 +189,7 @@ if(id != null){
             <div>
               <div class="box">
                   <ul>
-                    <li>${form_name}</li>
+                    <li>${form_name} <a href="${msfb.form_edit_url + form_id}"><i style="position:absolute;top:8px;right:8px;" class="fa fa-edit"></a></i></li>
                   </ul>
               </div>
             </div>
@@ -214,7 +214,7 @@ if(id != null){
               <div>
                 <div class="box">
                     <ul>
-                      <li>${qtn_name}</li>
+                      <li>${qtn_name} <a href="${msfb.qtn_edit_url + qtn_id}"><i style="position:absolute;top:8px;right:8px;" class="fa fa-edit"></a></i></li>
                     </ul>
                 </div>
               </div>
@@ -242,7 +242,7 @@ if(id != null){
             let qtn_html = `
               <div>
                 <div class="box">
-                    <p>${qtn_name}</p>
+                    <p>${qtn_name} <a href="${msfb.qtn_edit_url + qtn_id}"><i style="position:absolute;top:8px;right:8px;" class="fa fa-edit"></a></i></p>
                     <ul>
                       ${qtn_options}
                     </ul>
