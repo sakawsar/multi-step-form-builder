@@ -32,7 +32,7 @@
                             <li><span></span></li>
                         </ul>
                     </div>
-                    <p>Select Field</p>
+                    <p>Single select Field</p>
                 </div>
                 <div class="sk-col-2">
                     <button class="skfb-field-plus-btn"><i class="fas fa-plus"></i></button>
@@ -110,7 +110,7 @@
                             <i class="fas fa-chevron-down"></i>
                         </div>
                     </div>
-                    <p>Select Field</p>
+                    <p>Dropdown Field</p>
                 </div>
                 <div class="sk-col-2">
                     <button class="skfb-field-plus-btn"><i class="fas fa-plus"></i></button>
