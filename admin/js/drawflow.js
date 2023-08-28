@@ -337,6 +337,140 @@ if(id != null){
         })
       }
     })
+    if( jQuery('#msfb-formulation-builder').length > 0 ) {
+      // console.log('autosave working')
+      let this_el = jQuery('#msfb-formulation-builder')
+      if( !this_el.attr('data-formula-name') ) {
+        Swal.fire({
+          title: 'Formulation name',
+          text: "Enter this formulation name",
+          input: 'text',
+          inputLabel: 'Formulation name',
+          inputPlaceholder: 'Formulation name'
+        }).then( ok => {
+          console.log(ok)
+          this_el.attr('data-formula-name',ok.value)
+          jQuery.ajax({
+            url: msfb.ajax_url,
+            type: "POST",
+            dataType: "json",
+            data: {
+              action: "create_the_q_flow",
+              dataset: ok.value
+            },
+            success:function(resp){
+              console.log(resp)
+              if( resp.status && resp.status == 'success' ) {
+                this_el.attr('data-formula-id', resp.id)
+                // window.location.href = resp.redirect
+              }
+            },
+            error:function(err){
+              console.log(err)
+            }
+          })
+        })
+      }
+      let interval = setInterval( async () => {
+        // console.log(editor.export());
+        let data = editor.export()
+        let node_data = data.drawflow.Home.data
+        if( Object.keys(node_data).length == 0 ) {
+          return false
+        }
+        let formulation_data = []
+        let is_valid = false
+        jQuery.each(node_data,(k,v) => {
+          let has_connection = false
+          let node_name = v.name
+          let node_item_id = msfb_get_the_id(node_name)
+          let inputs = v.inputs
+          let is_root = true
+          jQuery.each(inputs, (in_k,in_v) => {
+            if ( in_v.connections.length > 0 ) {
+              has_connection = true
+              is_root = false
+            }
+          })
+          // console.log(has_connection)
+          let outputs = v.outputs
+          // console.log(outputs)
+          let output_data = []
+          jQuery.each(outputs, (out_k,out_v) => {
+            if ( out_v.connections.length > 0 ) {
+              has_connection = true
+              output_data[out_k] = out_v.connections.map( a_con => {
+                return node_data[a_con.node].name
+              })
+            }
+          })
+          if( has_connection == false ) {
+            is_valid = false
+            return false
+          } else {
+            is_valid = true
+          }
+          if(!is_root){
+            formulation_data[node_data[k].name] = output_data
+          } else {
+            formulation_data['root'] = output_data
+          }
+        })
+        if( is_valid == false ) {
+          return false
+        }
+        let formulation_name = this_el.attr('data-formula-name')  ? this_el.attr('data-formula-name') : 'Untitled q-flow'
+        let show_price = jQuery('#msfb-show-price:checked').val()
+        let redirect = jQuery('#msfb-redirect-url').val()
+        let msfb_nav_menu_position = jQuery('.msfb_nav_menu_position:checked').val()
+        let color_scheme = jQuery('#msfb-color-scheme').val()
+        if( show_price ) {
+          formulation_data.show_price = show_price
+        }
+        if( redirect ){
+          formulation_data.redirect = redirect
+        }
+        if( msfb_nav_menu_position ){
+          formulation_data.msfb_nav_menu_position = msfb_nav_menu_position
+        }
+        if( color_scheme ){
+          formulation_data.color_scheme = color_scheme
+        }
+        if ( formulation_name ) {
+          this_el.find('i').attr('class','fa fa-spinner fa-spin')
+          let request_data = {
+            "formulation_name": formulation_name,
+            "formulation_data": JSON.stringify( { ...formulation_data }),
+            "raw_data": JSON.stringify( data )
+          }
+          if ( this_el.attr('data-formula-id' ) ) {
+            request_data.formula_id = this_el.attr('data-formula-id' )
+          }
+          jQuery.ajax({
+            url: msfb.ajax_url,
+            type: "POST",
+            dataType: "json",
+            data: {
+              action: "msfb_add_formulation",
+              dataset: request_data
+            },
+            success: resp => {
+              this_el.find('i').attr('class','fas fa-save')
+              this_el.attr('data-formula-id',resp.formula_id)
+                if( resp.status != undefined && resp.status == "created" ) {
+                    // window.location.href = resp.redirect
+                }
+            },
+            error: err => {
+              this_el.find('i').attr('class','fas fa-save')
+              console.log(err)
+            }
+          })
+        } else {
+          return false
+        }
+      },5000)
+    }
     jQuery('#msfb-formulation-builder').on('click',async (e) => {
 
         let this_el = jQuery(e.currentTarget)

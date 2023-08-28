@@ -301,6 +301,25 @@ function msfb_get_form_data( $form_id ){
     $form_settings = isset($form_data['settings']) ? $form_data['settings'] : [] ;
     return $form_settings;
 }
+add_action('wp_ajax_create_the_q_flow','create_the_q_flow_callback');
+function create_the_q_flow_callback(){
+    if(isset($_POST['dataset'])){
+        global $wpdb;
+        $table_name = $wpdb->prefix.'msfb_formulations';
+        $wpdb->insert($table_name,array(
+            'formulation_name' => $_POST['dataset']
+        ));
+        $insert_id = $wpdb->insert_id;
+        wp_die(json_encode(array(
+            'status' => 'success',
+            'redirect' => admin_url( 'admin.php?page=formula_builder&formulation_id='.$wpdb->insert_id ),
+            'id' => $insert_id
+        )));
+    }
+    wp_die(json_encode(array(
+        'status' => 'error'
+    )));
+}
 add_action('wp_ajax_msfb_add_leads','msfb_add_leads_callback');
 function msfb_add_leads_callback(){
     if(isset($_POST['dataset'])){
