@@ -35,7 +35,8 @@ function msfb_enqueue_scripts(){
 	wp_register_style( 'msfb_admin_tailwind', MSFB_URL.'admin/css/tailwind.css' );
 	wp_enqueue_style( 'msfb_jquery_steps_css', MSFB_URL.'assets/css/jquery.steps.css' );
 	wp_enqueue_style( 'msfb_style', MSFB_URL.'assets/css/style.css' );
-	wp_register_style( 'msfb_admin_fontawesome', 'https://pro.fontawesome.com/releases/v5.10.0/css/all.css' );
+	// wp_register_style( 'msfb_admin_fontawesome', 'https://pro.fontawesome.com/releases/v5.10.0/css/all.css' );
+	wp_register_style( 'msfb_admin_fontawesome', MSFB_URL.'assets/css/fontawesome.css' );
 }
 // admin enqueue
 add_action('admin_enqueue_scripts','msfb_admin_enqueue_scripts');
@@ -115,7 +116,8 @@ function msfb_admin_enqueue_scripts(){
 	//css
 	wp_register_style( 'msfb_admin_global', MSFB_URL.'admin/css/global.css' );
 	wp_register_style( 'msfb_admin_tailwind', MSFB_URL.'admin/css/tailwind.css' );
-	wp_register_style( 'msfb_admin_fontawesome', 'https://pro.fontawesome.com/releases/v5.10.0/css/all.css' );
+	// wp_register_style( 'msfb_admin_fontawesome', 'https://pro.fontawesome.com/releases/v5.10.0/css/all.css' );
+	wp_register_style( 'msfb_admin_fontawesome', MSFB_URL.'admin/css/fontawesome.css' );
 	wp_register_style( 'msfb_admin_jquery_ui_css', MSFB_URL.'admin/css/jquery-ui.css' );
 	wp_register_style( 'msfb_admin_jquery_steps', MSFB_URL.'admin/css/jquery.steps.css' );
 	wp_register_style( 'msfb_admin_select2', MSFB_URL.'admin/css/select2.min.css' );

@@ -13,7 +13,37 @@ function msfb_mendatory_fields( $id, $question_data ){
         </div>
         <div class="skfb__field-box __2">
             <label for="msfb-pick-icon">Pick answer icon</label>
-            <div class="skfb__icon_select_field skfb__overflow_scroll"> 
+            <script>
+                jQuery(document).ready(function(){
+                    let msfb_setTimeout
+                    jQuery('#msfb_search_icon').on('input',function(){
+                        clearTimeout(msfb_setTimeout)
+                        let this_el = jQuery(this)
+                        msfb_setTimeout = setTimeout(() => {
+                            let search_key = this_el.val()
+                            let icons = jQuery('.msfb-icon-field-holder').find('i')
+                            console.log(icons)
+                            if( search_key ) {
+                                icons.hide()
+                            } else {
+                                icons.show()
+                                return
+                            }
+                            jQuery.each(icons,function(key,value){
+                                let icon_class = jQuery(value).attr('class')
+                                if( icon_class.indexOf(search_key) > -1 ) {
+                                    console.log('Listed class',icon_class)
+                                    jQuery(value).show()
+                                } else {
+                                    console.log('Not listed class')
+                                }
+                            })
+                        }, 500)
+                    })
+                })
+            </script>
+            <input type="text" name="" id="msfb_search_icon" placeholder="<?php _e('Search icons','msfb'); ?>">
+            <div class="skfb__icon_select_field skfb__overflow_scroll msfb-icon-field-holder"> 
                 <?php
                 include('icon_list.php');
                 foreach($msfb_icons as $icon){
