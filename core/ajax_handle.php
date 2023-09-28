@@ -1,4 +1,23 @@
 <?php
+add_action('wp_ajax_msfb_duplicate_item','msfb_duplicate_item_callback');
+function msfb_duplicate_item_callback(){
+    if ( isset( $_POST['dataset'] ) ) {
+        $item_id = $_POST['dataset']['item_id'];
+        $item_type = $_POST['dataset']['item_type'];
+        global $wpdb;
+        $table_name = $wpdb->prefix.'msfb_'.$item_type;
+        $results = $wpdb->get_results("SELECT * FROM $table_name WHERE id=$item_id",ARRAY_A);
+        $item_data = $results[0];
+        unset($item_data['id']);
+        $wpdb->insert($table_name,$item_data);
+        $insert_id = $wpdb->insert_id;
+        wp_die(json_encode(array(
+            'status' => 'success',
+            'insert_id' => $insert_id
+        )));
+    }
+    exit;
+}
 add_action('wp_ajax_msfb_leads_date_range','msfb_leads_date_range_callback');
 function msfb_leads_date_range_callback(){
     if( isset($_POST['dataset']) ) {

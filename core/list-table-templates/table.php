@@ -136,7 +136,7 @@ if( $el_type == "leads" ) {
     <tbody id="msfb-table-item-holder">
         <?php
         if($table_data['data'] != false){
-            foreach($table_data['data'] as $item_data){ ?>
+            foreach(array_reverse($table_data['data']) as $item_data){ ?>
             <tr>
                 <td><input type="checkbox" data-sel-id="msfb-select-all" data-msfb-item-id="<?php echo $item_data['id']; ?>" class="msfb-sel-field sk-custom-checkbox"></td>
                     <?php $i=1; foreach($table_data['struct'] as $t_id => $t_value){ ?>
@@ -185,6 +185,7 @@ if( $el_type == "leads" ) {
                     <i data-msfb-delete-id="<?php echo $item_data['id']; ?>" data-msfb-item-type="<?php echo $el_type; ?>" class="fa fa-trash"></i>
                     <?php if($el_type != "leads"){ ?>
                         <a href="<?php echo $this->add_new_url.'='.$item_data['id']; ?>"><i class="fa fa-edit"></i></a>
+                        <a class="msfb-duplicate-item" href="#" data-el-type="<?php echo $el_type; ?>" data-el-id="<?php echo $item_data['id']; ?>"><i class="fa fa-clone"></i></a>
                     <?php } else { ?>
                         <a href="<?php echo $this->add_new_url.'='.$item_data['id']; ?>"><i class="fa fa-eye"></i></a>
                     <?php } ?>

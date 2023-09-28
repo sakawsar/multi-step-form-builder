@@ -13,6 +13,37 @@ jQuery(document).ready($ => {
             text: msg
         })
     }
+    // duplicate item
+    $('.msfb-duplicate-item').on('click',e => {
+        e.preventDefault()
+        let this_el = this__(e)
+        let item_id = this_el.attr('data-el-id')
+        let item_type = this_el.attr('data-el-type')
+        let icon = this_el.find('i')
+        icon.attr('class','fa fa-spinner fa-spin')
+        $.ajax({
+            url: msfb.ajax_url,
+            type: "POST",
+            dataType: "json",
+            data: {
+                action: "msfb_duplicate_item",
+                dataset: {
+                    item_id, item_type
+                }
+            },
+            success: resp => {
+                console.log(resp)
+                icon.attr('class','fa fa-clone')
+                if( resp.status ) {
+                    window.location.reload()
+                }
+            },
+            error: err => {
+                console.log(err)
+                icon.attr('class','fa fa-clone')
+            }
+        })
+    })
     // leads date range filter by ajax
     $('#msfb_filter_lead_by_date_range').on('click',e => {
         e.preventDefault()
