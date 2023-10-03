@@ -148,6 +148,7 @@
             if( $('.tw-msfb-total-price span').length > 0 ) {
                 total = parseFloat( $('.tw-msfb-total-price span').html() )
             }
+            this_el.closest('div[data-msfb-node]').find('button[data-msfb-next]').attr('data-msfb-next',this_el.attr('data-next-node'))
             if( this_el.hasClass('selected') ) {
                 this_el.removeClass('selected');
                 if ( this_el.attr('data-price') && total != null ) {

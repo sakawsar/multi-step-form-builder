@@ -17,8 +17,8 @@ function msfb_multiselect_step( $data ){
         $i = 1;
         foreach($question_data as $option){
             $node = "";
-            if( !empty($step_data['outputs']['output_1']['connections']) ) {
-                $node = $step_data['outputs']['output_1']['connections'][0]['node'];
+            if( !empty($step_data['outputs']['output_'.$i]['connections']) ) {
+                $node = $step_data['outputs']['output_'.$i]['connections'][0]['node'];
             }
         ?>
         <div class="tw-msfb-multiselect-qtn__item" data-price="<?php echo isset($option['price']) ? $option['price'] : ""; ?>" data-next-node="<?php echo $node; ?>">

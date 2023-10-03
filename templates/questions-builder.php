@@ -45,6 +45,13 @@ $is_update = $question_id != "" ? "data-qtn-id='{$question_id}'" : "";
               <div>
                 <button class="skfb-btn" <?php echo $is_update; ?> id="msfb_save_question"><i class="fas fa-save"></i> <?php _e('Save','msfb'); ?></button>
                 <a href="<?php echo admin_url('admin.php?page=questions_builder&question_id'); ?>" class="skfb-btn"><i class="fas fa-plus"></i> <?php _e('Add new','msfb'); ?></a>
+                <?php 
+                $get_question = msfb_get_question($question_id);
+                $field_type = isset($get_question['question_type']) ? $get_question['question_type'] : "";
+                if( $question_id && $field_type == "msfb-multiselect" ) { 
+                ?>
+                  <a href="#" preserved-data="<?php echo isset($get_question['question_data']['route_data']) ? $get_question['question_data']['route_data'] : false; ?>" class="msfb-create-route-set skfb-btn" data-el-id="<?php echo $question_id; ?>"><i class="fas fa-plus"></i> <?php _e('Create Route set','msfb'); ?></a>
+                <?php } ?>
               </div>
             </div>
           </div>

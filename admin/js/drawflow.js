@@ -209,7 +209,7 @@ if(id != null){
         if( qtn_found.length > 0 ) {
           let qtn_type = qtn_found[0].question_type
           let qtn_name = qtn_found[0].question_name
-          if( qtn_type == "msfb-multiselect" || qtn_type == "msfb-text-field" || qtn_type == "msfb-textarea-field" || qtn_type == "msfb-date-field" || qtn_type == "msfb-map-field" || qtn_type == "msfb-upload-field" || qtn_type == "msfb-slider-field" ) {
+          if( qtn_type == "msfb-text-field" || qtn_type == "msfb-textarea-field" || qtn_type == "msfb-date-field" || qtn_type == "msfb-map-field" || qtn_type == "msfb-upload-field" || qtn_type == "msfb-slider-field" ) {
             let qtn_html = `
               <div>
                 <div class="box">
@@ -224,11 +224,11 @@ if(id != null){
             } else {
               return qtn_html
             }
-          } else if ( qtn_type == "msfb-single-select-field" || qtn_type == "msfb-dropdown-field" ) {
+          } else if ( qtn_type == "msfb-single-select-field" || qtn_type == "msfb-dropdown-field" || qtn_type == "msfb-multiselect" ) {
             let qtn_options = ``
             let qtn_data = qtn_found[0].question_data
             let input_count = 0
-            if( qtn_type == "msfb-single-select-field" ) {
+            if( qtn_type == "msfb-single-select-field" || qtn_type == "msfb-multiselect" ) {
               for (let i = 0; i < qtn_data.length; i++) {
                 qtn_options += `<li><i class="${qtn_data[i].icon_class}"></i> ${qtn_data[i].answer}</li>` 
                 input_count++

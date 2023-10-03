@@ -672,4 +672,96 @@ var ReCaptchaCallbackV3 = function() {
         let this_el = this__(e)
         console.log(this_el)
     })
+    // select field
+    const msfb_select_field = ( name = "" ) => {
+        let the_parent = $('div[data-msfb-active="1"] div[data-multiselect-no] .skfb__answer')
+        let options = ''
+        $.each( the_parent, function(k,v){
+            let the_answer = $(v).html()
+            options += `<option value="${the_answer}">${the_answer}</option>`
+        })
+        let select_field = `
+        <div class="msfb-a-route-set-holder" style="padding: 8px;margin-bottom: 8px;background: #c2c2c2;border-radius: 8px;">
+            <input value="${name}" class="msfb-route-set-name" type="text" name="msfb-route-set-name[]" placeholder="Route set name" style="width:100%;margin-bottom:8px;"/>
+            <select class="msfb-route-set" name="msfb-route-set[]" style="width:100%;" multiple>
+                <!--option value="">Select route set</option-->
+                ${options}
+            </select>
+        </div>
+        ` 
+        return select_field
+    }
+    // add route set
+    $(document).on('click','#msfb-add-new-route-set',function(){
+        let select_field = msfb_select_field()
+        $('.msfb-route-set-holder').append(select_field)
+        $('.msfb-route-set').select2({
+            placeholder: 'Select an option'
+        })
+    })
+    // create route set
+    $('.msfb-create-route-set').on('click', e => {
+        e.preventDefault()
+        let this_el = this__(e)
+        let popup_html = `
+            <div class="msfb-route-set-name-holder" style="display:flex;flex-direction:column;">
+                <div class="msfb-route-set-holder" style="display:flex;flex-direction:column;8px;"></div>
+                <button type="button" id="msfb-add-new-route-set">Add new route set</button>
+            </div>
+        `
+        // create select field with the_parent element
+        let preserved_data = $('.msfb-create-route-set').attr('preserved-data')
+        preserved_data = preserved_data != undefined && preserved_data != "" ? preserved_data : []
+        if( preserved_data.length > 0 ) {
+            let field_rows_html = ""
+            $.each(preserved_data, function(key, value){
+                field_rows_html += msfb_select_field(value.name)
+            })
+            popup_html = `
+                <div class="msfb-route-set-name-holder" style="display:flex;flex-direction:column;">
+                    <div class="msfb-route-set-holder" style="display:flex;flex-direction:column;8px;">${field_rows_html}</div>
+                    <button type="button" id="msfb-add-new-route-set">Add new route set</button>
+                </div>
+            `
+        }
+        Swal.fire({
+            title: "Create route set",
+            allowOutsideClick: false,
+            showCancelButton: true,
+            html: popup_html,
+            confirmButtonText: "Update",
+            preConfirm: () => {
+                let fields_data = []
+                $.each($('.msfb-a-route-set-holder'),function(k,the_row){
+                    let select2_data = $(the_row).find('.msfb-route-set').select2('data')
+                    let select2_values = select2_data.map(a => a.text)
+                    fields_data.push({
+                        "name": $(the_row).find('.msfb-route-set-name').val(),
+                        "values": select2_values
+                    })
+                })
+                console.log('route data', fields_data)
+                $('.msfb-create-route-set').attr('preserved-data',JSON.stringify(fields_data))
+            }
+        })
+        $('.msfb-route-set').select2({
+            placeholder: 'Select an option'
+        })
+        if( preserved_data.length > 0 ) {
+            $.each($('.msfb-a-route-set-holder'),function(k,the_row){
+                $(the_row).find('.msfb-route-set').val(preserved_data[k].values)
+                $(the_row).find('.msfb-route-set').trigger('change')
+            })
+        }
+    })
+    $.each($('.msfb-a-route-set-holder'),function(k,the_row){
+        $(the_row).find('.msfb-route-set').val()
+    })
+    let msfb_find_the_select_field = setInterval(() => {
+        if( $('.msfb-route-set').length > 0 ) {
+            $('.msfb-route-set').select2()
+        } else {
+            clearInterval(msfb_find_the_select_field)
+        }
+    }, 100);
 })(jQuery);

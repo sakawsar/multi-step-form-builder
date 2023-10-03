@@ -164,7 +164,25 @@ jQuery(document).ready($ => {
                 multiselect_opts.push(opt_data)
             })
             fields_data.question_type = "msfb-multiselect"
-            fields_data.question_data = JSON.stringify( multiselect_opts )
+            // let field_data_for_multiselect = {
+            //     "option_data": multiselect_opts
+            // }
+            // if( $('.msfb-create-route-set').attr('preserved-data') ) {
+            //     field_data_for_multiselect.route_data = $('.msfb-create-route-set').attr('preserved-data')
+            // }
+            fields_data.question_data = JSON.stringify( multiselect_opts  )
+            // $.each($('.msfb-a-route-set-holder'),function(k,the_row){
+            //     $(the_row).find('.msfb-a-route-set').each(function(kk,the_route){
+            //         let route_data = {
+            //             "route_type": $(the_route).attr('data-msfb-route-type'),
+            //             "route_value": $(the_route).attr('data-msfb-route-value'),
+            //             "route_action": $(the_route).attr('data-msfb-route-action'),
+            //             "route_action_value": $(the_route).attr('data-msfb-route-action-value')
+            //         }
+            //         fields_data[`route_${k}_${kk}`] = JSON.stringify(route_data)
+            //     })
+            // }) 
+            // console.log('route data', fields_data)
         } else if ( act_el == "msfb-single-select-field" ) {
             let select_opts = $(`.${act_el} div[data-multiselect-no]`)
             if( select_opts.length == 0 ) {
