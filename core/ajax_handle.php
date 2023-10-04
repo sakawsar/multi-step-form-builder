@@ -1,5 +1,5 @@
 <?php
-// add_action('wp_ajax_msfb_preview_formula','msfb_preview_formula_callback');
+add_action('wp_ajax_msfb_preview_formula','msfb_preview_formula_callback');
 function msfb_preview_formula_callback(){
     if( isset($_POST['dataset']) ) {
         $formula_id = $_POST['dataset'];

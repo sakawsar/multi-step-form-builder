@@ -342,12 +342,37 @@ if(id != null){
     }
     jQuery('#msfb-preview-formula-btn').on('click',function(){
       let this_el = jQuery(this)
+      let qflow_id = this_el.attr('data-qflow-id')
       let prev_html = this_el.html()
       if( !this_el.attr('data-previewing') ) {
         this_el.html('<i class="fa fa-times"></i> Close preview')
         this_el.attr('data-previewing',true)
-        jQuery('#msfb_drawflow').hide(function(){
-          jQuery('#msfb-preview-formula').fadeIn()
+        this_el.find('i').attr('class','fa fa-spinner fa-spin')
+        jQuery.ajax({
+            url: msfb.ajax_url,
+            type: "POST",
+            dataType: "html",
+            data: {
+                action: "msfb_preview_formula",
+                dataset: qflow_id
+            },
+            success: function(resp){
+                jQuery('#msfb-preview-formula').html(resp)
+                this_el.find('i').attr('class','fa fa-times')
+                jQuery('#msfb_drawflow').hide(function(){
+                  jQuery('#msfb-preview-formula').fadeIn()
+                })
+                // this_el.attr('data-previewing',"true")
+            },
+            error:function(err){
+                this_el.find('i').attr('class','fa fa-times')
+                // this_el.attr('data-previewing',"true")
+                Swal.fire({
+                    icon: "error",
+                    text: "Something went wrong."
+                })
+                console.log(err)
+            }
         })
       } else {
         this_el.removeAttr('data-previewing')

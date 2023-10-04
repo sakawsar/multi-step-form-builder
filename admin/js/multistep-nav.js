@@ -110,7 +110,7 @@
             //console.log(nodes)
             //console.log('visited nodes',visited_nodes)
         }
-        $('.msfb-select .tw-msfb-qtn-field div').on('click', e => {
+        $(document).on('click', '.msfb-select .tw-msfb-qtn-field div', e => {
             let this_el = $(e.currentTarget)
             let this_node = this_el.closest('div[data-msfb-node]').attr('data-msfb-node')
             let total
@@ -135,13 +135,13 @@
                 $('.tw-msfb-total-price span').counterUp();
             }
         })
-        $('.tw-msfb-slider-field').on('change',function(e){
+        $(document).on('change','.tw-msfb-slider-field',function(e){
             let price_holder =  $(this).closest('div[data-price]')
             let base_price = parseFloat( price_holder.attr('data-base-price') )
             let new_price = parseFloat($(this).val()) * base_price
             price_holder.attr('data-price',new_price)
         })
-        $('.msfb-multiselect .tw-msfb-qtn-field div').on('click', e => {
+        $(document).on('click', '.msfb-multiselect .tw-msfb-qtn-field div', e => {
             // //console.log(e)
             let this_el = $(e.currentTarget)
             let total
@@ -165,7 +165,7 @@
                 }
             }
         })
-        $('button[data-msfb-next], button[data-msfb-prev]').on('click', e => {
+        $(document).on('click', 'button[data-msfb-next], button[data-msfb-prev]', e => {
             $('html, body').animate({
                 scrollTop: $(".tw-msfb-container").offset().top
             }, 500)
@@ -312,11 +312,11 @@
                 })
             }
         })
-        $('.tw-msfb-dropdown-field').on('click', e => {
+        $(document).on('click', '.tw-msfb-dropdown-field', e => {
             let this_el = $(e.currentTarget)
             this_el.find('.item-holder').toggle('fast')
         })
-        $('div.tw-msfb-dropdown-qtn__item').on('click', e => {
+        $(document).on('click', 'div.tw-msfb-dropdown-qtn__item', e => {
             let this_el = $(e.currentTarget)
             let next_node = this_el.attr('data-next-node')
             let is_form_field = this_el.hasClass('tw-form-dropdown')
@@ -353,7 +353,7 @@
                 this_el.closest('.msfb-dropdown').attr('data-dropdown-value',this_el.attr('data-dropdown-value'))
             }
         })
-        $('button[data-msfb-redirect]').on('click', e => {
+        $(document).on('click','button[data-msfb-redirect]', e => {
             let this_el = $(e.currentTarget)
             if( ( msfb_recaptcha_client_id !== null || msfb_recaptcha_client_id !== undefined ) && !msfb_recaptcha_token ) {
                 Swal.fire({
@@ -375,7 +375,7 @@
             $('.tw-msfb-progress-bar__status').animate({"width":`100%`})
         })
         // slider change
-        $('.tw-msfb-slider-field').on('input', e => {
+        $(document).on('input', '.tw-msfb-slider-field', e => {
             let this_el = $(e.currentTarget)
             $('.msfb-slider-field-value strong').html(this_el.val())
             if( $('.msfb-slider-val').length > 0 ) {
@@ -383,7 +383,7 @@
             }
         })
         // upload
-        $('.tw-msfb-upload-field input').on('change', e => {
+        $(document).on('change', '.tw-msfb-upload-field input', e => {
             let this_el = $(e.currentTarget)
             // //console.log(this_el)
             let files = this_el[0].files

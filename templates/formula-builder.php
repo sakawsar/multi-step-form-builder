@@ -296,7 +296,7 @@
           </div> <!-- /.col- -->
           <?php if( $formula_id ) { ?>
           <div class="sk-col-md-9 sk-col-lg-9" id="msfb-preview-formula" style="display:none;">
-            <?php echo do_shortcode("[msfb_multistep_form disabled='yes' id='".$formula_id."']"); ?>
+            <?php //echo do_shortcode("[msfb_multistep_form disabled='yes' id='".$formula_id."']"); ?>
           </div>
           <?php } ?>
         </div> <!-- /.row -->
