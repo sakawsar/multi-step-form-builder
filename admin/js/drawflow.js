@@ -242,8 +242,6 @@ if(id != null){
                 // input_count++
               }
               qtn_options += `<p><b><u>Routes</u></b></p>`
-              qtn_options += `<li>Default route</li>`
-              input_count = 1
               if( msfb.multiselect_routes[qtn_found[0].id].length > 0 ) {
                 let route_set = msfb.multiselect_routes[qtn_found[0].id]
                 for (let jj = 0; jj < route_set.length; jj++) {
@@ -252,6 +250,8 @@ if(id != null){
                   input_count++
                 }
               }
+              qtn_options += `<li>Default route</li>`
+              input_count += 1
             } else {
               for (let i = 0; i < qtn_data.option_data.length; i++) {
                 qtn_options += `<li>${qtn_data.option_data[i].option}</li>` 

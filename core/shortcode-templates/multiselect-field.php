@@ -11,8 +11,15 @@ function msfb_multiselect_step( $data ){
         <p style="white-space: pre-wrap;" class="text-center text-xl"><?php echo $data['question_desc']; ?></p>
     <?php } ?>
     <?php isset($data['nav_position']) && $data['nav_position'] == 'top' ? msfb_step_navigation( $data ) : false; ?>
+    <?php
+    $question_id = $data['item_id'];
+    $routes = get_option('msfb_multistep_routes') ?: [];
+    // var_dump($data);
+    $route_data = isset($routes[$question_id]) ? $routes[$question_id] : false;
+    // $get_question = msfb_get_question($question_id);
+    ?>
     <!-- select -->
-    <div class="msfb-multiselect-qtn tw-msfb-qtn-field tw-msfb-multiselect-qtn">
+    <div class="msfb-multiselect-qtn tw-msfb-qtn-field tw-msfb-multiselect-qtn" data-node-route='<?php echo json_encode($step_data['outputs']); ?>' data-route-data='<?php echo json_encode($route_data); ?>'>
         <?php 
         $i = 1;
         foreach($question_data as $option){

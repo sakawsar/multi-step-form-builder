@@ -135,6 +135,8 @@
                 $('.tw-msfb-total-price span').counterUp();
             }
         })
+        // routed multiselect field
+        // $(document).on('click','')
         $(document).on('change','.tw-msfb-slider-field',function(e){
             let price_holder =  $(this).closest('div[data-price]')
             let base_price = parseFloat( price_holder.attr('data-base-price') )
@@ -148,7 +150,6 @@
             if( $('.tw-msfb-total-price span').length > 0 ) {
                 total = parseFloat( $('.tw-msfb-total-price span').html() )
             }
-            this_el.closest('div[data-msfb-node]').find('button[data-msfb-next]').attr('data-msfb-next',this_el.attr('data-next-node'))
             if( this_el.hasClass('selected') ) {
                 this_el.removeClass('selected');
                 if ( this_el.attr('data-price') && total != null ) {
@@ -164,7 +165,52 @@
                     $('.tw-msfb-total-price span').counterUp();
                 }
             }
+            // selected options answer in an array
+            let router_dom = this_el.closest('.tw-msfb-qtn-field')
+            let selected_nodes = []
+            $.each(router_dom.find('div.selected p'),function(key,value){
+                selected_nodes.push($(value).html())
+            })
+            console.log(selected_nodes, 'selected nodes')
+            // prepare routing data
+            let node_router_data = JSON.parse(router_dom.attr('data-node-route'))
+            let node_stack = []
+            for( output in node_router_data ) {
+                if( node_router_data[output].connections.length > 0 ) {
+                    node_stack.push(node_router_data[output].connections[0].node)
+                }
+            }
+            console.log(node_stack, 'node stack')
+            let next_node_index = node_stack.length - 1
+            let route_data = JSON.parse(router_dom.attr('data-route-data'))
+            // route_data.map( (v,k) => {
+            //     if( v.node == this_el.attr('data-next-node') ) {
+            //         next_node_id = k
+            //     }
+            // })
+            for( node_index in route_data ) {
+                // console.log(node_index, route_data[node_index].values, 'route data')
+                if( msfb_compareArrays(selected_nodes,route_data[node_index].values) ) {
+                    next_node_index = node_index
+                    // console.log('matched')
+                    // return false
+                }
+            }
+            // console.log(next_node_index,' next node index ')
+            this_el.closest('div[data-msfb-node]').find('button[data-msfb-next]').attr('data-msfb-next',node_stack[next_node_index])
+            // this_el.closest('div[data-msfb-node]').find('button[data-msfb-next]').attr('data-msfb-next',this_el.attr('data-next-node'))
         })
+        const msfb_compareArrays = (arr1, arr2) => {
+            if (arr1.length !== arr2.length) {
+                return false;
+            }
+            for (let i = 0; i < arr1.length; i++) {
+                if( arr2.indexOf(arr1[i]) == -1 ) {
+                    return false;
+                }
+            }
+            return true
+        }
         $(document).on('click', 'button[data-msfb-next], button[data-msfb-prev]', e => {
             $('html, body').animate({
                 scrollTop: $(".tw-msfb-container").offset().top

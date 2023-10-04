@@ -204,6 +204,8 @@ jQuery(document).ready($ => {
             // }
             if( $('.msfb-create-route-set').attr('preserved-data') ) {
                 fields_data.route_data = JSON.parse($('.msfb-create-route-set').attr('preserved-data'))
+            } else {
+                fields_data.route_data = []
             }
             fields_data.question_data = JSON.stringify( multiselect_opts  )
             // $.each($('.msfb-a-route-set-holder'),function(k,the_row){
@@ -301,7 +303,7 @@ jQuery(document).ready($ => {
         if( qtn_cat_field.length > 0 ) {
             fields_data.cat_id = qtn_cat_field.val()
         }
-        // console.log('fields data',fields_data)
+        console.log('fields data',fields_data)
         $.ajax({
             url: msfb.ajax_url,
             type: "POST",

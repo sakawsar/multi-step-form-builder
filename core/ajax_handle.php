@@ -484,9 +484,9 @@ function msfb_save_questions_callback(){
     exit;
 }
 function msfb_set_route_to_question( $qtn_id, &$qtn_data ){
-    if( isset( $qtn_data['route_data'] ) && $qtn_data['question_type'] == "msfb-multiselect" ) {
+    if( $qtn_data['question_type'] == "msfb-multiselect" ) {
         $routes = get_option('msfb_multistep_routes') ?: [];
-        $routes[$qtn_id] = $qtn_data['route_data'];
+        $routes[$qtn_id] = isset( $qtn_data['route_data'] ) ? $qtn_data['route_data'] : [];
         update_option('msfb_multistep_routes',$routes);
         unset($qtn_data['route_data']);
     }
