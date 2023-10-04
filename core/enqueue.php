@@ -72,6 +72,7 @@ function msfb_admin_enqueue_scripts(){
 		'form_edit_url' => admin_url( 'admin.php?page=contact_form_builder&form_id=' ),
 		'max_rows' => get_option('msfb_row_count') ?: 5,
 		'all_questions' => $all_questions,
+		'multiselect_routes' => get_option('msfb_multistep_routes') ?: [],
 		'all_forms' => $all_forms,
 		'translate' => array(
 			'form_data_successfully_submitted' => get_option('form_data_successfully_submitted') ?: 'Form data successfully submitted.',

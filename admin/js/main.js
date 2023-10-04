@@ -672,6 +672,9 @@ var ReCaptchaCallbackV3 = function() {
         let this_el = this__(e)
         console.log(this_el)
     })
+    $(document).on('click','.msfb-remove-a-route-set',function(){
+        $(this).closest('.msfb-a-route-set-holder').remove()
+    })
     // select field
     const msfb_select_field = ( name = "" ) => {
         let the_parent = $('div[data-msfb-active="1"] div[data-multiselect-no] .skfb__answer')
@@ -681,7 +684,8 @@ var ReCaptchaCallbackV3 = function() {
             options += `<option value="${the_answer}">${the_answer}</option>`
         })
         let select_field = `
-        <div class="msfb-a-route-set-holder" style="padding: 8px;margin-bottom: 8px;background: #c2c2c2;border-radius: 8px;">
+        <div class="msfb-a-route-set-holder" style="position:relative;padding: 20px;margin-bottom: 8px;background: #c2c2c2;border-radius: 8px;">
+            <i style="position:absolute;top: 4px;right: 4px;" class="fa fa-times-circle msfb-remove-a-route-set"></i>
             <input value="${name}" class="msfb-route-set-name" type="text" name="msfb-route-set-name[]" placeholder="Route set name" style="width:100%;margin-bottom:8px;"/>
             <select class="msfb-route-set" name="msfb-route-set[]" style="width:100%;" multiple>
                 <!--option value="">Select route set</option-->

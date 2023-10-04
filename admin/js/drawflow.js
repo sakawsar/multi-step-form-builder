@@ -42,7 +42,8 @@ if(id != null){
         let current_options = node_data[i].current_options
         let node_id = node_data[i].node_id
         let qtn_type = jQuery('div[data-node="'+node_name+'"]').attr('data-question-type')
-        if ( qtn_type == "msfb-single-select-field" || qtn_type == "msfb-dropdown-field" ) {
+        if ( qtn_type == "msfb-single-select-field" || qtn_type == "msfb-multiselect" || qtn_type == "msfb-dropdown-field" ) {
+          console.log(prev_options,current_options)
           if( prev_options !== current_options ) {
               if( prev_options > current_options ) {
                   let offset = prev_options - current_options
@@ -206,6 +207,7 @@ if(id != null){
         let qtn_found = msfb.all_questions.filter( a_qtn => {
           return a_qtn.id == qtn_id
         })
+        console.log(qtn_found)
         if( qtn_found.length > 0 ) {
           let qtn_type = qtn_found[0].question_type
           let qtn_name = qtn_found[0].question_name
@@ -228,10 +230,27 @@ if(id != null){
             let qtn_options = ``
             let qtn_data = qtn_found[0].question_data
             let input_count = 0
-            if( qtn_type == "msfb-single-select-field" || qtn_type == "msfb-multiselect" ) {
+            if( qtn_type == "msfb-single-select-field" ) {
               for (let i = 0; i < qtn_data.length; i++) {
                 qtn_options += `<li><i class="${qtn_data[i].icon_class}"></i> ${qtn_data[i].answer}</li>` 
                 input_count++
+              }
+            } else if ( qtn_type == "msfb-multiselect" ) {
+              qtn_options += `<p><b><u>Options</u></b></p>`
+              for (let i = 0; i < qtn_data.length; i++) {
+                qtn_options += `<p><i class="${qtn_data[i].icon_class}"></i> ${qtn_data[i].answer}</p>` 
+                // input_count++
+              }
+              qtn_options += `<p><b><u>Routes</u></b></p>`
+              qtn_options += `<li>Default route</li>`
+              input_count = 1
+              if( msfb.multiselect_routes[qtn_found[0].id].length > 0 ) {
+                let route_set = msfb.multiselect_routes[qtn_found[0].id]
+                for (let jj = 0; jj < route_set.length; jj++) {
+                  const element = route_set[jj]
+                  qtn_options += `<li>${element.name}</li>`
+                  input_count++
+                }
               }
             } else {
               for (let i = 0; i < qtn_data.option_data.length; i++) {
@@ -239,6 +258,7 @@ if(id != null){
                 input_count++
               }
             }
+            // qtn_name = qtn_type == "msfb-multiselect" ? `${qtn_name} route sets` : qtn_name
             let qtn_html = `
               <div>
                 <div class="box">
