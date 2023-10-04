@@ -710,7 +710,7 @@ var ReCaptchaCallbackV3 = function() {
         let popup_html = `
             <div class="msfb-route-set-name-holder" style="display:flex;flex-direction:column;">
                 <div class="msfb-route-set-holder" style="display:flex;flex-direction:column;8px;"></div>
-                <button type="button" id="msfb-add-new-route-set">Add new route set</button>
+                <button type="button" id="msfb-add-new-route-set" class="skfb-btn">Add new route set</button>
             </div>
         `
         // create select field with the_parent element
@@ -724,7 +724,7 @@ var ReCaptchaCallbackV3 = function() {
             popup_html = `
                 <div class="msfb-route-set-name-holder" style="display:flex;flex-direction:column;">
                     <div class="msfb-route-set-holder" style="display:flex;flex-direction:column;8px;">${field_rows_html}</div>
-                    <button type="button" id="msfb-add-new-route-set">Add new route set</button>
+                    <button type="button" class="skfb-btn" id="msfb-add-new-route-set">Add new route set</button>
                 </div>
             `
         }
@@ -734,6 +734,10 @@ var ReCaptchaCallbackV3 = function() {
             showCancelButton: true,
             html: popup_html,
             confirmButtonText: "Update",
+            customClass: {
+                confirmButton: 'skfb-btn',
+                cancelButton: 'skfb-btn'
+            },
             preConfirm: () => {
                 let fields_data = []
                 $.each($('.msfb-a-route-set-holder'),function(k,the_row){
