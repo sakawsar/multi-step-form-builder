@@ -592,13 +592,13 @@ if(id != null){
                         icon: "success",
                         text: "Formula has been added."
                     })
-                    window.location.href = resp.redirect
+                    // window.location.href = resp.redirect
                 } else if(resp.status != undefined && resp.status == "updated" ){
                     Swal.fire({
                         icon: "success",
                         text: "Formula has been updated."
                     }).then( ok => {
-                      window.location.reload()
+                      // window.location.href = resp.redirect
                     })
                 }
             },

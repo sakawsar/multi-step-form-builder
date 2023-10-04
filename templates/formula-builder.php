@@ -34,7 +34,7 @@
                 <a href="<?php echo admin_url( 'admin.php?page=formula_builder&formulation_id' ); ?>" class="skfb-btn"><i class="fas fa-plus"></i> Add new</a>
                 <?php if(isset($_GET['formulation_id']) && sanitize_text_field( $_GET['formulation_id'] ) != "" ) { ?>
                   <a id="msfb-formulation-settings" href="<?php echo admin_url( 'admin.php?page=formula_builder&formulation_id='.sanitize_text_field( $_GET['formulation_id'] ).'&settings' ); ?>" class="skfb-btn"><i class="fas fa-cog"></i> Settings</a>
-                  <button class="skfb-btn" id="msfb-preview-formula-btn" type="button"><i class="fa fa-eye"></i> Preview</button>
+                  <button class="skfb-btn" data-qflow-id="<?php echo $formula_id; ?>" id="msfb-preview-formula-btn" type="button"><i class="fa fa-eye"></i> Preview</button>
                 <?php } ?>
               </div>
             </div>

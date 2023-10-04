@@ -13,6 +13,31 @@ jQuery(document).ready($ => {
             text: msg
         })
     }
+    // load preview
+    $('#msfb-preview-formula-btn').on('click',e => {
+        // this_el
+        let this_el = this__(e)
+        let qflow_id = this_el.attr('data-qflow-id')
+        // $.ajax({
+        //     url: msfb.ajax_url,
+        //     type: "POST",
+        //     dataType: "html",
+        //     data: {
+        //         action: "msfb_preview_formula",
+        //         dataset: qflow_id
+        //     },
+        //     success: function(resp){
+        //         $('#msfb-preview-formula').html(resp)
+        //     },
+        //     error:function(err){
+        //         Swal.fire({
+        //             icon: "error",
+        //             text: "Something went wrong."
+        //         })
+        //         console.log(err)
+        //     }
+        // })
+    })
     // duplicate item
     $('.msfb-duplicate-item').on('click',e => {
         e.preventDefault()

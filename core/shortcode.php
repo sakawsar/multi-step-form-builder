@@ -25,7 +25,10 @@ function msfb_ui_callback( $atts ){
 	$results = $wpdb->get_results("SELECT * FROM $table_name WHERE id='$formulation_id'");
 	$json_data = $results[0]->raw_data;
 	$json_data = json_decode(stripslashes( $json_data ),true);
-	$json_data = $json_data['drawflow']['Home']['data'];
+	$json_data = isset($json_data['drawflow']['Home']['data']) ? $json_data['drawflow']['Home']['data'] : false;
+	if( !$json_data ) {
+		return __('No Q-Flow data found','msfb');
+	}
 	$formulation = $json_data;
 	$formulation_data = json_decode(stripslashes($results[0]->formulation_data),true);
 	// echo '<pre>';

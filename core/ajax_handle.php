@@ -1,4 +1,12 @@
 <?php
+// add_action('wp_ajax_msfb_preview_formula','msfb_preview_formula_callback');
+function msfb_preview_formula_callback(){
+    if( isset($_POST['dataset']) ) {
+        $formula_id = $_POST['dataset'];
+        echo do_shortcode("[msfb_multistep_form disabled='yes' id='".$formula_id."']");
+    }
+    exit;
+}
 add_action('wp_ajax_msfb_duplicate_item','msfb_duplicate_item_callback');
 function msfb_duplicate_item_callback(){
     if ( isset( $_POST['dataset'] ) ) {
