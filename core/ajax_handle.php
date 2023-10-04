@@ -468,18 +468,28 @@ function msfb_save_questions_callback(){
         $qtn_data = $_POST['dataset'];
         if( isset( $qtn_data['question_id'] ) ){
             $qtn_id = $qtn_data['question_id'];
+            msfb_set_route_to_question( $qtn_id, $qtn_data );
             unset($qtn_data['question_id']);
             $wpdb->update($table_name,$qtn_data,array( 'id' => $qtn_id ));
             $_POST['dataset']['status'] = 'updated';
         } else {
             $wpdb->insert($table_name,$_POST['dataset']);
             $_POST['dataset']['question_id'] = $wpdb->insert_id;
+            msfb_set_route_to_question( $wpdb->insert_id, $_POST['dataset'] );
             $_POST['dataset']['status'] = 'created';
         }
         echo json_encode($_POST['dataset']);
         exit;
     }
     exit;
+}
+function msfb_set_route_to_question( $qtn_id, &$qtn_data ){
+    if( isset( $qtn_data['route_data'] ) && $qtn_data['question_type'] == "msfb-multiselect" ) {
+        $routes = get_option('msfb_multistep_routes') ?: [];
+        $routes[$qtn_id] = $qtn_data['route_data'];
+        update_option('msfb_multistep_routes',$routes);
+        unset($qtn_data['route_data']);
+    }
 }
 add_action('wp_ajax_msfb_save_forms','msfb_save_forms_callback');
 function msfb_save_forms_callback(){

@@ -711,7 +711,7 @@ var ReCaptchaCallbackV3 = function() {
         `
         // create select field with the_parent element
         let preserved_data = $('.msfb-create-route-set').attr('preserved-data')
-        preserved_data = preserved_data != undefined && preserved_data != "" ? preserved_data : []
+        preserved_data = preserved_data != undefined && preserved_data != "" ?  JSON.parse(preserved_data) : []
         if( preserved_data.length > 0 ) {
             let field_rows_html = ""
             $.each(preserved_data, function(key, value){

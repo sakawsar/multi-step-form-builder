@@ -192,9 +192,9 @@ jQuery(document).ready($ => {
             // let field_data_for_multiselect = {
             //     "option_data": multiselect_opts
             // }
-            // if( $('.msfb-create-route-set').attr('preserved-data') ) {
-            //     field_data_for_multiselect.route_data = $('.msfb-create-route-set').attr('preserved-data')
-            // }
+            if( $('.msfb-create-route-set').attr('preserved-data') ) {
+                fields_data.route_data = JSON.parse($('.msfb-create-route-set').attr('preserved-data'))
+            }
             fields_data.question_data = JSON.stringify( multiselect_opts  )
             // $.each($('.msfb-a-route-set-holder'),function(k,the_row){
             //     $(the_row).find('.msfb-a-route-set').each(function(kk,the_route){
