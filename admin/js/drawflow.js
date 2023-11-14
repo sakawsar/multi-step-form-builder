@@ -407,7 +407,7 @@ if(id != null){
               console.log(resp)
               if( resp.status && resp.status == 'success' ) {
                 this_el.attr('data-formula-id', resp.id)
-                // window.location.href = resp.redirect
+                window.location.href = msfb.formulation_url + resp.id
               }
             },
             error:function(err){
@@ -516,7 +516,7 @@ if(id != null){
         }
       },5000)
     }
-    jQuery('.msfb-edit-question-from-q-flow').on('click',function(e){
+    jQuery(document).on('click','.msfb-edit-question-from-q-flow',function(e){
         e.preventDefault()
         let url = jQuery(this).attr('href')
         Swal.fire({

@@ -68,6 +68,7 @@ function msfb_admin_enqueue_scripts(){
 	}, $all_forms);
 	$localize_data = array(
 		'ajax_url' => admin_url( 'admin-ajax.php' ),
+		'formulation_url' => admin_url( 'admin.php?page=formula_builder&formulation_id=' ),
 		'qtn_edit_url' => admin_url( 'admin.php?page=questions_builder&question_id=' ),
 		'form_edit_url' => admin_url( 'admin.php?page=contact_form_builder&form_id=' ),
 		'max_rows' => get_option('msfb_row_count') ?: 5,
