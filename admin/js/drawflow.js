@@ -123,7 +123,7 @@ if(id != null){
     })
 
     editor.on('translate', function(position) {
-      // console.log('Translate x:' + position.x + ' y:'+ position.y);
+      console.log('Translate x:' + position.x + ' y:'+ position.y);
     })
 
     editor.on('addReroute', function(id) {

@@ -176,7 +176,7 @@ function msfb_mendatory_fields( $id, $question_data ){
                 <div class="msfb-dropdown-value-field" data-dropdown-row-no="<?php echo $i; ?>">
                     <input type="text" value="<?php echo $option_data['value']; ?>" data-msfb-field-type="value" data-dropdown-row-no="<?php echo $i; ?>" class="msfb_dropdown_data_value" placeholder="Value"/>
                     <input type="text" value="<?php echo $option_data['option']; ?>" data-msfb-field-type="option" data-dropdown-row-no="<?php echo $i; ?>" class="msfb_dropdown_data_option" placeholder="Option"/>
-                    <input type="text" value="<?php echo $option_data['price']; ?>" data-msfb-field-type="price" data-dropdown-row-no="<?php echo $i; ?>" class="msfb_dropdown_data_price" placeholder="Price"/>
+                    <input type="text" value="<?php echo isset($option_data['price']) ? $option_data['price'] : ""; ?>" data-msfb-field-type="price" data-dropdown-row-no="<?php echo $i; ?>" class="msfb_dropdown_data_price" placeholder="Price"/>
                     <i class="fa fa-<?php echo $i == $total_options ? "plus" : "times"; ?>-circle"></i>
                 </div>
                 <?php $i++; } 

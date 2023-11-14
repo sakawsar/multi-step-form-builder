@@ -148,6 +148,9 @@ jQuery(document).ready($ => {
         let act_el = msfb_active_question()
         let qtn_name = $(`.${act_el}`).attr('data-qtn-name')
         let qtn_title = $(`.${act_el} .skfb__form-title`).html()
+            if( qtn_title == "" ) {
+                qtn_title == "Untitled"
+            }
         let qtn_desc = $(`.${act_el} .skfb__form-desc`).val()
         let qtn_price = $(`.${act_el}`).attr('data-msfb-price')
         let qtn_required = $(`.${act_el}`).attr('data-msfb-required')
@@ -267,7 +270,7 @@ jQuery(document).ready($ => {
         } else if ( act_el == "msfb-upload-field" ) {
             fields_data.question_type = "msfb-upload-field"
         } else if ( act_el == "msfb-dropdown-field" ) {
-            let sel_options = $(`.${act_el} select option`)
+            let sel_options = $(`.${act_el} select.skfb__custom-select option`)
             let sel_data = []
             $.each(sel_options,(k,v) => {
                 let a_opt_data = {

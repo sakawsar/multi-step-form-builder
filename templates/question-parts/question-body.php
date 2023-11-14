@@ -11,7 +11,7 @@
     <div class="skfb__form-wrapper">
         <header class="skfb__form-header">
             <h2 contenteditable="true" class="skfb__form-title skfb_question_seleted"><?php echo !empty($question_data) ? $question_data['question_title'] : "Title"; ?></h2>
-            <textarea contenteditable="true" class="skfb__form-desc"><?php echo !empty($question_data) ? $question_data['question_desc'] : "Description"; ?></textarea>
+            <textarea placeholder="Description" contenteditable="true" class="skfb__form-desc"><?php echo !empty($question_data) ? $question_data['question_desc'] : ""; ?></textarea>
         </header>
 
         <div class="skfb__question-builder">
@@ -61,7 +61,7 @@
     <div class="skfb__form-wrapper">
         <header class="skfb__form-header">
             <h2 contenteditable="true" class="skfb__form-title skfb_question_seleted"><?php echo !empty($question_data) ? $question_data['question_title'] : "Title"; ?></h2>
-            <p contenteditable="true" class="skfb__form-desc"><?php echo !empty($question_data) ? $question_data['question_desc'] : "Description"; ?></p>
+            <textarea  placeholder="Description" contenteditable="true" class="skfb__form-desc"><?php echo !empty($question_data) ? $question_data['question_desc'] : ""; ?></textarea>
         </header>
 
         <form action="#" class="skfb__form">
@@ -77,7 +77,7 @@
     <div class="skfb__form-wrapper __2">
         <header class="skfb__form-header">
             <h2 contenteditable="true" class="skfb__form-title skfb_question_seleted"><?php echo !empty($question_data) ? $question_data['question_title'] : "Title"; ?></h2>
-            <p contenteditable="true" class="skfb__form-desc"><?php echo !empty($question_data) ? $question_data['question_desc'] : "Description"; ?></p>
+            <textarea  placeholder="Description" contenteditable="true" class="skfb__form-desc"><?php echo !empty($question_data) ? $question_data['question_desc'] : ""; ?></textarea>
         </header>
         <div class="sk-row">
         <div class="sk-col-md-6">
@@ -115,7 +115,7 @@
     <div class="skfb__form-wrapper">
         <header class="skfb__form-header">
             <h2 contenteditable="true" class="skfb__form-title skfb_question_seleted"><?php echo !empty($question_data) ? $question_data['question_title'] : "Title"; ?></h2>
-            <p contenteditable="true" class="skfb__form-desc"><?php echo !empty($question_data) ? $question_data['question_desc'] : "Description"; ?></p>
+            <textarea  placeholder="Description" contenteditable="true" class="skfb__form-desc"><?php echo !empty($question_data) ? $question_data['question_desc'] : ""; ?></textarea>
         </header>
 
         <div class="sk-row sk-justify-content-center">
@@ -142,7 +142,7 @@
     <div class="skfb__form-wrapper">
         <header class="skfb__form-header">
             <h2 contenteditable="true" class="skfb__form-title skfb_question_seleted"><?php echo !empty($question_data) ? $question_data['question_title'] : "Title"; ?></h2>
-            <textarea contenteditable="true" class="skfb__form-desc"><?php echo !empty($question_data) ? $question_data['question_desc'] : "Description"; ?></textarea>
+            <textarea  placeholder="Description" contenteditable="true" class="skfb__form-desc"><?php echo !empty($question_data) ? $question_data['question_desc'] : ""; ?></textarea>
         </header>
 
         <div class="skfb__question-builder">
@@ -195,7 +195,7 @@ $slider_data = !empty($question_data) && $question_data['question_type'] == "msf
     <div class="skfb__form-wrapper">
         <header class="skfb__form-header">
             <h2 contenteditable="true" class="skfb__form-title skfb_question_seleted"><?php echo !empty($question_data) ? $question_data['question_title'] : "Title"; ?></h2>
-            <textarea contenteditable="true" class="skfb__form-desc"><?php echo !empty($question_data) ? $question_data['question_desc'] : "Description"; ?></textarea>
+            <textarea  placeholder="Description" contenteditable="true" class="skfb__form-desc"><?php echo !empty($question_data) ? $question_data['question_desc'] : ""; ?></textarea>
         </header>
         <div class="skfb__field-box skfb-form-builder-drawer">
             <div class="skfb__range-slider">
@@ -218,7 +218,7 @@ $slider_data = !empty($question_data) && $question_data['question_type'] == "msf
     <div class="skfb__form-wrapper">
         <header class="skfb__form-header">
             <h2 contenteditable="true" class="skfb__form-title skfb_question_seleted"><?php echo !empty($question_data) ? $question_data['question_title'] : "Title"; ?></h2>
-            <textarea contenteditable="true" class="skfb__form-desc"><?php echo !empty($question_data) ? $question_data['question_desc'] : "Description"; ?></textarea>
+            <textarea  placeholder="Description" contenteditable="true" class="skfb__form-desc"><?php echo !empty($question_data) ? $question_data['question_desc'] : ""; ?></textarea>
         </header>
 
         <form action="#" class="skfb__form">
@@ -234,7 +234,7 @@ $slider_data = !empty($question_data) && $question_data['question_type'] == "msf
     <div class="skfb__form-wrapper">
         <header class="skfb__form-header">
             <h2 contenteditable="true" class="skfb__form-title skfb_question_seleted"><?php echo !empty($question_data) ? $question_data['question_title'] : "Title"; ?></h2>
-            <textarea contenteditable="true" class="skfb__form-desc"><?php echo !empty($question_data) ? $question_data['question_desc'] : "Description"; ?></textarea>
+            <textarea  placeholder="Description" contenteditable="true" class="skfb__form-desc"><?php echo !empty($question_data) ? $question_data['question_desc'] : ""; ?></textarea>
         </header>
 
         <form action="#" class="skfb__form">
@@ -250,7 +250,7 @@ $slider_data = !empty($question_data) && $question_data['question_type'] == "msf
     <div class="skfb__form-wrapper">
         <header class="skfb__form-header">
             <h2 contenteditable="true" class="skfb__form-title skfb_question_seleted"><?php echo !empty($question_data) ? $question_data['question_title'] : "Title"; ?></h2>
-            <textarea contenteditable="true" class="skfb__form-desc"><?php echo !empty($question_data) ? $question_data['question_desc'] : "Description"; ?></textarea>
+            <textarea  placeholder="Description" contenteditable="true" class="skfb__form-desc"><?php echo !empty($question_data) ? $question_data['question_desc'] : ""; ?></textarea>
         </header>
 
         <div class="skfb__uploader skfb-form-builder-drawer">

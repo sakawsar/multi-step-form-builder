@@ -293,6 +293,11 @@ var ReCaptchaCallbackV3 = function() {
         let setRight = drawerWidth + 22;
         rightDrawer.css({ "right": "-" + setRight + "px" });
     }
+    $(document).on('click','h2.skfb__form-title',function(){
+        if( $(this).html() == "Form title" || $(this).html() == "Title" ) {
+            $(this).html('')
+        }
+    })
     // question or des selected
     $('.skfb__form-title, .skfb__form-desc').on('click',e => {
         msfb_hide_all_drawer()
@@ -502,7 +507,7 @@ var ReCaptchaCallbackV3 = function() {
         $(`div[data-body-type="${act_qtn}"] [placeholder]`).attr('placeholder',this_el.val())
     })
     // set required field
-    $('.msfb-required').on('click',e => {
+    $(document).on('click','.msfb-required',e => {
         let act_qtn = msfb_active_question()
         let is_checked = $(`div[data-drawer-type="${act_qtn}"] .msfb-required:checked`).val()
         if( is_checked != undefined ) {
