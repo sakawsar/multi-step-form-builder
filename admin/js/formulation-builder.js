@@ -4,9 +4,11 @@
         $('#msfb-search-formula-element').on('keyup', e => {
             let this_el = $(e.currentTarget)
             let this_val = this_el.val().toLowerCase()
+            let cat_val = ""
             if( elements.length > 0 ){
                 let sel_el_type = $('.msfb-filter-tab div.msfb-tab-selected').attr('data-type')
                 sel_el_type = sel_el_type == "qtn" ? "question" : "form"
+                cat_val = sel_el_type == "question" ? $('#msfb_list_questions_by_category').val() : $('#msfb_list_questions_by_category2').val()
                 $.each(elements, (k,el) => {
                     if( this_val != "" ){
                         $(el).hide()
@@ -14,16 +16,22 @@
                     let el_name = $(el).attr('data-element-name').toLowerCase()
                     if( el_name.indexOf(this_val) > -1 ){
                         if( $(el).attr('data-element-type') == sel_el_type ) {
-                            $(el).show()
+                            console.log(cat_val)
+                            if( $(el).attr('data-element-cat-id') == cat_val || cat_val == "" ) {
+                                $(el).show()
+                            }
                         }
                     }
                 })
             }
         })
-        $('#msfb_list_questions_by_category, #msfb_list_questions_by_category2').on('change',function(){
+        $('#msfb_list_questions_by_category, #msfb_list_questions_by_category2').on('change',function(e){
             let cat_id = $(this).val()
+            let el_type = $(this).attr('data-cat-type')
             $.each(elements,function(k,el){
-                $(el).show()
+                if( $(el).attr('data-element-type') == el_type ) {
+                    $(el).show()
+                }
                 if( cat_id ) {
                     if( $(el).attr('data-element-cat-id') != cat_id ) {
                         $(el).hide()

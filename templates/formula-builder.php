@@ -140,7 +140,7 @@
                   
                   <div class="msfb-qtn-els-holder">
                     <!-- <h6 class="sk-head skfb-bb-primary sk-text-primary">Filter questions</h6> -->
-                    <select class="sk-form-control" id="msfb_list_questions_by_category">
+                    <select class="sk-form-control" data-cat-type="question" id="msfb_list_questions_by_category">
                       <option value="">Filter questions by category</option>
                       <?php foreach($qt_cats as $a_cat){ if( $a_cat->cat_type != "question") continue; ?>
                         <option data-type="<?php echo $a_cat->cat_type; ?>" value="<?php echo $a_cat->id; ?>"><?php echo $a_cat->cat_name; ?></option>
@@ -150,7 +150,7 @@
                   <div class="msfb-form-els-holder" style="display:none;">
                     <!-- <h6 class="sk-head skfb-bb-primary sk-text-primary">Filter forms</h6> -->
                     <!-- <h6 class="sk-head skfb-bb-primary sk-text-primary">Filter <span style="padding:2px 4px;background:#244A60;color:white;">questions</span>/<span style="padding:2px 4px;background:yellow;color:black;">forms</span></h6> -->
-                    <select class="sk-form-control" id="msfb_list_questions_by_category2">
+                    <select class="sk-form-control" data-cat-type="form" id="msfb_list_questions_by_category2">
                       <option value="">Filter forms by category</option>
                       <?php foreach($qt_cats as $a_cat){ if( $a_cat->cat_type != "from") continue; ?>
                         <option data-type="<?php echo $a_cat->cat_type; ?>" value="<?php echo $a_cat->id; ?>"><?php echo $a_cat->cat_name; ?></option>
