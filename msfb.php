@@ -1,7 +1,7 @@
 <?php
 /**
  * 
- * Plugin Name: Multi-step form builder
+ * Plugin Name: Multi-step form builder Pro
  * Description: Multi step form builder - smart inquiry forms incl. pricing calculator via Drag & Drop
  * Author: Dwayne Advertising
  * Version: 1.0

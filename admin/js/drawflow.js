@@ -190,7 +190,7 @@ if(id != null){
             <div>
               <div class="box">
                   <ul>
-                    <li>${form_name} <a href="${msfb.form_edit_url + form_id}"><i style="position:absolute;top:8px;right:8px;" class="fa fa-edit"></a></i></li>
+                    <li>${form_name} <a class="msfb-edit-question-from-q-flow" href="${msfb.form_edit_url + form_id}&"><i style="position:absolute;top:8px;right:8px;" class="fa fa-edit"></a></i></li>
                   </ul>
               </div>
             </div>
@@ -216,7 +216,7 @@ if(id != null){
               <div>
                 <div class="box">
                     <ul>
-                      <li>${qtn_name} <a href="${msfb.qtn_edit_url + qtn_id}"><i style="position:absolute;top:8px;right:8px;" class="fa fa-edit"></a></i></li>
+                      <li>${qtn_name} <a class="msfb-edit-question-from-q-flow" href="${msfb.qtn_edit_url + qtn_id}"><i style="position:absolute;top:8px;right:8px;" class="fa fa-edit"></a></i></li>
                     </ul>
                 </div>
               </div>
@@ -262,7 +262,7 @@ if(id != null){
             let qtn_html = `
               <div>
                 <div class="box">
-                    <p>${qtn_name} <a href="${msfb.qtn_edit_url + qtn_id}"><i style="position:absolute;top:8px;right:8px;" class="fa fa-edit"></a></i></p>
+                    <p>${qtn_name} <a class="msfb-edit-question-from-q-flow" href="${msfb.qtn_edit_url + qtn_id}"><i style="position:absolute;top:8px;right:8px;" class="fa fa-edit"></a></i></p>
                     <ul>
                       ${qtn_options}
                     </ul>
@@ -516,148 +516,177 @@ if(id != null){
         }
       },5000)
     }
-    jQuery('#msfb-formulation-builder').on('click',async (e) => {
-
-        let this_el = jQuery(e.currentTarget)
-        console.log(editor.export());
-        let data = editor.export()
-        let node_data = data.drawflow.Home.data
-        if( Object.keys(node_data).length == 0 ) {
-          Swal.fire({
-            icon: "warning",
-            text: "No Formula found."
-          })
-          return false
-        }
-        let formulation_data = []
-        // console.log(node_data)
-        // return false
-        let is_valid = false
-        jQuery.each(node_data,(k,v) => {
-          let has_connection = false
-          let node_name = v.name
-          let node_item_id = msfb_get_the_id(node_name)
-          let inputs = v.inputs
-          let is_root = true
-          jQuery.each(inputs, (in_k,in_v) => {
-            if ( in_v.connections.length > 0 ) {
-              has_connection = true
-              is_root = false
+    jQuery('.msfb-edit-question-from-q-flow').on('click',function(e){
+        e.preventDefault()
+        let url = jQuery(this).attr('href')
+        Swal.fire({
+            icon: "info",
+            text: msfb.translate.save_the_q_flow,
+            showCancelButton: true,
+            confirmButtonText: msfb.translate.save_button_text
+        }).then(( result ) => {
+            if( result.value ) {
+                msfb_save_the_q_flow( false, url )
             }
-          })
-          console.log(has_connection)
-          let outputs = v.outputs
-          // console.log(outputs)
-          let output_data = []
-          jQuery.each(outputs, (out_k,out_v) => {
-            if ( out_v.connections.length > 0 ) {
-              has_connection = true
-              output_data[out_k] = out_v.connections.map( a_con => {
-                return node_data[a_con.node].name
-              })
-            }
-          })
-          if( has_connection == false ) {
-            Swal.fire({
-              icon: "warning",
-              text: "Each node should have at least one connection"
-            })
-            is_valid = false
-            return false
-          } else {
-            is_valid = true
-          }
-          if(!is_root){
-            formulation_data[node_data[k].name] = output_data
-          } else {
-            formulation_data['root'] = output_data
+        })
+    })
+    jQuery('#msfb-formulation-builder').on('click',(e) => {
+      msfb_save_the_q_flow(e)
+    })
+    // if( jQuery('#msfb-formulation-builder').length > 0 ) {
+    //   window.onbeforeunload = function(e){
+    //     e.preventDefault()
+    //     return "Pleave saved "
+    //   }
+    // }
+    async function msfb_save_the_q_flow( e = false, qtn_redirect = false ) {
+      let this_el = jQuery('#msfb-formulation-builder')
+      if( e ) {
+        this_el = jQuery(e.currentTarget)
+      }
+      console.log(editor.export());
+      let data = editor.export()
+      let node_data = data.drawflow.Home.data
+      if( Object.keys(node_data).length == 0 ) {
+        Swal.fire({
+          icon: "warning",
+          text: "No Formula found."
+        })
+        return false
+      }
+      let formulation_data = []
+      // console.log(node_data)
+      // return false
+      let is_valid = false
+      jQuery.each(node_data,(k,v) => {
+        let has_connection = false
+        let node_name = v.name
+        let node_item_id = msfb_get_the_id(node_name)
+        let inputs = v.inputs
+        let is_root = true
+        jQuery.each(inputs, (in_k,in_v) => {
+          if ( in_v.connections.length > 0 ) {
+            has_connection = true
+            is_root = false
           }
         })
-        if( is_valid == false ) {
-          return false
-        }
-        let formulation_name
-        if ( !this_el.attr('data-formula-id') ) {
-          const { value: formula_name } = await Swal.fire({
-            title: 'Formulation name',
-            text: "Enter this formulation name",
-            input: 'text',
-            inputLabel: 'Formulation name',
-            inputPlaceholder: 'Formulation name'
-          })
-          formulation_name = formula_name
-        } else {
-          formulation_name = this_el.attr('data-formula-name')
-        }
-        let show_price = jQuery('#msfb-show-price:checked').val()
-        let redirect = jQuery('#msfb-redirect-url').val()
-        let msfb_nav_menu_position = jQuery('.msfb_nav_menu_position:checked').val()
-        let color_scheme = jQuery('#msfb-color-scheme').val()
-        if( show_price ) {
-          formulation_data.show_price = show_price
-        }
-        if( redirect ){
-          formulation_data.redirect = redirect
-        }
-        if( msfb_nav_menu_position ){
-          formulation_data.msfb_nav_menu_position = msfb_nav_menu_position
-        }
-        if( color_scheme ){
-          formulation_data.color_scheme = color_scheme
-        }
-        if ( formulation_name ) {
-          this_el.find('i').attr('class','fa fa-spinner fa-spin')
-          let request_data = {
-            "formulation_name": formulation_name,
-            "formulation_data": JSON.stringify( { ...formulation_data }),
-            "raw_data": JSON.stringify( data )
+        console.log(has_connection)
+        let outputs = v.outputs
+        // console.log(outputs)
+        let output_data = []
+        jQuery.each(outputs, (out_k,out_v) => {
+          if ( out_v.connections.length > 0 ) {
+            has_connection = true
+            output_data[out_k] = out_v.connections.map( a_con => {
+              return node_data[a_con.node].name
+            })
           }
-          if ( this_el.attr('data-formula-id' ) ) {
-            request_data.formula_id = this_el.attr('data-formula-id' )
-          }
-          jQuery.ajax({
-            url: msfb.ajax_url,
-            type: "POST",
-            dataType: "json",
-            data: {
-              action: "msfb_add_formulation",
-              dataset: request_data
-              // dataset: {
-              //   "formulation_name": formulation_name,
-              //   "formulation_data": JSON.stringify( { ...formulation_data }),
-              //   "raw_data": JSON.stringify( data )
-              // }
-            },
-            success: resp => {
-              this_el.find('i').attr('class','fas fa-save')
-              // console.log(resp)
-              this_el.attr('data-formula-id',resp.formula_id)
-                if( resp.status != undefined && resp.status == "created" ) {
-                    Swal.fire({
-                        icon: "success",
-                        text: "Formula has been added."
-                    })
-                    // window.location.href = resp.redirect
-                } else if(resp.status != undefined && resp.status == "updated" ){
-                    Swal.fire({
-                        icon: "success",
-                        text: "Formula has been updated."
-                    }).then( ok => {
-                      // window.location.href = resp.redirect
-                    })
-                }
-            },
-            error: err => {
-              this_el.find('i').attr('class','fas fa-save')
-              console.log(err)
-            }
-          })
-        } else {
+        })
+        if( has_connection == false ) {
           Swal.fire({
             icon: "warning",
-            text: "Formulation name is required to save it."
+            text: "Each node should have at least one connection"
           })
+          is_valid = false
           return false
+        } else {
+          is_valid = true
         }
-    })
+        if(!is_root){
+          formulation_data[node_data[k].name] = output_data
+        } else {
+          formulation_data['root'] = output_data
+        }
+      })
+      if( is_valid == false ) {
+        return false
+      }
+      let formulation_name
+      if ( !this_el.attr('data-formula-id') ) {
+        const { value: formula_name } = await Swal.fire({
+          title: 'Formulation name',
+          text: "Enter this formulation name",
+          input: 'text',
+          inputLabel: 'Formulation name',
+          inputPlaceholder: 'Formulation name'
+        })
+        formulation_name = formula_name
+      } else {
+        formulation_name = this_el.attr('data-formula-name')
+      }
+      let show_price = jQuery('#msfb-show-price:checked').val()
+      let redirect = jQuery('#msfb-redirect-url').val()
+      let msfb_nav_menu_position = jQuery('.msfb_nav_menu_position:checked').val()
+      let color_scheme = jQuery('#msfb-color-scheme').val()
+      if( show_price ) {
+        formulation_data.show_price = show_price
+      }
+      if( redirect ){
+        formulation_data.redirect = redirect
+      }
+      if( msfb_nav_menu_position ){
+        formulation_data.msfb_nav_menu_position = msfb_nav_menu_position
+      }
+      if( color_scheme ){
+        formulation_data.color_scheme = color_scheme
+      }
+      if ( formulation_name ) {
+        this_el.find('i').attr('class','fa fa-spinner fa-spin')
+        let request_data = {
+          "formulation_name": formulation_name,
+          "formulation_data": JSON.stringify( { ...formulation_data }),
+          "raw_data": JSON.stringify( data )
+        }
+        if ( this_el.attr('data-formula-id' ) ) {
+          request_data.formula_id = this_el.attr('data-formula-id' )
+        }
+        jQuery.ajax({
+          url: msfb.ajax_url,
+          type: "POST",
+          dataType: "json",
+          data: {
+            action: "msfb_add_formulation",
+            dataset: request_data
+            // dataset: {
+            //   "formulation_name": formulation_name,
+            //   "formulation_data": JSON.stringify( { ...formulation_data }),
+            //   "raw_data": JSON.stringify( data )
+            // }
+          },
+          success: resp => {
+            this_el.find('i').attr('class','fas fa-save')
+            // console.log(resp)
+            this_el.attr('data-formula-id',resp.formula_id)
+              if( resp.status != undefined && resp.status == "created" ) {
+                  Swal.fire({
+                      icon: "success",
+                      text: "Formula has been added."
+                  })
+                  // window.location.href = resp.redirect
+              } else if(resp.status != undefined && resp.status == "updated" ){
+                  Swal.fire({
+                      icon: "success",
+                      text: "Formula has been updated."
+                  }).then( ok => {
+                    if( qtn_redirect ) {
+                      let url = new URL(qtn_redirect)
+                      
+                      window.location.href = qtn_redirect
+                    }
+                  })
+              }
+          },
+          error: err => {
+            this_el.find('i').attr('class','fas fa-save')
+            console.log(err)
+          }
+        })
+      } else {
+        Swal.fire({
+          icon: "warning",
+          text: "Formulation name is required to save it."
+        })
+        return false
+      }
+  }
 }

@@ -75,6 +75,8 @@ function msfb_admin_enqueue_scripts(){
 		'multiselect_routes' => get_option('msfb_multistep_routes') ?: [],
 		'all_forms' => $all_forms,
 		'translate' => array(
+			'save_the_q_flow' => get_option('save_the_q_flow') ?: "Save the Q-Flow before you leave",
+			'save_button_text' => get_option('save_button_text') ?: "Save",
 			'form_data_successfully_submitted' => get_option('form_data_successfully_submitted') ?: 'Form data successfully submitted.',
 			'this_option_did_not_point_to_any_other_question' => get_option('this_option_did_not_point_to_any_other_question') ?: 'This option did not point to any other question.',
 			'select_an_option_first' => get_option('select_an_option_first') ?: 'Select an option first.',
@@ -99,6 +101,8 @@ function msfb_admin_enqueue_scripts(){
 			// print_r($this_form_data);
 			// echo '</pre>';
 		}
+		$localize_data['qtn_edit_url'] = admin_url( 'admin.php?page=questions_builder&q_flow_id='.$formula_id.'&question_id=' );
+		$localize_data['form_edit_url'] = admin_url( 'admin.php?page=contact_form_builder&q_flow_id='.$formula_id.'&form_id=' );
 	}
 	wp_localize_script( 'msfb_admin_localize', 'msfb', $localize_data);
 	wp_enqueue_script( 'msfb_admin_main', MSFB_URL.'admin/js/main.js', array(), false, true );

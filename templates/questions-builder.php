@@ -1,5 +1,9 @@
 <?php
 $question_id = "";
+$q_flow_id = "";
+if(isset($_GET['q_flow_id']) && $_GET['q_flow_id'] != ""){
+  $q_flow_id = sanitize_text_field( $_GET['q_flow_id'] );
+}
 if(isset($_GET['question_id']) && $_GET['question_id'] != ""){
   $question_id = sanitize_text_field( $_GET['question_id'] );
 }
@@ -53,6 +57,9 @@ $is_update = $question_id != "" ? "data-qtn-id='{$question_id}'" : "";
                 if( $question_id && $field_type == "msfb-multiselect" ) {
                 ?>
                   <a href="#" preserved-data='<?php echo json_encode($route_data); ?>' class="msfb-create-route-set skfb-btn" data-el-id="<?php echo $question_id; ?>"><i class="fas fa-plus"></i> <?php _e('Create Route set','msfb'); ?></a>
+                <?php } ?>
+                <?php if( $q_flow_id != "" ) { ?>
+                  <a href="<?php echo admin_url('admin.php?page=formula_builder&formulation_id='.$q_flow_id); ?>" class="skfb-btn"><i class="fas fa-back"></i> <?php _e('Back to Q-Flow','msfb'); ?></a>
                 <?php } ?>
               </div>
             </div>
