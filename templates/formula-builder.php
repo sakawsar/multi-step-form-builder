@@ -1,4 +1,4 @@
-<div class="app">
+<div class="app" style="min-width: 768px;background:white;">
   <div class="skfb-container-with-sidebar">
     <div class="skfb-header">
       <div class="sk-container">
@@ -45,7 +45,8 @@
     <div class="skfb-content msfb-heigh-75vh">
       <div class="sk-container msfb-heigh-75vh">
         <div class="sk-row msfb-heigh-75vh">
-          <div class="sk-col-md-3 sk-col-lg-2 skfb__overflow_scroll msfb-question-type-holders msfb-heigh-75vh" style="height:600px;">
+          <div style="width:20%;padding:8px;" class="skfb__overflow_scroll msfb-question-type-holders msfb-heigh-75vh" style="height:600px;">
+          <!-- <div class="sk-col-md-3 sk-col-lg-2 skfb__overflow_scroll msfb-question-type-holders msfb-heigh-75vh" style="height:600px;"> -->
             <div class="skfb-feilds-panel">
             <div class="msfb-filter-tab">
                     <div class="msfb-qtn-tab msfb-tab-selected" data-type="qtn">
@@ -283,16 +284,18 @@
               <?php } ?>
             </div>
           </div> <!-- /.col- -->
-          <div class="sk-col-md-9 sk-col-lg-10" id="msfb_drawflow" ondrop="drop(event)" ondragover="allowDrop(event)">
-            <!-- <div class="btn-lock">
-              <i id="lock" class="fas fa-lock" onclick="editor.editor_mode='fixed'; changeMode('lock');"></i>
-              <i id="unlock" class="fas fa-lock-open" onclick="editor.editor_mode='edit'; changeMode('unlock');" style="display:none;"></i>
-            </div> -->
-            <div class="bar-zoom">
-              <i class="fas fa-search-minus" title="Zoom Out" id="msfb_drawflow_zoom_out"></i>
-              <i class="fas fa-search" title="Zoom Reset" id="msfb_drawflow_zoom_reset"></i>
-              <i class="fas fa-search-plus" title="Zoom In" id="msfb_drawflow_zoom_in"></i>
-            </div>
+          <!-- <div class="sk-col-md-9 sk-col-lg-10"> -->
+            <div style="width:80%;" id="msfb_drawflow" ondrop="drop(event)" ondragover="allowDrop(event)">
+              <!-- <div class="btn-lock">
+                <i id="lock" class="fas fa-lock" onclick="editor.editor_mode='fixed'; changeMode('lock');"></i>
+                <i id="unlock" class="fas fa-lock-open" onclick="editor.editor_mode='edit'; changeMode('unlock');" style="display:none;"></i>
+              </div> -->
+              <div class="bar-zoom">
+                <i class="fas fa-search-minus" title="Zoom Out" id="msfb_drawflow_zoom_out"></i>
+                <i class="fas fa-search" title="Zoom Reset" id="msfb_drawflow_zoom_reset"></i>
+                <i class="fas fa-search-plus" title="Zoom In" id="msfb_drawflow_zoom_in"></i>
+              </div>
+            <!-- </div> -->
           </div> <!-- /.col- -->
           <?php if( $formula_id ) { ?>
           <div class="sk-col-md-9 sk-col-lg-9" id="msfb-preview-formula" style="display:none;">
