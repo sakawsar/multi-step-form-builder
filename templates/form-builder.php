@@ -1,3 +1,9 @@
+<?php
+$q_flow_id = "";
+if(isset($_GET['q_flow_id']) && $_GET['q_flow_id'] != ""){
+  $q_flow_id = sanitize_text_field( $_GET['q_flow_id'] );
+}
+?>
 <div class="app">
   <div class="skfb-container-with-sidebar">
     <div class="skfb-header">
@@ -33,6 +39,9 @@
                   <a href="<?php echo admin_url( 'admin.php?page=contact_form_builder&form_id' ); ?>" class="skfb-btn"><i class="fas fa-plus"></i> Add new</a>
                   <?php if(isset($_GET['form_id']) && sanitize_text_field( $_GET['form_id'] ) != "" ) { ?>
                     <a href="<?php echo admin_url( 'admin.php?page=contact_form_builder&form_id='.sanitize_text_field( $_GET['form_id'] ).'&settings' ); ?>" class="skfb-btn"><i class="fas fa-cog"></i> Settings</a>
+                  <?php } ?>
+                  <?php if( $q_flow_id != "" ) { ?>
+                    <a href="<?php echo admin_url('admin.php?page=formula_builder&formulation_id='.$q_flow_id); ?>" class="skfb-btn"><i class="fas fa-back"></i> <?php _e('Back to Q-Flow','msfb'); ?></a>
                   <?php } ?>
                 </div>
             </div>
