@@ -748,6 +748,13 @@ var ReCaptchaCallbackV3 = function() {
                 $.each($('.msfb-a-route-set-holder'),function(k,the_row){
                     let select2_data = $(the_row).find('.msfb-route-set').select2('data')
                     let select2_values = select2_data.map(a => a.text)
+                    let set_name = $(the_row).find('.msfb-route-set-name').val()
+                    if( !set_name ) {
+                        Swal.showValidationMessage('Route set name is required.')
+                    }
+                    if( select2_values.length == 0 ) {
+                        Swal.showValidationMessage('Option selections are required.')
+                    }
                     fields_data.push({
                         "name": $(the_row).find('.msfb-route-set-name').val(),
                         "values": select2_values
