@@ -19,9 +19,10 @@ function msfb_duplicate_item_callback(){
         unset($item_data['id']);
         $wpdb->insert($table_name,$item_data);
         $insert_id = $wpdb->insert_id;
-        if( $item_type == "question" && $item_data['question_type'] == "msfb-multiselect" ) {
+        if( $item_type == "questions" && $item_data['question_type'] == "msfb-multiselect" ) {
             $get_routes = get_option('msfb_multistep_routes') ?: [];
             $get_routes[$insert_id] = $get_routes[$item_id];
+            update_option('msfb_multistep_routes', $get_routes);
         }
         wp_die(json_encode(array(
             'status' => 'success',
