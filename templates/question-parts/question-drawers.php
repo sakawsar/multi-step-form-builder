@@ -131,32 +131,8 @@ function msfb_mendatory_fields( $id, $question_data ){
     </div>
     <div class="skfb__field-box __2">
         <label for="msfb-required">
-            <style>
-                .msfb-required{
-                    display:none!important;
-                }
-                .msfb-custom-checkbox{
-                    display: inline-block;
-                    background: white;
-                    height: 16px;
-                    width: 16px;
-                }
-                .msfb-required:checked ~ .msfb-custom-checkbox:after{
-                    content: "";
-                    height: 8px;
-                    width:8px;
-                    position: absolute;
-                    top: 4px;
-                    left:4px;
-                    display:block;
-                    background:#244A60;
-                }
-                .msfb-custom-checkbox:after{
-                    display:none;
-                }
-            </style>
             <input type="checkbox" <?php echo $has_data && $question_data['question_required'] ? "checked" : ""; ?> class="sk-custom-checkbox msfb-required" />
-            <span class="msfb-custom-checkbox"></span>
+            <!-- <span class="msfb-custom-checkbox"></span> -->
             <span>Required</span>
         </label>
     </div>

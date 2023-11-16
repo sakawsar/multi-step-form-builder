@@ -68,25 +68,25 @@ var ReCaptchaCallbackV3 = function() {
                 // console.log('target',the_target)
                 let class_list = the_target.attr('class')
                 // console.log('class_list',class_list)
-                if( the_target.closest('.msfb-multiselect-holder').length > 0 ) {
-                    return false
-                } else if( the_target.closest('.skfb__field-box').length > 0 ) {
-                    return false
-                } else if ( the_target.closest('.skfb-right-options').length > 0 ) {
-                    return false
-                } else if ( class_list && class_list.indexOf('skfb__form-title') > -1 ) {
-                    return false
-                } else if ( class_list && class_list.indexOf('skfb__form-desc') > -1 ) {
-                    return false
-                } else if ( the_target.length > 0 && the_target[0].id == "msfb-formulation-settings" ) {
-                    return false
-                } else {
-                    $('.msfb-question-type-holders').fadeIn()
-                    let rightDrawer = $('.skfb-right-options');
-                    let drawerWidth = rightDrawer.width();
-                    let setRight = drawerWidth + 22;
-                    rightDrawer.css({ "right": "-" + setRight + "px" });
-                }
+                // if( the_target.closest('.msfb-multiselect-holder').length > 0 ) {
+                //     return false
+                // } else if( the_target.closest('.skfb__field-box').length > 0 ) {
+                //     return false
+                // } else if ( the_target.closest('.skfb-right-options').length > 0 ) {
+                //     return false
+                // } else if ( class_list && class_list.indexOf('skfb__form-title') > -1 ) {
+                //     return false
+                // } else if ( class_list && class_list.indexOf('skfb__form-desc') > -1 ) {
+                //     return false
+                // } else if ( the_target.length > 0 && the_target[0].id == "msfb-formulation-settings" ) {
+                //     return false
+                // } else {
+                //     $('.msfb-question-type-holders').fadeIn()
+                //     let rightDrawer = $('.skfb-right-options');
+                //     let drawerWidth = rightDrawer.width();
+                //     let setRight = drawerWidth + 22;
+                //     rightDrawer.css({ "right": "-" + setRight + "px" });
+                // }
             })
         // })
     });

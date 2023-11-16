@@ -14,7 +14,7 @@
           $checked = "checked";
         }
         ?>
-        <input <?php echo $checked; ?> style="width:auto;" type="checkbox" id="msfb-show-price" />
+        <input <?php echo $checked; ?> type="checkbox" class="sk-custom-checkbox" id="msfb-show-price" />
       </div>
       <div class="skfb__field-box __2">
         <?php
