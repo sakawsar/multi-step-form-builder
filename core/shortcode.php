@@ -93,7 +93,7 @@ function msfb_ui_callback( $atts ){
 			// 		}
 			// 	}
 			// }
-			$map[$key] = array_unique($nodes);
+			$map[$key] = array_values(array_unique($nodes));
 			$edges = [];
 			foreach($map as $key => $edge){
 				if( count($edge) > 0) {
