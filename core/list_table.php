@@ -7,6 +7,10 @@ class MSFB_List_Table{
     public $has_category = true;
     public $has_search = true;
     public $lead_data = null;
+    public $add_button;
+    public $search_placeholder;
+    public $cat_type;
+    public $label;
     function __construct($el_type){
         $this->list_type = $el_type;
         switch($el_type){
