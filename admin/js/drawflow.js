@@ -81,7 +81,7 @@ if(id != null){
     })
     // Events!
     editor.on('nodeCreated', function(id) {
-      // console.log("Node created " + id);
+      console.log("Node created " + id);
     })
 
     editor.on('nodeRemoved', function(id) {
@@ -284,6 +284,17 @@ if(id != null){
       }
       pos_x = pos_x * ( editor.precanvas.clientWidth / (editor.precanvas.clientWidth * editor.zoom)) - (editor.precanvas.getBoundingClientRect().x * ( editor.precanvas.clientWidth / (editor.precanvas.clientWidth * editor.zoom)));
       pos_y = pos_y * ( editor.precanvas.clientHeight / (editor.precanvas.clientHeight * editor.zoom)) - (editor.precanvas.getBoundingClientRect().y * ( editor.precanvas.clientHeight / (editor.precanvas.clientHeight * editor.zoom)));
+      let exported_data = editor.export()
+      // prevent adding more than 3 nodes
+      let node_count = Object.keys(exported_data.drawflow.Home.data).length
+      console.log(node_count)
+      if( node_count >= 3 ) {
+        Swal.fire({
+          icon: "warning",
+          text: "You can only add 3 nodes. To add more, please upgrade to pro version."
+        })
+        return false
+      }
       update_the_nodes_with_raw_data( name, pos_x, pos_y, 'add')
     }
 
